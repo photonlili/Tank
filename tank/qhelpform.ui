@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QHelpForm</class>
+ <widget class="QWidget" name="QHelpForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>520</width>
+    <height>293</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QTabWidget" name="tabWidget_help">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_mplayer">
+      <attribute name="title">
+       <string>Mplayer</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QMPlayerUI" name="widget_2" native="true"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Log</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QWidget" name="widget_log" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lb_log">
+            <property name="text">
+             <string>System Event:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSysEventWidget" name="tableView"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QMPlayerUI</class>
+   <extends>QWidget</extends>
+   <header>qmplayerui.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QSysEventWidget</class>
+   <extends>QTableView</extends>
+   <header>qsyseventwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

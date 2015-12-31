@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QFactorySetPassForm</class>
+ <widget class="QCDialog" name="QFactorySetPassForm">
+  <property name="modal" stdset="0">
+   <bool>false</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>247</width>
+    <height>115</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Password</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0" colspan="4">
+    <widget class="QLineEdit" name="lineEdit_facpassword">
+     <property name="focusPolicy">
+      <enum>Qt::ClickFocus</enum>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="QCPushButton" name="btn_sure">
+     <property name="text">
+      <string>Enter</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="3">
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="0">
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Factory password:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QCPushButton" name="btn_cancel">
+     <property name="text">
+      <string>Cancel</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCPushButton</class>
+   <extends>QPushButton</extends>
+   <header>qcpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QCDialog</class>
+   <extends>QWidget</extends>
+   <header>qcdialog.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

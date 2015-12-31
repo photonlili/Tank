@@ -1,0 +1,993 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QSetForm</class>
+ <widget class="QWidget" name="QSetForm">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>654</width>
+    <height>364</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="leftMargin">
+    <number>9</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="HNTabWidget" name="tabWidget_set">
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="tabPosition">
+      <enum>QTabWidget::North</enum>
+     </property>
+     <property name="tabShape">
+      <enum>QTabWidget::Rounded</enum>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>16</width>
+       <height>16</height>
+      </size>
+     </property>
+     <property name="elideMode">
+      <enum>Qt::ElideNone</enum>
+     </property>
+     <widget class="QWidget" name="tab_7">
+      <attribute name="title">
+       <string>Default</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="2">
+        <widget class="QWidget" name="widget_4" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>157</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QWidget" name="widget_time" native="true">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1">
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDateEdit" name="dateYear">
+            <property name="displayFormat">
+             <string>yyyy-MM-dd</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="1">
+           <spacer name="verticalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="1">
+           <widget class="QTimeEdit" name="dateTime">
+            <property name="currentSection">
+             <enum>QDateTimeEdit::HourSection</enum>
+            </property>
+            <property name="displayFormat">
+             <string>hh:mm:ss</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_settime">
+            <property name="text">
+             <string>Set time:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QWidget" name="widget_userrights" native="true">
+         <layout class="QGridLayout" name="gridLayout_6">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item row="1" column="1">
+           <spacer name="verticalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCheckBox" name="checkBox_userrights">
+            <property name="text">
+             <string>User rights</string>
+            </property>
+            <property name="tristate">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="2">
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_userrights">
+            <property name="text">
+             <string>Open userrights:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QWidget" name="widget_steering" native="true">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="1">
+           <widget class="QRadioButton" name="radioButton">
+            <property name="text">
+             <string>clock wise</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <spacer name="verticalSpacer_12">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>12</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="1">
+           <spacer name="verticalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>11</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="1">
+           <widget class="QRadioButton" name="radioButton_2">
+            <property name="text">
+             <string>two-way</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <spacer name="verticalSpacer_10">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>12</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="2">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_steering">
+            <property name="text">
+             <string>Steering</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QWidget" name="widget_language" native="true">
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item row="5" column="1">
+           <widget class="QRadioButton" name="radioButton_chinese">
+            <property name="text">
+             <string>Chinese</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="1">
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="4" column="1">
+           <spacer name="verticalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="1">
+           <widget class="QRadioButton" name="radioButton_english">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>English</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <spacer name="horizontalSpacer_8">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="3" column="2">
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0" colspan="3">
+           <widget class="QLabel" name="label_setlanguage">
+            <property name="text">
+             <string>Set language:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>Manager</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="5" column="2" rowspan="2">
+           <widget class="QTextEdit" name="textEdit_set_comment"/>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLineEdit" name="lineEdit_set_name"/>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Password:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QLineEdit" name="lineEdit_set_password"/>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLineEdit" name="le_createtime"/>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Authority:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QComboBox" name="comboBox_set_authority"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>Name:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" rowspan="7">
+           <widget class="QUserSetWidget" name="tableView_userlist"/>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLineEdit" name="le_creater"/>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>Creater:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>CreateTime:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1" rowspan="2">
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Comment:</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QCPushButton" name="pushButton_set_new">
+            <property name="text">
+             <string>New</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCPushButton" name="pushButton_set_del">
+            <property name="text">
+             <string>Delete</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>173</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
+       <string>Device</string>
+      </attribute>
+      <widget class="QCheckBox" name="checkBox_2">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>100</y>
+         <width>171</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Optical fiber sensing</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_3">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>130</y>
+         <width>231</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Infrared sensor outer ring</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_4">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>160</y>
+         <width>231</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Infrared sensor inner ring</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_5">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>190</y>
+         <width>181</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Pressure pickup</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>210</x>
+         <y>260</y>
+         <width>99</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Check</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>100</y>
+         <width>48</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_2">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>130</y>
+         <width>48</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinBox_3">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>160</y>
+         <width>48</width>
+         <height>27</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_11">
+      <attribute name="title">
+       <string>Network</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="10" column="2">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Gateway:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="3">
+        <widget class="QLineEdit" name="lineEdit_gateway"/>
+       </item>
+       <item row="9" column="2">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Mask:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="3">
+        <widget class="QLineEdit" name="lineEdit_dns"/>
+       </item>
+       <item row="9" column="3">
+        <widget class="QLineEdit" name="lineEdit_mask"/>
+       </item>
+       <item row="2" column="0" rowspan="13">
+        <widget class="QWIFIWidget" name="tableView_Wifi"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="lb_curnet">
+         <property name="text">
+          <string>Current:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Select network</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="3">
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="11" column="2">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>DNS:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>IP configure</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="1">
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Expanding</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="13" column="3">
+        <widget class="QCPushButton" name="btn_saveip">
+         <property name="text">
+          <string>Save</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Ip address:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="4">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="8" column="3">
+        <widget class="QLineEdit" name="lineEdit_ip"/>
+       </item>
+       <item row="7" column="2">
+        <widget class="QCheckBox" name="chk_dhcp">
+         <property name="text">
+          <string>Use DHCP</string>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>Factory</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QStackedWidget" name="stackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="page">
+          <widget class="QCPushButton" name="btn_calibrate">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>60</y>
+             <width>158</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Calibrate</string>
+           </property>
+          </widget>
+          <widget class="QCheckBox" name="chkDebug">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>220</y>
+             <width>161</width>
+             <height>22</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Debug window</string>
+           </property>
+          </widget>
+          <widget class="QScrollBar" name="scb_bcklight">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>160</y>
+             <width>212</width>
+             <height>13</height>
+            </rect>
+           </property>
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_18">
+           <property name="geometry">
+            <rect>
+             <x>30</x>
+             <y>20</y>
+             <width>67</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Serial No.:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_5">
+           <property name="geometry">
+            <rect>
+             <x>40</x>
+             <y>100</y>
+             <width>81</width>
+             <height>41</height>
+            </rect>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::LeftToRight</enum>
+           </property>
+           <property name="text">
+            <string>Backlight</string>
+           </property>
+           <property name="textInteractionFlags">
+            <set>Qt::LinksAccessibleByMouse</set>
+           </property>
+          </widget>
+          <widget class="QLabel" name="label_19">
+           <property name="geometry">
+            <rect>
+             <x>110</x>
+             <y>20</y>
+             <width>161</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
+           </property>
+          </widget>
+         </widget>
+         <widget class="QWidget" name="page_2">
+          <layout class="QGridLayout" name="gridLayout_8">
+           <item row="0" column="1">
+            <spacer name="verticalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>127</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="0">
+            <spacer name="horizontalSpacer_13">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>201</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="lb_serial">
+             <property name="text">
+              <string>Input serial number please!</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <spacer name="horizontalSpacer_14">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>201</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="1">
+            <spacer name="verticalSpacer_14">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>127</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCPushButton</class>
+   <extends>QPushButton</extends>
+   <header>qcpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QUserSetWidget</class>
+   <extends>QTableView</extends>
+   <header>qusersetwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QWIFIWidget</class>
+   <extends>QTableView</extends>
+   <header>qwifiwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>HNTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>hntabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

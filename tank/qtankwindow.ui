@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QTankWindow</class>
+ <widget class="QStackedWidget" name="QTankWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::StrongFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>StackedWidget</string>
+  </property>
+  <property name="currentIndex">
+   <number>1</number>
+  </property>
+  <widget class="QLoginDialog" name="page_login"/>
+  <widget class="MainWindow" name="page_main"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MainWindow</class>
+   <extends>QWidget</extends>
+   <header>mainwindow.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QLoginDialog</class>
+   <extends>QWidget</extends>
+   <header>logindialog.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

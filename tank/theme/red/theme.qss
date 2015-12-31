@@ -1,0 +1,8 @@
+MainWindow QWidget#centralWidget {
+    border-image: url(://theme/red/bk_main.png);
+}
+
+MainWindow QWidget#widget_user, QWidget#widget_hanon, QWidget#widget_run, 
+QWidget#widget_edit_library, QWidget#widget_edit_method, QWidget#widget_edit_stage {
+    border-image: url(://theme/red/bk_content.png);
+}

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QTankException</class>
+ <widget class="QCDialog" name="QTankException">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>350</width>
+    <height>96</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QCWidget" name="widgetPic" native="true"/>
+   </item>
+   <item>
+    <widget class="QListWidget" name="lwWarn"/>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCDialog</class>
+   <extends>QWidget</extends>
+   <header>qcdialog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>QCWidget</class>
+   <extends>QWidget</extends>
+   <header>qcwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QMethodView</class>
+ <widget class="QCTableView" name="QMethodView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>485</width>
+    <height>215</height>
+   </rect>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::WheelFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="frameShape">
+   <enum>QFrame::StyledPanel</enum>
+  </property>
+  <property name="frameShadow">
+   <enum>QFrame::Sunken</enum>
+  </property>
+  <property name="lineWidth">
+   <number>1</number>
+  </property>
+  <property name="midLineWidth">
+   <number>0</number>
+  </property>
+  <property name="showGrid">
+   <bool>true</bool>
+  </property>
+  <property name="gridStyle">
+   <enum>Qt::SolidLine</enum>
+  </property>
+  <attribute name="horizontalHeaderVisible">
+   <bool>true</bool>
+  </attribute>
+  <layout class="QHBoxLayout" name="horizontalLayout"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

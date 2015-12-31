@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QCDateTime</class>
+ <widget class="QWidget" name="QCDateTime">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>266</width>
+    <height>80</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="4">
+    <widget class="QToolButton" name="btnDownTime">
+     <property name="text">
+      <string>↓</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="3">
+    <widget class="QLineEdit" name="le_year">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="4">
+    <widget class="QToolButton" name="btnYearDown">
+     <property name="text">
+      <string>↓</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="QToolButton" name="btnUpTime">
+     <property name="text">
+      <string>↑</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QLineEdit" name="le_time"/>
+   </item>
+   <item row="0" column="2">
+    <widget class="QToolButton" name="btnYearUp">
+     <property name="text">
+      <string>↑</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
