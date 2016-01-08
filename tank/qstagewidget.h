@@ -25,6 +25,9 @@ public:
     void initdb(QString dbName = "", bool save = true);
     void selectStage(int row = 0);
     int currentStage() { return currentIndex().row(); }
+    int totalStageTimeRamp();
+    void stageParam(quint8& stage, quint8& vessel,
+                    quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold);
     void currentStageParam(quint8& stage, quint8& vessel,
                            quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold);
     int countStage() { return m_model->rowCount(); }

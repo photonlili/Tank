@@ -48,6 +48,19 @@ void QEditForm::initAll()
 
 void QEditForm::libGetted(QString name)
 {
+    if(DB_EXTRACT == name)
+    {
+        ui->le_press->setDisabled(true);
+        ui->le_timeramp->setDisabled(true);
+        ui->comboBox_method_type->setDisabled(true);
+    }
+    else
+    {
+        ui->le_press->setDisabled(false);
+        ui->le_timeramp->setDisabled(false);
+        ui->comboBox_method_type->setDisabled(false);
+    }
+
     ui->tableView_method->initdb(name);
     tbvStage->initdb(name);
 

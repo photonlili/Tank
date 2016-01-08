@@ -53,8 +53,10 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
-    ui->widget_10->setFixedWidth(121);
-    ui->widget_4->setFixedWidth(445);
+    ui->widget_9->setFixedWidth(140);
+    ui->widget_10->setFixedWidth(140);
+    ui->widget_3->setFixedWidth(520);
+    ui->widget_4->setFixedWidth(435);
 }
 
 QDispelForm::~QDispelForm()
@@ -72,19 +74,40 @@ void QDispelForm::initAll()
 
 void QDispelForm::timeNewData()
 {
-    int temp = qrand() % 300;
-    int press = qrand() % 800;
+    quint8 stage;
+    quint8 vessel;
+    quint16 pressure;
+    quint16 tempture;
+    quint16 hold;
+    static quint16 ramp = 0;
+    static quint16 curRamp = 0;
 
-    static double initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-    static double lastPointKey = 0;
-    double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-    pline() << currentPointKey << temp << press << currentPointKey-initPointKey << currentPointKey-lastPointKey;
-    if (currentPointKey-lastPointKey > 0.01) // at most add point every 10 ms
+    if(m_lastPointKey-m_initPointKey == 0)
     {
-        int key = currentPointKey-initPointKey;
-        pline() << qSin(key*10) * 15;
-        int temp = key * 14 + 10 + qSin(key) * 14;
-        int press = key * 24 + 18 + qCos(key) * 15;
+        ui->tbv_stage->currentStageParam(stage, vessel, curRamp, pressure, tempture, hold);
+        ramp = curRamp;
+    }
+    else if(m_lastPointKey-m_initPointKey > m_totalStageRamp)
+    {
+        // stop
+    }
+    else if(m_lastPointKey-m_initPointKey == ramp)
+    {
+        ui->tbv_stage->next();
+        ui->tbv_stage->currentStageParam(stage, vessel, curRamp, pressure, tempture, hold);
+        ramp += curRamp;
+    }
+
+    pline() << curRamp << ramp;
+    //获取温度和压力
+    double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+    int key = currentPointKey - m_initPointKey;
+    int temp = tempture * key / curRamp;
+    int press = tempture * key / curRamp;
+
+    pline() << currentPointKey << temp << pressure << currentPointKey-m_initPointKey << currentPointKey-m_lastPointKey;
+    if (currentPointKey-m_lastPointKey > 0.01) // at most add point every 10 ms
+    {
         ui->label_curtemp->setText(QString("%1").arg(temp));
         ui->label_stressure->setText(QString("%1").arg(press));
         ui->page_plot->addTempture(key, temp);
@@ -97,7 +120,7 @@ void QDispelForm::timeNewData()
             ui->page_plot->xAxis->setRange(0, key, Qt::AlignLeft);
         }
         ui->page_plot->replot();
-        lastPointKey = currentPointKey;
+        m_lastPointKey = currentPointKey;
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -144,6 +167,8 @@ void QDispelForm::on_btn_play_clicked()
     }
     else if(bRunning == eStop)
     {
+        m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+        m_lastPointKey = m_initPointKey;
         bRunning = ePlay;
         startHeating();
         serialNo = m_dlg->newReport(methodForm->currentLibrary(),
@@ -157,6 +182,7 @@ void QDispelForm::startHeating()
     ui->btn_play->setText(tr("Pause"));
     ui->sw_main->setCurrentIndex(0);
 
+    ui->tbv_stage->selectStage(0);
     quint8 stage;
     quint8 vessel;
     quint16 ramp;
@@ -164,6 +190,10 @@ void QDispelForm::startHeating()
     quint16 tempture;
     quint16 hold;
     ui->tbv_stage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
+    m_totalStageRamp = ui->tbv_stage->totalStageTimeRamp();
+    m_currentStage = ui->tbv_stage->currentStage();
+
+    pline() << m_currentStage << m_totalStageRamp;
 
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
@@ -286,6 +316,8 @@ void QDispelForm::on_btn_play_2_clicked()
     }
     else if(bRunning == eStop)
     {
+        m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+        m_lastPointKey = 0;
         bRunning = ePlay;
         startHeatingExtract();
         serialNo = m_dlg->newReport(methodForm->currentLibrary(),

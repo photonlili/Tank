@@ -84,6 +84,11 @@ private slots:
 private:
     Ui::QDispelForm *ui;
 
+    quint8 m_currentStage;
+    quint16 m_totalStageRamp;
+    double m_initPointKey;
+    double m_lastPointKey;
+
     QTankException* excp;
 
     QString serialNo;

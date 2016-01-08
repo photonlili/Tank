@@ -72,6 +72,27 @@ void QStageWidget::selectStage(int row)
     //m_mapper->setCurrentIndex(row);
 }
 
+int QStageWidget::totalStageTimeRamp()
+{
+    quint16 ramp = 0;
+    for(int row = 0; row < m_model->rowCount(); row++)
+    {
+        ramp += m_model->index(row, Stage_Timeramp).data().toUInt();
+    }
+    return ramp;
+}
+
+void QStageWidget::stageParam(quint8 &stage, quint8 &vessel, quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold)
+{
+    int row = stage - 1;
+    stage = m_model->index(row, Stage_Index).data().toUInt();
+    vessel = m_model->index(row, Stage_Vessel).data().toUInt();
+    ramp = m_model->index(row, Stage_Timeramp).data().toUInt();
+    press = m_model->index(row, Stage_Presspsi).data().toUInt();
+    tempture = m_model->index(row, Stage_Tempture).data().toUInt();
+    hold = m_model->index(row, Stage_Hold).data().toUInt();
+}
+
 void QStageWidget::currentStageParam(quint8 &stage, quint8 &vessel, quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold)
 {
     QModelIndex index = currentIndex();
@@ -104,11 +125,11 @@ void QStageWidget::newStage()
     row = m_model->rowCount();
     m_model->insertRow(row);
     m_model->setData(m_model->index(row, Stage_Index), row+1);
-    m_model->setData(m_model->index(row, Stage_Vessel), 20);
-    m_model->setData(m_model->index(row, Stage_Timeramp), 5);
-    m_model->setData(m_model->index(row, Stage_Presspsi), 500);
-    m_model->setData(m_model->index(row, Stage_Tempture), 200);
-    m_model->setData(m_model->index(row, Stage_Hold), 5);
+    m_model->setData(m_model->index(row, Stage_Vessel), 12);
+    m_model->setData(m_model->index(row, Stage_Timeramp), 500);
+    m_model->setData(m_model->index(row, Stage_Presspsi), 800);
+    m_model->setData(m_model->index(row, Stage_Tempture), 300);
+    m_model->setData(m_model->index(row, Stage_Hold), 600);
     m_model->setData(m_model->index(row, Stage_MethodId), m_methodid);
     m_model->submit();
 }
@@ -139,11 +160,11 @@ void QStageWidget::cleanStage()
     int row = 0;
 
     m_model->setData(m_model->index(row, Stage_Index), row+1);
-    m_model->setData(m_model->index(row, Stage_Vessel), 20);
-    m_model->setData(m_model->index(row, Stage_Timeramp), 5);
-    m_model->setData(m_model->index(row, Stage_Presspsi), 500);
-    m_model->setData(m_model->index(row, Stage_Tempture), 200);
-    m_model->setData(m_model->index(row, Stage_Hold), 5);
+    m_model->setData(m_model->index(row, Stage_Vessel), 12);
+    m_model->setData(m_model->index(row, Stage_Timeramp), 500);
+    m_model->setData(m_model->index(row, Stage_Presspsi), 800);
+    m_model->setData(m_model->index(row, Stage_Tempture), 300);
+    m_model->setData(m_model->index(row, Stage_Hold), 600);
     m_model->setData(m_model->index(row, Stage_MethodId), m_methodid);
 
     row  = m_model->rowCount();

@@ -6,6 +6,7 @@
 #include "qserialwarning.h"
 #include "qtankexception.h"
 #include "qtankcrosscenter.h"
+#include "qtankserver.h"
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +42,8 @@ int main(int argc, char *argv[])
         QObject::connect(s2, SIGNAL(sigSerialUnlock()), &war, SLOT(accept()));
         war.exec();
     }
+
+    HNSingleServer(theApp);
 
     //消息循环
     return theApp->exec();

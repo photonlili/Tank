@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>780</width>
-    <height>399</height>
+    <height>355</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -59,7 +59,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_dispel_run">
       <attribute name="title">
@@ -419,7 +419,7 @@
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_status">
                   <property name="text">
-                   <string>Heating</string>
+                   <string>Stopped</string>
                   </property>
                  </widget>
                 </item>
@@ -815,7 +815,7 @@
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_status_2">
                   <property name="text">
-                   <string>Heating</string>
+                   <string>Stopped</string>
                   </property>
                  </widget>
                 </item>

@@ -7,7 +7,7 @@ QTankSerialPort::QTankSerialPort(QObject *parent) :
 #ifdef __MIPS_LINUX__
     QString portName("/dev/ttyS2");
 #else
-    QString portName("/dev/ttyS20");
+    QString portName("/dev/ttyS2");
 #endif
     setPortName(portName);
     setBaudRate(QSerialPort::Baud57600);
@@ -129,7 +129,7 @@ void QTankSerialPort::sendCloseAck()
 void QTankSerialPort::recvWriteSerialNumber(const QByteArray &l)
 {
     QSettings set;
-    set.setValue("Device/SerialNo.", l.constData());
+    set.setValue("Device/SerialNo.", l);
     set.sync();
     sendWriteSerialNumberAck();
     emit sigSerialUnlock();

@@ -12,7 +12,7 @@ QTankPeerPort::QTankPeerPort(QObject *parent) :
 #ifdef __MIPS_LINUX__
     QString portName("/dev/ttyS0");
 #else
-    QString portName("/dev/ttyS2");
+    QString portName("/dev/ttyS3");
 #endif
     setPortName(portName);
     setBaudRate(QSerialPort::Baud57600);
