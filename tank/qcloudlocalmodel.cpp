@@ -26,6 +26,7 @@ void QCloudLocalModel::queryRootDirs()
     setData(index(row, DIR_CODE), "002");
     setData(index(row, DIR_PATH), DB_DATA);
     submit();
+    emit sigQueryRootDirSuccess();
 }
 
 void QCloudLocalModel::uploadFile(QString code, QString path, QString filename, int len)

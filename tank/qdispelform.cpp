@@ -17,12 +17,17 @@ QDispelForm::QDispelForm(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(timeNewData()));
 
     m_dlg = new QReportViewDialog(this);
-    methodForm = new QMethodForm(this);
 
+    methodForm = new QMethodForm(this);
     connect(methodForm, SIGNAL(tellLibrary(QString)), ui->lb_libname, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(tellMethod(QString)), ui->lb_method, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(tellType(QString)), ui->lb_type, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(selMethod(QString, int)), this, SLOT(prepareRunning(QString, int)));
+
+    methodForm2 = new QMethodForm(this);
+    connect(methodForm2, SIGNAL(tellLibrary(QString)), ui->lb_libname_2, SLOT(setText(QString)));
+    connect(methodForm2, SIGNAL(tellMethod(QString)), ui->lb_method_2, SLOT(setText(QString)));
+    connect(methodForm2, SIGNAL(selMethod(QString, int)), this, SLOT(prepareExtractRunning(QString, int)));
 
     m_plotObjectHandler = new QCPDocumentObject(this);
     m_text = new QTextEdit(this);
@@ -68,8 +73,8 @@ void QDispelForm::initAll()
 {
     // 默认不运行
     bRunning = eStop;
-    methodForm->initAll();
     prepareRunning(DB_HANON, 1);
+    prepareExtractRunning(DB_EXTRACT, 1);
 }
 
 void QDispelForm::timeNewData()
@@ -140,13 +145,17 @@ void QDispelForm::prepareRunning(QString db, int mid)
     pline() << db << mid;
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid);
+}
+
+void QDispelForm::prepareExtractRunning(QString, int mid)
+{
     ui->tbv_stage_2->initdb(DB_EXTRACT);
     ui->tbv_stage_2->refresh(mid);
 }
 
 void QDispelForm::on_btn_open_clicked()
 {
-    methodForm->initAll();
+    methodForm->initAll("Library <> 'Extract'");
     methodForm->exec();
 }
 
@@ -295,8 +304,8 @@ void QDispelForm::on_btn_trans_clicked()
 
 void QDispelForm::on_btn_open_2_clicked()
 {
-    methodForm->initAll();
-    methodForm->exec();
+    methodForm2->initAll("Library = 'Extract'");
+    methodForm2->exec();
 }
 
 void QDispelForm::on_btn_play_2_clicked()

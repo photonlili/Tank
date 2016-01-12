@@ -98,5 +98,6 @@
         <file>theme/basic/bk_progress_background.png</file>
         <file>theme/basic/bk_progress_chunk.png</file>
         <file>theme/basic/bk_warning.png</file>
+        <file>theme/basic/bk_wenjianjia.ico</file>
     </qresource>
 </RCC>

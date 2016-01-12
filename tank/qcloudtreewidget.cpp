@@ -71,4 +71,5 @@ void QCloudTreeWidget::currentRowChanged()
     QModelIndex parIndex = curIndex.parent();
     if(!parIndex.isValid())
         model->queryFiles(model->index(curIndex.row(), DIR_CODE).data().toString());
+    expand(curIndex);
 }

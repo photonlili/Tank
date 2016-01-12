@@ -1,6 +1,7 @@
 #include "qfactorysetpassform.h"
 #include "ui_qfactorysetpassform.h"
 #include "qtankpublic.h"
+#include "hnmsgbox.h"
 
 QFactorySetPassForm::QFactorySetPassForm(QWidget *parent) :
     QCDialog(parent),
@@ -19,6 +20,8 @@ void QFactorySetPassForm::passYes()
 {
     if("123456" == ui->lineEdit_facpassword->text())
         accept();
+    else
+        HNMsgBox::warning(this, tr("Password error"));;
 }
 
 QFactorySetPassForm::~QFactorySetPassForm()

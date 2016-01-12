@@ -314,32 +314,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="120"/>
-        <location filename="../qdispelform.ui" line="584"/>
-        <source>Library</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qdispelform.ui" line="139"/>
         <location filename="../qdispelform.ui" line="603"/>
         <source>Library-0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="180"/>
-        <location filename="../qdispelform.ui" line="644"/>
-        <source>Method</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qdispelform.ui" line="199"/>
         <location filename="../qdispelform.ui" line="663"/>
         <source>Method-0</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qdispelform.ui" line="222"/>
-        <source>Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -354,9 +337,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="402"/>
-        <location filename="../qdispelform.ui" line="840"/>
-        <source>Tempture</source>
+        <location filename="../qdispelform.ui" line="422"/>
+        <location filename="../qdispelform.ui" line="818"/>
+        <source>Stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -386,11 +369,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="341"/>
-        <source>Pressure</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qdispelform.ui" line="367"/>
         <source>kPa</source>
         <translation type="unfinished"></translation>
@@ -403,9 +381,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="422"/>
-        <location filename="../qdispelform.ui" line="818"/>
-        <source>Heating</source>
+        <location filename="../qdispelform.ui" line="120"/>
+        <location filename="../qdispelform.ui" line="584"/>
+        <source>Library:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.ui" line="180"/>
+        <location filename="../qdispelform.ui" line="644"/>
+        <source>Method:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.ui" line="222"/>
+        <source>Type:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.ui" line="341"/>
+        <source>Pressure:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.ui" line="402"/>
+        <location filename="../qdispelform.ui" line="840"/>
+        <source>Tempture:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -417,8 +417,9 @@
     <message>
         <location filename="../qdispelform.ui" line="473"/>
         <location filename="../qdispelform.ui" line="923"/>
-        <location filename="../qdispelform.cpp" line="174"/>
-        <location filename="../qdispelform.cpp" line="182"/>
+        <location filename="../qdispelform.cpp" line="233"/>
+        <location filename="../qdispelform.cpp" line="241"/>
+        <location filename="../qdispelform.cpp" line="384"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -429,7 +430,8 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="153"/>
+        <location filename="../qdispelform.cpp" line="182"/>
+        <location filename="../qdispelform.cpp" line="331"/>
         <source>Pause</source>
         <translation type="unfinished"></translation>
     </message>
@@ -467,7 +469,13 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qeditform.ui" line="451"/>
+        <source>Vessel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qeditform.ui" line="57"/>
+        <location filename="../qeditform.ui" line="441"/>
         <source>Method</source>
         <translation type="unfinished"></translation>
     </message>
@@ -482,43 +490,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="240"/>
+        <location filename="../qeditform.ui" line="253"/>
         <source>Stage:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="268"/>
+        <location filename="../qeditform.ui" line="281"/>
         <source>Tempture:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="261"/>
+        <location filename="../qeditform.ui" line="274"/>
         <source>PressPSI:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="254"/>
+        <location filename="../qeditform.ui" line="267"/>
         <source>TimeRAMP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="247"/>
+        <location filename="../qeditform.ui" line="260"/>
         <source>Hold:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qeditform.ui" line="339"/>
         <source>StageNum:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qeditform.ui" line="441"/>
-        <source>Method:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qeditform.ui" line="451"/>
-        <source>Vessel:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -537,17 +535,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="106"/>
+        <location filename="../qeditform.cpp" line="125"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="107"/>
+        <location filename="../qeditform.cpp" line="126"/>
         <source>Tempture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="108"/>
+        <location filename="../qeditform.cpp" line="127"/>
         <source>Pressure</source>
         <translation type="unfinished"></translation>
     </message>
@@ -567,7 +565,7 @@
 <context>
     <name>QExceptionWidget</name>
     <message>
-        <location filename="../qexceptionwidget.ui" line="16"/>
+        <location filename="../qexceptionwidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -739,6 +737,26 @@
         <source>Sure</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qmethodform.cpp" line="67"/>
+        <source>Standard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qmethodform.cpp" line="70"/>
+        <source>Press</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qmethodform.cpp" line="73"/>
+        <source>RAMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qmethodform.cpp" line="76"/>
+        <source>Extract</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QMethodView</name>
@@ -857,6 +875,24 @@
     <message>
         <location filename="../qpreviewwidget.ui" line="14"/>
         <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QProgressWindow</name>
+    <message>
+        <location filename="../qprogresswindow.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qprogresswindow.ui" line="27"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qprogresswindow.ui" line="47"/>
+        <source>Progressing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1186,44 +1222,44 @@
         <translation type="obsolete">Warning</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="203"/>
-        <location filename="../qsetform.cpp" line="245"/>
+        <location filename="../qsetform.cpp" line="207"/>
+        <location filename="../qsetform.cpp" line="249"/>
         <source>Name couldn&apos;t be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="216"/>
-        <location filename="../qsetform.cpp" line="261"/>
+        <location filename="../qsetform.cpp" line="220"/>
+        <location filename="../qsetform.cpp" line="265"/>
         <source>This user is existed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="222"/>
+        <location filename="../qsetform.cpp" line="226"/>
         <source>Password confirm is not equal to password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="234"/>
+        <location filename="../qsetform.cpp" line="238"/>
         <source>You can&apos;t delete default user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="273"/>
+        <location filename="../qsetform.cpp" line="277"/>
         <source>Save success</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="281"/>
+        <location filename="../qsetform.cpp" line="285"/>
         <source>Current:Wired Lan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="286"/>
+        <location filename="../qsetform.cpp" line="290"/>
         <source>Current:%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="320"/>
+        <location filename="../qsetform.cpp" line="324"/>
         <source>Password error</source>
         <translation type="unfinished">Password error</translation>
     </message>

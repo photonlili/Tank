@@ -76,8 +76,10 @@ void QCloudLocalTreeWidget::currentRowChanged()
 {
     QModelIndex curIndex = currentIndex();
     QModelIndex parIndex = curIndex.parent();
-    if(!parIndex.isValid())
-        m_model->queryFiles(m_model->index(curIndex.row(), DIR_CODE).data().toString());
+    if(parIndex.isValid())
+        return;
+    m_model->queryFiles(m_model->index(curIndex.row(), DIR_CODE).data().toString());
+    expand(curIndex);
 }
 
 void QCloudLocalTreeWidget::uploadSuccess()

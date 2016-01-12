@@ -47,6 +47,7 @@ public slots:
     void showDebugWindow(int);
 private slots:
     void prepareRunning(QString, int);
+    void prepareExtractRunning(QString, int);
 
     void timeNewData();
 
@@ -105,6 +106,7 @@ private:
     QTimer* timer;
 
     QMethodForm* methodForm;
+    QMethodForm* methodForm2;
     QCPDocumentObject* m_plotObjectHandler;
     QTextEdit* m_text;
     QTankPeerPort* com0;

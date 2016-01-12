@@ -19,7 +19,7 @@ public:
         Working = 2,
     };
 
-    void initAll();
+    void initAll(QString filter = "");
 
     QString currentLibrary();
     QString currentMethodName();

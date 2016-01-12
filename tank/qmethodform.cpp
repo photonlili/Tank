@@ -20,9 +20,9 @@ QMethodForm::~QMethodForm()
     delete ui;
 }
 
-void QMethodForm::initAll()
+void QMethodForm::initAll(QString filter)
 {
-    ui->tbv_lib->refresh("");
+    ui->tbv_lib->refresh(filter);
     ui->tbv_lib->selectdb();
 }
 

@@ -207,3 +207,15 @@ QProgressBar {
 QProgressBar::chunk {
     background-image:url(://theme/basic/bk_progress_chunk.png);
 }
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+    border-image: none;
+    image: url(://theme/basic/bk_wenjianjia.ico);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+    border-image: none;
+    image: url("://theme/basic/bk_wenjianjia.ico");
+}

@@ -50,15 +50,21 @@ void QEditForm::libGetted(QString name)
 {
     if(DB_EXTRACT == name)
     {
-        ui->le_press->setDisabled(true);
-        ui->le_timeramp->setDisabled(true);
-        ui->comboBox_method_type->setDisabled(true);
+        ui->lb_pressBuddy->setHidden(true);
+        ui->lb_timerampBuddy->setHidden(true);
+        ui->lbTypeBuddy->setHidden(true);
+        ui->le_press->setHidden(true);
+        ui->le_timeramp->setHidden(true);
+        ui->comboBox_method_type->setHidden(true);
     }
     else
     {
-        ui->le_press->setDisabled(false);
-        ui->le_timeramp->setDisabled(false);
-        ui->comboBox_method_type->setDisabled(false);
+        ui->lb_pressBuddy->setHidden(false);
+        ui->lb_timerampBuddy->setHidden(false);
+        ui->lbTypeBuddy->setHidden(false);
+        ui->le_press->setHidden(false);
+        ui->le_timeramp->setHidden(false);
+        ui->comboBox_method_type->setHidden(false);
     }
 
     ui->tableView_method->initdb(name);

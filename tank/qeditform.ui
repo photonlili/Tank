@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>710</width>
-    <height>373</height>
+    <width>770</width>
+    <height>431</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -234,6 +234,19 @@
           <enum>Qt::StrongFocus</enum>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
+          <item row="5" column="1">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
           <item row="0" column="1">
            <widget class="QLabel" name="label_3">
             <property name="text">
@@ -249,14 +262,14 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="lb_timerampBuddy">
             <property name="text">
              <string>TimeRAMP:</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLabel" name="label_9">
+           <widget class="QLabel" name="lb_pressBuddy">
             <property name="text">
              <string>PressPSI:</string>
             </property>
@@ -268,19 +281,6 @@
              <string>Tempture:</string>
             </property>
            </widget>
-          </item>
-          <item row="5" column="1">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
           </item>
           <item row="0" column="3">
            <widget class="QSpinBox" name="spin_stage">
@@ -317,7 +317,7 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="1" colspan="3">
+          <item row="7" column="1" colspan="3">
            <widget class="QWidget" name="widget_5" native="true">
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
@@ -438,7 +438,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Method:</string>
+             <string>Method</string>
             </property>
            </widget>
           </item>
@@ -448,7 +448,7 @@
           <item>
            <widget class="QLabel" name="label_12">
             <property name="text">
-             <string>Vessel:</string>
+             <string>Vessel</string>
             </property>
            </widget>
           </item>
@@ -456,7 +456,7 @@
            <widget class="QLineEdit" name="le_vessel"/>
           </item>
           <item>
-           <widget class="QLabel" name="label_6">
+           <widget class="QLabel" name="lbTypeBuddy">
             <property name="text">
              <string>Type</string>
             </property>

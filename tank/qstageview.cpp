@@ -8,7 +8,7 @@ QStageView::QStageView(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setSelectionMode(QAbstractItemView::NoSelection);
+    setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
 #ifdef __MIPS_LINUX__

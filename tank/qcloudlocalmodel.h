@@ -18,6 +18,7 @@ protected:
     QStandardItem *findDirByCode(QString code);
 
 signals:
+    void sigQueryRootDirSuccess();
     void sigUploadSuccess();
 public slots:
 private:

@@ -117,7 +117,7 @@
              <item>
               <widget class="QLabel" name="lb_libbuddy">
                <property name="text">
-                <string>Library</string>
+                <string>Library:</string>
                </property>
               </widget>
              </item>
@@ -177,7 +177,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Method</string>
+                <string>Method:</string>
                </property>
               </widget>
              </item>
@@ -219,7 +219,7 @@
              <item>
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Type</string>
+                <string>Type:</string>
                </property>
               </widget>
              </item>
@@ -338,7 +338,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Pressure</string>
+                   <string>Pressure:</string>
                   </property>
                  </widget>
                 </item>
@@ -399,7 +399,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Tempture</string>
+                   <string>Tempture:</string>
                   </property>
                  </widget>
                 </item>
@@ -581,7 +581,7 @@
              <item>
               <widget class="QLabel" name="lb_libbuddy_2">
                <property name="text">
-                <string>Library</string>
+                <string>Library:</string>
                </property>
               </widget>
              </item>
@@ -641,7 +641,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Method</string>
+                <string>Method:</string>
                </property>
               </widget>
              </item>
@@ -837,7 +837,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Tempture</string>
+                   <string>Tempture:</string>
                   </property>
                  </widget>
                 </item>

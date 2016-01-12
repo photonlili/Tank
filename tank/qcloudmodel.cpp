@@ -54,6 +54,7 @@ void QCloudModel::queryRootDirsResult()
         row++;
     }
     submit();
+    emit sigQueryRootDirSuccess();
 }
 
 void QCloudModel::queryFilesResult()
