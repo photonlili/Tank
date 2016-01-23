@@ -65,9 +65,6 @@ QSetForm::QSetForm(QWidget *parent) :
     connect(HNEthManager::Instance(), SIGNAL(sigLanConnected()), this, SLOT(netChanged()));
     connect(HNEthManager::Instance(), SIGNAL(sigLanDisConnected()), this, SLOT(netChanged()));
 
-    connect(ui->tableView_Wifi, SIGNAL(clicked(QModelIndex)),
-            this, SLOT(clickedWIFI()), Qt::QueuedConnection);
-
     m_facPass = new QFactorySetPassForm(this);
     ui->scb_bcklight->setRange(5, 255);
     ui->scb_bcklight->setValue(255);
@@ -87,8 +84,6 @@ QSetForm::QSetForm(QWidget *parent) :
     ui->lb_serial->setPalette(plt);
 
     QSettings set;
-    QString serial = set.value("/Device/SerialNo.").toString();
-    ui->lb_serial->setText(serial);
 }
 
 QSetForm::~QSetForm()
@@ -126,6 +121,14 @@ void QSetForm::initAll()
     QSettings set;
     int id = set.value("DefaultLogin").toInt();
     ui->tableView_userlist->selectUser(id);
+
+    QByteArray serial = set.value("/Device/SerialNo.").toByteArray();
+    QString sn;
+    for(int i = 0; i < serial.size(); i++)
+        sn += QString::number((quint8)serial[i], 16);
+    sn = sn.toUpper();
+    ui->lb_serial_2->setText(sn);
+
 }
 
 void QSetForm::userRightsChanged(int bChecked)
@@ -293,50 +296,6 @@ void QSetForm::netChanged()
     ui->lb_curnet->setText(netName);
 }
 
-void QSetForm::clickedWIFI()
-{
-    static QWIFIPassForm* pas = NULL;
-    if(!pas)
-    {
-        pas = new QWIFIPassForm(this);
-        connect(pas, SIGNAL(connectClicked(QString)), this, SLOT(wifiPassDone(QString)));
-    }
-
-    QString name = ui->tableView_Wifi->currentWIFIName();
-    QString encryt = ui->tableView_Wifi->currentWIFIEncrypted();
-    QString type = ui->tableView_Wifi->currentWIFIType();
-    QString mac = ui->tableView_Wifi->currentWIFIMAC();
-
-    HNEthManager::Instance()->setRefresh(false);
-    do
-    {
-        if("YES" == encryt)
-        {
-            pas->setWifiName(name);
-            if(QWIFIPassForm::Rejected == pas->exec())
-                break;
-        }
-
-        bool ok = ui->tableView_Wifi->setCurrentWifi(mac, wifiPassword);
-
-        if(!ok)
-        {
-            HNMsgBox::warning(this, tr("Password error"));
-            break;
-        }
-
-        pline() << name << encryt << wifiPassword;
-    }while(0);
-    HNEthManager::Instance()->setRefresh();
-
-    return;
-}
-
-void QSetForm::wifiPassDone(QString password)
-{
-    wifiPassword = password;
-}
-
 void QSetForm::timerSetTime()
 {
     QDateTime dt = QDateTime::currentDateTime();
@@ -423,3 +382,12 @@ void QSetForm::on_chk_dhcp_stateChanged(int bChecked)
     ui->lineEdit_dns->setDisabled(bChecked);
 }
 
+void QSetForm::on_btnRestore_clicked()
+{
+    //语言？
+    //开机是否允许登陆？
+    //默认登陆用户
+    //网络设置
+    //主题
+    //头像
+}

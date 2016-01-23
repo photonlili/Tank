@@ -42,9 +42,6 @@ private slots:
 
     void netChanged();
 
-    void clickedWIFI();
-    void wifiPassDone(QString password);
-
     void on_scb_bcklight_valueChanged(int value);
 
     void on_btn_calibrate_clicked();
@@ -53,9 +50,10 @@ private slots:
 
     void on_chk_dhcp_stateChanged(int arg1);
 
+    void on_btnRestore_clicked();
+
 private:
     Ui::QSetForm *ui;
-    QString wifiPassword;
     QFactorySetPassForm* m_facPass;
 
     // QObject interface

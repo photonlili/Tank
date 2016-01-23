@@ -15,7 +15,9 @@ public:
     explicit HNMsgBox(QWidget *parent = 0);
     ~HNMsgBox();
 
+    //警告，不可选择
     static int warning(QWidget* parent = 0, QString content = "");
+    //提醒，供用户选择
     static int tips(QWidget* parent = 0, QString content = "");
 
 protected:

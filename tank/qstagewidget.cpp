@@ -36,18 +36,46 @@ void QStageWidget::refresh(QString filter)
     m_model->setHeaderData(Stage_Hold, Qt::Horizontal, tr("Hold"));
 }
 
-void QStageWidget::refresh(int methodid)
+void QStageWidget::refresh(int methodid, int type)
 {
     m_model->setFilter(QString("M_Id = %1").arg(methodid));
     m_model->select();
-    setColumnHidden(Stage_Id, true);
-    setColumnHidden(Stage_MethodId, true);
+
     m_model->setHeaderData(Stage_Index, Qt::Horizontal, tr("Stage"));
     m_model->setHeaderData(Stage_Vessel, Qt::Horizontal, tr("Vessel"));
     m_model->setHeaderData(Stage_Timeramp, Qt::Horizontal, tr("TimeRAMP"));
     m_model->setHeaderData(Stage_Presspsi, Qt::Horizontal, tr("PressPSI"));
     m_model->setHeaderData(Stage_Tempture, Qt::Horizontal, tr("Tempture"));
     m_model->setHeaderData(Stage_Hold, Qt::Horizontal, tr("Hold"));
+    setColumnHidden(Stage_Id, true);
+    setColumnHidden(Stage_MethodId, true);
+
+    setColumnHidden(Stage_Timeramp, false);
+    setColumnHidden(Stage_Presspsi, false);
+    setColumnHidden(Stage_Tempture, false);
+    setColumnHidden(Stage_Hold, false);
+
+    switch(type)
+    {
+    case Type_Standard:
+        setColumnHidden(Stage_Timeramp, true);
+        setColumnHidden(Stage_Presspsi, true);
+        break;
+    case Type_Stressure:
+        setColumnHidden(Stage_Timeramp, true);
+        setColumnHidden(Stage_Tempture, true);
+        setColumnHidden(Stage_Hold, true);
+        break;
+    case Type_Extract:
+        setColumnHidden(Stage_Vessel, true);
+        setColumnHidden(Stage_Timeramp, true);
+        setColumnHidden(Stage_Presspsi, true);
+        break;
+    case Type_Temprature:
+    default:
+        break;
+    }
+
 }
 
 void QStageWidget::initdb(QString dbName, bool save)

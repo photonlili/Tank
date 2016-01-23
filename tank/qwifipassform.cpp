@@ -25,6 +25,11 @@ void QWIFIPassForm::setWifiName(QString name)
     ui->label_ssid_name->setText(name);
 }
 
+QString QWIFIPassForm::wifiPwd()
+{
+    return ui->lineEdit_ssid_password->text();
+}
+
 void QWIFIPassForm::connectClicked()
 {
     emit connectClicked(ui->lineEdit_ssid_password->text());

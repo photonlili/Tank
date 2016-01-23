@@ -16,6 +16,7 @@ public:
     ~QWIFIPassForm();
 
     void setWifiName(QString name);
+    QString wifiPwd();
 
 signals:
     void connectClicked(QString password);

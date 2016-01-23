@@ -104,3 +104,8 @@ void QMethodForm::on_le_search_btnClicked()
     ui->tbv_method->refresh(QString("M_Name like '%%1%'").arg(ui->le_search->text()));
     ui->tbv_method->selectMethod();
 }
+
+void QMethodForm::on_btnClose_clicked()
+{
+    reject();
+}

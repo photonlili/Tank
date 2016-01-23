@@ -33,6 +33,9 @@
        <string>Content</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
+       <property name="bottomMargin">
+        <number>40</number>
+       </property>
        <item row="1" column="0" rowspan="2" colspan="10">
         <widget class="QWidget" name="widget" native="true">
          <layout class="QHBoxLayout" name="horizontalLayout_2">

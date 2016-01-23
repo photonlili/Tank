@@ -44,6 +44,8 @@ private slots:
 
     void on_le_search_btnClicked();
 
+    void on_btnClose_clicked();
+
 private:
     Ui::QMethodForm *ui;
 };

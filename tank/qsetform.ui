@@ -877,7 +877,7 @@
             <set>Qt::LinksAccessibleByMouse</set>
            </property>
           </widget>
-          <widget class="QLabel" name="label_19">
+          <widget class="QLabel" name="lb_serial_2">
            <property name="geometry">
             <rect>
              <x>110</x>
@@ -888,6 +888,19 @@
            </property>
            <property name="text">
             <string>TextLabel</string>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="btnRestore">
+           <property name="geometry">
+            <rect>
+             <x>310</x>
+             <y>60</y>
+             <width>99</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Restore</string>
            </property>
           </widget>
          </widget>

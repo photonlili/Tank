@@ -51,3 +51,8 @@ void QLibraryForm::currentDBChanged(QModelIndex, QModelIndex)
     QString db = ui->tbv_lib->currentDBDisplayed();
     ui->le_lib_name->setText(db);
 }
+
+void QLibraryForm::on_btnClose_clicked()
+{
+    reject();
+}

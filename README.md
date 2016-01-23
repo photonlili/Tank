@@ -10,8 +10,11 @@ Subsystem       sftp    internal-sftp
 passwd root
 0
 # net.sh
-3.通过zmodem上传net.sh到/DWINFile 执行
+3.
+通过zmodem上传net.sh到/DWINFile 执行
 # project
-4.Fillzllia上传/DWINFile下所有的文件
+4.
+Fillzllia上传/DWINFile下所有的文件
 # init project
-5.写入序列号 云用户密码
+5.
+写入序列号 云用户密码

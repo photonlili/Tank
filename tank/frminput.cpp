@@ -67,8 +67,8 @@ void frmInput::InitForm()
     frmWidth = this->width();
     frmHeight = this->height();
 
-    QSqlDatabase DbConn = newDatabaseConn();
-    setDatabaseName(DbConn, DB_PINYIN);
+    m_db = newDatabaseConn();
+    setDatabaseName(m_db, DB_PINYIN);
 
     isFirst = true;
     isPress = false;
@@ -529,6 +529,7 @@ void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
         //这样导致输入法面板的关闭按钮不起作用,关闭后马上有控件获取焦点又显示.
         //为此,增加判断,当焦点是从有对象转为无对象再转为有对象时不要显示.
         //这里又要多一个判断,万一首个窗体的第一个焦点就是落在可输入的对象中,则要过滤掉
+
 #ifndef __MIPS_LINUX__
         if (oldWidget == 0x0 && !isFirst) {
             return;
@@ -548,6 +549,7 @@ void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
             currentPlain = (QPlainTextEdit *)nowWidget;
             currentEditType = "QPlainTextEdit";
             ShowPanel();
+#if 0
         } else if (nowWidget->inherits("QComboBox")) {
             QComboBox *cbox = (QComboBox *)nowWidget;
             //只有当下拉选择框处于编辑模式才可以输入
@@ -564,6 +566,7 @@ void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
             currentWidget = nowWidget;
             currentEditType = "QWidget";
             ShowPanel();
+#endif
         } else {
             //需要将输入法切换到最初的原始状态--小写,同时将之前的对象指针置为零
             currentWidget = 0;
@@ -635,7 +638,7 @@ void frmInput::changeLetter(bool isUpper)
 void frmInput::selectChinese()
 {
     clearChinese();
-    QSqlQuery query(QSqlDatabase::database("pinyin"));
+    QSqlQuery query(m_db);
     QString currentPY = ui->labPY->text();
     QString sql = "select [word] from [pinyin] where [pinyin]='" + currentPY + "';";
     query.exec(sql);

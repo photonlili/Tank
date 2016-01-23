@@ -5,6 +5,7 @@
 #include "qtankdefine.h"
 #include "qcprinter.h"
 #include "qtankclient.h"
+#include "hnmsgbox.h"
 
 QCloudTreeWidget::QCloudTreeWidget(QWidget *parent) :
     QCloudTreeView(parent),
@@ -63,6 +64,7 @@ void QCloudTreeWidget::downSuccess()
     pline() << m_tmpfile << m_localfile;
     QFile::rename(m_tmpfile, m_localfile);
     system(QString("mv %1 %2").arg(m_tmpfile).arg(m_localfile).toAscii().data());
+    HNMsgBox::warning(this, "DownLoad Success");
 }
 
 void QCloudTreeWidget::currentRowChanged()

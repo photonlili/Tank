@@ -6,6 +6,7 @@ QProgressWindow::QProgressWindow(QWidget *parent) :
     ui(new Ui::QProgressWindow)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose, true);
     ui->pbar->setRange(0, 100);
     connect(ui->btnCancel, SIGNAL(clicked()),
             this, SLOT(reject()));

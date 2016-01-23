@@ -3,12 +3,17 @@
 #include "qtanklinux.h"
 #include "qtankpublic.h"
 #include "qtankdefine.h"
+#include "hnmsgbox.h"
 
 QWIFIWidget::QWIFIWidget(QWidget *parent) :
     QWIFIView(parent),
     ui(new Ui::QWIFIWidget)
 {
     ui->setupUi(this);
+
+    connect(this, SIGNAL(clicked(QModelIndex)),
+            this, SLOT(clickWIFI()), Qt::QueuedConnection);
+    m_pass = new QWIFIPassForm(this);
 
     m_model = new QWIFIModel(this);
     setModel(m_model);
@@ -22,27 +27,33 @@ QWIFIWidget::~QWIFIWidget()
     delete ui;
 }
 
-QString QWIFIWidget::currentWIFIName()
+void QWIFIWidget::clickWIFI()
 {
-    return m_model->data(m_model->index(currentIndex().row(), ESSID_NAME)).toString();
+    QString name = m_model->data(m_model->index(currentIndex().row(), ESSID_NAME)).toString();
+    QString encryt = m_model->data(m_model->index(currentIndex().row(), ESSID_ENCRYP)).toString();
+    QString type = m_model->data(m_model->index(currentIndex().row(), ESSID_TYPE)).toString();
+    QString mac = m_model->data(m_model->index(currentIndex().row(), ESSID_BSSID)).toString();
+
+    HNEthManager::Instance()->setRefresh(false);
+    do
+    {
+        if("YES" == encryt)
+        {
+            m_pass->setWifiName(name);
+            if(QWIFIPassForm::Rejected == m_pass->exec())
+                break;
+        }
+
+        bool ok = m_model->setCurrentWifi(mac, m_pass->wifiPwd());
+
+        if(!ok)
+        {
+            HNMsgBox::warning(this, tr("Password error"));
+            break;
+        }
+
+        pline() << name << encryt << m_pass->wifiPwd();
+    }while(0);
+    HNEthManager::Instance()->setRefresh();
 }
 
-QString QWIFIWidget::currentWIFIEncrypted()
-{
-    return m_model->data(m_model->index(currentIndex().row(), ESSID_ENCRYP)).toString();
-}
-
-QString QWIFIWidget::currentWIFIType()
-{
-    return m_model->data(m_model->index(currentIndex().row(), ESSID_TYPE)).toString();
-}
-
-QString QWIFIWidget::currentWIFIMAC()
-{
-    return m_model->data(m_model->index(currentIndex().row(), ESSID_BSSID)).toString();
-}
-
-bool QWIFIWidget::setCurrentWifi(QString bssid_mac, QString password)
-{
-    return m_model->setCurrentWifi(bssid_mac, password);
-}

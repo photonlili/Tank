@@ -5,6 +5,7 @@
 #include "qcustomplot.h"
 #include "qctabbar.h"
 #include "QTime"
+#include "qprogresswindow.h"
 
 QDispelForm::QDispelForm(QWidget *parent) :
     QWidget(parent),
@@ -58,8 +59,8 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
-    ui->widget_9->setFixedWidth(140);
-    ui->widget_10->setFixedWidth(140);
+    ui->widget_9->setFixedWidth(180);
+    ui->widget_10->setFixedWidth(180);
     ui->widget_3->setFixedWidth(520);
     ui->widget_4->setFixedWidth(435);
 }
@@ -142,9 +143,11 @@ void QDispelForm::showDebugWindow(int show)
 
 void QDispelForm::prepareRunning(QString db, int mid)
 {
-    pline() << db << mid;
+    int type = methodForm->currentMethodType();
+    pline() << db << mid << type;
     ui->tbv_stage->initdb(db);
-    ui->tbv_stage->refresh(mid);
+    ui->tbv_stage->refresh(mid, type);
+
 }
 
 void QDispelForm::prepareExtractRunning(QString, int mid)
@@ -378,7 +381,7 @@ void QDispelForm::startHeatingExtract()
         m_text->append(method);
         m_text->append(tr("SerialNo:1"));
         m_text->append(QString(tr("StartTime:%1")).arg(QDateTime::currentDateTime().toString("yyyy/MM/dd hh:mm:ss")));
-        */
+    */
 }
 
 void QDispelForm::on_btn_stop_2_clicked()
@@ -441,5 +444,5 @@ void QDispelForm::slotException(int e)
 {
     pline() << e;
     excp->newExcp("GFFFF");
-    excp->exec();
+    //excp->exec();
 }

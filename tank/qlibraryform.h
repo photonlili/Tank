@@ -31,6 +31,8 @@ private slots:
     void on_btn_lib_add_clicked();
 
     void currentDBChanged(QModelIndex,QModelIndex);
+    void on_btnClose_clicked();
+
 private:
     Ui::QLibraryForm *ui;
 };

@@ -72,6 +72,7 @@ private:
     QPoint mousePoint;              //鼠标拖动自定义标题栏时的坐标
     bool mousePressed;              //鼠标是否按下
 
+    QSqlDatabase m_db;              //数据库
     bool isPress;                   //是否长按退格键
     QPushButton *btnPress;          //长按按钮
     QTimer *timerPress;             //退格键定时器

@@ -71,6 +71,13 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QToolButton" name="btnClose">
+        <property name="text">
+         <string>X</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -179,11 +186,6 @@
    <header>qcpushbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>QMethodWidget</class>
-   <extends>QTableView</extends>
-   <header>qmethodwidget.h</header>
-  </customwidget>
-  <customwidget>
    <class>QCDialog</class>
    <extends>QWidget</extends>
    <header>qcdialog.h</header>
@@ -193,6 +195,11 @@
    <class>QUserLibraryWidget</class>
    <extends>QTableView</extends>
    <header>quserlibrarywidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QMethodWidget</class>
+   <extends>QTableView</extends>
+   <header>qmethodwidget.h</header>
   </customwidget>
   <customwidget>
    <class>QSearchLineEdit</class>

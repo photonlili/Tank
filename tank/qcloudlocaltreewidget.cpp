@@ -3,6 +3,7 @@
 #include "qtankdefine.h"
 #include "qtankpublic.h"
 #include "qreportviewdialog.h"
+#include "hnmsgbox.h"
 
 QCloudLocalTreeWidget::QCloudLocalTreeWidget(QWidget *parent) :
     QCloudTreeView(parent),
@@ -87,4 +88,5 @@ void QCloudLocalTreeWidget::uploadSuccess()
     QString localfile = QString("%1/%2").arg(m_localPath).arg(m_uploadFileName);
     pline() << "remove " << localfile;
     QFile::remove(localfile);
+    HNMsgBox::warning(this, "Upload Success");
 }
