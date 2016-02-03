@@ -140,7 +140,8 @@ SOURCES += main.cpp\
     qexceptionview.cpp \
     qexceptionwidget.cpp \
     qprogresswindow.cpp \
-    qtankcrosscenter.cpp
+    qtankcrosscenter.cpp \
+    hnprogressbar.cpp
 
 HEADERS  += mainwindow.h \
     frminput.h \
@@ -245,7 +246,8 @@ HEADERS  += mainwindow.h \
     qexceptionview.h \
     qexceptionwidget.h \
     qprogresswindow.h \
-    qtankcrosscenter.h
+    qtankcrosscenter.h \
+    hnprogressbar.h
 
 FORMS    += mainwindow.ui \
     frminput.ui \
@@ -306,7 +308,8 @@ FORMS    += mainwindow.ui \
     qtankexception.ui \
     qexceptionview.ui \
     qexceptionwidget.ui \
-    qprogresswindow.ui
+    qprogresswindow.ui \
+    hnprogressbar.ui
 
 OTHER_FILES += \
     tank.pro.user

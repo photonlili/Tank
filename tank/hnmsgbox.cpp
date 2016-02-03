@@ -42,3 +42,4 @@ int HNMsgBox::_tips(QString content)
     ui->stwBtn->setCurrentIndex(0);
     return exec();
 }
+

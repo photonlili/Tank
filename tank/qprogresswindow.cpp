@@ -1,13 +1,13 @@
 #include "qprogresswindow.h"
 #include "ui_qprogresswindow.h"
+#include "qtankpublic.h"
 
 QProgressWindow::QProgressWindow(QWidget *parent) :
     QCDialog(parent),
     ui(new Ui::QProgressWindow)
 {
     ui->setupUi(this);
-    setAttribute(Qt::WA_DeleteOnClose, true);
-    ui->pbar->setRange(0, 100);
+    bar = ui->widgetBar;
     connect(ui->btnCancel, SIGNAL(clicked()),
             this, SLOT(reject()));
     connect(ui->btnCancel, SIGNAL(clicked()),
@@ -21,15 +21,17 @@ QProgressWindow::~QProgressWindow()
 
 void QProgressWindow::initAll()
 {
-    ui->pbar->setValue(0);
+    bar->setRange(0, 100);
+    bar->setValue(0);
 }
 
 void QProgressWindow::setValue(int value)
 {
-    ui->pbar->setValue(value);
+    bar->setValue(value);
 }
 
 void QProgressWindow::cancel()
 {
     reject();
 }
+

@@ -2,6 +2,7 @@
 #define QPROGRESSWINDOW_H
 
 #include "qcdialog.h"
+#include "hnprogressbar.h"
 
 namespace Ui {
 class QProgressWindow;
@@ -24,6 +25,7 @@ signals:
     void canceled();
 private:
     Ui::QProgressWindow *ui;
+    HNProgressBar* bar;
 };
 
 #endif // QPROGRESSWINDOW_H

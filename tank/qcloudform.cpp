@@ -14,7 +14,7 @@ QCloudForm::QCloudForm(QWidget *parent) :
 
     QTankClient* client = HNSingleClient(this);
 
-#if 0
+#if 1
     m_prog = new QProgressWindow(this);
     connect(client, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));

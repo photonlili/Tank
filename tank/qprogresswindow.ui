@@ -14,17 +14,10 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="0" colspan="2">
-    <widget class="QProgressBar" name="pbar">
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QCPushButton" name="btnCancel">
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Cancel</string>
+      <string>Progressing</string>
      </property>
     </widget>
    </item>
@@ -41,12 +34,15 @@
      </property>
     </spacer>
    </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QLabel" name="label">
+   <item row="3" column="1">
+    <widget class="QCPushButton" name="btnCancel">
      <property name="text">
-      <string>Progressing</string>
+      <string>Cancel</string>
      </property>
     </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="HNProgressBar" name="widgetBar" native="true"/>
    </item>
   </layout>
  </widget>
@@ -60,6 +56,12 @@
    <class>QCDialog</class>
    <extends>QWidget</extends>
    <header>qcdialog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNProgressBar</class>
+   <extends>QWidget</extends>
+   <header>hnprogressbar.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
