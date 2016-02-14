@@ -1,20 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>HNUpgradeWidget</class>
- <widget class="QWidget" name="HNUpgradeWidget" >
-  <property name="geometry" >
+ <widget class="QWidget" name="HNUpgradeWidget">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>560</width>
+    <height>323</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>HNUpgradeWidget</string>
   </property>
+  <widget class="HNProgressBar" name="widget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>140</y>
+     <width>243</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lbStat">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>190</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Updating</string>
+   </property>
+  </widget>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>HNProgressBar</class>
+   <extends>QWidget</extends>
+   <header>hnprogressbar.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

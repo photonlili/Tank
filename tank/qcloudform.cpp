@@ -12,28 +12,32 @@ QCloudForm::QCloudForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QTankClient* client = HNSingleClient(this);
+    m_cli = HNSingleClient(this);
 
 #if 1
     m_prog = new QProgressWindow(this);
-    connect(client, SIGNAL(signalUpdateProgress(int)),
+    connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));
-    connect(client, SIGNAL(signalUploadSucc(QString)),
+    connect(m_cli, SIGNAL(signalUploadSucc(QString)),
             m_prog, SLOT(cancel()));
     connect(m_prog, SIGNAL(canceled()),
-            client, SLOT(sendCancelUpload()));
+            m_cli, SLOT(sendCancelUpload()));
     connect(ui->pushButton_upload, SIGNAL(clicked()),
             this, SLOT(slotOpenProgress()), Qt::QueuedConnection);
 
     m_progDown = new QProgressWindow(this);
-    connect(client, SIGNAL(signalUpdateProgress(int)),
+    connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
-    connect(client, SIGNAL(signalDownSucc()),
+    connect(m_cli, SIGNAL(signalDownSucc()),
             m_progDown, SLOT(cancel()));
     connect(m_progDown, SIGNAL(canceled()),
-            client, SLOT(sendCancelDown()));
+            m_cli, SLOT(sendCancelDown()));
     connect(ui->pushButton_down, SIGNAL(clicked()),
             this, SLOT(slotOpenDownProgress()), Qt::QueuedConnection);
+
+    m_progDel = new QProgressWindow(this);
+    connect(ui->pushButton_del, SIGNAL(clicked()),
+            this, SLOT(slotDelProgress()), Qt::QueuedConnection);
 #endif
 
     connect(ui->pushButton_upload, SIGNAL(clicked()), ui->treeLocal, SLOT(uploadFile()), Qt::QueuedConnection);
@@ -66,4 +70,20 @@ void QCloudForm::slotOpenDownProgress()
 {
     m_progDown->initAll();
     m_progDown->show();
+}
+
+void QCloudForm::slotDelProgress()
+{
+    connect(m_cli, SIGNAL(signalListFileOK()),
+            this, SLOT(slotDelOK()));
+    m_progDel->initAll();
+    m_progDel->show();
+}
+
+void QCloudForm::slotDelOK()
+{
+    m_progDel->setValue(100);
+   m_progDel->cancel();
+    disconnect(m_cli, SIGNAL(signalListFileOK()),
+               this, SLOT(slotDelOK()));
 }

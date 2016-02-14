@@ -24,12 +24,16 @@ public slots:
     void slotUpdateLabReport();
     void slotOpenProgress();
     void slotOpenDownProgress();
+    void slotDelProgress();
+    void slotDelOK();
 
 private:
     Ui::QCloudForm *ui;
     QTankClient* m_Client;
     QProgressWindow* m_prog;
     QProgressWindow* m_progDown;
+    QProgressWindow* m_progDel;
+    QTankClient* m_cli;
 };
 
 #endif // QCLOUDFORM_H

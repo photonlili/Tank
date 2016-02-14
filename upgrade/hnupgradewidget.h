@@ -15,6 +15,9 @@ public:
     explicit HNUpgradeWidget(QWidget *parent = 0);
     ~HNUpgradeWidget();
 
+private slots:
+    void timeGoGo();
+
 private:
     Ui::HNUpgradeWidget *ui;
 };

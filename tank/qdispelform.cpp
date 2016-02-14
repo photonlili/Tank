@@ -59,10 +59,10 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
-    ui->widget_9->setFixedWidth(180);
-    ui->widget_10->setFixedWidth(180);
+    ui->widget_9->setFixedWidth(140);
+    ui->widget_10->setFixedWidth(140);
     ui->widget_3->setFixedWidth(520);
-    ui->widget_4->setFixedWidth(435);
+    ui->widget_4->setFixedWidth(434);
 }
 
 QDispelForm::~QDispelForm()

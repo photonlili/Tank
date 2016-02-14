@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>theme/basic/bk_progress_background.png</file>
+        <file>theme/basic/bk_progress_chunk.png</file>
+    </qresource>
+</RCC>

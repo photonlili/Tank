@@ -3,6 +3,26 @@
 
 #include <QTableView>
 #include "qctableview.h"
+#include <QItemDelegate>
+
+class QStageFormatTextDelegate : public QItemDelegate
+{
+    Q_OBJECT
+public:
+    QStageFormatTextDelegate(QObject *parent = 0): QItemDelegate(parent) { }
+
+    // QItemDelegate interface
+protected:
+    void drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const;
+
+private:
+
+    // QItemDelegate interface
+protected:
+    void drawDecoration(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QPixmap &pixmap) const;
+    void drawFocus(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect) const;
+    void drawCheck(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, Qt::CheckState state) const;
+};
 
 namespace Ui {
 class QStageView;
@@ -18,6 +38,7 @@ public:
 
 private:
     Ui::QStageView *ui;
+    QStageFormatTextDelegate* dg;
 };
 
 #endif // QSTAGEVIEW_H

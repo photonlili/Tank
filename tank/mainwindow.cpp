@@ -17,7 +17,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->label_appname->setForegroundRole(QPalette::BrightText);
     ui->label_time->setText(QDateTime::currentDateTime().toString("yyyy/MM/dd hh:mm"));
-
+    ui->label_time->setForegroundRole(QPalette::BrightText);
+    ui->label_user->setForegroundRole(QPalette::BrightText);
+    ui->label->setForegroundRole(QPalette::BrightText);
     connect(ui->tab_set, SIGNAL(showDebugWindow(int)),
             ui->tab_dispel, SLOT(showDebugWindow(int)));
     connect(ui->tab_dispel, SIGNAL(signalUpdateLabReport()),

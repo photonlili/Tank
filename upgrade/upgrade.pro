@@ -17,7 +17,9 @@ SOURCES += main.cpp\
     qtankclient.cpp \
     qtankmessage.cpp \
     qtankpublic.cpp \
-    qcomponent.cpp
+    qcomponent.cpp \
+    hnprogressbar.cpp \
+    qcwidget.cpp
 
 HEADERS  += hnupgradewidget.h \
     qtankclient.h \
@@ -26,9 +28,16 @@ HEADERS  += hnupgradewidget.h \
     qtankpublic.h \
     qtankgui.h \
     qcomponent.h \
-    qtankdefine.h
+    qtankdefine.h \
+    hnprogressbar.h \
+    qcwidget.h
 
-FORMS    += hnupgradewidget.ui
+FORMS    += hnupgradewidget.ui \
+    hnprogressbar.ui \
+    qcwidget.ui
 
 OTHER_FILES += \
     upgrade.pro.user
+
+RESOURCES += \
+    theme.qrc
