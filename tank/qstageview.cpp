@@ -2,6 +2,7 @@
 #include "ui_qstageview.h"
 #include "qcheaderview.h"
 #include "qtankdefine.h"
+#include "qtankpublic.h"
 
 QStageView::QStageView(QWidget *parent) :
     QCTableView(parent),
@@ -33,7 +34,19 @@ QStageView::~QStageView()
 
 void QStageFormatTextDelegate::drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const
 {
-
+    qint32 time = text.toInt();
+    qint32 hour = time / 60;
+    qint32 minute = time % 60;
+    painter->save();
+    //pline() << quint32(option.state);
+    if( 98561 == option.state)
+        painter->setPen(option.palette.color(QPalette::BrightText));
+    //else if( 98305 == option.state)
+    //    painter->setPen(Qt::red);
+    painter->drawText(rect, Qt::AlignCenter, QString("%1:%2")
+                      .arg(hour, 2, 10, QLatin1Char('0'))
+                      .arg(minute, 2, 10, QLatin1Char('0')));
+    painter->restore();
 }
 
 void QStageFormatTextDelegate::drawDecoration(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QPixmap &pixmap) const

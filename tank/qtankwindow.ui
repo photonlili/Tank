@@ -20,10 +20,11 @@
    <string>StackedWidget</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>2</number>
   </property>
   <widget class="QLoginDialog" name="page_login"/>
   <widget class="MainWindow" name="page_main"/>
+  <widget class="HNUpgradeWidget" name="page_upgrade"/>
  </widget>
  <customwidgets>
   <customwidget>
@@ -36,6 +37,12 @@
    <class>QLoginDialog</class>
    <extends>QWidget</extends>
    <header>logindialog.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNUpgradeWidget</class>
+   <extends>QWidget</extends>
+   <header>hnupgradewidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

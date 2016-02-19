@@ -26,6 +26,7 @@ public:
     void selectStage(int row = 0);
     int currentStage() { return currentIndex().row(); }
     int totalStageTimeRamp();
+    void setRamp(quint16 ramp);
     void stageParam(quint8& stage, quint8& vessel,
                     quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold);
     void currentStageParam(quint8& stage, quint8& vessel,

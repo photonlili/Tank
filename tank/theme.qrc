@@ -69,7 +69,6 @@
         <file>theme/basic/bk_lineedit.png</file>
         <file>theme/basic/bk_lineedit_focus.png</file>
         <file>theme/basic/bk_logo_0.png</file>
-        <file>theme/basic/bk_wifi_connecting.gif</file>
         <file>theme/basic/btn_down.png</file>
         <file>theme/basic/btn_down_press.png</file>
         <file>theme/basic/btn_up.png</file>
@@ -99,5 +98,30 @@
         <file>theme/basic/bk_progress_chunk.png</file>
         <file>theme/basic/bk_warning.png</file>
         <file>theme/basic/bk_wenjianjia.ico</file>
+        <file>theme/basic/bk_radio_normal.png</file>
+        <file>theme/basic/bk_radio_press.png</file>
+        <file>theme/basic/bk_wifi_connecting.png</file>
+        <file>theme/basic/bk_wifi_unconnected.png</file>
+        <file>theme/basic/bt_brower_press.png</file>
+        <file>theme/basic/bt_down_press.png</file>
+        <file>theme/basic/bt_open_press.png</file>
+        <file>theme/basic/bt_sure_press.png</file>
+        <file>theme/basic/bt_turn_press.png</file>
+        <file>theme/basic/bt_up_press.png</file>
+        <file>theme/basic/bt_view_press.png</file>
+        <file>theme/basic/key_return.png</file>
+        <file>theme/basic/key_return_press.png</file>
+        <file>theme/basic/bt_pause.png</file>
+        <file>theme/basic/bt_pause_press.png</file>
+        <file>theme/basic/bt_play.png</file>
+        <file>theme/basic/bt_play_press.png</file>
+        <file>theme/basic/bt_stir.png</file>
+        <file>theme/basic/bt_stir_press.png</file>
+        <file>theme/basic/bt_stop.png</file>
+        <file>theme/basic/bt_stop_press.png</file>
+        <file>theme/basic/bt_close.png</file>
+        <file>theme/basic/bt_close_press.png</file>
+        <file>theme/basic/bt_turn2.png</file>
+        <file>theme/basic/bt_turn2_press.png</file>
     </qresource>
 </RCC>

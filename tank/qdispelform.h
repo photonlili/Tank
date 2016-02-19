@@ -50,6 +50,7 @@ private slots:
     void prepareExtractRunning(QString, int);
 
     void timeNewData();
+    void timeNewData2();
 
     void on_btn_open_clicked();
 
@@ -87,8 +88,11 @@ private:
 
     quint8 m_currentStage;
     quint16 m_totalStageRamp;
+    quint16 m_totalStageRamp2;
     double m_initPointKey;
     double m_lastPointKey;
+    double m_initPointKey2;
+    double m_lastPointKey2;
 
     QTankException* excp;
 
@@ -104,6 +108,7 @@ private:
     int bRunning;
 
     QTimer* timer;
+    QTimer* timer2;
 
     QMethodForm* methodForm;
     QMethodForm* methodForm2;
@@ -112,6 +117,9 @@ private:
     QTankPeerPort* com0;
     QTankSerialPort* s2;
     QDebugWidget* m_debug;
+
+    quint16 m_curRamp;
+    quint16 m_curRamp2;
 };
 
 #endif // QDISPELFORM_H

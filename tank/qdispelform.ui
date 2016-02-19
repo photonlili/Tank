@@ -463,7 +463,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Open</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -476,35 +476,35 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Play</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btn_stop">
                   <property name="text">
-                   <string>Stop</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btn_trans">
                   <property name="text">
-                   <string>Switch</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btn_turn">
                   <property name="text">
-                   <string>Left</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCPushButton" name="pushButton_4">
+                 <widget class="QCPushButton" name="btn_turn_2">
                   <property name="text">
-                   <string>Right</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -522,7 +522,7 @@
                  </spacer>
                 </item>
                </layout>
-               <zorder>pushButton_4</zorder>
+               <zorder>btn_turn_2</zorder>
                <zorder>btn_open</zorder>
                <zorder>btn_play</zorder>
                <zorder>btn_stop</zorder>
@@ -919,7 +919,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Open</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
@@ -932,28 +932,28 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Play</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btn_stop_2">
                   <property name="text">
-                   <string>Stop</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btn_trans_2">
                   <property name="text">
-                   <string>Switch</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QCPushButton" name="btnStir">
                   <property name="text">
-                   <string>Stir</string>
+                   <string/>
                   </property>
                  </widget>
                 </item>

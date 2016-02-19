@@ -75,6 +75,13 @@ QSetForm::QSetForm(QWidget *parent) :
     ui->label_steering->setFixedHeight(30);
     ui->radioButton_chinese->setFixedSize(100,30);
     ui->radioButton_english->setFixedSize(100,30);
+    ui->widget_time->setFixedWidth(218);
+    ui->widget_language->setFixedWidth(218);
+    ui->widget_userrights->setFixedWidth(218);
+    ui->widget_steering->setFixedWidth(218);
+    ui->radioButton_turn0->setFixedSize(100,30);
+    ui->radioButton_turn0->setFixedSize(100,30);
+    ui->checkBox_userrights->setFixedSize(100, 30);
 
     ui->lb_serial->setFixedSize(300, 60);
     QPalette plt = ui->lb_serial->palette();
@@ -83,7 +90,6 @@ QSetForm::QSetForm(QWidget *parent) :
     plt.setColor(QPalette::WindowText, QColor(Qt::red));
     ui->lb_serial->setPalette(plt);
 
-    QSettings set;
 }
 
 QSetForm::~QSetForm()

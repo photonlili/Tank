@@ -13,6 +13,46 @@ QDispelForm::QDispelForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->btn_open->setFixedSize(80, 30);
+    ui->btn_open_2->setFixedSize(80, 30);
+    ui->btn_play->setFixedSize(80, 30);
+    ui->btn_play_2->setFixedSize(80, 30);
+    ui->btn_stop->setFixedSize(80, 30);
+    ui->btn_stop_2->setFixedSize(80, 30);
+    ui->btn_trans->setFixedSize(80, 30);
+    ui->btn_trans_2->setFixedSize(80, 30);
+    ui->btn_turn->setFixedSize(80, 30);
+    ui->btn_turn_2->setFixedSize(80, 30);
+    ui->btnStir->setFixedSize(80, 30);
+
+    ui->btn_open->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_open.png";
+    ui->btn_open->btnIcon()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+    ui->btn_open_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_open.png";
+    ui->btn_open_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+
+    ui->btn_play->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play->btnIcon()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+    ui->btn_play_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+
+    ui->btn_stop->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
+    ui->btn_stop->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
+    ui->btn_stop_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
+    ui->btn_stop_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
+
+    ui->btn_trans->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_view.png";
+    ui->btn_trans->btnIcon()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
+    ui->btn_trans_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_view.png";
+    ui->btn_trans_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
+
+    ui->btn_turn->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_turn.png";
+    ui->btn_turn->btnIcon()[BTN_PRESS] = "://theme/basic/bt_turn_press.png";
+    ui->btn_turn_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_turn2.png";
+    ui->btn_turn_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_turn2_press.png";
+
+    ui->btnStir->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stir.png";
+    ui->btnStir->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stir_press.png";
+
     timer = new QTimer(this);
     timer->setSingleShot(false);
     connect(timer, SIGNAL(timeout()), this, SLOT(timeNewData()));
@@ -86,12 +126,14 @@ void QDispelForm::timeNewData()
     quint16 tempture;
     quint16 hold;
     static quint16 ramp = 0;
-    static quint16 curRamp = 0;
+    static quint16 preRamp = 0;
 
     if(m_lastPointKey-m_initPointKey == 0)
     {
-        ui->tbv_stage->currentStageParam(stage, vessel, curRamp, pressure, tempture, hold);
-        ramp = curRamp;
+        m_curRamp = 0;
+        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, hold);
+        preRamp = 0;
+        ramp = m_curRamp;
     }
     else if(m_lastPointKey-m_initPointKey > m_totalStageRamp)
     {
@@ -100,16 +142,17 @@ void QDispelForm::timeNewData()
     else if(m_lastPointKey-m_initPointKey == ramp)
     {
         ui->tbv_stage->next();
-        ui->tbv_stage->currentStageParam(stage, vessel, curRamp, pressure, tempture, hold);
-        ramp += curRamp;
+        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, hold);
+        preRamp = ramp;
+        ramp += m_curRamp;
     }
 
-    pline() << curRamp << ramp;
+    pline() << m_curRamp << ramp;
     //获取温度和压力
     double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
     int key = currentPointKey - m_initPointKey;
-    int temp = tempture * key / curRamp;
-    int press = tempture * key / curRamp;
+    int temp = tempture * key / m_curRamp;
+    int press = tempture * key / m_curRamp;
 
     pline() << currentPointKey << temp << pressure << currentPointKey-m_initPointKey << currentPointKey-m_lastPointKey;
     if (currentPointKey-m_lastPointKey > 0.01) // at most add point every 10 ms
@@ -127,6 +170,64 @@ void QDispelForm::timeNewData()
         }
         ui->page_plot->replot();
         m_lastPointKey = currentPointKey;
+        ui->tbv_stage->setRamp(m_lastPointKey-m_initPointKey-preRamp);
+    }
+    //pline() << ui->tbv_stage->rect();
+}
+
+void QDispelForm::timeNewData2()
+{
+    quint8 stage;
+    quint8 vessel;
+    quint16 pressure;
+    quint16 tempture;
+    quint16 hold;
+    static quint16 ramp = 0;
+    static quint16 preRamp = 0;
+
+    if(m_lastPointKey2-m_initPointKey2 == 0)
+    {
+        m_curRamp2 = 0;
+        ui->tbv_stage_2->currentStageParam(stage, vessel, m_curRamp2, pressure, tempture, hold);
+        preRamp = 0;
+        ramp = m_curRamp2;
+    }
+    else if(m_lastPointKey2-m_initPointKey2 > m_totalStageRamp2)
+    {
+        // stop
+    }
+    else if(m_lastPointKey2-m_initPointKey2 == ramp)
+    {
+        ui->tbv_stage_2->next();
+        ui->tbv_stage_2->currentStageParam(stage, vessel, m_curRamp2, pressure, tempture, hold);
+        preRamp = ramp;
+        ramp += m_curRamp2;
+    }
+
+    pline() << m_curRamp2 << ramp;
+    //获取温度和压力
+    double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+    int key = currentPointKey - m_initPointKey2;
+    int temp = tempture * key / m_curRamp2;
+    int press = tempture * key / m_curRamp2;
+
+    pline() << currentPointKey << temp << pressure << currentPointKey-m_initPointKey2 << currentPointKey-m_lastPointKey2;
+    if (currentPointKey-m_lastPointKey2 > 0.01) // at most add point every 10 ms
+    {
+        ui->label_curtemp_2->setText(QString("%1").arg(temp));
+        ui->label_stressure_2->setText(QString("%1").arg(press));
+        ui->page_plot_2->addTempture(key, temp);
+        ui->page_plot_2->addPressure(key, press);
+        //if(key>20)
+            //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
+        if(key > 20)
+        {
+            ui->page_plot_2->xAxis->setTickStep(10);
+            ui->page_plot_2->xAxis->setRange(0, key, Qt::AlignLeft);
+        }
+        ui->page_plot_2->replot();
+        m_lastPointKey2 = currentPointKey;
+        ui->tbv_stage_2->setRamp(m_lastPointKey2-m_initPointKey2-preRamp);
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -144,16 +245,21 @@ void QDispelForm::showDebugWindow(int show)
 void QDispelForm::prepareRunning(QString db, int mid)
 {
     int type = methodForm->currentMethodType();
+    QString name = methodForm->currentMethodName();
     pline() << db << mid << type;
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid, type);
-
+    ui->lb_libname->setText(db);
+    ui->lb_method->setText(name);
 }
 
-void QDispelForm::prepareExtractRunning(QString, int mid)
+void QDispelForm::prepareExtractRunning(QString db, int mid)
 {
+    QString name = methodForm2->currentMethodName();
     ui->tbv_stage_2->initdb(DB_EXTRACT);
     ui->tbv_stage_2->refresh(mid);
+    ui->lb_libname_2->setText(db);
+    ui->lb_method_2->setText(name);
 }
 
 void QDispelForm::on_btn_open_clicked()
@@ -295,6 +401,11 @@ void QDispelForm::saveLabReport()
 void QDispelForm::on_btn_stop_clicked()
 {
     bRunning = eStop;
+    if(timer->isActive())
+    {
+        ui->tbv_stage->setRamp(m_curRamp);
+        ui->tbv_stage->selectStage(ui->tbv_stage->currentStage());
+    }
     stopHeating();
 }
 

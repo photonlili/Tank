@@ -1816,7 +1816,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnReturn">
+       <widget class="QCPushButton" name="btnReturn">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
           <horstretch>0</horstretch>
@@ -1827,7 +1827,7 @@
          <enum>Qt::NoFocus</enum>
         </property>
         <property name="text">
-         <string>确定</string>
+         <string/>
         </property>
        </widget>
       </item>

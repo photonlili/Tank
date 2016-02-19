@@ -110,6 +110,12 @@ int QStageWidget::totalStageTimeRamp()
     return ramp;
 }
 
+void QStageWidget::setRamp(quint16 ramp)
+{
+    int row = currentIndex().row();
+    m_model->setData(m_model->index(row, Stage_Timeramp), ramp);
+}
+
 void QStageWidget::stageParam(quint8 &stage, quint8 &vessel, quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold)
 {
     int row = stage - 1;

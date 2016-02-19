@@ -32,6 +32,7 @@ public slots:
     void initPic();
     void wifiConnected();
     void wifiDisConnected();
+    void wifiConnecting();
 
 private slots:
     void timerSetTime();

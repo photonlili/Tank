@@ -272,7 +272,7 @@
            </spacer>
           </item>
           <item row="2" column="1">
-           <widget class="QRadioButton" name="radioButton">
+           <widget class="QRadioButton" name="radioButton_turn0">
             <property name="text">
              <string>clock wise</string>
             </property>
@@ -305,7 +305,7 @@
            </spacer>
           </item>
           <item row="4" column="1">
-           <widget class="QRadioButton" name="radioButton_2">
+           <widget class="QRadioButton" name="radioButton_turn1">
             <property name="text">
              <string>two-way</string>
             </property>

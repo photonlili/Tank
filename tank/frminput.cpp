@@ -111,6 +111,13 @@ void frmInput::InitForm()
     ui->btnSpace->btnIcon()[BTN_HOVER] = "://theme/basic/key_blank.png";
     ui->btnSpace->btnIcon()[BTN_DISABLE] = "://theme/basic/key_blank.png";
 
+    ui->btnReturn->btnIcon()[BTN_NORMAL] = "://theme/basic/key_return.png";
+    ui->btnReturn->btnIcon()[BTN_PRESS] = "://theme/basic/key_return_press.png";
+    ui->btnReturn->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_return.png";
+    ui->btnReturn->btnIcon()[BTN_CHECK] = "://theme/basic/key_return_press.png";
+    ui->btnReturn->btnIcon()[BTN_HOVER] = "://theme/basic/key_return.png";
+    ui->btnReturn->btnIcon()[BTN_DISABLE] = "://theme/basic/key_return.png";
+
     ui->radioCN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
     ui->radioCN->setFixedSize(40, 40);
     ui->radioCN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
@@ -283,7 +290,7 @@ void frmInput::btn_clicked()
         if(0 == ui->stackedWidget->currentIndex()) {
             ui->stackedWidget->setCurrentIndex(1);
         } else if(1 == ui->stackedWidget->currentIndex()) {
-            ui->stackedWidget->setCurrentIndex(0);
+        //    ui->stackedWidget->setCurrentIndex(0);
         }
     } else if (objectName == "radioCN") {
         if (currentType == "min" || currentType == "max") {
@@ -295,8 +302,8 @@ void frmInput::btn_clicked()
             changeType();
         } else if (currentType == "chinese") {
         }
-        if(ui->radioNum->isChecked())
-            ui->radioNum->setChecked(false);
+        //if(ui->radioNum->isChecked())
+        //    ui->radioNum->setChecked(false);
         if(1 == ui->stackedWidget->currentIndex())
             ui->stackedWidget->setCurrentIndex(0);
     } else if (objectName == "radioEN") {
@@ -309,8 +316,8 @@ void frmInput::btn_clicked()
             ui->checkShift->update();
             changeType();
         }
-        if(ui->radioNum->isChecked())
-            ui->radioNum->setChecked(false);
+        //if(ui->radioNum->isChecked())
+        //    ui->radioNum->setChecked(false);
         if(1 == ui->stackedWidget->currentIndex())
             ui->stackedWidget->setCurrentIndex(0);
     } else if (objectName == "btnDelete" || objectName == "btnDel") {
@@ -867,7 +874,6 @@ void frmInput::ChangeFont()
     ui->btnPre->setFont(labFont);
     ui->btnNext->setFont(labFont);
     ui->btnClose->setFont(labFont);
-
 }
 
 void frmInput::changeStyle(QString topColor, QString bottomColor, QString borderColor, QString textColor)

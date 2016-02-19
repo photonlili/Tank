@@ -30,6 +30,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->tab_user, SIGNAL(setPic()), this, SLOT(initPic()));
     connect(ui->tab_user, SIGNAL(signalLogout()), this, SIGNAL(signalLogout()));
     //这个静态句柄，会引发信号和槽的参数不能被moc编译器识别。运行时找不到带参数的信号和槽。
+    connect(HNEthManager::Instance(), SIGNAL(sigDisConnected()), this, SLOT(wifiDisConnected()));
+    connect(HNEthManager::Instance(), SIGNAL(sigConnecting()), this, SLOT(wifiConnecting()));
     connect(HNEthManager::Instance(), SIGNAL(sigConnected()), this, SLOT(wifiConnected()));
     connect(HNEthManager::Instance(), SIGNAL(sigDisConnected()), this, SLOT(wifiDisConnected()));
 
@@ -121,7 +123,13 @@ void MainWindow::wifiConnected()
 
 void MainWindow::wifiDisConnected()
 {
-    ui->widget_wifi->setPixmap("");
+    ui->widget_wifi->setPixmap("://theme/basic/bk_wifi_unconnected.png");
+    ui->widget_wifi->update();
+}
+
+void MainWindow::wifiConnecting()
+{
+    ui->widget_wifi->setPixmap("://theme/basic/bk_wifi_connecting.png");
     ui->widget_wifi->update();
 }
 

@@ -72,9 +72,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="btnClose">
+       <widget class="QCPushButton" name="btnClose">
         <property name="text">
-         <string>X</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -156,21 +156,21 @@
       <item>
        <widget class="QCPushButton" name="btn_up">
         <property name="text">
-         <string>Up</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCPushButton" name="btn_down">
         <property name="text">
-         <string>Down</string>
+         <string/>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QCPushButton" name="btn_sure">
         <property name="text">
-         <string>Sure</string>
+         <string/>
         </property>
        </widget>
       </item>
