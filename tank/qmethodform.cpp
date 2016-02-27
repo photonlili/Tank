@@ -14,14 +14,14 @@ QMethodForm::QMethodForm(QWidget *parent) :
     connect(ui->tbv_method->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(methodChanged()));
 
-    ui->btn_up->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_up.png";
-    ui->btn_up->btnIcon()[BTN_PRESS] = "://theme/basic/bt_up_press.png";
-    ui->btn_down->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_down.png";
-    ui->btn_down->btnIcon()[BTN_PRESS] = "://theme/basic/bt_down_press.png";
-    ui->btn_sure->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_sure.png";
-    ui->btn_sure->btnIcon()[BTN_PRESS] = "://theme/basic/bt_sure_press.png";
-    ui->btnClose->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_close.png";
-    ui->btnClose->btnIcon()[BTN_PRESS] = "://theme/basic/bt_close_press.png";
+    ui->btn_up->iconTable()[BTN_NORMAL] = "://theme/basic/bt_up.png";
+    ui->btn_up->iconTable()[BTN_PRESS] = "://theme/basic/bt_up_press.png";
+    ui->btn_down->iconTable()[BTN_NORMAL] = "://theme/basic/bt_down.png";
+    ui->btn_down->iconTable()[BTN_PRESS] = "://theme/basic/bt_down_press.png";
+    ui->btn_sure->iconTable()[BTN_NORMAL] = "://theme/basic/bt_sure.png";
+    ui->btn_sure->iconTable()[BTN_PRESS] = "://theme/basic/bt_sure_press.png";
+    ui->btnClose->iconTable()[BTN_NORMAL] = "://theme/basic/bt_close.png";
+    ui->btnClose->iconTable()[BTN_PRESS] = "://theme/basic/bt_close_press.png";
 
     ui->btn_up->setFixedSize(80, 30);
     ui->btn_down->setFixedSize(80, 30);

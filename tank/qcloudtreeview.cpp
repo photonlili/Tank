@@ -7,6 +7,7 @@ QCloudTreeView::QCloudTreeView(QWidget *parent) :
 {
     ui->setupUi(this);
     setHeaderHidden(true);
+    setEditTriggers(NoEditTriggers);
 }
 
 QCloudTreeView::~QCloudTreeView()

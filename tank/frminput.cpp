@@ -83,40 +83,40 @@ void frmInput::InitForm()
     currentBrowser = 0;
     currentEditType = "";
 
-    ui->btnDel->btnIcon()[BTN_NORMAL] = "://theme/basic/key_del.png";
-    ui->btnDel->btnIcon()[BTN_PRESS] = "://theme/basic/key_del_press.png";
-    ui->btnDel->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_del.png";
-    ui->btnDel->btnIcon()[BTN_CHECK] = "://theme/basic/key_del_press.png";
-    ui->btnDel->btnIcon()[BTN_HOVER] = "://theme/basic/key_del.png";
-    ui->btnDel->btnIcon()[BTN_DISABLE] = "://theme/basic/key_del.png";
+    ui->btnDel->iconTable()[BTN_NORMAL] = "://theme/basic/key_del.png";
+    ui->btnDel->iconTable()[BTN_PRESS] = "://theme/basic/key_del_press.png";
+    ui->btnDel->iconTable()[BTN_UNCHECK] = "://theme/basic/key_del.png";
+    ui->btnDel->iconTable()[BTN_CHECK] = "://theme/basic/key_del_press.png";
+    ui->btnDel->iconTable()[BTN_HOVER] = "://theme/basic/key_del.png";
+    ui->btnDel->iconTable()[BTN_DISABLE] = "://theme/basic/key_del.png";
 
-    ui->btnDelete->btnIcon()[BTN_NORMAL] = "://theme/basic/key_del.png";
-    ui->btnDelete->btnIcon()[BTN_PRESS] = "://theme/basic/key_del_press.png";
-    ui->btnDelete->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_del.png";
-    ui->btnDelete->btnIcon()[BTN_CHECK] = "://theme/basic/key_del_press.png";
-    ui->btnDelete->btnIcon()[BTN_HOVER] = "://theme/basic/key_del.png";
-    ui->btnDelete->btnIcon()[BTN_DISABLE] = "://theme/basic/key_del.png";
+    ui->btnDelete->iconTable()[BTN_NORMAL] = "://theme/basic/key_del.png";
+    ui->btnDelete->iconTable()[BTN_PRESS] = "://theme/basic/key_del_press.png";
+    ui->btnDelete->iconTable()[BTN_UNCHECK] = "://theme/basic/key_del.png";
+    ui->btnDelete->iconTable()[BTN_CHECK] = "://theme/basic/key_del_press.png";
+    ui->btnDelete->iconTable()[BTN_HOVER] = "://theme/basic/key_del.png";
+    ui->btnDelete->iconTable()[BTN_DISABLE] = "://theme/basic/key_del.png";
 
-    ui->btnClose->btnIcon()[BTN_NORMAL] = "://theme/basic/key_close.png";
-    ui->btnClose->btnIcon()[BTN_PRESS] = "://theme/basic/key_close_press.png";
-    ui->btnClose->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_close.png";
-    ui->btnClose->btnIcon()[BTN_CHECK] = "://theme/basic/key_close_press.png";
-    ui->btnClose->btnIcon()[BTN_HOVER] = "://theme/basic/key_close.png";
-    ui->btnClose->btnIcon()[BTN_DISABLE] = "://theme/basic/key_close.png";
+    ui->btnClose->iconTable()[BTN_NORMAL] = "://theme/basic/key_close.png";
+    ui->btnClose->iconTable()[BTN_PRESS] = "://theme/basic/key_close_press.png";
+    ui->btnClose->iconTable()[BTN_UNCHECK] = "://theme/basic/key_close.png";
+    ui->btnClose->iconTable()[BTN_CHECK] = "://theme/basic/key_close_press.png";
+    ui->btnClose->iconTable()[BTN_HOVER] = "://theme/basic/key_close.png";
+    ui->btnClose->iconTable()[BTN_DISABLE] = "://theme/basic/key_close.png";
 
-    ui->btnSpace->btnIcon()[BTN_NORMAL] = "://theme/basic/key_blank.png";
-    ui->btnSpace->btnIcon()[BTN_PRESS] = "://theme/basic/key_blank_press.png";
-    ui->btnSpace->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_blank.png";
-    ui->btnSpace->btnIcon()[BTN_CHECK] = "://theme/basic/key_blank_press.png";
-    ui->btnSpace->btnIcon()[BTN_HOVER] = "://theme/basic/key_blank.png";
-    ui->btnSpace->btnIcon()[BTN_DISABLE] = "://theme/basic/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_NORMAL] = "://theme/basic/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_PRESS] = "://theme/basic/key_blank_press.png";
+    ui->btnSpace->iconTable()[BTN_UNCHECK] = "://theme/basic/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_CHECK] = "://theme/basic/key_blank_press.png";
+    ui->btnSpace->iconTable()[BTN_HOVER] = "://theme/basic/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_DISABLE] = "://theme/basic/key_blank.png";
 
-    ui->btnReturn->btnIcon()[BTN_NORMAL] = "://theme/basic/key_return.png";
-    ui->btnReturn->btnIcon()[BTN_PRESS] = "://theme/basic/key_return_press.png";
-    ui->btnReturn->btnIcon()[BTN_UNCHECK] = "://theme/basic/key_return.png";
-    ui->btnReturn->btnIcon()[BTN_CHECK] = "://theme/basic/key_return_press.png";
-    ui->btnReturn->btnIcon()[BTN_HOVER] = "://theme/basic/key_return.png";
-    ui->btnReturn->btnIcon()[BTN_DISABLE] = "://theme/basic/key_return.png";
+    ui->btnReturn->iconTable()[BTN_NORMAL] = "://theme/basic/key_return.png";
+    ui->btnReturn->iconTable()[BTN_PRESS] = "://theme/basic/key_return_press.png";
+    ui->btnReturn->iconTable()[BTN_UNCHECK] = "://theme/basic/key_return.png";
+    ui->btnReturn->iconTable()[BTN_CHECK] = "://theme/basic/key_return_press.png";
+    ui->btnReturn->iconTable()[BTN_HOVER] = "://theme/basic/key_return.png";
+    ui->btnReturn->iconTable()[BTN_DISABLE] = "://theme/basic/key_return.png";
 
     ui->radioCN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
     ui->radioCN->setFixedSize(40, 40);

@@ -44,6 +44,12 @@ public slots:
     void sendDelFile(QString code, QString id);
     void sendListPubDirectory();
     void sendListPubFiles();
+    /**
+     * @brief sendDownDevFiles
+     * @param path 文件下载下来保存的路径
+     * @param id
+     * @param local 文件下载下来保存的名字
+     */
     void sendDownDevFiles(QString path, QString id, QString local);
     void sendDownPubFiles();
     void sendCancelDown();

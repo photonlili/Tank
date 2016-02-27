@@ -22,6 +22,7 @@ public:
 signals:
     void signalLogout();
     void changeLanguage();
+    void sigUpgrade();
 
 public slots:
     void slotSerialLocked();

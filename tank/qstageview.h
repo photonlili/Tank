@@ -39,6 +39,7 @@ public:
 private:
     Ui::QStageView *ui;
     QStageFormatTextDelegate* dg;
+    QStageFormatTextDelegate* dgHold;
 };
 
 #endif // QSTAGEVIEW_H

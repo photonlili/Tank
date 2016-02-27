@@ -23,6 +23,7 @@ public:
 signals:
     void changeLanguage();
     void showDebugWindow(int show);
+    void sigUpgrade();
 
 public slots:
     void timerSetTime();

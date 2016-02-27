@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>573</width>
-    <height>300</height>
+    <width>680</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,98 +34,117 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
        <property name="bottomMargin">
-        <number>40</number>
+        <number>9</number>
        </property>
-       <item row="1" column="0" rowspan="2" colspan="10">
-        <widget class="QWidget" name="widget" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QCloudTreeWidget" name="treeCloud"/>
+       <item row="0" column="0">
+        <widget class="QWidget" name="widgetCloud" native="true">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>40</number>
+          </property>
+          <item row="2" column="2">
+           <widget class="QCPushButton" name="pushButton_del">
+            <property name="text">
+             <string>Delete</string>
+            </property>
+           </widget>
           </item>
-          <item>
-           <widget class="QCloudLocalTreeWidget" name="treeLocal"/>
+          <item row="2" column="3">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>60</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="6">
+           <widget class="QCPushButton" name="btn_print">
+            <property name="text">
+             <string>Print</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QCPushButton" name="pushButton_down">
+            <property name="text">
+             <string>Down</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="5">
+           <widget class="QCPushButton" name="pushButton_upload">
+            <property name="text">
+             <string>Upload</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>59</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="7">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>59</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="2" column="0">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>59</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0" colspan="8">
+           <widget class="QWidget" name="widget" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QCloudTreeWidget" name="treeCloud"/>
+             </item>
+             <item>
+              <widget class="QCloudLocalTreeWidget" name="treeLocal"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Cloud Service:</string>
+            </property>
+           </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <spacer name="horizontalSpacer_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="8" colspan="2">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="1">
-        <widget class="QCPushButton" name="pushButton_down">
-         <property name="text">
-          <string>Down</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="4">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="3" column="7">
-        <widget class="QCPushButton" name="btn_print">
-         <property name="text">
-          <string>Print</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="5">
-        <widget class="QCPushButton" name="pushButton_upload">
-         <property name="text">
-          <string>Upload</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QCPushButton" name="pushButton_del">
-         <property name="text">
-          <string>Delete</string>
-         </property>
         </widget>
        </item>
       </layout>

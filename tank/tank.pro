@@ -38,6 +38,9 @@ INSTALLS += target
 RESOURCES += \
     theme.qrc
 
+RC_FILE += \
+    resource.rc
+
 TRANSLATIONS = language/zh_CN.ts \
     language/en_US.ts
 
@@ -249,7 +252,8 @@ HEADERS  += mainwindow.h \
     qprogresswindow.h \
     qtankcrosscenter.h \
     hnprogressbar.h \
-    hnupgradewidget.h
+    hnupgradewidget.h \
+    qversion.h
 
 FORMS    += mainwindow.ui \
     frminput.ui \
@@ -315,4 +319,5 @@ FORMS    += mainwindow.ui \
     hnupgradewidget.ui
 
 OTHER_FILES += \
-    tank.pro.user
+    tank.pro.user \
+    resource.rc

@@ -25,37 +25,40 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->btn_turn_2->setFixedSize(80, 30);
     ui->btnStir->setFixedSize(80, 30);
 
-    ui->btn_open->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_open.png";
-    ui->btn_open->btnIcon()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
-    ui->btn_open_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_open.png";
-    ui->btn_open_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+    ui->btn_open->iconTable()[BTN_NORMAL] = "://theme/basic/bt_open.png";
+    ui->btn_open->iconTable()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+    ui->btn_open_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_open.png";
+    ui->btn_open_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
 
-    ui->btn_play->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_play.png";
-    ui->btn_play->btnIcon()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
-    ui->btn_play_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_play.png";
-    ui->btn_play_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+    ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+    ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
 
-    ui->btn_stop->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
-    ui->btn_stop->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
-    ui->btn_stop_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
-    ui->btn_stop_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
+    ui->btn_stop->iconTable()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
+    ui->btn_stop->iconTable()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
+    ui->btn_stop_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_stop.png";
+    ui->btn_stop_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_stop_press.png";
 
-    ui->btn_trans->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_view.png";
-    ui->btn_trans->btnIcon()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
-    ui->btn_trans_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_view.png";
-    ui->btn_trans_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
+    ui->btn_trans->iconTable()[BTN_NORMAL] = "://theme/basic/bt_view.png";
+    ui->btn_trans->iconTable()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
+    ui->btn_trans_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_view.png";
+    ui->btn_trans_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_view_press.png";
 
-    ui->btn_turn->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_turn.png";
-    ui->btn_turn->btnIcon()[BTN_PRESS] = "://theme/basic/bt_turn_press.png";
-    ui->btn_turn_2->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_turn2.png";
-    ui->btn_turn_2->btnIcon()[BTN_PRESS] = "://theme/basic/bt_turn2_press.png";
+    ui->btn_turn->iconTable()[BTN_NORMAL] = "://theme/basic/bt_turn.png";
+    ui->btn_turn->iconTable()[BTN_PRESS] = "://theme/basic/bt_turn_press.png";
+    ui->btn_turn_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_turn2.png";
+    ui->btn_turn_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_turn2_press.png";
 
-    ui->btnStir->btnIcon()[BTN_NORMAL] = "://theme/basic/bt_stir.png";
-    ui->btnStir->btnIcon()[BTN_PRESS] = "://theme/basic/bt_stir_press.png";
+    ui->btnStir->iconTable()[BTN_NORMAL] = "://theme/basic/bt_stir.png";
+    ui->btnStir->iconTable()[BTN_PRESS] = "://theme/basic/bt_stir_press.png";
 
     timer = new QTimer(this);
     timer->setSingleShot(false);
     connect(timer, SIGNAL(timeout()), this, SLOT(timeNewData()));
+    timer2 = new QTimer(this);
+    timer2->setSingleShot(false);
+    connect(timer2, SIGNAL(timeout()), this, SLOT(timeNewData2()));
 
     m_dlg = new QReportViewDialog(this);
 
@@ -114,6 +117,9 @@ void QDispelForm::initAll()
 {
     // 默认不运行
     bRunning = eStop;
+    //读取上一次的选中库和选中方法
+    methodForm->initAll("Library <> 'Extract'");
+    methodForm2->initAll("Library = 'Extract'");
     prepareRunning(DB_HANON, 1);
     prepareExtractRunning(DB_EXTRACT, 1);
 }
@@ -127,6 +133,12 @@ void QDispelForm::timeNewData()
     quint16 hold;
     static quint16 ramp = 0;
     static quint16 preRamp = 0;
+
+    if(bRunning == ePause)
+    {
+        m_pauseTime++;
+        return;
+    }
 
     if(m_lastPointKey-m_initPointKey == 0)
     {
@@ -170,7 +182,7 @@ void QDispelForm::timeNewData()
         }
         ui->page_plot->replot();
         m_lastPointKey = currentPointKey;
-        ui->tbv_stage->setRamp(m_lastPointKey-m_initPointKey-preRamp);
+        ui->tbv_stage->setRamp(m_lastPointKey-m_initPointKey-m_pauseTime-preRamp);
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -184,6 +196,12 @@ void QDispelForm::timeNewData2()
     quint16 hold;
     static quint16 ramp = 0;
     static quint16 preRamp = 0;
+
+    if(bRunning == ePause)
+    {
+        m_pauseTime2++;
+        return;
+    }
 
     if(m_lastPointKey2-m_initPointKey2 == 0)
     {
@@ -227,7 +245,7 @@ void QDispelForm::timeNewData2()
         }
         ui->page_plot_2->replot();
         m_lastPointKey2 = currentPointKey;
-        ui->tbv_stage_2->setRamp(m_lastPointKey2-m_initPointKey2-preRamp);
+        ui->tbv_stage_2->setRamp(m_lastPointKey2-m_initPointKey2-m_pauseTime2-preRamp);
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -245,8 +263,8 @@ void QDispelForm::showDebugWindow(int show)
 void QDispelForm::prepareRunning(QString db, int mid)
 {
     int type = methodForm->currentMethodType();
-    QString name = methodForm->currentMethodName();
-    pline() << db << mid << type;
+    QString name = methodForm->currentMethodName();        
+    pline() << db << name << mid << type;
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid, type);
     ui->lb_libname->setText(db);
@@ -288,6 +306,8 @@ void QDispelForm::on_btn_play_clicked()
         m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
         m_lastPointKey = m_initPointKey;
         bRunning = ePlay;
+        m_pauseTime = 0;
+        timer->start(1000);
         startHeating();
         serialNo = m_dlg->newReport(methodForm->currentLibrary(),
                          methodForm->currentMethodName());
@@ -296,8 +316,8 @@ void QDispelForm::on_btn_play_clicked()
 
 void QDispelForm::startHeating()
 {
-    timer->start(1000);
-    ui->btn_play->setText(tr("Pause"));
+    ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_playing.png";
+    ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main->setCurrentIndex(0);
 
     ui->tbv_stage->selectStage(0);
@@ -348,15 +368,16 @@ void QDispelForm::startHeating()
 
 void QDispelForm::pauseHeating()
 {
-    ui->btn_play->setText(tr("Play"));
-    timer->stop();
+    ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_pause.png";
+    ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_pause_press.png";
     com0->sendMsgPause();
 }
 
 void QDispelForm::stopHeating()
 {
-    timer->stop();
-    ui->btn_play->setText(tr("Play"));
+    ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+    ui->btn_play->update();
     com0->sendMsgStop();
 
     QPixmap pix = ui->page_plot->toPixmap(600, 320);
@@ -406,6 +427,7 @@ void QDispelForm::on_btn_stop_clicked()
         ui->tbv_stage->setRamp(m_curRamp);
         ui->tbv_stage->selectStage(ui->tbv_stage->currentStage());
     }
+    timer->stop();
     stopHeating();
 }
 
@@ -430,7 +452,7 @@ void QDispelForm::on_btn_play_2_clicked()
     if(bRunning == ePlay)
     {
         bRunning = ePause;
-        startHeatingExtract();
+        pauseHeatingExtract();
     }
     else if(bRunning == ePause)
     {
@@ -439,9 +461,12 @@ void QDispelForm::on_btn_play_2_clicked()
     }
     else if(bRunning == eStop)
     {
-        m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-        m_lastPointKey = 0;
+        m_initPointKey2 = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+        m_lastPointKey2 = m_initPointKey2;
+
         bRunning = ePlay;
+        m_pauseTime2 = 0;
+        timer2->start(1000);
         startHeatingExtract();
         serialNo = m_dlg->newReport(methodForm->currentLibrary(),
                          methodForm->currentMethodName());
@@ -450,8 +475,8 @@ void QDispelForm::on_btn_play_2_clicked()
 
 void QDispelForm::startHeatingExtract()
 {
-    timer->start(1000);
-    ui->btn_play_2->setText(tr("Pause"));
+    ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_playing.png";
+    ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main_2->setCurrentIndex(0);
 
     quint8 stage;
@@ -461,6 +486,10 @@ void QDispelForm::startHeatingExtract()
     quint16 tempture;
     quint16 hold;
     ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, press, tempture, hold);
+    m_totalStageRamp2 = ui->tbv_stage_2->totalStageTimeRamp();
+    int currentStage2 = ui->tbv_stage_2->currentStage();
+
+    pline() << currentStage2 << m_totalStageRamp2;
 
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
@@ -495,15 +524,25 @@ void QDispelForm::startHeatingExtract()
     */
 }
 
+void QDispelForm::pauseHeatingExtract()
+{
+    ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_pause.png";
+    ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_pause_press.png";
+    com0->sendMsgPause();
+}
+
 void QDispelForm::on_btn_stop_2_clicked()
 {
+    ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
+    ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
+    ui->btn_play_2->update();
     bRunning = eStop;
+    timer2->stop();
     stopHeatingExtract();
 }
 
 void QDispelForm::stopHeatingExtract()
 {
-    timer->stop();
     ui->btn_play_2->setText(tr("Play"));
     com0->sendMsgStop();
 
@@ -542,11 +581,6 @@ void QDispelForm::on_btnStir_clicked()
 }
 
 void QDispelForm::on_btn_turn_clicked()
-{
-
-}
-
-void QDispelForm::on_pushButton_4_clicked()
 {
 
 }

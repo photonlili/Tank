@@ -69,6 +69,7 @@ private slots:
     void on_btn_play_2_clicked();
 
     void startHeatingExtract();
+    void pauseHeatingExtract();
 
     void on_btn_stop_2_clicked();
 
@@ -80,7 +81,6 @@ private slots:
 
     void on_btn_turn_clicked();
 
-    void on_pushButton_4_clicked();
     void slotException(int);
 
 private:
@@ -109,6 +109,9 @@ private:
 
     QTimer* timer;
     QTimer* timer2;
+
+    quint32 m_pauseTime;
+    quint32 m_pauseTime2;
 
     QMethodForm* methodForm;
     QMethodForm* methodForm2;

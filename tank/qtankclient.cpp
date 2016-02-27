@@ -587,10 +587,11 @@ void QTankClient::recvDownFileResultMessage(QTankMessage &qMsg)
 
     QString tmpFile = QString("%1/%2").arg(m_downfileresult.m_path).arg(m_downfileresult.m_name);
 #ifdef __MIPS_LINUX__
-    system(QString("touch %1/%2").arg(tmpFile).toAscii().data());
+    systemChild(QString("touch %1").arg(tmpFile).toAscii().data());
 #endif
     QFile f(tmpFile);
-    f.open( QIODevice::Truncate );
+    f.open( QIODevice::WriteOnly | QIODevice::Truncate );
+    pline() << tmpFile << f.size();
     f.close();
     emit signalUpdateProgress(0);
     emit signalDownData();
@@ -605,7 +606,7 @@ void QTankClient::recvDownFileDataResultMessage(QTankMessage &qMsg)
     int nFileSize = 0;
     QString tmpFile = QString("%1/%2").arg(m_downfileresult.m_path).arg(m_downfileresult.m_name);
     QFile f(tmpFile);
-    f.open( QIODevice::Append );
+    f.open( QIODevice::WriteOnly | QIODevice::Append );
     f.write(result.m_data);
     nFileSize = f.size();
     f.close();

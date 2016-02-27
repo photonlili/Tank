@@ -29,8 +29,16 @@
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../hnmsgbox.ui" line="133"/>
+        <location filename="../hnmsgbox.ui" line="134"/>
         <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HNProgressBar</name>
+    <message>
+        <location filename="../hnprogressbar.ui" line="14"/>
+        <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -39,6 +47,19 @@
     <message>
         <location filename="../hntabwidget.ui" line="14"/>
         <source>TabWidget</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HNUpgradeWidget</name>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="14"/>
+        <source>HNUpgradeWidget</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="85"/>
+        <source>Updating</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -213,7 +234,7 @@
 <context>
     <name>QCWidget</name>
     <message>
-        <location filename="../qcwidget.ui" line="16"/>
+        <location filename="../qcwidget.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
@@ -231,22 +252,27 @@
         <translation>服务内容</translation>
     </message>
     <message>
-        <location filename="../qcloudform.ui" line="120"/>
+        <location filename="../qcloudform.ui" line="85"/>
         <source>Upload</source>
         <translation>上传</translation>
     </message>
     <message>
-        <location filename="../qcloudform.ui" line="127"/>
+        <location filename="../qcloudform.ui" line="143"/>
+        <source>Cloud Service:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qcloudform.ui" line="51"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qcloudform.ui" line="80"/>
+        <location filename="../qcloudform.ui" line="78"/>
         <source>Down</source>
         <translation>下载</translation>
     </message>
     <message>
-        <location filename="../qcloudform.ui" line="113"/>
+        <location filename="../qcloudform.ui" line="71"/>
         <source>Print</source>
         <translation>打印</translation>
     </message>
@@ -260,12 +286,12 @@
     <message>
         <location filename="../qcloudlocalmodel.cpp" line="20"/>
         <source>Method</source>
-        <translation>方法库</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qcloudlocalmodel.cpp" line="25"/>
         <source>Data</source>
-        <translation>实验报告</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -281,12 +307,12 @@
     <message>
         <location filename="../qcloudmodel.cpp" line="46"/>
         <source>Method</source>
-        <translation>方法库</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qcloudmodel.cpp" line="48"/>
         <source>Data</source>
-        <translation>实验报告</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -329,10 +355,8 @@
         <translation type="obsolete">库名</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="460"/>
-        <location filename="../qdispelform.ui" line="910"/>
         <source>Open</source>
-        <translation>打开</translation>
+        <translation type="obsolete">打开</translation>
     </message>
     <message>
         <source>Up</source>
@@ -377,13 +401,13 @@
     </message>
     <message>
         <location filename="../qdispelform.ui" line="120"/>
-        <location filename="../qdispelform.ui" line="584"/>
+        <location filename="../qdispelform.ui" line="590"/>
         <source>Library:</source>
         <translation>库名：</translation>
     </message>
     <message>
         <location filename="../qdispelform.ui" line="139"/>
-        <location filename="../qdispelform.ui" line="603"/>
+        <location filename="../qdispelform.ui" line="609"/>
         <source>Library-0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -393,7 +417,7 @@
     </message>
     <message>
         <location filename="../qdispelform.ui" line="199"/>
-        <location filename="../qdispelform.ui" line="663"/>
+        <location filename="../qdispelform.ui" line="669"/>
         <source>Method-0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -407,8 +431,8 @@
         <translation>压力控制</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="380"/>
-        <location filename="../qdispelform.ui" line="811"/>
+        <location filename="../qdispelform.ui" line="386"/>
+        <location filename="../qdispelform.ui" line="823"/>
         <source>℃</source>
         <translation>℃</translation>
     </message>
@@ -418,7 +442,7 @@
     </message>
     <message>
         <location filename="../qdispelform.ui" line="180"/>
-        <location filename="../qdispelform.ui" line="644"/>
+        <location filename="../qdispelform.ui" line="650"/>
         <source>Method:</source>
         <translation>方法名：</translation>
     </message>
@@ -428,47 +452,42 @@
         <translation>类型：</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="341"/>
+        <location filename="../qdispelform.ui" line="347"/>
         <source>Pressure:</source>
         <translation>当期压力：</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="402"/>
-        <location filename="../qdispelform.ui" line="840"/>
+        <location filename="../qdispelform.ui" line="408"/>
+        <location filename="../qdispelform.ui" line="852"/>
         <source>Tempture:</source>
         <translation>当前温度：</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="422"/>
-        <location filename="../qdispelform.ui" line="818"/>
+        <location filename="../qdispelform.ui" line="428"/>
+        <location filename="../qdispelform.ui" line="830"/>
         <source>Stopped</source>
         <translation>停止加热</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="487"/>
-        <location filename="../qdispelform.ui" line="937"/>
         <source>Switch</source>
-        <translation>切换</translation>
+        <translation type="obsolete">切换</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="494"/>
         <source>Left</source>
-        <translation>左旋</translation>
+        <translation type="obsolete">左旋</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="501"/>
         <source>Right</source>
-        <translation>右旋</translation>
+        <translation type="obsolete">右旋</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="551"/>
+        <location filename="../qdispelform.ui" line="557"/>
         <source>Extract</source>
         <translation>萃取</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="944"/>
         <source>Stir</source>
-        <translation>搅拌</translation>
+        <translation type="obsolete">搅拌</translation>
     </message>
     <message>
         <source>Run</source>
@@ -479,7 +498,7 @@
         <translation type="obsolete">当前压力</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="367"/>
+        <location filename="../qdispelform.ui" line="373"/>
         <source>kPa</source>
         <translation>PSI</translation>
     </message>
@@ -492,9 +511,9 @@
         <translation type="obsolete">度</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="309"/>
-        <location filename="../qdispelform.ui" line="354"/>
-        <location filename="../qdispelform.ui" line="798"/>
+        <location filename="../qdispelform.ui" line="315"/>
+        <location filename="../qdispelform.ui" line="360"/>
+        <location filename="../qdispelform.ui" line="810"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -515,19 +534,15 @@
         <translation type="obsolete">当前压力</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="473"/>
-        <location filename="../qdispelform.ui" line="923"/>
-        <location filename="../qdispelform.cpp" line="245"/>
-        <location filename="../qdispelform.cpp" line="253"/>
-        <location filename="../qdispelform.cpp" line="396"/>
+        <location filename="../qdispelform.cpp" line="351"/>
+        <location filename="../qdispelform.cpp" line="359"/>
+        <location filename="../qdispelform.cpp" line="507"/>
         <source>Play</source>
         <translation>运行</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="480"/>
-        <location filename="../qdispelform.ui" line="930"/>
         <source>Stop</source>
-        <translation>停止</translation>
+        <translation type="obsolete">停止</translation>
     </message>
     <message>
         <source>Company:%1</source>
@@ -575,8 +590,8 @@
         <translation type="obsolete">搜索</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="194"/>
-        <location filename="../qdispelform.cpp" line="343"/>
+        <location filename="../qdispelform.cpp" line="300"/>
+        <location filename="../qdispelform.cpp" line="454"/>
         <source>Pause</source>
         <translation>暂停</translation>
     </message>
@@ -593,78 +608,78 @@
         <translation type="obsolete">用户库名</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="127"/>
+        <location filename="../qeditform.ui" line="165"/>
         <source>User</source>
         <translation type="unfinished">用户</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="85"/>
+        <location filename="../qeditform.ui" line="395"/>
         <source>Add</source>
         <translation>新增</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="66"/>
+        <location filename="../qeditform.ui" line="376"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="98"/>
+        <location filename="../qeditform.ui" line="408"/>
         <source>Del</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="221"/>
+        <location filename="../qeditform.ui" line="424"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="451"/>
+        <location filename="../qeditform.ui" line="116"/>
         <source>Vessel</source>
         <translation>罐数</translation>
     </message>
     <message>
         <location filename="../qeditform.ui" line="57"/>
-        <location filename="../qeditform.ui" line="441"/>
+        <location filename="../qeditform.ui" line="106"/>
         <source>Method</source>
         <translation>方法</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="185"/>
+        <location filename="../qeditform.ui" line="466"/>
         <source>-</source>
         <translation>－</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="172"/>
+        <location filename="../qeditform.ui" line="453"/>
         <source>+</source>
         <translation>＋</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="253"/>
+        <location filename="../qeditform.ui" line="213"/>
         <source>Stage:</source>
         <translation>阶段：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="281"/>
+        <location filename="../qeditform.ui" line="241"/>
         <source>Tempture:</source>
         <translation>温度：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="274"/>
+        <location filename="../qeditform.ui" line="234"/>
         <source>PressPSI:</source>
         <translation>压力：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="267"/>
+        <location filename="../qeditform.ui" line="227"/>
         <source>TimeRAMP:</source>
         <translation>爬坡时间：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="260"/>
+        <location filename="../qeditform.ui" line="220"/>
         <source>Hold:</source>
         <translation>保持时间：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="339"/>
+        <location filename="../qeditform.ui" line="299"/>
         <source>StageNum:</source>
         <translation>总阶段数：</translation>
     </message>
@@ -677,12 +692,12 @@
         <translation type="obsolete">罐数：</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="461"/>
+        <location filename="../qeditform.ui" line="126"/>
         <source>Type</source>
         <translation>类型</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="120"/>
+        <location filename="../qeditform.ui" line="158"/>
         <source>Library:</source>
         <translation>方法库：</translation>
     </message>
@@ -691,7 +706,7 @@
         <translation type="obsolete">阶段</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="192"/>
+        <location filename="../qeditform.ui" line="473"/>
         <source>Clear</source>
         <translation>清空</translation>
     </message>
@@ -780,12 +795,17 @@
         <translation>播放器</translation>
     </message>
     <message>
-        <location filename="../qhelpform.ui" line="46"/>
+        <location filename="../qhelpform.ui" line="60"/>
+        <source>MPlayer Window:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qhelpform.ui" line="74"/>
         <source>Log</source>
         <translation>日志</translation>
     </message>
     <message>
-        <location filename="../qhelpform.ui" line="58"/>
+        <location filename="../qhelpform.ui" line="86"/>
         <source>System Event:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -872,7 +892,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qmplayerui.ui" line="127"/>
+        <location filename="../qmplayerui.ui" line="130"/>
         <source>Play</source>
         <translation>播放</translation>
     </message>
@@ -881,18 +901,18 @@
         <translation type="obsolete">暂停</translation>
     </message>
     <message>
-        <location filename="../qmplayerui.ui" line="82"/>
-        <location filename="../qmplayerui.ui" line="96"/>
+        <location filename="../qmplayerui.ui" line="85"/>
+        <location filename="../qmplayerui.ui" line="99"/>
         <source>00:00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qmplayerui.ui" line="134"/>
+        <location filename="../qmplayerui.ui" line="137"/>
         <source>Stop</source>
         <translation>停止</translation>
     </message>
     <message>
-        <location filename="../qmplayerui.ui" line="154"/>
+        <location filename="../qmplayerui.ui" line="157"/>
         <source>v</source>
         <translation></translation>
     </message>
@@ -910,42 +930,34 @@
         <translation>请选择方法：</translation>
     </message>
     <message>
-        <location filename="../qmethodform.ui" line="77"/>
-        <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qmethodform.ui" line="159"/>
         <source>Up</source>
-        <translation>上</translation>
+        <translation type="obsolete">上</translation>
     </message>
     <message>
-        <location filename="../qmethodform.ui" line="166"/>
         <source>Down</source>
-        <translation>下</translation>
+        <translation type="obsolete">下</translation>
     </message>
     <message>
-        <location filename="../qmethodform.ui" line="173"/>
         <source>Sure</source>
-        <translation>确定</translation>
+        <translation type="obsolete">确定</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="67"/>
+        <location filename="../qmethodform.cpp" line="81"/>
         <source>Standard</source>
         <translation>标准控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="70"/>
+        <location filename="../qmethodform.cpp" line="84"/>
         <source>Press</source>
         <translation>压力控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="73"/>
+        <location filename="../qmethodform.cpp" line="87"/>
         <source>RAMP</source>
         <translation>爬坡控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="76"/>
+        <location filename="../qmethodform.cpp" line="90"/>
         <source>Extract</source>
         <translation>萃取控制</translation>
     </message>
@@ -1100,12 +1112,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qprogresswindow.ui" line="27"/>
+        <location filename="../qprogresswindow.ui" line="40"/>
         <source>Cancel</source>
         <translation type="unfinished">取消</translation>
     </message>
     <message>
-        <location filename="../qprogresswindow.ui" line="47"/>
+        <location filename="../qprogresswindow.ui" line="20"/>
         <source>Progressing</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1288,27 +1300,27 @@
         <translation>用户管理</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="470"/>
+        <location filename="../qsetform.ui" line="489"/>
         <source>Password:</source>
         <translation>密码：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="513"/>
+        <location filename="../qsetform.ui" line="532"/>
         <source>CreateTime:</source>
         <translation>创建时间：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="506"/>
+        <location filename="../qsetform.ui" line="525"/>
         <source>Creater:</source>
         <translation>创建者：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="520"/>
+        <location filename="../qsetform.ui" line="539"/>
         <source>Comment:</source>
         <translation>注释：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="493"/>
+        <location filename="../qsetform.ui" line="512"/>
         <source>Name:</source>
         <translation>姓名：</translation>
     </message>
@@ -1317,77 +1329,93 @@
         <translation type="obsolete">确认密码：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="483"/>
+        <location filename="../qsetform.ui" line="502"/>
         <source>Authority:</source>
         <translation>权限：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="533"/>
+        <location filename="../qsetform.ui" line="552"/>
         <source>New</source>
         <translation>新用户</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="540"/>
+        <location filename="../qsetform.ui" line="559"/>
         <source>Delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="576"/>
+        <location filename="../qsetform.ui" line="634"/>
         <source>Optical fiber sensing</source>
         <translation>光线传感：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="589"/>
+        <location filename="../qsetform.ui" line="647"/>
         <source>Infrared sensor outer ring</source>
         <translation>红外传感器外圈：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="602"/>
+        <location filename="../qsetform.ui" line="683"/>
         <source>Infrared sensor inner ring</source>
         <translation>红外传感器内圈：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="615"/>
+        <location filename="../qsetform.ui" line="670"/>
         <source>Pressure pickup</source>
         <translation>压力传感器：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="628"/>
+        <location filename="../qsetform.ui" line="601"/>
         <source>Check</source>
         <translation>校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="759"/>
+        <location filename="../qsetform.ui" line="826"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="766"/>
+        <location filename="../qsetform.ui" line="757"/>
         <source>Ip address:</source>
         <translation>IP地址：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="858"/>
+        <location filename="../qsetform.ui" line="473"/>
+        <source>User Manager:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="696"/>
+        <source>Device Check:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="908"/>
         <source>Serial No.:</source>
         <translation>序列号：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="890"/>
+        <location filename="../qsetform.ui" line="940"/>
+        <location filename="../qsetform.ui" line="979"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="903"/>
+        <location filename="../qsetform.ui" line="953"/>
         <source>Restore</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="938"/>
+        <location filename="../qsetform.ui" line="966"/>
+        <source>Ver:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="1014"/>
         <source>Input serial number please!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="832"/>
+        <location filename="../qsetform.ui" line="882"/>
         <source>Debug window</source>
         <translation>调试窗口</translation>
     </message>
@@ -1402,62 +1430,62 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="729"/>
+        <location filename="../qsetform.ui" line="816"/>
         <source>DNS:</source>
         <translation>解析域名：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="680"/>
+        <location filename="../qsetform.ui" line="767"/>
         <source>Mask:</source>
         <translation>子网掩码：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="670"/>
+        <location filename="../qsetform.ui" line="790"/>
         <source>Gateway:</source>
         <translation>默认网关：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="736"/>
+        <location filename="../qsetform.ui" line="730"/>
         <source>IP configure</source>
         <translation>配置IP：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="709"/>
+        <location filename="../qsetform.ui" line="723"/>
         <source>Select network</source>
         <translation>选取网络</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="789"/>
+        <location filename="../qsetform.ui" line="747"/>
         <source>Use DHCP</source>
         <translation>启用DHCP</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="696"/>
+        <location filename="../qsetform.ui" line="737"/>
         <source>Current:</source>
         <translation>当前网络：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="800"/>
+        <location filename="../qsetform.ui" line="850"/>
         <source>Factory</source>
         <translation>出厂设置</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="819"/>
+        <location filename="../qsetform.ui" line="869"/>
         <source>Calibrate</source>
         <translation>鼠标校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="874"/>
+        <location filename="../qsetform.ui" line="924"/>
         <source>Backlight</source>
         <translation>背光</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="564"/>
+        <location filename="../qsetform.ui" line="586"/>
         <source>Device</source>
         <translation>设备校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="664"/>
+        <location filename="../qsetform.ui" line="705"/>
         <source>Network</source>
         <translation>网络设置</translation>
     </message>
@@ -1470,39 +1498,39 @@
         <translation type="obsolete">警告</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="210"/>
-        <location filename="../qsetform.cpp" line="252"/>
+        <location filename="../qsetform.cpp" line="218"/>
+        <location filename="../qsetform.cpp" line="260"/>
         <source>Name couldn&apos;t be empty</source>
         <translation>名字不能为空</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="223"/>
-        <location filename="../qsetform.cpp" line="268"/>
+        <location filename="../qsetform.cpp" line="231"/>
+        <location filename="../qsetform.cpp" line="276"/>
         <source>This user is existed</source>
         <translation>用户已经存在</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="229"/>
+        <location filename="../qsetform.cpp" line="237"/>
         <source>Password confirm is not equal to password</source>
         <translation>确认密码不相同</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="241"/>
+        <location filename="../qsetform.cpp" line="249"/>
         <source>You can&apos;t delete default user</source>
         <translation>不能删除管理员</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="280"/>
+        <location filename="../qsetform.cpp" line="288"/>
         <source>Save success</source>
         <translation>保存成功</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="288"/>
+        <location filename="../qsetform.cpp" line="296"/>
         <source>Current:Wired Lan</source>
         <translation>当前网络：有线</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="293"/>
+        <location filename="../qsetform.cpp" line="301"/>
         <source>Current:%1</source>
         <translation>当前网络：%1</translation>
     </message>
@@ -1897,11 +1925,6 @@
     <message>
         <location filename="../frminput.ui" line="1593"/>
         <source>|</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../frminput.ui" line="1830"/>
-        <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -123,5 +123,7 @@
         <file>theme/basic/bt_close_press.png</file>
         <file>theme/basic/bt_turn2.png</file>
         <file>theme/basic/bt_turn2_press.png</file>
+        <file>theme/basic/bt_playing.png</file>
+        <file>theme/basic/bt_playing_press.png</file>
     </qresource>
 </RCC>

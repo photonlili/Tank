@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>654</width>
-    <height>364</height>
+    <width>727</width>
+    <height>431</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -41,7 +41,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -455,104 +455,126 @@
        <string>Manager</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="bottomMargin">
+        <number>9</number>
+       </property>
        <item>
-        <widget class="QWidget" name="widget" native="true">
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="5" column="2" rowspan="2">
-           <widget class="QTextEdit" name="textEdit_set_comment"/>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLineEdit" name="lineEdit_set_name"/>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLabel" name="label_7">
-            <property name="text">
-             <string>Password:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2">
-           <widget class="QLineEdit" name="lineEdit_set_password"/>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLineEdit" name="le_createtime"/>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLabel" name="label_9">
-            <property name="text">
-             <string>Authority:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QComboBox" name="comboBox_set_authority"/>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>Name:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" rowspan="7">
-           <widget class="QUserSetWidget" name="tableView_userlist"/>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLineEdit" name="le_creater"/>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>Creater:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="1">
-           <widget class="QLabel" name="label_8">
-            <property name="text">
-             <string>CreateTime:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="1" rowspan="2">
-           <widget class="QLabel" name="label_10">
-            <property name="text">
-             <string>Comment:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QWidget" name="widget_2" native="true">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <widget class="QWidget" name="widgetUserManager" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>40</number>
+          </property>
           <item>
-           <widget class="QCPushButton" name="pushButton_set_new">
+           <widget class="QLabel" name="label_14">
             <property name="text">
-             <string>New</string>
+             <string>User Manager:</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCPushButton" name="pushButton_set_del">
-            <property name="text">
-             <string>Delete</string>
-            </property>
+           <widget class="QWidget" name="widget" native="true">
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="5" column="2" rowspan="2">
+              <widget class="QTextEdit" name="textEdit_set_comment"/>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLineEdit" name="lineEdit_set_name"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="label_7">
+               <property name="text">
+                <string>Password:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="lineEdit_set_password"/>
+             </item>
+             <item row="4" column="2">
+              <widget class="QLineEdit" name="le_createtime"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Authority:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QComboBox" name="comboBox_set_authority"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Name:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" rowspan="7">
+              <widget class="QUserSetWidget" name="tableView_userlist"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLineEdit" name="le_creater"/>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Creater:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="label_8">
+               <property name="text">
+                <string>CreateTime:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1" rowspan="2">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Comment:</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>173</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+           <widget class="QWidget" name="widget_2" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QCPushButton" name="pushButton_set_new">
+               <property name="text">
+                <string>New</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCPushButton" name="pushButton_set_del">
+               <property name="text">
+                <string>Delete</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>173</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -563,234 +585,271 @@
       <attribute name="title">
        <string>Device</string>
       </attribute>
-      <widget class="QCheckBox" name="checkBox_2">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>100</y>
-         <width>171</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Optical fiber sensing</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_3">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>130</y>
-         <width>231</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Infrared sensor outer ring</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_4">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>160</y>
-         <width>231</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Infrared sensor inner ring</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_5">
-       <property name="geometry">
-        <rect>
-         <x>90</x>
-         <y>190</y>
-         <width>181</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Pressure pickup</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton">
-       <property name="geometry">
-        <rect>
-         <x>210</x>
-         <y>260</y>
-         <width>99</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Check</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="spinBox">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>100</y>
-         <width>48</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="spinBox_2">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>130</y>
-         <width>48</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="spinBox_3">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>160</y>
-         <width>48</width>
-         <height>27</height>
-        </rect>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QWidget" name="widgetDevice" native="true">
+         <widget class="QCPushButton" name="pushButton">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>250</y>
+            <width>99</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Check</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_2">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>130</y>
+            <width>141</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>100</y>
+            <width>141</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_2">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>100</y>
+            <width>171</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Optical fiber sensing</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_3">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>130</y>
+            <width>231</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Infrared sensor outer ring</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="spinBox_3">
+          <property name="geometry">
+           <rect>
+            <x>340</x>
+            <y>160</y>
+            <width>141</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_5">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>190</y>
+            <width>181</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pressure pickup</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="checkBox_4">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>160</y>
+            <width>231</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Infrared sensor inner ring</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>251</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Device Check:</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_11">
       <attribute name="title">
        <string>Network</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="10" column="2">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Gateway:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="10" column="3">
-        <widget class="QLineEdit" name="lineEdit_gateway"/>
-       </item>
-       <item row="9" column="2">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Mask:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="3">
-        <widget class="QLineEdit" name="lineEdit_dns"/>
-       </item>
-       <item row="9" column="3">
-        <widget class="QLineEdit" name="lineEdit_mask"/>
-       </item>
-       <item row="2" column="0" rowspan="13">
-        <widget class="QWIFIWidget" name="tableView_Wifi"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="lb_curnet">
-         <property name="text">
-          <string>Current:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_11">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Select network</string>
-         </property>
-        </widget>
-       </item>
-       <item row="14" column="3">
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="11" column="2">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>DNS:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>IP configure</string>
-         </property>
-        </widget>
-       </item>
-       <item row="11" column="1">
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Expanding</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="13" column="3">
-        <widget class="QCPushButton" name="btn_saveip">
-         <property name="text">
-          <string>Save</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Ip address:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="9" column="4">
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="8" column="3">
-        <widget class="QLineEdit" name="lineEdit_ip"/>
-       </item>
-       <item row="7" column="2">
-        <widget class="QCheckBox" name="chk_dhcp">
-         <property name="text">
-          <string>Use DHCP</string>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QWidget" name="widgetIP" native="true">
+         <layout class="QGridLayout" name="gridLayout_9">
+          <property name="topMargin">
+           <number>2</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_11">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Select network</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>IP configure</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lb_curnet">
+            <property name="text">
+             <string>Current:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" rowspan="7">
+           <widget class="QWIFIWidget" name="tableView_Wifi"/>
+          </item>
+          <item row="2" column="2">
+           <widget class="QCheckBox" name="chk_dhcp">
+            <property name="text">
+             <string>Use DHCP</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Ip address:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLineEdit" name="lineEdit_ip"/>
+          </item>
+          <item row="4" column="2">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Mask:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLineEdit" name="lineEdit_mask"/>
+          </item>
+          <item row="4" column="4">
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>59</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="5" column="2">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Gateway:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLineEdit" name="lineEdit_gateway"/>
+          </item>
+          <item row="6" column="1">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Expanding</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>60</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="6" column="2">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>DNS:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="3">
+           <widget class="QLineEdit" name="lineEdit_dns"/>
+          </item>
+          <item row="7" column="3">
+           <widget class="QCPushButton" name="btn_saveip">
+            <property name="text">
+             <string>Save</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="3">
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>119</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -822,7 +881,7 @@
           <widget class="QCheckBox" name="chkDebug">
            <property name="geometry">
             <rect>
-             <x>40</x>
+             <x>30</x>
              <y>220</y>
              <width>161</width>
              <height>22</height>
@@ -835,7 +894,7 @@
           <widget class="QScrollBar" name="scb_bcklight">
            <property name="geometry">
             <rect>
-             <x>40</x>
+             <x>30</x>
              <y>160</y>
              <width>212</width>
              <height>13</height>
@@ -861,7 +920,7 @@
           <widget class="QLabel" name="label_5">
            <property name="geometry">
             <rect>
-             <x>40</x>
+             <x>30</x>
              <y>100</y>
              <width>81</width>
              <height>41</height>
@@ -890,17 +949,30 @@
             <string>TextLabel</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="btnRestore">
+          <widget class="QLabel" name="label_13">
            <property name="geometry">
             <rect>
-             <x>310</x>
-             <y>60</y>
-             <width>99</width>
-             <height>27</height>
+             <x>320</x>
+             <y>20</y>
+             <width>31</width>
+             <height>17</height>
             </rect>
            </property>
            <property name="text">
-            <string>Restore</string>
+            <string>Ver:</string>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lbVer">
+           <property name="geometry">
+            <rect>
+             <x>360</x>
+             <y>20</y>
+             <width>67</width>
+             <height>17</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>TextLabel</string>
            </property>
           </widget>
          </widget>
@@ -973,6 +1045,76 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
+       <string>Upgrade</string>
+      </attribute>
+      <widget class="QLabel" name="label_17">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>30</y>
+         <width>251</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Please insert u disk for restore.</string>
+       </property>
+      </widget>
+      <widget class="QCPushButton" name="btnRestore">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>70</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Restore</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_19">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>140</y>
+         <width>201</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Found new version</string>
+       </property>
+      </widget>
+      <widget class="QCPushButton" name="btnUpgrade">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>190</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Upgrade</string>
+       </property>
+      </widget>
+      <widget class="QCPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>280</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Backup</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </item>

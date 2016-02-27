@@ -64,6 +64,7 @@ void QCPushButton::mouseReleaseEvent(QMouseEvent *e)
 #ifdef __MIPS_LINUX__
         state = BTN_NORMAL;
         //pline() << state;
+        update();
 #else
         if(rect().contains(e->pos()))
             state = BTN_HOVER;

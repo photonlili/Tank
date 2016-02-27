@@ -18,6 +18,7 @@
 #include "qtanklinux.h"
 #include "qnewuser.h"
 #include "hnmsgbox.h"
+#include "qversion.h"
 
 QSetForm::QSetForm(QWidget *parent) :
     QWidget(parent),
@@ -90,6 +91,7 @@ QSetForm::QSetForm(QWidget *parent) :
     plt.setColor(QPalette::WindowText, QColor(Qt::red));
     ui->lb_serial->setPalette(plt);
 
+    connect(ui->btnUpgrade, SIGNAL(clicked()), this, SIGNAL(sigUpgrade()));
 }
 
 QSetForm::~QSetForm()
@@ -134,6 +136,8 @@ void QSetForm::initAll()
         sn += QString::number((quint8)serial[i], 16);
     sn = sn.toUpper();
     ui->lb_serial_2->setText(sn);
+
+    ui->lbVer->setText(VER_FILEVERSION_STR);
 
 }
 
@@ -325,6 +329,17 @@ void QSetForm::initLanguage()
     ui->retranslateUi(this);
     m_facPass->initLanguage();
     ui->tableView_userlist->initLanguage();
+
+    QSettings set;
+    QByteArray serial = set.value("/Device/SerialNo.").toByteArray();
+    QString sn;
+    for(int i = 0; i < serial.size(); i++)
+        sn += QString::number((quint8)serial[i], 16);
+    sn = sn.toUpper();
+    ui->lb_serial_2->setText(sn);
+
+    ui->lbVer->setText(VER_FILEVERSION_STR);
+
 }
 
 bool QSetForm::eventFilter(QObject * obj, QEvent * e)
@@ -397,3 +412,4 @@ void QSetForm::on_btnRestore_clicked()
     //主题
     //头像
 }
+

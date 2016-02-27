@@ -17,7 +17,7 @@ public:
     ~QCPushButton();
 
     //QCPushButton [] = 不能正常运算 所以采用这种形式。
-    TBtnIconTable& btnIcon() { return m_pixmap; }
+    TBtnIconTable& iconTable() { return m_pixmap; }
 
 private:
     Ui::QCPushButton *ui;

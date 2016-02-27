@@ -24,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
             ui->tab_dispel, SLOT(showDebugWindow(int)));
     connect(ui->tab_dispel, SIGNAL(signalUpdateLabReport()),
             ui->tab_cloud, SLOT(slotUpdateLabReport()));
+    connect(ui->tab_set, SIGNAL(sigUpgrade()), this,  SIGNAL(sigUpgrade()));
     connect(ui->tab_set, SIGNAL(changeLanguage()), this,  SIGNAL(changeLanguage()));
     connect(ui->tab_set, SIGNAL(changeLanguage()), this,  SLOT(initLanuage()));
     connect(ui->tab_user, SIGNAL(setTheme()), this, SLOT(initTheme()));

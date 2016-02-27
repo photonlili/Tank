@@ -58,7 +58,7 @@ QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
     setStyleSheet(styleString);
     styleFile.close();
 
-#ifndef __MIPS_LINUX__
+#ifdef __MIPS_LINUX__
     frmInput::Instance()->Init("min", "control", "hanon", 14, 14);
 #endif
 

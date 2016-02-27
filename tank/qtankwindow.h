@@ -22,6 +22,7 @@ public slots:
     void slotLogout();
     void slotSerialLock();
     void slotSerialUnLock();
+    void slotUpgrade();
 
 private slots:
     void slotStatus(int index);

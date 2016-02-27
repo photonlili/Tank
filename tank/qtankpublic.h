@@ -25,4 +25,6 @@ void moveRight(QWidget* w);
 
 void msgHandler(QtMsgType, const char *);
 
+int systemChild(const char* cmd);
+
 #endif // WBGLOBAL_H

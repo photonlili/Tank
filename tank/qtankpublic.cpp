@@ -5,6 +5,7 @@
 #include <QUuid>
 #include <QDebug>
 #include "qserialwarning.h"
+#include "qtanklinux.h"
 
 QSqlDatabase managerDB;
 QString gUserName;
@@ -114,4 +115,20 @@ void msgHandler(QtMsgType type, const char * msg)
     mutex.unlock();
 
     fprintf(stderr, "%s\n", msg);
+}
+
+
+int systemChild(const char *cmd)
+{
+    if(!cmd)
+        return -1;
+    __pid_t pid = fork();
+    if(pid > 0)
+    {
+        return 0;
+    }
+    else if(0 == pid)
+    {
+        return execv(cmd, NULL);
+    }
 }

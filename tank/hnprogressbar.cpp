@@ -49,5 +49,5 @@ void HNProgressBar::paintEvent(QPaintEvent *)
     QStylePainter p(this);
     if(back.isEmpty())
         return;
-    p.drawItemPixmap(rect(), Qt::AlignHCenter|Qt::AlignBottom, QIcon(back).pixmap(rect().size(), QIcon::Normal, QIcon::On));
+    p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(back).pixmap(rect().size(), QIcon::Normal, QIcon::On));
 }

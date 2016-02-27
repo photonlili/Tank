@@ -21,6 +21,7 @@ QTankWindow::QTankWindow(QWidget *parent) :
     connect(ui->page_main, SIGNAL(signalLogout()), this, SLOT(slotLogout()));
     connect(ui->page_main, SIGNAL(changeLanguage()), ui->page_login, SLOT(initlanguage()));
     connect(ui->page_main, SIGNAL(changeLanguage()), this, SIGNAL(changeLanguage()));
+    connect(ui->page_main, SIGNAL(sigUpgrade()), this, SLOT(slotUpgrade()));
 
     if(bOpenRights)
         slotStatus(Login_Request);
@@ -76,6 +77,12 @@ void QTankWindow::slotSerialLock()
 void QTankWindow::slotSerialUnLock()
 {
     ui->page_main->slotSerialUnlocked();
+}
+
+void QTankWindow::slotUpgrade()
+{
+    setCurrentIndex(2);
+    ui->page_upgrade->initAll();
 }
 
 void QTankWindow::slotStatus(int index)
