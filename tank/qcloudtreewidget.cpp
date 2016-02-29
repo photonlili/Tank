@@ -24,7 +24,6 @@ QCloudTreeWidget::QCloudTreeWidget(QWidget *parent) :
     cloudFont.setPointSize(16);
     setFont(cloudFont);
     connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentRowChanged()));
-    connect(model, SIGNAL(sigDownSuccess()), this, SLOT(downSuccess()));
 }
 
 QCloudTreeWidget::~QCloudTreeWidget()
@@ -44,6 +43,7 @@ void QCloudTreeWidget::downFile()
     QString localname = filename.split("_").at(1);
     m_localfile = QString("%1/%2").arg(path).arg(localname);
     m_tmpfile = QString("%1/%2").arg(path).arg(filename);
+    connect(model, SIGNAL(sigDownSuccess()), this, SLOT(downSuccess()));
     model->downFile(path, fileid, localname);
 }
 
@@ -64,6 +64,7 @@ void QCloudTreeWidget::downSuccess()
     pline() << m_tmpfile << m_localfile;
     QFile::rename(m_tmpfile, m_localfile);
     system(QString("mv %1 %2").arg(m_tmpfile).arg(m_localfile).toAscii().data());
+    disconnect(model, SIGNAL(sigDownSuccess()), this, SLOT(downSuccess()));
     HNMsgBox::warning(this, "DownLoad Success");
 }
 

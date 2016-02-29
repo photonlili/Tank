@@ -117,7 +117,11 @@ void msgHandler(QtMsgType type, const char * msg)
     fprintf(stderr, "%s\n", msg);
 }
 
-
+/**
+ * @brief systemChild 返回后，进入两个进程空间
+ * @param cmd
+ * @return
+ */
 int systemChild(const char *cmd)
 {
     if(!cmd)

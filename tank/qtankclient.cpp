@@ -587,7 +587,7 @@ void QTankClient::recvDownFileResultMessage(QTankMessage &qMsg)
 
     QString tmpFile = QString("%1/%2").arg(m_downfileresult.m_path).arg(m_downfileresult.m_name);
 #ifdef __MIPS_LINUX__
-    systemChild(QString("touch %1").arg(tmpFile).toAscii().data());
+    system(QString("touch %1").arg(tmpFile).toAscii().data());
 #endif
     QFile f(tmpFile);
     f.open( QIODevice::WriteOnly | QIODevice::Truncate );

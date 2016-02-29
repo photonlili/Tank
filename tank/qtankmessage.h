@@ -57,7 +57,7 @@
 #define _TCPCMD_RECEIVEDIRYES             0x4f4b
 #define _TCPCMD_RECEIVEDIRNO
 #define _TCP_BLOCKDATA_SIZE                    0x400
-#define _TCP_RECVBUFF_SIZE                      0x8000
+#define _TCP_RECVBUFF_SIZE                      0x400
 
 #define _TCP_SECTION_UPCODE                    "UPCODE"
 #define _TCP_SECTION_ID                        "ID"
