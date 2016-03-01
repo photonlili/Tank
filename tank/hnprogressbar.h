@@ -30,10 +30,6 @@ private:
 private:
     QString m_back, m_trunk;
     int m_min, m_max, m_value;
-
-    // QWidget interface
-protected:
-    void paintEvent(QPaintEvent *);
 };
 
 #endif // HNPROGRESSBAR_H
