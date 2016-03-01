@@ -6,89 +6,113 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>742</width>
-    <height>372</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>HNUpgradeWidget</string>
   </property>
-  <widget class="QLabel" name="lbTip">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>100</y>
-     <width>311</width>
-     <height>17</height>
-    </rect>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <property name="spacing">
+    <number>0</number>
    </property>
-   <property name="text">
-    <string>Please don't close this computer! Upgrading...</string>
+   <property name="leftMargin">
+    <number>0</number>
    </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>150</x>
-     <y>220</y>
-     <width>531</width>
-     <height>81</height>
-    </rect>
+   <property name="topMargin">
+    <number>0</number>
    </property>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="widgetHNUpgrade" native="true">
+     <widget class="QLabel" name="lbTip">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>140</y>
+        <width>431</width>
+        <height>41</height>
+       </rect>
+      </property>
       <property name="text">
-       <string>Restore:</string>
+       <string>Please don't close this computer! Upgrading...</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Download:</string>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>320</y>
+        <width>431</width>
+        <height>81</height>
+       </rect>
       </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Upgrade:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" colspan="2">
+        <widget class="HNProgressBar" name="widgetBackup" native="true"/>
+       </item>
+       <item row="3" column="1" colspan="2">
+        <widget class="HNProgressBar" name="widgetUpgrade" native="true"/>
+       </item>
+       <item row="1" column="1" colspan="2">
+        <widget class="HNProgressBar" name="widgetDownload" native="true"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Backup:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="lbBack">
+         <property name="text">
+          <string>Waiting...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="lbDown">
+         <property name="text">
+          <string>Waiting...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLabel" name="lbUpgrade">
+         <property name="text">
+          <string>Wating...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Download:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
-    </item>
-    <item row="0" column="1" colspan="2">
-     <widget class="HNProgressBar" name="widgetBackup" native="true"/>
-    </item>
-    <item row="3" column="1" colspan="2">
-     <widget class="HNProgressBar" name="widgetUpgrade" native="true"/>
-    </item>
-    <item row="1" column="1" colspan="2">
-     <widget class="HNProgressBar" name="widgetDownload" native="true"/>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="label">
-      <property name="text">
-       <string>Backup:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="lbBack">
-      <property name="text">
-       <string>Waiting...</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="3">
-     <widget class="QLabel" name="lbDown">
-      <property name="text">
-       <string>Waiting...</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="3">
-     <widget class="QLabel" name="lbUpgrade">
-      <property name="text">
-       <string>Wating...</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

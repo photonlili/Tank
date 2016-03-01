@@ -19,6 +19,44 @@
 #include "qnewuser.h"
 #include "hnmsgbox.h"
 #include "qversion.h"
+#include <QThread>
+#include "qhotplugwatcher.h"
+
+class QBackupThread : public QThread
+{
+public:
+    explicit QBackupThread(QObject* parent = 0);
+
+    // QThread interface
+protected:
+    void run();
+};
+
+void QBackupThread::run()
+{
+    QDir d(QHotplugWatcher::Instance()->devMountPath());
+    if(!d.exists())
+    {
+        QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Qt::QueuedConnection, Q_ARG(QString, tr("Please Check U Disk!")));
+        return;
+    }
+#ifdef __MIPS_LINUX__
+    system("rm -f /mnt/usb_sda1/backup.tar.gz");
+    system("tar czvf /mnt/usb_sda1/backup.tar.gz /DWINFile/tank");
+#endif
+    //语言？
+    //开机是否允许登陆？
+    //默认登陆用户
+    //网络设置
+    //主题
+    //头像
+}
+
+
+QBackupThread::QBackupThread(QObject *parent) : QThread(parent)
+{
+
+}
 
 QSetForm::QSetForm(QWidget *parent) :
     QWidget(parent),
@@ -91,7 +129,10 @@ QSetForm::QSetForm(QWidget *parent) :
     plt.setColor(QPalette::WindowText, QColor(Qt::red));
     ui->lb_serial->setPalette(plt);
 
+    QBackupThread* t = new QBackupThread(this);
     connect(ui->btnUpgrade, SIGNAL(clicked()), this, SIGNAL(sigUpgrade()));
+    connect(ui->btnBackup, SIGNAL(clicked()), t, SLOT(start()));
+    connect(QHotplugWatcher::Instance(), SIGNAL(storageChanged(int)), this, SLOT(slotStorageChanged(int)));
 }
 
 QSetForm::~QSetForm()
@@ -324,6 +365,19 @@ void QSetForm::slotSerialUnlock()
     ui->stackedWidget->setCurrentIndex(0);
 }
 
+void QSetForm::slotInvokeWarning(QString msg)
+{
+    HNMsgBox::warning(this, msg);
+}
+
+void QSetForm::slotStorageChanged(int stat)
+{
+    if(stat == QHotplugWatcher::E_ADD)
+        ui->lbBackup->setText(tr("U disk ready!"));
+    else if(stat == QHotplugWatcher::E_RM)
+        ui->lbBackup->setText(tr("Please insert u disk."));
+}
+
 void QSetForm::initLanguage()
 {
     ui->retranslateUi(this);
@@ -402,14 +456,3 @@ void QSetForm::on_chk_dhcp_stateChanged(int bChecked)
     ui->lineEdit_gateway->setDisabled(bChecked);
     ui->lineEdit_dns->setDisabled(bChecked);
 }
-
-void QSetForm::on_btnRestore_clicked()
-{
-    //语言？
-    //开机是否允许登陆？
-    //默认登陆用户
-    //网络设置
-    //主题
-    //头像
-}
-

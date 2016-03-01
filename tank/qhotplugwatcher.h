@@ -23,6 +23,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QThread>
 #include "qdevicewatcher.h"
+#include <QTimer>
 
 #ifndef __GNUC__
 #define __PRETTY_FUNCTION__  __FUNCTION__
@@ -34,10 +35,35 @@ class QHotplugWatcher : public QThread
 public:
     static QHotplugWatcher *Instance();
 
+    enum {
+        E_NULLDEV,
+        E_MOUSE,
+        E_KEYBOARD,
+        E_STORAGE,
+        E_MAXDEV,
+    };
+
+    enum {
+        E_NULLSTAT,
+        E_ADD,
+        E_RM,
+        E_CHANGE,
+        E_MAXSTAT,
+    };
+
+    quint32 deviceType() { return m_devType; }
+    quint32 deviceStat() { return m_devStat; }
+    QString devMountPath() { return m_storage; }
+
+signals:
+    void storageChanged(int stat);
+
 public slots:
     void slotDeviceAdded(const QString& dev);
     void slotDeviceRemoved(const QString& dev);
     void slotDeviceChanged(const QString& dev);
+    void slotDeviceDriver();
+
 protected:
     virtual bool event(QEvent *e);
 
@@ -47,6 +73,10 @@ private:
     QDeviceWatcher *watcher;
     explicit QHotplugWatcher(QObject *parent = 0);
     static QHotplugWatcher* _instance;
+    quint32 m_devType;
+    quint32 m_devStat;
+    QString m_storage;
+    QTimer* timer;
 };
 
 #endif // QHOTPLUGWATCHER_H

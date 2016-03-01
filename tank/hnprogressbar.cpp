@@ -10,12 +10,12 @@ HNProgressBar::HNProgressBar(QWidget *parent) :
     ui(new Ui::HNProgressBar)
 {
     ui->setupUi(this);
-    this->value = 0;
-    this->min = 0;
-    this->max = 100;
-    this->back = "://theme/basic/bk_progress_background.png";
-    this->trunk = "://theme/basic/bk_progress_chunk.png";
-    ui->lbTrunk->setPixmap(QPixmap(this->trunk));
+    m_value = 0;
+    m_min = 0;
+    m_max = 100;
+    m_back = "://theme/basic/bk_progress_background.png";
+    m_trunk = "://theme/basic/bk_progress_chunk.png";
+    ui->lbTrunk->setPixmap(QPixmap(m_trunk));
 }
 
 HNProgressBar::~HNProgressBar()
@@ -25,29 +25,29 @@ HNProgressBar::~HNProgressBar()
 
 void HNProgressBar::setPixMap(QString back, QString trunk)
 {
-    this->back = back;
-    this->trunk = trunk;
-    ui->lbTrunk->setPixmap(QPixmap(this->trunk));
+    m_back = back;
+    m_trunk = trunk;
+    ui->lbTrunk->setPixmap(QPixmap(m_trunk));
 }
 
 void HNProgressBar::setValue(int value)
 {
-    this->value = value;
-    int w = width() * value / (max-min);
+    m_value = value;
+    int w = width() * value / (m_max-m_min);
     ui->lbTrunk->setFixedWidth(w);
     ui->lbTrunk->update();
 }
 
 void HNProgressBar::setRange(int min, int max)
 {
-    this->min = min;
-    this->max = max;
+    m_min = min;
+    m_max = max;
 }
 
 void HNProgressBar::paintEvent(QPaintEvent *)
 {
     QStylePainter p(this);
-    if(back.isEmpty())
+    if(m_back.isEmpty())
         return;
-    p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(back).pixmap(rect().size(), QIcon::Normal, QIcon::On));
+    p.drawItemPixmap(rect(), Qt::AlignCenter, QIcon(m_back).pixmap(rect().size(), QIcon::Normal, QIcon::On));
 }

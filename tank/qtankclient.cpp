@@ -37,12 +37,12 @@ QTankClient::QTankClient(QObject *parent) :
     m_UID = 0;
     setReadBufferSize(_TCP_RECVBUFF_SIZE);
     //启动连接
+    eConType = E_LIANTONG;
     readConType();
     connectToSingelHost();
     timer = new QTimer(this);
     timer->setSingleShot(false);
     connect(timer, SIGNAL(timeout()), this, SLOT(sendHeatBeatMessage()));
-    timer->start(5 * 1000);
 }
 
 QTankClient::~QTankClient()
@@ -65,7 +65,9 @@ void QTankClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
     case QAbstractSocket::ConnectingState:
     case QAbstractSocket::ConnectedState:
     case QAbstractSocket::ClosingState:
+        break;
     case QAbstractSocket::UnconnectedState:
+        saveConType();
         break;
     default:
         break;
@@ -76,7 +78,6 @@ void QTankClient::socketErrorOccured(QAbstractSocket::SocketError e)
 {
     //在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
     pline() << e;
-    //saveConType();
     switch(e)
     {
     case QAbstractSocket::RemoteHostClosedError:
@@ -88,9 +89,12 @@ void QTankClient::socketConnected()
 {
     pline() << peerAddress().toString() << peerName();
     //这个步骤，socket重建，资源重新开始
-    m_heartCount = 0;
+    m_heartCount = 0;    
     //TODO:心跳检测重连会不会引发这条消息？
     sendLoginMessage();
+    //如果连接还未成功开始发送心跳包，
+    //QNativeSocketEngine::write() was not called in QAbstractSocket::ConnectedState
+    timer->start(5 * 1000);
 }
 
 void QTankClient::socketDisconnect()
@@ -120,6 +124,7 @@ void QTankClient::readConType()
 
 void QTankClient::connectToSingelHost()
 {
+    pline() << "connect to" << eConType;
     switch(eConType)
     {
     case E_DIANXIN:

@@ -7,7 +7,15 @@ QHotplugWatcher* QHotplugWatcher::_instance = NULL;
 QHotplugWatcher::QHotplugWatcher(QObject *parent) :
     QThread(parent)
 {
+    m_devType = E_NULLDEV;
+    m_devStat = E_NULLSTAT;
+    m_storage = "/mnt/usb_sda1";
+
     //qDebug("tid=%#x %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__);
+    timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, SIGNAL(timeout()), this, SLOT(slotDeviceDriver()), Qt::DirectConnection);
+
     start();
 
     moveToThread(this); //Let bool event(QEvent *e) be in another thread
@@ -30,23 +38,50 @@ QHotplugWatcher *QHotplugWatcher::Instance()
 
 void QHotplugWatcher::slotDeviceAdded(const QString &dev)
 {
-#ifdef __MIPS_LINUX__
-    QWSServer::setCursorVisible(true);
-#endif
     qDebug("tid=%#x %s: add %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+
+    if("/dev/input/event1" == dev)
+        m_devType = E_MOUSE;
+    else if("/dev/input/event2" == dev)
+        m_devType = E_KEYBOARD;
+    else if("/dev/sda1" == dev)
+        m_devType = E_STORAGE;
+    m_devStat = E_ADD;
+    timer->start(1000);
 }
 
 void QHotplugWatcher::slotDeviceRemoved(const QString &dev)
 {
-#ifdef __MIPS_LINUX__
-    QWSServer::setCursorVisible(false);
-#endif
     qDebug("tid=%#x %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+    m_devStat = E_RM;
+    timer->start(1000);
 }
 
 void QHotplugWatcher::slotDeviceChanged(const QString &dev)
 {
     qDebug("tid=%#x %s: change %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
+}
+
+void QHotplugWatcher::slotDeviceDriver()
+{
+#ifdef __MIPS_LINUX__
+    if(E_MOUSE == m_devType)
+    {
+        if(E_ADD == m_devStat)
+            QWSServer::setCursorVisible(true);
+        else if(E_RM == m_devStat)
+            QWSServer::setCursorVisible(false);
+    }
+    else if(E_STORAGE == m_devType)
+    {
+        if(E_ADD == m_devStat)
+            emit storageChanged(E_ADD);
+        else if(E_RM == m_devStat)
+            emit storageChanged(E_RM);
+    }
+    else
+#endif
+    if(E_KEYBOARD == m_devType);
 }
 
 bool QHotplugWatcher::event(QEvent *e) {

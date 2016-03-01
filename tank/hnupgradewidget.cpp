@@ -6,10 +6,10 @@
 #include "qtankdefine.h"
 #include "qtanklinux.h"
 
-class QBackupThread : public QThread
+class QBackupLocalThread : public QThread
 {
 public:
-    explicit QBackupThread(QObject* parent = 0);
+    explicit QBackupLocalThread(QObject* parent = 0);
 
     void setLabel(QLabel* lb)
     {
@@ -29,12 +29,12 @@ private:
     QLabel* label;
 };
 
-QBackupThread::QBackupThread(QObject *parent) : QThread(parent)
+QBackupLocalThread::QBackupLocalThread(QObject *parent) : QThread(parent)
 {
 
 }
 
-void QBackupThread::run()
+void QBackupLocalThread::run()
 {
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 12));
@@ -50,10 +50,10 @@ void QBackupThread::run()
 }
 
 
-class QRestoreThread : public QThread
+class QUpgradeThread : public QThread
 {
 public:
-    explicit QRestoreThread(QObject* parent = 0);
+    explicit QUpgradeThread(QObject* parent = 0);
 
     void setLabel(QLabel* lb)
     {
@@ -80,12 +80,12 @@ private:
 };
 
 
-QRestoreThread::QRestoreThread(QObject *parent)
+QUpgradeThread::QUpgradeThread(QObject *parent)
 {
 
 }
 
-void QRestoreThread::run()
+void QUpgradeThread::run()
 {
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 40));
@@ -105,6 +105,15 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
     ui(new Ui::HNUpgradeWidget)
 {
     ui->setupUi(this);
+
+    ui->lbBack->setFixedWidth(80);
+    ui->lbUpgrade->setFixedWidth(80);
+    ui->lbDown->setFixedWidth(80);
+
+    QList<QLabel *> lb = this->findChildren<QLabel *>();
+    foreach (QLabel * label, lb) {
+        label->setForegroundRole(QPalette::BrightText);
+    }
 
     ui->widgetUpgrade->setFixedWidth(240);
     ui->widgetUpgrade->setRange(0, 100);
@@ -132,12 +141,12 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
     ui->lbDown->setFixedWidth(100);
     ui->lbUpgrade->setFixedWidth(100);
 
-    QBackupThread* t = new QBackupThread(this);
+    QBackupLocalThread* t = new QBackupLocalThread(this);
     t->setLabel(ui->lbBack);
     t->setProgress(ui->widgetBackup);
     disconnect(this, SIGNAL(sigBackup()), this, SLOT(backup()));
     connect(this, SIGNAL(sigBackup()), t, SLOT(start()), Qt::QueuedConnection);
-    QRestoreThread* tt = new QRestoreThread(this);
+    QUpgradeThread* tt = new QUpgradeThread(this);
     tt->setLabel(ui->lbUpgrade);
     tt->setProgress(ui->widgetUpgrade);
     tt->setTimer(timer);

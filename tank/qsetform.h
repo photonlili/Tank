@@ -29,6 +29,8 @@ public slots:
     void timerSetTime();
     void slotSerialLock();
     void slotSerialUnlock();
+    void slotInvokeWarning(QString msg);
+    void slotStorageChanged(int stat);
 
 private slots:
     void userRightsChanged(int bChecked);
@@ -50,8 +52,6 @@ private slots:
     void on_btn_saveip_clicked();
 
     void on_chk_dhcp_stateChanged(int arg1);
-
-    void on_btnRestore_clicked();
 
 private:
     Ui::QSetForm *ui;

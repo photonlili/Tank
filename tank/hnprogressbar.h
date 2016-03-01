@@ -28,9 +28,8 @@ private:
     Ui::HNProgressBar *ui;
 
 private:
-    QString back, trunk;
-    int min, max, value;
-    QCWidget* widgetTrunk;
+    QString m_back, m_trunk;
+    int m_min, m_max, m_value;
 
     // QWidget interface
 protected:
