@@ -152,6 +152,7 @@ void QEditForm::on_btn_stage_del_clicked()
     tbvStage->delStage();
     ui->spin_stage->setRange(1, tbvStage->countStage());
     ui->spin_stage->setValue(tbvStage->countStage());
+    ui->le_stagenum->setText(QString::number(tbvStage->countStage()));
 }
 
 void QEditForm::on_btn_stage_add_clicked()
@@ -159,5 +160,6 @@ void QEditForm::on_btn_stage_add_clicked()
     tbvStage->newStage();
     ui->spin_stage->setRange(1, tbvStage->countStage());
     ui->spin_stage->setValue(tbvStage->countStage());
+    ui->le_stagenum->setText(QString::number(tbvStage->countStage()));
 }
 

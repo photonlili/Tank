@@ -19,10 +19,10 @@ private:
 
     // QItemDelegate interface
 protected:
-    void drawDecoration(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QPixmap &pixmap) const;
     void drawFocus(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect) const;
-    void drawCheck(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, Qt::CheckState state) const;
 };
+
+
 
 namespace Ui {
 class QStageView;

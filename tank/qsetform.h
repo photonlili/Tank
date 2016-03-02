@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QLineEdit>
 #include "qfactorysetpassform.h"
+#include "qprogresswindow.h"
 
 namespace Ui {
 class QSetForm;
@@ -56,6 +57,7 @@ private slots:
 private:
     Ui::QSetForm *ui;
     QFactorySetPassForm* m_facPass;
+    QProgressWindow* prog;
 
     // QObject interface
 public:

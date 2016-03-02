@@ -20,6 +20,14 @@ export QWS_MOUSE_PROTO=tslib:/dev/input/event0
 export QWS_DISPLAY=LinuxFb:/dev/fb0
 #export QWS_SIATH=$QTDIR/lib:$LD_LIBRARY_PATH
 
+#从U盘更新程序
+if [ -d /mnt/usb_sda1 ]; then
+	if [-e /mnt/usb_sda1/upgrade.tar.gz ]
+		tar xzvf /mnt/usb_sda1/upgrade.tar.gz -C /
+	fi
+fi
+
+#启动程序
 cd /DWINFile
 /DWINFile/tank -qws &
 

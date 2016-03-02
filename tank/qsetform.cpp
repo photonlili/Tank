@@ -27,9 +27,13 @@ class QBackupThread : public QThread
 public:
     explicit QBackupThread(QObject* parent = 0);
 
+    void setProgressWidget(QProgressWindow* prog) { m_prog = prog; }
     // QThread interface
 protected:
     void run();
+
+private:
+    QProgressWindow* m_prog;
 };
 
 void QBackupThread::run()
@@ -41,8 +45,12 @@ void QBackupThread::run()
         return;
     }
 #ifdef __MIPS_LINUX__
+    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 16));
     system("rm -f /mnt/usb_sda1/backup.tar.gz");
+    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 36));
     system("tar czvf /mnt/usb_sda1/backup.tar.gz /DWINFile/tank");
+    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
+    QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Qt::QueuedConnection, Q_ARG(QString, tr("Backup success")));
 #endif
     //语言？
     //开机是否允许登陆？
@@ -133,6 +141,11 @@ QSetForm::QSetForm(QWidget *parent) :
     connect(ui->btnUpgrade, SIGNAL(clicked()), this, SIGNAL(sigUpgrade()));
     connect(ui->btnBackup, SIGNAL(clicked()), t, SLOT(start()));
     connect(QHotplugWatcher::Instance(), SIGNAL(storageChanged(int)), this, SLOT(slotStorageChanged(int)));
+
+    prog = new QProgressWindow(this);
+    prog->initAll();
+
+    t->setProgressWidget(prog);
 }
 
 QSetForm::~QSetForm()

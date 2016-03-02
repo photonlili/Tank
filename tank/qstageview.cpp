@@ -42,26 +42,16 @@ void QStageFormatTextDelegate::drawDisplay(QPainter *painter, const QStyleOption
     painter->save();
     //pline() << quint32(option.state);
     if( 106753 == option.state || 98305 == option.state || 98561 == option.state)
+    {
         painter->setPen(option.palette.color(QPalette::BrightText));
-    //else if( 98305 == option.state)
-    //    painter->setPen(Qt::red);
+    }
     painter->drawText(rect, Qt::AlignCenter, QString("%1:%2")
                       .arg(hour, 2, 10, QLatin1Char('0'))
                       .arg(minute, 2, 10, QLatin1Char('0')));
     painter->restore();
 }
 
-void QStageFormatTextDelegate::drawDecoration(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QPixmap &pixmap) const
-{
-
-}
 
 void QStageFormatTextDelegate::drawFocus(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect) const
 {
-
-}
-
-void QStageFormatTextDelegate::drawCheck(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, Qt::CheckState state) const
-{
-
 }

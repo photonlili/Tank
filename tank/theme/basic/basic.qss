@@ -310,16 +310,6 @@ QRadioButton::indicator:indeterminate:pressed {
     image: url();
 }
 
-QTableView{
-    border:none;
-    background:white;
-}
-
-QTableView::item:selected{
-    color:white;
-    background: #FF8400;
-}
-
 QScrollBar:vertical {
     margin: 13px 0px 13px 0px;
     background-color: rgb(255, 255, 255, 100);

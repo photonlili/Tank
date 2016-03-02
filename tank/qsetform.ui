@@ -41,7 +41,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1063,19 +1063,6 @@
         <string>Please insert u disk.</string>
        </property>
       </widget>
-      <widget class="QCPushButton" name="btnRestore">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>151</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Restore</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="lbCheckVer">
        <property name="geometry">
         <rect>
@@ -1105,7 +1092,7 @@
       <widget class="QCPushButton" name="btnBackup">
        <property name="geometry">
         <rect>
-         <x>240</x>
+         <x>60</x>
          <y>70</y>
          <width>151</width>
          <height>27</height>

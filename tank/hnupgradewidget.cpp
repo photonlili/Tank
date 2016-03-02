@@ -218,7 +218,9 @@ void HNUpgradeWidget::restart()
 {
     static int i = 6;
     if(i == 0) {
-        //system("reboot");
+#ifdef __MIPS_LINUX__
+        system("reboot");
+#endif
         timer->stop();
         return;
     }
