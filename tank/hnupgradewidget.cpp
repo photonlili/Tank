@@ -38,12 +38,11 @@ void QBackupLocalThread::run()
 {
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 12));
-    system("rm -f ./backup/backup.tar.gz");
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
-    system("tar czvf ./backup/backup.tar.gz /DWINFile/tank");
+    system("tar czvf ./tmp/backup.tar.gz /DWINFile/tank");
 #else
-    system("tar czvf ./backup/backup.tar.gz tank");
+    system("tar czvf ./tmp/backup.tar.gz tank");
 #endif
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Success")));
@@ -90,10 +89,10 @@ void QUpgradeThread::run()
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
-    system("tar xzvf ./upgrade/upgrade.tar.gz -C /");
+    system("tar xzvf ./tmp/upgrade.tar.gz -C /");
 #else
     system("mkdir tmp");
-    system("tar xzvf ./upgrade/upgrade.tar.gz -C tmp");
+    system("tar xzvf ./tmp/upgrade.tar.gz -C tmp");
 #endif
     QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
     QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Success")));
@@ -162,6 +161,7 @@ HNUpgradeWidget::~HNUpgradeWidget()
 void HNUpgradeWidget::initAll()
 {
     ui->lbTip->setText(tr("Please don't close this computer! Upgrading..."));
+    system("rm -fr tmp & mkdir tmp");
     emit sigBackup();
     emit sigDownload();
 }
@@ -170,8 +170,7 @@ void HNUpgradeWidget::download()
 {
     //开始下载过程
     ui->lbDown->setText(tr("Progressing..."));
-    system("rm -f ./upgrade/upgrade.tar.gz");
-    m_cli->sendDownDevFiles("./upgrade", "356", "upgrade.tar.gz");
+    m_cli->sendDownDevFiles("./tmp", "356", "upgrade.tar.gz");
 }
 
 void HNUpgradeWidget::downOK()
@@ -187,11 +186,10 @@ void HNUpgradeWidget::backup()
     //开始备份
     ui->lbBack->setText(tr("Progressing..."));
     ui->widgetBackup->setValue(24);
-    system("rm -f ./backup/backup.tar.gz");
 #ifdef __MIPS_LINUX__
-    system("tar czvf ./backup/backup.tar.gz /DWINFile/tank");
+    system("tar czvf ./tmp/backup.tar.gz /DWINFile/tank");
 #else
-    system("tar czvf ./backup/backup.tar.gz tank");
+    system("tar czvf ./tmp/backup.tar.gz tank");
 #endif
     ui->widgetBackup->setValue(100);
     ui->lbBack->setText(tr("Success"));
@@ -202,13 +200,12 @@ void HNUpgradeWidget::restore()
     ui->lbUpgrade->setText(tr("Progressing..."));
     ui->widgetUpgrade->setValue(24);
 #ifdef __MIPS_LINUX__
-    system("tar xzvf ./upgrade/upgrade.tar.gz -C /");
+    system("tar xzvf ./tmp/upgrade.tar.gz -C /");
 #else
     system("mkdir tmp");
-    system("tar xzvf ./upgrade/upgrade.tar.gz -C tmp");
+    system("tar xzvf ./tmp/upgrade.tar.gz -C tmp");
 #endif
     ui->widgetUpgrade->setValue(60);
-    system("rm -f ./upgrade/upgrade.tar.gz");
     ui->widgetUpgrade->setValue(100);
     ui->lbUpgrade->setText(tr("Success"));
     timer->start(1000);
