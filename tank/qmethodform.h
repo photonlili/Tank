@@ -28,6 +28,7 @@ public:
 signals:
     void tellMethod(QString name);
     void tellLibrary(QString name);
+    void tellLibraryDisplayed(QString name);
     void tellType(QString type);
     void selMethod(QString dbname, int id);
 

@@ -16,7 +16,7 @@ class QUserLibraryWidget : public QUserLibraryView
 public:
     explicit QUserLibraryWidget(QWidget *parent = 0);
     ~QUserLibraryWidget();
-    void refresh(QString filter = QString("Library <> '%1'").arg(DB_HANON));
+    void refresh(QString filter = "");
     void selectdb(int id = 0);
     void selectdb(QString dbname);
     QString currentdb();

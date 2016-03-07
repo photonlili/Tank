@@ -215,7 +215,7 @@
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QLabel" name="label_11">
+              <widget class="QLabel" name="lb_holdBuddy">
                <property name="text">
                 <string>Hold:</string>
                </property>
@@ -236,7 +236,7 @@
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QLabel" name="label_10">
+              <widget class="QLabel" name="lb_temptureBuddy">
                <property name="text">
                 <string>Tempture:</string>
                </property>

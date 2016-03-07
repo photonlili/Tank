@@ -20,12 +20,16 @@ QCloudLocalTreeWidget::QCloudLocalTreeWidget(QWidget *parent) :
     setFont(cloudFont);
     connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(currentRowChanged()));
-    connect(m_model, SIGNAL(sigUploadSuccess()), this, SLOT(uploadSuccess()));
 }
 
 QCloudLocalTreeWidget::~QCloudLocalTreeWidget()
 {
     delete ui;
+}
+
+QString QCloudLocalTreeWidget::currentUploadingFile()
+{
+    return QString("%1/%2").arg(m_localPath).arg(m_uploadFileName);
 }
 
 void QCloudLocalTreeWidget::printFile()
@@ -81,12 +85,4 @@ void QCloudLocalTreeWidget::currentRowChanged()
         return;
     m_model->queryFiles(m_model->index(curIndex.row(), DIR_CODE).data().toString());
     expand(curIndex);
-}
-
-void QCloudLocalTreeWidget::uploadSuccess()
-{
-    QString localfile = QString("%1/%2").arg(m_localPath).arg(m_uploadFileName);
-    pline() << "remove " << localfile;
-    QFile::remove(localfile);
-    HNMsgBox::warning(this, "Upload Success");
 }

@@ -63,13 +63,13 @@ QDispelForm::QDispelForm(QWidget *parent) :
     m_dlg = new QReportViewDialog(this);
 
     methodForm = new QMethodForm(this);
-    connect(methodForm, SIGNAL(tellLibrary(QString)), ui->lb_libname, SLOT(setText(QString)));
+    connect(methodForm, SIGNAL(tellLibraryDisplayed(QString)), ui->lb_libname, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(tellMethod(QString)), ui->lb_method, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(tellType(QString)), ui->lb_type, SLOT(setText(QString)));
     connect(methodForm, SIGNAL(selMethod(QString, int)), this, SLOT(prepareRunning(QString, int)));
 
     methodForm2 = new QMethodForm(this);
-    connect(methodForm2, SIGNAL(tellLibrary(QString)), ui->lb_libname_2, SLOT(setText(QString)));
+    connect(methodForm2, SIGNAL(tellLibraryDisplayed(QString)), ui->lb_libname_2, SLOT(setText(QString)));
     connect(methodForm2, SIGNAL(tellMethod(QString)), ui->lb_method_2, SLOT(setText(QString)));
     connect(methodForm2, SIGNAL(selMethod(QString, int)), this, SLOT(prepareExtractRunning(QString, int)));
 
@@ -120,7 +120,9 @@ void QDispelForm::initAll()
     //读取上一次的选中库和选中方法
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
+    ui->lb_libname->setText(tr("System"));
     prepareRunning(DB_HANON, 1);
+    ui->lb_libname_2->setText(tr("Extract"));
     prepareExtractRunning(DB_EXTRACT, 1);
 }
 
@@ -267,7 +269,6 @@ void QDispelForm::prepareRunning(QString db, int mid)
     pline() << db << name << mid << type;
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid, type);
-    ui->lb_libname->setText(db);
     ui->lb_method->setText(name);
 }
 
@@ -276,7 +277,6 @@ void QDispelForm::prepareExtractRunning(QString db, int mid)
     QString name = methodForm2->currentMethodName();
     ui->tbv_stage_2->initdb(DB_EXTRACT);
     ui->tbv_stage_2->refresh(mid);
-    ui->lb_libname_2->setText(db);
     ui->lb_method_2->setText(name);
 }
 

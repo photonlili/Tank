@@ -58,9 +58,55 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../hnupgradewidget.ui" line="85"/>
-        <source>Updating</source>
-        <translation type="unfinished"></translation>
+        <location filename="../hnupgradewidget.ui" line="44"/>
+        <location filename="../hnupgradewidget.cpp" line="163"/>
+        <source>Please don&apos;t close this computer! Upgrading...</source>
+        <translation>系统正在升级，请不要关闭计算机。</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="63"/>
+        <source>Upgrade:</source>
+        <translation>升级：</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="79"/>
+        <source>Backup:</source>
+        <translation>备份：</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="86"/>
+        <location filename="../hnupgradewidget.ui" line="93"/>
+        <source>Waiting...</source>
+        <translation>等待...</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="100"/>
+        <source>Wating...</source>
+        <translation>等待...</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.ui" line="107"/>
+        <source>Download:</source>
+        <translation>下载：</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="172"/>
+        <location filename="../hnupgradewidget.cpp" line="187"/>
+        <location filename="../hnupgradewidget.cpp" line="200"/>
+        <source>Progressing...</source>
+        <translation>过程中...</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="180"/>
+        <location filename="../hnupgradewidget.cpp" line="195"/>
+        <location filename="../hnupgradewidget.cpp" line="210"/>
+        <source>Success</source>
+        <translation>成功。</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="225"/>
+        <source>Upgrade success, Restarting... %1</source>
+        <translation>升级完成，正在重启电脑...%1</translation>
     </message>
 </context>
 <context>
@@ -127,6 +173,32 @@
         <location filename="../mainwindow.ui" line="427"/>
         <source>Cloud</source>
         <translation>云服务</translation>
+    </message>
+</context>
+<context>
+    <name>QBackupLocalThread</name>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="39"/>
+        <source>Progressing...</source>
+        <translation>过程中...</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="48"/>
+        <source>Success</source>
+        <translation>成功。</translation>
+    </message>
+</context>
+<context>
+    <name>QBackupThread</name>
+    <message>
+        <location filename="../qsetform.cpp" line="44"/>
+        <source>Please Check U Disk!</source>
+        <translation>请检查U盘！</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.cpp" line="53"/>
+        <source>Backup success</source>
+        <translation>备份成功。</translation>
     </message>
 </context>
 <context>
@@ -259,7 +331,7 @@
     <message>
         <location filename="../qcloudform.ui" line="143"/>
         <source>Cloud Service:</source>
-        <translation type="unfinished"></translation>
+        <translation>云服务内容：</translation>
     </message>
     <message>
         <location filename="../qcloudform.ui" line="51"/>
@@ -534,9 +606,7 @@
         <translation type="obsolete">当前压力</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="351"/>
-        <location filename="../qdispelform.cpp" line="359"/>
-        <location filename="../qdispelform.cpp" line="507"/>
+        <location filename="../qdispelform.cpp" line="546"/>
         <source>Play</source>
         <translation>运行</translation>
     </message>
@@ -590,10 +660,8 @@
         <translation type="obsolete">搜索</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="300"/>
-        <location filename="../qdispelform.cpp" line="454"/>
         <source>Pause</source>
-        <translation>暂停</translation>
+        <translation type="obsolete">暂停</translation>
     </message>
 </context>
 <context>
@@ -711,17 +779,17 @@
         <translation>清空</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="125"/>
+        <location filename="../qeditform.cpp" line="162"/>
         <source>Standard</source>
         <translation>标准控制</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="126"/>
+        <location filename="../qeditform.cpp" line="163"/>
         <source>Tempture</source>
         <translation>温度爬坡</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="127"/>
+        <location filename="../qeditform.cpp" line="164"/>
         <source>Pressure</source>
         <translation>压力控制</translation>
     </message>
@@ -779,7 +847,7 @@
     <message>
         <location filename="../qfactorysetpassform.cpp" line="24"/>
         <source>Password error</source>
-        <translation type="unfinished">密码错误</translation>
+        <translation>密码错误</translation>
     </message>
 </context>
 <context>
@@ -797,7 +865,7 @@
     <message>
         <location filename="../qhelpform.ui" line="60"/>
         <source>MPlayer Window:</source>
-        <translation type="unfinished"></translation>
+        <translation>播放器窗口：</translation>
     </message>
     <message>
         <location filename="../qhelpform.ui" line="74"/>
@@ -807,7 +875,7 @@
     <message>
         <location filename="../qhelpform.ui" line="86"/>
         <source>System Event:</source>
-        <translation type="unfinished"></translation>
+        <translation>系统日志：</translation>
     </message>
 </context>
 <context>
@@ -942,22 +1010,22 @@
         <translation type="obsolete">确定</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="81"/>
+        <location filename="../qmethodform.cpp" line="79"/>
         <source>Standard</source>
         <translation>标准控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="84"/>
+        <location filename="../qmethodform.cpp" line="82"/>
         <source>Press</source>
         <translation>压力控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="87"/>
+        <location filename="../qmethodform.cpp" line="85"/>
         <source>RAMP</source>
         <translation>爬坡控制</translation>
     </message>
     <message>
-        <location filename="../qmethodform.cpp" line="90"/>
+        <location filename="../qmethodform.cpp" line="88"/>
         <source>Extract</source>
         <translation>萃取控制</translation>
     </message>
@@ -1047,8 +1115,8 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../qtankpublic.cpp" line="41"/>
-        <location filename="../qtankpublic.cpp" line="54"/>
+        <location filename="../qtankpublic.cpp" line="42"/>
+        <location filename="../qtankpublic.cpp" line="55"/>
         <source>QSQLITE %1 Error</source>
         <translation>数据库 %1 错误</translation>
     </message>
@@ -1114,12 +1182,12 @@
     <message>
         <location filename="../qprogresswindow.ui" line="40"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../qprogresswindow.ui" line="20"/>
         <source>Progressing</source>
-        <translation type="unfinished"></translation>
+        <translation>正在执行...</translation>
     </message>
 </context>
 <context>
@@ -1167,7 +1235,7 @@
     <message>
         <location filename="../qreportviewdialog.cpp" line="130"/>
         <source>StopReason:%1</source>
-        <translation type="unfinished"></translation>
+        <translation>停止原因：%1</translation>
     </message>
     <message>
         <source>SerialNo:1</source>
@@ -1344,22 +1412,22 @@
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="634"/>
+        <location filename="../qsetform.ui" line="640"/>
         <source>Optical fiber sensing</source>
         <translation>光线传感：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="647"/>
+        <location filename="../qsetform.ui" line="653"/>
         <source>Infrared sensor outer ring</source>
         <translation>红外传感器外圈：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="683"/>
+        <location filename="../qsetform.ui" line="692"/>
         <source>Infrared sensor inner ring</source>
         <translation>红外传感器内圈：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="670"/>
+        <location filename="../qsetform.ui" line="679"/>
         <source>Pressure pickup</source>
         <translation>压力传感器：</translation>
     </message>
@@ -1369,53 +1437,80 @@
         <translation>校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="826"/>
+        <location filename="../qsetform.ui" line="835"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="757"/>
+        <location filename="../qsetform.ui" line="766"/>
         <source>Ip address:</source>
         <translation>IP地址：</translation>
     </message>
     <message>
         <location filename="../qsetform.ui" line="473"/>
         <source>User Manager:</source>
-        <translation type="unfinished"></translation>
+        <translation>用户管理：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="696"/>
+        <location filename="../qsetform.ui" line="705"/>
         <source>Device Check:</source>
-        <translation type="unfinished"></translation>
+        <translation>设备校准：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="908"/>
+        <location filename="../qsetform.ui" line="859"/>
+        <location filename="../qsetform.ui" line="897"/>
+        <source>Upgrade</source>
+        <translation>系统更新</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="871"/>
+        <location filename="../qsetform.cpp" line="385"/>
+        <source>Please insert u disk.</source>
+        <translation>请插入U盘</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="884"/>
+        <source>this is latest version.</source>
+        <translation>这是最新的版本。</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="910"/>
+        <source>Backup</source>
+        <translation>备份</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="936"/>
+        <source>Recovery</source>
+        <translation>还原</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.ui" line="975"/>
         <source>Serial No.:</source>
         <translation>序列号：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="940"/>
-        <location filename="../qsetform.ui" line="979"/>
+        <location filename="../qsetform.ui" line="949"/>
+        <location filename="../qsetform.ui" line="988"/>
         <source>TextLabel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="953"/>
+        <location filename="../qsetform.ui" line="923"/>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>恢复出厂设置</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="966"/>
+        <location filename="../qsetform.ui" line="962"/>
         <source>Ver:</source>
-        <translation type="unfinished"></translation>
+        <translation>版本：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="1014"/>
+        <location filename="../qsetform.ui" line="1093"/>
         <source>Input serial number please!</source>
-        <translation type="unfinished"></translation>
+        <translation>请输入序列号。</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="882"/>
+        <location filename="../qsetform.ui" line="1026"/>
         <source>Debug window</source>
         <translation>调试窗口</translation>
     </message>
@@ -1430,52 +1525,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="816"/>
+        <location filename="../qsetform.ui" line="825"/>
         <source>DNS:</source>
         <translation>解析域名：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="767"/>
+        <location filename="../qsetform.ui" line="776"/>
         <source>Mask:</source>
         <translation>子网掩码：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="790"/>
+        <location filename="../qsetform.ui" line="799"/>
         <source>Gateway:</source>
         <translation>默认网关：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="730"/>
+        <location filename="../qsetform.ui" line="739"/>
         <source>IP configure</source>
         <translation>配置IP：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="723"/>
+        <location filename="../qsetform.ui" line="732"/>
         <source>Select network</source>
         <translation>选取网络</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="747"/>
+        <location filename="../qsetform.ui" line="756"/>
         <source>Use DHCP</source>
         <translation>启用DHCP</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="737"/>
+        <location filename="../qsetform.ui" line="746"/>
         <source>Current:</source>
         <translation>当前网络：</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="850"/>
+        <location filename="../qsetform.ui" line="994"/>
         <source>Factory</source>
-        <translation>出厂设置</translation>
+        <translation>售后服务</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="869"/>
+        <location filename="../qsetform.ui" line="1013"/>
         <source>Calibrate</source>
         <translation>鼠标校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="924"/>
+        <location filename="../qsetform.ui" line="1055"/>
         <source>Backlight</source>
         <translation>背光</translation>
     </message>
@@ -1485,7 +1580,7 @@
         <translation>设备校准</translation>
     </message>
     <message>
-        <location filename="../qsetform.ui" line="705"/>
+        <location filename="../qsetform.ui" line="714"/>
         <source>Network</source>
         <translation>网络设置</translation>
     </message>
@@ -1498,41 +1593,46 @@
         <translation type="obsolete">警告</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="218"/>
-        <location filename="../qsetform.cpp" line="260"/>
+        <location filename="../qsetform.cpp" line="268"/>
+        <location filename="../qsetform.cpp" line="310"/>
         <source>Name couldn&apos;t be empty</source>
         <translation>名字不能为空</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="231"/>
-        <location filename="../qsetform.cpp" line="276"/>
+        <location filename="../qsetform.cpp" line="281"/>
+        <location filename="../qsetform.cpp" line="326"/>
         <source>This user is existed</source>
         <translation>用户已经存在</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="237"/>
+        <location filename="../qsetform.cpp" line="287"/>
         <source>Password confirm is not equal to password</source>
         <translation>确认密码不相同</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="249"/>
+        <location filename="../qsetform.cpp" line="299"/>
         <source>You can&apos;t delete default user</source>
         <translation>不能删除管理员</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="288"/>
+        <location filename="../qsetform.cpp" line="338"/>
         <source>Save success</source>
         <translation>保存成功</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="296"/>
+        <location filename="../qsetform.cpp" line="346"/>
         <source>Current:Wired Lan</source>
         <translation>当前网络：有线</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="301"/>
+        <location filename="../qsetform.cpp" line="351"/>
         <source>Current:%1</source>
         <translation>当前网络：%1</translation>
+    </message>
+    <message>
+        <location filename="../qsetform.cpp" line="383"/>
+        <source>U disk ready!</source>
+        <translation>检测到U盘！</translation>
     </message>
     <message>
         <source>Password error</source>
@@ -1682,6 +1782,19 @@
         <location filename="../qtankwindow.ui" line="20"/>
         <source>StackedWidget</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QUpgradeThread</name>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="89"/>
+        <source>Progressing...</source>
+        <translation>过程中...</translation>
+    </message>
+    <message>
+        <location filename="../hnupgradewidget.cpp" line="98"/>
+        <source>Success</source>
+        <translation>成功</translation>
     </message>
 </context>
 <context>
@@ -1870,7 +1983,7 @@
     <message>
         <location filename="../qwifipassform.ui" line="70"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -1891,7 +2004,7 @@
     <message>
         <location filename="../qwifiwidget.cpp" line="51"/>
         <source>Password error</source>
-        <translation type="unfinished">密码错误</translation>
+        <translation>密码错误</translation>
     </message>
 </context>
 <context>

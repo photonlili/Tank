@@ -16,10 +16,10 @@ public:
     explicit QCloudLocalTreeWidget(QWidget *parent = 0);
     ~QCloudLocalTreeWidget();
 
+    QString currentUploadingFile();
 public slots:
 private slots:
     void currentRowChanged();
-    void uploadSuccess();
     void printFile();
     void uploadFile();
 

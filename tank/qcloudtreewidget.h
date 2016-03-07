@@ -16,11 +16,13 @@ public:
     explicit QCloudTreeWidget(QWidget *parent = 0);
     ~QCloudTreeWidget();
 
+    QString currentDownloadingFile();
+    QString currentDownloadingFilelocalName();
+
 private slots:
     void currentRowChanged();
     void downFile();
     void delFile();
-    void downSuccess();
 
 private:
     Ui::QCloudTreeWidget *ui;

@@ -49,60 +49,92 @@ void QCloudForm::slotOpenProgress()
 {
     connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));
-    connect(m_cli, SIGNAL(signalUploadSucc()),
-            this, SLOT(slotOpenOK()));
+
     connect(m_cli, SIGNAL(signalUploadSucc(QString)),
-            m_prog, SLOT(cancel()));
-    connect(m_prog, SIGNAL(canceled()),
+            m_prog, SLOT(accept()));
+    connect(m_prog, SIGNAL(rejected()),
             m_cli, SLOT(sendCancelUpload()));
-    connect(m_prog, SIGNAL(canceled()),
+
+    connect(m_prog, SIGNAL(accepted()),
             this, SLOT(slotOpenOK()));
+    connect(m_prog, SIGNAL(rejected()),
+            this, SLOT(slotOpenOK()));
+
     m_prog->initAll();
     m_prog->show();
-}
-
-void QCloudForm::slotOpenDownProgress()
-{
-    connect(m_cli, SIGNAL(signalUpdateProgress(int)),
-            m_progDown, SLOT(setValue(int)));
-    connect(m_cli, SIGNAL(signalDownSucc()),
-            m_progDown, SLOT(cancel()));
-    connect(m_cli, SIGNAL(signalDownSucc()),
-            this, SLOT(slotOpenDownOK()));
-    connect(m_progDown, SIGNAL(canceled()),
-            m_cli, SLOT(sendCancelDown()));
-    connect(m_progDown, SIGNAL(canceled()),
-            this, SLOT(slotOpenDownOK()));
-    m_progDown->initAll();
-    m_progDown->show();
 }
 
 void QCloudForm::slotOpenOK()
 {
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));
-    disconnect(m_cli, SIGNAL(signalUploadSucc()),
-            this, SLOT(slotOpenOK()));
+
     disconnect(m_cli, SIGNAL(signalUploadSucc(QString)),
-            m_prog, SLOT(cancel()));
-    disconnect(m_prog, SIGNAL(canceled()),
+            m_prog, SLOT(accept()));
+    disconnect(m_prog, SIGNAL(rejected()),
             m_cli, SLOT(sendCancelUpload()));
-    disconnect(m_prog, SIGNAL(canceled()),
+
+    disconnect(m_prog, SIGNAL(accepted()),
             this, SLOT(slotOpenOK()));
+    disconnect(m_prog, SIGNAL(rejected()),
+            this, SLOT(slotOpenOK()));
+
+    QString localfile = ui->treeLocal->currentUploadingFile();
+    pline() << "remove " << localfile;
+    QFile::remove(localfile);
+
+    if(QDialog::Accepted == m_prog->result() )
+        HNMsgBox::warning(this, "Upload Success");
+    else
+        HNMsgBox::warning(this, "Upload Canceled");
 }
+
+void QCloudForm::slotOpenDownProgress()
+{
+    connect(m_cli, SIGNAL(signalUpdateProgress(int)),
+            m_progDown, SLOT(setValue(int)));
+
+    connect(m_cli, SIGNAL(signalUploadSucc(QString)),
+            m_progDown, SLOT(accept()));
+    connect(m_progDown, SIGNAL(rejected()),
+            m_cli, SLOT(sendCancelUpload()));
+
+    connect(m_progDown, SIGNAL(accepted()),
+            this, SLOT(slotOpenOK()));
+    connect(m_progDown, SIGNAL(rejected()),
+            this, SLOT(slotOpenOK()));
+
+    m_progDown->initAll();
+    m_progDown->show();
+}
+
 
 void QCloudForm::slotOpenDownOK()
 {
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
-    disconnect(m_cli, SIGNAL(signalDownSucc()),
-            m_progDown, SLOT(cancel()));
-    disconnect(m_cli, SIGNAL(signalDownSucc()),
-            this, SLOT(slotOpenDownOK()));
-    disconnect(m_progDown, SIGNAL(canceled()),
-            m_cli, SLOT(sendCancelDown()));
-    disconnect(m_progDown, SIGNAL(canceled()),
-            this, SLOT(slotOpenDownOK()));
+
+    disconnect(m_cli, SIGNAL(signalUploadSucc(QString)),
+            m_progDown, SLOT(accept()));
+    disconnect(m_progDown, SIGNAL(rejected()),
+            m_cli, SLOT(sendCancelUpload()));
+
+    disconnect(m_progDown, SIGNAL(accepted()),
+            this, SLOT(slotOpenOK()));
+    disconnect(m_progDown, SIGNAL(rejected()),
+            this, SLOT(slotOpenOK()));
+
+    QString downedFile = ui->treeCloud->currentDownloadingFile();
+    QString localname = ui->treeCloud->currentDownloadingFilelocalName();
+
+    pline() << downedFile << localname;
+
+    system(QString("mv %1 %2").arg(downedFile).arg(localname).toAscii().data());
+
+    if(QDialog::Accepted == m_progDown->result() )
+        HNMsgBox::warning(this, "Download Success");
+    else
+        HNMsgBox::warning(this, "Download Canceled");
 }
 
 void QCloudForm::slotDelProgress()
@@ -116,7 +148,7 @@ void QCloudForm::slotDelProgress()
 void QCloudForm::slotDelOK()
 {
     m_progDel->setValue(100);
-    m_progDel->cancel();
+    m_progDel->accept();
     disconnect(m_cli, SIGNAL(signalListFileOK()),
                this, SLOT(slotDelOK()));
 }

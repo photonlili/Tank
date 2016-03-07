@@ -128,9 +128,9 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
     connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetDownload, SLOT(setValue(int)));
     connect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
 
-    connect(this, SIGNAL(sigBackup()), this, SLOT(backup()), Qt::QueuedConnection);
+    //connect(this, SIGNAL(sigBackup()), this, SLOT(backup()), Qt::QueuedConnection);
     connect(this, SIGNAL(sigDownload()), this, SLOT(download()), Qt::QueuedConnection);
-    connect(this, SIGNAL(sigRestore()), this, SLOT(restore()), Qt::QueuedConnection);
+    //connect(this, SIGNAL(sigRestore()), this, SLOT(restore()), Qt::QueuedConnection);
 
     timer = new QTimer(this);
     timer->setSingleShot(false);

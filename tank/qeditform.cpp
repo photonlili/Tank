@@ -34,6 +34,7 @@ QEditForm::QEditForm(QWidget *parent) :
     connect(ui->pushButton_method_add, SIGNAL(clicked()), this, SLOT(newM()));
     connect(ui->pushButton_method_del, SIGNAL(clicked()), this, SLOT(delM()));
     connect(ui->pushButton_method_save, SIGNAL(clicked()), this, SLOT(saveM()));
+    connect(libForm, SIGNAL(libSelectedDisplayed(QString)), ui->label_method_libname, SLOT(setText(QString)));
     connect(libForm, SIGNAL(libSelected(QString)), this, SLOT(libGetted(QString)));
 }
 
@@ -70,8 +71,6 @@ void QEditForm::libGetted(QString name)
     ui->tableView_method->initdb(name);
     tbvStage->initdb(name);
 
-    ui->label_method_libname->setText(name);
-
     ui->tableView_method->refresh();
     ui->tableView_method->selectMethod();
 }
@@ -85,6 +84,44 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
     tbvStage->setMethodId(ui->tableView_method->currentMethodId());
     tbvStage->refresh(ui->tableView_method->currentMethodId());
     tbvStage->selectStage();
+
+    if(Type_Extract == ui->tableView_method->currentMethodType())
+    {
+        ui->lb_timerampBuddy->setHidden(true);
+        ui->le_timeramp->setHidden(true);
+        ui->lb_pressBuddy->setHidden(true);
+        ui->le_press->setHidden(true);
+        ui->lb_temptureBuddy->setHidden(false);
+        ui->le_tempture->setHidden(false);
+    }
+    else if(Type_Standard == ui->tableView_method->currentMethodType())
+    {
+        ui->lb_timerampBuddy->setHidden(true);
+        ui->le_timeramp->setHidden(true);
+        ui->lb_pressBuddy->setHidden(true);
+        ui->le_press->setHidden(true);
+        ui->lb_temptureBuddy->setHidden(false);
+        ui->le_tempture->setHidden(false);
+    }
+    else if(Type_Stressure == ui->tableView_method->currentMethodType())
+    {
+        ui->lb_timerampBuddy->setHidden(true);
+        ui->le_timeramp->setHidden(true);
+        ui->lb_pressBuddy->setHidden(false);
+        ui->le_press->setHidden(false);
+        ui->lb_temptureBuddy->setHidden(true);
+        ui->le_tempture->setHidden(true);
+    }
+    else if(Type_Temprature == ui->tableView_method->currentMethodType())
+    {
+        ui->lb_timerampBuddy->setHidden(false);
+        ui->le_timeramp->setHidden(false);
+        ui->lb_pressBuddy->setHidden(false);
+        ui->le_press->setHidden(false);
+        ui->lb_temptureBuddy->setHidden(false);
+        ui->le_tempture->setHidden(false);
+    }
+
 
     ui->spin_stage->setRange(1, tbvStage->countStage());
     ui->spin_stage->setValue(1);

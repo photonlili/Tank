@@ -52,12 +52,6 @@ void QBackupThread::run()
     QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
     QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Qt::QueuedConnection, Q_ARG(QString, tr("Backup success")));
 #endif
-    //语言？
-    //开机是否允许登陆？
-    //默认登陆用户
-    //网络设置
-    //主题
-    //头像
 }
 
 
@@ -414,7 +408,9 @@ bool QSetForm::eventFilter(QObject * obj, QEvent * e)
     if(ui->tabWidget_set->tabBar() == obj && e->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent* me = (QMouseEvent*)e;
-        if(m_facPass->isHidden() && ui->tabWidget_set->currentIndex() != 4 && ui->tabWidget_set->tabBar()->tabRect(4).contains(me->pos()))
+        if(m_facPass->isHidden() &&
+                ui->tabWidget_set->currentIndex() != 5 &&
+                ui->tabWidget_set->tabBar()->tabRect(5).contains(me->pos()))
         {
             m_facPass->initAll();
             moveCenter(m_facPass);
@@ -468,4 +464,16 @@ void QSetForm::on_chk_dhcp_stateChanged(int bChecked)
     ui->lineEdit_mask->setDisabled(bChecked);
     ui->lineEdit_gateway->setDisabled(bChecked);
     ui->lineEdit_dns->setDisabled(bChecked);
+}
+
+void QSetForm::on_btnRestore_clicked()
+{
+    //恢复出厂设置
+
+    //语言？
+    //开机是否允许登陆？
+    //默认登陆用户
+    //网络设置
+    //主题
+    //头像
 }

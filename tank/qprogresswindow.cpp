@@ -10,8 +10,6 @@ QProgressWindow::QProgressWindow(QWidget *parent) :
     bar = ui->widgetBar;
     connect(ui->btnCancel, SIGNAL(clicked()),
             this, SLOT(reject()));
-    connect(ui->btnCancel, SIGNAL(clicked()),
-            this, SIGNAL(canceled()));
 }
 
 QProgressWindow::~QProgressWindow()
@@ -28,10 +26,5 @@ void QProgressWindow::initAll()
 void QProgressWindow::setValue(int value)
 {
     bar->setValue(value);
-}
-
-void QProgressWindow::cancel()
-{
-    reject();
 }
 

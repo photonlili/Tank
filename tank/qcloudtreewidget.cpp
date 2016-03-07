@@ -31,6 +31,16 @@ QCloudTreeWidget::~QCloudTreeWidget()
     delete ui;
 }
 
+QString QCloudTreeWidget::currentDownloadingFile()
+{
+    return m_tmpfile;
+}
+
+QString QCloudTreeWidget::currentDownloadingFilelocalName()
+{
+    return m_localfile;
+}
+
 void QCloudTreeWidget::downFile()
 {
     QModelIndex curIndex = currentIndex();
@@ -43,8 +53,7 @@ void QCloudTreeWidget::downFile()
     QString localname = filename.split("_").at(1);
     m_localfile = QString("%1/%2").arg(path).arg(localname);
     m_tmpfile = QString("%1/%2").arg(path).arg(filename);
-    connect(model, SIGNAL(sigDownSuccess()), this, SLOT(downSuccess()));
-    model->downFile(path, fileid, localname);
+    model->downFile(path, fileid, m_tmpfile);
 }
 
 void QCloudTreeWidget::delFile()
@@ -57,15 +66,6 @@ void QCloudTreeWidget::delFile()
     QString fileid = model->index(curIndex.row(), FILE_ID, parIndex).data().toString();
     pline() << code << fileid;
     model->delFile(code, fileid);
-}
-
-void QCloudTreeWidget::downSuccess()
-{
-    pline() << m_tmpfile << m_localfile;
-    QFile::rename(m_tmpfile, m_localfile);
-    system(QString("mv %1 %2").arg(m_tmpfile).arg(m_localfile).toAscii().data());
-    disconnect(model, SIGNAL(sigDownSuccess()), this, SLOT(downSuccess()));
-    HNMsgBox::warning(this, "DownLoad Success");
 }
 
 void QCloudTreeWidget::currentRowChanged()

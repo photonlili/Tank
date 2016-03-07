@@ -20,6 +20,7 @@ public:
 
 signals:
     void libSelected(QString name);
+    void libSelectedDisplayed(QString name);
 
 private slots:
     void on_btn_lib_select_clicked();

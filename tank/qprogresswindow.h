@@ -19,10 +19,7 @@ public:
     void initAll();
 public slots:
     void setValue(int value);
-    void cancel();
 
-signals:
-    void canceled();
 private:
     Ui::QProgressWindow *ui;
     HNProgressBar* bar;

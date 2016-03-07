@@ -54,6 +54,8 @@ private slots:
 
     void on_chk_dhcp_stateChanged(int arg1);
 
+    void on_btnRestore_clicked();
+
 private:
     Ui::QSetForm *ui;
     QFactorySetPassForm* m_facPass;

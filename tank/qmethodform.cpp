@@ -20,12 +20,12 @@ QMethodForm::QMethodForm(QWidget *parent) :
     ui->btn_down->iconTable()[BTN_PRESS] = "://theme/basic/bt_down_press.png";
     ui->btn_sure->iconTable()[BTN_NORMAL] = "://theme/basic/bt_sure.png";
     ui->btn_sure->iconTable()[BTN_PRESS] = "://theme/basic/bt_sure_press.png";
-    ui->btnClose->iconTable()[BTN_NORMAL] = "://theme/basic/bt_close.png";
-    ui->btnClose->iconTable()[BTN_PRESS] = "://theme/basic/bt_close_press.png";
 
     ui->btn_up->setFixedSize(80, 30);
     ui->btn_down->setFixedSize(80, 30);
     ui->btn_sure->setFixedSize(80, 30);
+    ui->btnClose->iconTable()[BTN_NORMAL] = "://theme/basic/bt_close.png";
+    ui->btnClose->iconTable()[BTN_PRESS] = "://theme/basic/bt_close_press.png";
     ui->btnClose->setFixedSize(27, 27);
 }
 
@@ -58,8 +58,6 @@ int QMethodForm::currentMethodType()
 void QMethodForm::libChanged()
 {
     QString curDB = ui->tbv_lib->currentdb();
-
-    emit tellLibrary(curDB);
 
     ui->tbv_method->initdb(curDB, false);
     //ui->wid_stage->initdb(curDB);
@@ -109,6 +107,11 @@ void QMethodForm::on_btn_sure_clicked()
 {
     QString curDB = ui->tbv_lib->currentdb();
     int mid = ui->tbv_method->currentMethodId();
+    QString curDBDisplayed = ui->tbv_lib->currentDBDisplayed();
+
+    pline() << curDB << curDBDisplayed << mid;
+    emit tellLibrary(curDB);
+    emit tellLibraryDisplayed(curDBDisplayed);
     emit selMethod(curDB, mid);
     accept();
 }

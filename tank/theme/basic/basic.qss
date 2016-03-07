@@ -227,13 +227,13 @@ QTreeView::branch:open:has-children:has-siblings  {
 }
 
 
-QCheckBox{
+QCheckBox, QRadioButton{
     spacing:5px;
 }
 
-QCheckBox::indicator {
-    width:20px;
-    height:20px;
+QCheckBox::indicator, QRadioButton::indicator {
+    width:36px;
+    height:36px;
 }
 
 QCheckBox::indicator:unchecked{
@@ -266,16 +266,6 @@ QCheckBox::indicator:indeterminate:hover {
 
 QCheckBox::indicator:indeterminate:pressed {
     image: url();
-}
-
-
-QCheckBox, QRadioButton{
-    spacing:5px;
-}
-
-QCheckBox::indicator, QRadioButton::indicator {
-    width:20px;
-    height:20px;
 }
 
 QRadioButton::indicator:unchecked{
