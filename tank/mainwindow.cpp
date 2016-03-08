@@ -39,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(HNEthManager::Instance(), SIGNAL(sigDisConnected()), this, SLOT(wifiDisConnected()));
     connect(HNEthManager::Instance(), SIGNAL(sigConnecting()), this, SLOT(wifiConnecting()));
     connect(HNEthManager::Instance(), SIGNAL(sigConnected()), this, SLOT(wifiConnected()));
-    connect(HNEthManager::Instance(), SIGNAL(sigDisConnected()), this, SLOT(wifiDisConnected()));
 
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), this, SLOT(timerSetTime()) );

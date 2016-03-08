@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QDesktopWidget>
 #include <QSqlTableModel>
-#include "qwifimanager.h"
+#include "HNEthManager.h"
 
 namespace Ui {
 class MainWindow;

@@ -1,5 +1,5 @@
-#ifndef QWIFIMANAGER_H
-#define QWIFIMANAGER_H
+#ifndef HNETHMANAGER_H
+#define HNETHMANAGER_H
 
 #include <QObject>
 #include <QTimer>
@@ -109,4 +109,4 @@ private:
     QString m_status;
 };
 
-#endif // QWIFIMANAGER_H
+#endif // HNETHMANAGER_H

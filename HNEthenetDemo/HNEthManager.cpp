@@ -1,4 +1,4 @@
-#include "qwifimanager.h"
+#include "HNEthManager.h"
 #include "qtanklinux.h"
 #include "qtankpublic.h"
 

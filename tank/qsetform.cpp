@@ -14,7 +14,7 @@
 #include "qtankdefine.h"
 #include "qmsgbox.h"
 #include "qwifipassform.h"
-#include "qwifimanager.h"
+#include "HNEthManager.h"
 #include "qtanklinux.h"
 #include "qnewuser.h"
 #include "hnmsgbox.h"

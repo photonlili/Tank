@@ -112,7 +112,6 @@ SOURCES += main.cpp\
     qcloudmodel.cpp \
     qcloudtreeview.cpp \
     qcloudtreewidget.cpp \
-    qwifimanager.cpp \
     qmethodform.cpp \
     qstageplot.cpp \
     qlibraryform.cpp \
@@ -145,7 +144,8 @@ SOURCES += main.cpp\
     qprogresswindow.cpp \
     qtankcrosscenter.cpp \
     hnprogressbar.cpp \
-    hnupgradewidget.cpp
+    hnupgradewidget.cpp \
+    HNEthManager.cpp
 
 HEADERS  += mainwindow.h \
     frminput.h \
@@ -220,7 +220,6 @@ HEADERS  += mainwindow.h \
     qcloudmodel.h \
     qcloudtreeview.h \
     qcloudtreewidget.h \
-    qwifimanager.h \
     qmethodform.h \
     qstageplot.h \
     qlibraryform.h \
@@ -253,7 +252,8 @@ HEADERS  += mainwindow.h \
     qtankcrosscenter.h \
     hnprogressbar.h \
     hnupgradewidget.h \
-    qversion.h
+    qversion.h \
+    HNEthManager.h
 
 FORMS    += mainwindow.ui \
     frminput.ui \
