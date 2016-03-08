@@ -25,6 +25,7 @@ signals:
     void sigUpgrade();
 
 public slots:
+    void slotLockPage(bool block) {bLocked = block;}
     void slotSerialLocked();
     void slotSerialUnlocked();
     void initFont(){};
@@ -41,6 +42,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QTimer * timer;
+    bool bLocked;
+
+    // QObject interface
+public:
+    bool eventFilter(QObject *, QEvent *);
 };
 
 #endif // MAINWINDOW_H

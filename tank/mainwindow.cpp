@@ -15,6 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    bLocked = false;
+
+    connect(ui->tab_dispel, SIGNAL(signalLockPage(bool)), this, SLOT(slotLockPage(bool)));
+
+    ui->tabWidget->cTabBar()->installEventFilter(this);
     ui->label_appname->setForegroundRole(QPalette::BrightText);
     ui->label_time->setText(QDateTime::currentDateTime().toString("yyyy/MM/dd hh:mm"));
     ui->label_time->setForegroundRole(QPalette::BrightText);
@@ -139,4 +144,13 @@ void MainWindow::timerSetTime()
     QDateTime dt = QDateTime::currentDateTime();
     //pline() << dt.currentDateTime().toString("yyyy/MM/dd hh:mm:ss");
     ui->label_time->setText(dt.toString("yyyy/MM/dd hh:mm:ss"));
+}
+
+
+bool MainWindow::eventFilter(QObject *o, QEvent *e)
+{
+    if(ui->tabWidget->cTabBar() == o && e->type() == QEvent::MouseButtonPress)
+        if(bLocked)
+            return true;
+    return QObject::eventFilter(o, e);
 }

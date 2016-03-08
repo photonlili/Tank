@@ -39,7 +39,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QTabWidget" name="tabWidget_dispel">
+    <widget class="HNTabWidget" name="tabWidget_dispel">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -1025,6 +1025,12 @@
    <class>QRunPlot</class>
    <extends>QWidget</extends>
    <header>qrunplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>hntabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

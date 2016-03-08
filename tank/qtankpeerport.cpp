@@ -242,7 +242,7 @@ void QTankPeerPort::readyReadData()
     m_blockOnNet += readAll();
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
-    //TODO:假设具备判断已经接受完全的装备
+    //TODO:已经具备判断已经接受完全的装备
     do{
         quint16 nBlockLen = QTankPeerMessage::parseBlockSize(m_blockOnNet);
 

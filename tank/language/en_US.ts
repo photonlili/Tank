@@ -486,7 +486,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="546"/>
+        <location filename="../qdispelform.cpp" line="125"/>
+        <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.cpp" line="127"/>
+        <source>Extract Lib</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.cpp" line="554"/>
         <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -691,11 +701,6 @@
     <message>
         <location filename="../qlibraryform.ui" line="44"/>
         <source>Library:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qlibraryform.ui" line="74"/>
-        <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -42,6 +42,7 @@ public:
 
 signals:
     void signalUpdateLabReport();
+    void signalLockPage(bool block);
 
 public slots:
     void showDebugWindow(int);
@@ -123,6 +124,10 @@ private:
 
     quint16 m_curRamp;
     quint16 m_curRamp2;
+
+    // QObject interface
+public:
+    bool eventFilter(QObject *, QEvent *);
 };
 
 #endif // QDISPELFORM_H

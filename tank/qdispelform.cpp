@@ -13,6 +13,8 @@ QDispelForm::QDispelForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->tabWidget_dispel->tabBar()->installEventFilter(this);
+
     ui->btn_open->setFixedSize(80, 30);
     ui->btn_open_2->setFixedSize(80, 30);
     ui->btn_play->setFixedSize(80, 30);
@@ -122,7 +124,7 @@ void QDispelForm::initAll()
     methodForm2->initAll("Library = 'Extract'");
     ui->lb_libname->setText(tr("System"));
     prepareRunning(DB_HANON, 1);
-    ui->lb_libname_2->setText(tr("Extract"));
+    ui->lb_libname_2->setText(tr("Extract Lib"));
     prepareExtractRunning(DB_EXTRACT, 1);
 }
 
@@ -184,7 +186,7 @@ void QDispelForm::timeNewData()
         }
         ui->page_plot->replot();
         m_lastPointKey = currentPointKey;
-        ui->tbv_stage->setRamp(m_lastPointKey-m_initPointKey-m_pauseTime-preRamp);
+        ui->tbv_stage->setRamp(ramp-(m_lastPointKey-m_initPointKey-m_pauseTime));
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -247,7 +249,7 @@ void QDispelForm::timeNewData2()
         }
         ui->page_plot_2->replot();
         m_lastPointKey2 = currentPointKey;
-        ui->tbv_stage_2->setRamp(m_lastPointKey2-m_initPointKey2-m_pauseTime2-preRamp);
+        ui->tbv_stage_2->setRamp(ramp-(m_lastPointKey2-m_initPointKey2-m_pauseTime2));
     }
     //pline() << ui->tbv_stage->rect();
 }
@@ -303,6 +305,8 @@ void QDispelForm::on_btn_play_clicked()
     }
     else if(bRunning == eStop)
     {
+        emit signalLockPage(true);
+
         m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
         m_lastPointKey = m_initPointKey;
         bRunning = ePlay;
@@ -421,6 +425,7 @@ void QDispelForm::saveLabReport()
 
 void QDispelForm::on_btn_stop_clicked()
 {
+    emit signalLockPage(false);
     bRunning = eStop;
     if(timer->isActive())
     {
@@ -461,6 +466,8 @@ void QDispelForm::on_btn_play_2_clicked()
     }
     else if(bRunning == eStop)
     {
+        emit signalLockPage(true);
+
         m_initPointKey2 = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
         m_lastPointKey2 = m_initPointKey2;
 
@@ -533,6 +540,7 @@ void QDispelForm::pauseHeatingExtract()
 
 void QDispelForm::on_btn_stop_2_clicked()
 {
+    emit signalLockPage(false);
     ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
     ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
     ui->btn_play_2->update();
@@ -590,4 +598,13 @@ void QDispelForm::slotException(int e)
     pline() << e;
     excp->newExcp("GFFFF");
     //excp->exec();
+}
+
+
+bool QDispelForm::eventFilter(QObject *o, QEvent *e)
+{
+    if(ui->tabWidget_dispel->tabBar() == o && e->type() == QEvent::MouseButtonPress)
+        if(bRunning != eStop)
+            return true;
+    return QObject::eventFilter(o, e);
 }
