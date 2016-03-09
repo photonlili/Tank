@@ -35,16 +35,16 @@ target.path += /DWINFile
 
 INSTALLS += target
 
+TRANSLATIONS = language/zh_CN.ts \
+    language/en_US.ts
+
+CODECFORTR = UTF-8
+
 RESOURCES += \
     theme.qrc
 
 RC_FILE += \
     resource.rc
-
-TRANSLATIONS = language/zh_CN.ts \
-    language/en_US.ts
-
-CODECFORTR = UTF-8
 
 SOURCES += main.cpp\
         mainwindow.cpp \
