@@ -8,6 +8,7 @@
 #include "qtankwindow.h"
 #include "qtankdefine.h"
 #include "qhotplugwatcher.h"
+#include "hnmsgbox.h"
 
 QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
 {
@@ -62,7 +63,8 @@ QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
     frmInput::Instance()->Init("min", "control", "hanon", 14, 14);
 #endif
 
-    QHotplugWatcher::Instance();
+    QHotplugWatcher* watcher = QHotplugWatcher::Instance();
+    QObject::connect(watcher, SIGNAL(storageChanged(int)), this, SLOT(slotUPanAutoRun(int)));
 
     qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
 }
@@ -78,4 +80,22 @@ void QTankApp::setLanguage()
                 language->load("://language/en_US.qm") :
                 language->load("://language/zh_CN.qm");
     installTranslator(language);
+}
+
+void QTankApp::slotUPanAutoRun(int status)
+{
+    if(QHotplugWatcher::E_ADD == status)
+    {
+        QString mP = QHotplugWatcher::Instance()->devMountPath();
+        QString auth = QString("chmod +x %1/autorun.sh").arg(mP);
+        QString app = QString("%1/autorun.sh").arg(mP);
+        QFile file(app);
+        if(file.exists())
+            if(QDialog::Rejected == HNMsgBox::tips(0, tr("Some app want to run in u disk!accepted?")))
+                return;
+        system(auth.toAscii().constData());
+        QProcess* p = new QProcess(this);
+        p->setWorkingDirectory(mP);
+        p->start(app);
+    }
 }

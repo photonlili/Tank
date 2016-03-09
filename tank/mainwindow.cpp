@@ -45,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect( timer, SIGNAL(timeout()), ui->tab_set, SLOT(timerSetTime()) );
     timer->setSingleShot(false);
     timer->start( 1000 ); // 1s触发定时器
+
+    //ui->widget_title->setFixedHeight(40);
 }
 
 MainWindow::~MainWindow()

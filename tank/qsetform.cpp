@@ -41,16 +41,16 @@ void QBackupThread::run()
     QDir d(QHotplugWatcher::Instance()->devMountPath());
     if(!d.exists())
     {
-        QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Qt::QueuedConnection, Q_ARG(QString, tr("Please Check U Disk!")));
+        QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Q_ARG(QString, tr("Please Check U Disk!")));
         return;
     }
 #ifdef __MIPS_LINUX__
-    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 16));
+    QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 16));
     system("rm -f /mnt/usb_sda1/backup.tar.gz");
-    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 36));
+    QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 36));
     system("tar czvf /mnt/usb_sda1/backup.tar.gz /DWINFile/tank");
-    QMetaObject::invokeMethod(m_prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
-    QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Qt::QueuedConnection, Q_ARG(QString, tr("Backup success")));
+    QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 100));
+    QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Q_ARG(QString, tr("Backup success")));
 #endif
 }
 

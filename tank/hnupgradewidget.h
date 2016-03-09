@@ -4,6 +4,25 @@
 #include <QWidget>
 #include "qtankclient.h"
 
+class QBackupLocalThread : public QThread
+{
+public:
+    explicit QBackupLocalThread(QObject *parent = 0) : QThread(parent){}
+
+    // QThread interface
+protected:
+    void run();
+};
+
+class QUpgradeThread : public QThread
+{
+public:
+    explicit QUpgradeThread(QObject *parent = 0) : QThread(parent){}
+    // QThread interface
+protected:
+    void run();
+};
+
 namespace Ui {
 class HNUpgradeWidget;
 }
@@ -18,22 +37,19 @@ public:
 
     void initAll();
 
-signals:
-    void sigBackup();
-    void sigDownload();
-    void sigRestore();
-
 private slots:
-    void backup();
+    void setText(QString text);
+    void setValue(int value);
     void download();
     void downOK();
-    void restore();
     void restart();
 
 private:
     Ui::HNUpgradeWidget *ui;
     QTankClient* m_cli;
     QTimer* timer;
+    QBackupLocalThread* m_backupT;
+    QUpgradeThread* m_upgradeT;
 };
 
 #endif // HNUPGRADEWIDGET_H

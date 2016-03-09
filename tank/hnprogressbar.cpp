@@ -35,7 +35,8 @@ void HNProgressBar::setValue(int value)
 {
     m_value = value;
     int w = width() * value / (m_max-m_min);
-    ui->lbTrunk->setFixedWidth(w);
+    int h = height();
+    ui->lbTrunk->setFixedSize(w, h);
     ui->lbTrunk->update();
 }
 

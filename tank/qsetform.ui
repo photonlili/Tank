@@ -858,24 +858,11 @@
       <attribute name="title">
        <string>Upgrade</string>
       </attribute>
-      <widget class="QLabel" name="lbBackup">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>30</y>
-         <width>241</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Please insert u disk.</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="lbCheckVer">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>190</y>
+         <x>250</x>
+         <y>70</y>
          <width>201</width>
          <height>17</height>
         </rect>
@@ -887,73 +874,21 @@
       <widget class="QCPushButton" name="btnUpgrade">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>240</y>
-         <width>151</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Upgrade</string>
-       </property>
-      </widget>
-      <widget class="QCPushButton" name="btnBackup">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>151</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Backup</string>
-       </property>
-      </widget>
-      <widget class="QCPushButton" name="btnRestore">
-       <property name="geometry">
-        <rect>
-         <x>410</x>
-         <y>70</y>
-         <width>141</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Restore</string>
-       </property>
-      </widget>
-      <widget class="QCPushButton" name="pushButton_3">
-       <property name="geometry">
-        <rect>
          <x>250</x>
-         <y>70</y>
-         <width>131</width>
+         <y>120</y>
+         <width>151</width>
          <height>27</height>
         </rect>
        </property>
        <property name="text">
-        <string>Recovery</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="lb_serial_2">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>330</y>
-         <width>161</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
+        <string>Check</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_13">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>330</y>
+         <x>50</x>
+         <y>70</y>
          <width>31</width>
          <height>17</height>
         </rect>
@@ -962,11 +897,24 @@
         <string>Ver:</string>
        </property>
       </widget>
+      <widget class="QLabel" name="lbVer">
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>70</y>
+         <width>67</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
       <widget class="QLabel" name="label_18">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>330</y>
+         <x>50</x>
+         <y>30</y>
          <width>67</width>
          <height>17</height>
         </rect>
@@ -975,17 +923,61 @@
         <string>Serial No.:</string>
        </property>
       </widget>
-      <widget class="QLabel" name="lbVer">
+      <widget class="QLabel" name="lb_serial_2">
        <property name="geometry">
         <rect>
-         <x>390</x>
-         <y>330</y>
-         <width>67</width>
+         <x>130</x>
+         <y>30</y>
+         <width>161</width>
          <height>17</height>
         </rect>
        </property>
        <property name="text">
         <string>TextLabel</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>Recovery</string>
+      </attribute>
+      <widget class="QLabel" name="lbBackup">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>250</y>
+         <width>241</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Please insert u disk.</string>
+       </property>
+      </widget>
+      <widget class="QCPushButton" name="btnBackup">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>290</y>
+         <width>151</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Backup</string>
+       </property>
+      </widget>
+      <widget class="QCPushButton" name="pushButton_3">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>290</y>
+         <width>131</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Recovery</string>
        </property>
       </widget>
      </widget>
@@ -1056,6 +1048,19 @@
            </property>
            <property name="textInteractionFlags">
             <set>Qt::LinksAccessibleByMouse</set>
+           </property>
+          </widget>
+          <widget class="QCPushButton" name="btnRestore">
+           <property name="geometry">
+            <rect>
+             <x>240</x>
+             <y>60</y>
+             <width>141</width>
+             <height>27</height>
+            </rect>
+           </property>
+           <property name="text">
+            <string>Restore</string>
            </property>
           </widget>
          </widget>
@@ -1140,6 +1145,12 @@
    <header>qcpushbutton.h</header>
   </customwidget>
   <customwidget>
+   <class>HNTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>hntabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>QUserSetWidget</class>
    <extends>QTableView</extends>
    <header>qusersetwidget.h</header>
@@ -1148,12 +1159,6 @@
    <class>QWIFIWidget</class>
    <extends>QTableView</extends>
    <header>qwifiwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>HNTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>hntabwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

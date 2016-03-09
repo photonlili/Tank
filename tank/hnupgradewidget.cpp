@@ -6,97 +6,35 @@
 #include "qtankdefine.h"
 #include "qtanklinux.h"
 
-class QBackupLocalThread : public QThread
-{
-public:
-    explicit QBackupLocalThread(QObject* parent = 0);
-
-    void setLabel(QLabel* lb)
-    {
-        label = lb;
-    }
-
-    void setProgress(HNProgressBar* wid)
-    {
-        prog = wid;
-    }
-
-    // QThread interface
-protected:
-    void run();
-private:
-    HNProgressBar* prog;
-    QLabel* label;
-};
-
-QBackupLocalThread::QBackupLocalThread(QObject *parent) : QThread(parent)
-{
-
-}
-
 void QBackupLocalThread::run()
 {
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
-    QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 12));
-    QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 40));
+    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Backuping...")));
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 12));
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
     system("tar czvf ./tmp/backup.tar.gz /DWINFile/tank");
 #else
     system("tar czvf ./tmp/backup.tar.gz tank");
 #endif
-    QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Success")));
-}
-
-
-class QUpgradeThread : public QThread
-{
-public:
-    explicit QUpgradeThread(QObject* parent = 0);
-
-    void setLabel(QLabel* lb)
-    {
-        label = lb;
-    }
-
-    void setProgress(HNProgressBar* wid)
-    {
-        prog = wid;
-    }
-
-    void setTimer(QTimer* t)
-    {
-        timer = t;
-    }
-
-    // QThread interface
-protected:
-    void run();
-private:
-    HNProgressBar* prog;
-    QLabel* label;
-    QTimer* timer;
-};
-
-
-QUpgradeThread::QUpgradeThread(QObject *parent)
-{
-
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 100));
+    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Success")));
+    QMetaObject::invokeMethod(parent(), "download");
 }
 
 void QUpgradeThread::run()
 {
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Progressing...")));
-    QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 40));
+    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Progressing...")));
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
     system("tar xzvf ./tmp/upgrade.tar.gz -C /");
 #else
-    system("mkdir tmp");
     system("tar xzvf ./tmp/upgrade.tar.gz -C tmp");
 #endif
-    QMetaObject::invokeMethod(prog, "setValue", Qt::QueuedConnection, Q_ARG(int, 100));
-    QMetaObject::invokeMethod(label, "setText", Qt::QueuedConnection, Q_ARG(QString, tr("Success")));
-    QMetaObject::invokeMethod(timer, "start", Qt::QueuedConnection, Q_ARG(int, 1000));
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 60));
+    system("rm -f ./tmp/upgrade.tar.gz ./tmp/backup.tar.gz");
+    QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 100));
+    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Success")));
+    QMetaObject::invokeMethod(parent(), "restart");
 }
 
 HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
@@ -105,52 +43,22 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->lbBack->setFixedWidth(80);
-    ui->lbUpgrade->setFixedWidth(80);
-    ui->lbDown->setFixedWidth(80);
-
     QList<QLabel *> lb = this->findChildren<QLabel *>();
     foreach (QLabel * label, lb) {
         label->setForegroundRole(QPalette::BrightText);
     }
 
-    ui->widgetUpgrade->setFixedWidth(240);
-    ui->widgetUpgrade->setRange(0, 100);
-    ui->widgetUpgrade->setValue(0);
-    ui->widgetDownload->setFixedWidth(240);
-    ui->widgetDownload->setRange(0, 100);
-    ui->widgetDownload->setValue(0);
-    ui->widgetBackup->setFixedWidth(240);
-    ui->widgetBackup->setRange(0, 100);
-    ui->widgetBackup->setValue(0);
-
-    m_cli = HNSingleClient(this);
-    connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetDownload, SLOT(setValue(int)));
-    connect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
-
-    //connect(this, SIGNAL(sigBackup()), this, SLOT(backup()), Qt::QueuedConnection);
-    connect(this, SIGNAL(sigDownload()), this, SLOT(download()), Qt::QueuedConnection);
-    //connect(this, SIGNAL(sigRestore()), this, SLOT(restore()), Qt::QueuedConnection);
-
     timer = new QTimer(this);
-    timer->setSingleShot(false);
+    timer->setSingleShot(true);
     connect(timer, SIGNAL(timeout()), this, SLOT(restart()));
 
-    ui->lbBack->setFixedWidth(100);
-    ui->lbDown->setFixedWidth(100);
-    ui->lbUpgrade->setFixedWidth(100);
+    ui->lbUpgrade->setFixedWidth(300);
+    ui->widgetUpgrade->setFixedSize(240, 20);
+    ui->widgetUpgrade->setRange(0, 100);
+    ui->widgetUpgrade->setValue(0);
 
-    QBackupLocalThread* t = new QBackupLocalThread(this);
-    t->setLabel(ui->lbBack);
-    t->setProgress(ui->widgetBackup);
-    disconnect(this, SIGNAL(sigBackup()), this, SLOT(backup()));
-    connect(this, SIGNAL(sigBackup()), t, SLOT(start()), Qt::QueuedConnection);
-    QUpgradeThread* tt = new QUpgradeThread(this);
-    tt->setLabel(ui->lbUpgrade);
-    tt->setProgress(ui->widgetUpgrade);
-    tt->setTimer(timer);
-    disconnect(this, SIGNAL(sigRestore()), this, SLOT(restore()));
-    connect(this, SIGNAL(sigRestore()), tt, SLOT(start()), Qt::QueuedConnection);
+    m_backupT = new QBackupLocalThread(this);
+    m_upgradeT = new QUpgradeThread(this);
 }
 
 HNUpgradeWidget::~HNUpgradeWidget()
@@ -160,55 +68,38 @@ HNUpgradeWidget::~HNUpgradeWidget()
 
 void HNUpgradeWidget::initAll()
 {
-    ui->lbTip->setText(tr("Please don't close this computer! Upgrading..."));
-    system("rm -fr tmp & mkdir tmp");
-    emit sigBackup();
-    emit sigDownload();
+    system("mkdir tmp & rm -f tmp/upgrade.tar.gz");
+    //检查版本更新信息
+    //检查完毕
+    m_backupT->start();
+}
+
+void HNUpgradeWidget::setText(QString text)
+{
+    ui->lbUpgrade->setText(text);
+}
+
+void HNUpgradeWidget::setValue(int value)
+{
+    ui->widgetUpgrade->setValue(value);
 }
 
 void HNUpgradeWidget::download()
 {
     //开始下载过程
-    ui->lbDown->setText(tr("Progressing..."));
+    ui->lbUpgrade->setText(tr("Downloading..."));
+    m_cli = HNSingleClient(this);
+    connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
+    connect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
     m_cli->sendDownDevFiles("./tmp", "356", "upgrade.tar.gz");
 }
 
 void HNUpgradeWidget::downOK()
 {
-    disconnect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetDownload, SLOT(setValue(int)));
+    disconnect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
     disconnect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
-    ui->lbDown->setText(tr("Success"));
-    emit sigRestore();
-}
-
-void HNUpgradeWidget::backup()
-{
-    //开始备份
-    ui->lbBack->setText(tr("Progressing..."));
-    ui->widgetBackup->setValue(24);
-#ifdef __MIPS_LINUX__
-    system("tar czvf ./tmp/backup.tar.gz /DWINFile/tank");
-#else
-    system("tar czvf ./tmp/backup.tar.gz tank");
-#endif
-    ui->widgetBackup->setValue(100);
-    ui->lbBack->setText(tr("Success"));
-}
-
-void HNUpgradeWidget::restore()
-{
-    ui->lbUpgrade->setText(tr("Progressing..."));
-    ui->widgetUpgrade->setValue(24);
-#ifdef __MIPS_LINUX__
-    system("tar xzvf ./tmp/upgrade.tar.gz -C /");
-#else
-    system("mkdir tmp");
-    system("tar xzvf ./tmp/upgrade.tar.gz -C tmp");
-#endif
-    ui->widgetUpgrade->setValue(60);
-    ui->widgetUpgrade->setValue(100);
     ui->lbUpgrade->setText(tr("Success"));
-    timer->start(1000);
+    m_upgradeT->start();
 }
 
 void HNUpgradeWidget::restart()
@@ -222,5 +113,6 @@ void HNUpgradeWidget::restart()
         return;
     }
     i--;
-    ui->lbTip->setText(tr("Upgrade success, Restarting... %1").arg(i));
+    ui->lbUpgrade->setText(tr("Upgrade success, Restarting... %1").arg(i));
+    timer->start(1000);
 }

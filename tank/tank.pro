@@ -26,7 +26,7 @@ equals(QT_KIT, MIPS32) {
 
 CONFIG(debug, debug|release) {
 } else {
-    DEFINES += QT_NO_DEBUG_OUTPUT
+    DEFINES -= QT_NO_DEBUG_OUTPUT
 }
 
 INCLUDEPATH +=  .
