@@ -1,6 +1,5 @@
 #include "qhotplugapp.h"
 #include "qhotplugwatcher.h"
-#include <QProcess>
 #include <stdlib.h>
 
 QHotPlugApp::QHotPlugApp(int &argc, char **argv) :
@@ -17,5 +16,9 @@ void QHotPlugApp::slotUPanAutoRun(int status)
         system(auth.toAscii().constData());
         QString app = QString("%1/autorun.sh").arg(mP);
         system(app.toAscii().constData());
+    }
+    else
+    {
+
     }
 }

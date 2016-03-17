@@ -44,14 +44,14 @@ void QHotplugConsoleWatcher::slotDeviceAdded(const QString &dev)
     else if("/dev/sda1" == dev)
         m_devType = E_STORAGE;
     m_devStat = E_ADD;
-    timer->start(1000);
+    timer->start(100);
 }
 
 void QHotplugConsoleWatcher::slotDeviceRemoved(const QString &dev)
 {
     qDebug("tid=%#x %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
     m_devStat = E_RM;
-    timer->start(1000);
+    timer->start(100);
 }
 
 void QHotplugConsoleWatcher::slotDeviceChanged(const QString &dev)
