@@ -151,7 +151,30 @@ void MainWindow::timerSetTime()
 bool MainWindow::eventFilter(QObject *o, QEvent *e)
 {
     if(ui->tabWidget->cTabBar() == o && e->type() == QEvent::MouseButtonPress)
+    {
         if(bLocked)
             return true;
+        else
+        {
+            QMouseEvent* me = (QMouseEvent*)e;
+            pline() << ui->tabWidget->currentIndex() <<
+                       ui->tabWidget->cTabBar()->tabRect(5).contains(me->pos());
+            if(ui->tabWidget->currentIndex() != 5 &&
+                    ui->tabWidget->cTabBar()->tabRect(5).contains(me->pos()))
+            {
+                pline() << "qieru";
+                QTankClient* cli = HNSingleClient(this);
+                ui->tab_cloud->slotConnect();
+            }
+            else if(ui->tabWidget->currentIndex() == 5 &&
+                    !ui->tabWidget->cTabBar()->tabRect(5).contains(me->pos()))
+            {
+                pline() << "qiechu";
+                QTankClient* cli = HNSingleClient(this);
+                ui->tab_cloud->slotDisConnect();
+            }
+        }
+    }
+
     return QObject::eventFilter(o, e);
 }

@@ -83,7 +83,6 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
 
     tbvStage->setMethodId(ui->tableView_method->currentMethodId());
     tbvStage->refresh(ui->tableView_method->currentMethodId());
-    tbvStage->selectStage();
 
     if(Type_Extract == ui->tableView_method->currentMethodType())
     {
@@ -130,15 +129,25 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
 
 void QEditForm::saveM()
 {
-    tbvStage->saveStage();
-    QModelIndex index = ui->tableView_method->currentIndex();
+    int stage = ui->spin_stage->value();
     int type = ui->comboBox_method_type->currentIndex();
-    QString newName = ui->lineEdit_methodname->text();
     int vessel = ui->le_vessel->text().toInt();
+    QString newName = ui->lineEdit_methodname->text();
+    QModelIndex index = ui->tableView_method->currentIndex();
     ui->tableView_method->setMethodType(index.row(), type);
     ui->tableView_method->setMethodName(index.row(), newName);
     ui->tableView_method->setMethodVessel(index.row(), vessel);
-    pline() << index << type << newName;
+    pline() << index.row() << type << newName;
+
+    QStringList rampList = ui->le_timeramp->text().split(":");
+    quint16 ramp = rampList[0].toUInt() * 60 + rampList[1].toUInt();
+    quint16 press = ui->le_press->text().toUInt();
+    quint16 tempture = ui->le_tempture->text().toUInt();
+    QStringList holdList = ui->le_hold->text().split(":");
+    quint16 hold = holdList[0].toUInt() * 60 + holdList[1].toUInt();
+    pline() << stage << ramp << press << tempture << hold;
+    tbvStage->saveStage(stage, vessel, ramp, press, tempture, hold);
+    ui->spin_stage->setValue(stage);
 }
 
 void QEditForm::delM()
@@ -174,7 +183,9 @@ void QEditForm::on_btn_open_clicked()
 
 void QEditForm::on_spin_stage_valueChanged(int arg1)
 {
+    pline() << tbvStage->currentStage() << arg1;
     tbvStage->selectStage(arg1-1);
+    pline() << tbvStage->currentStage();
 }
 
 void QEditForm::on_btn_stage_clear_clicked()

@@ -280,9 +280,11 @@ HNEthManager::HNEthManager(QObject *parent) :
     connect(m_workTimer, SIGNAL(timeout()), this, SLOT(refreshWifiStatus()));
     connect(m_workTimer, SIGNAL(timeout()), this, SLOT(checkLanConnection()));
     connect(m_workTimer, SIGNAL(timeout()), this, SLOT(checkNetworkClear()));
+#ifdef __MIPS_LINUX__
     m_workTimer->start(5000);
     //更新一次，以后一直调用scan_r 5-6s
     system("wpa_cli -iwlan0 scan");
+#endif
 }
 
 void HNEthManager::restoreWifi()

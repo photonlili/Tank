@@ -23,7 +23,7 @@ void QBackupLocalThread::run()
 
 void QUpgradeThread::run()
 {
-    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Progressing...")));
+    QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Upgrading...")));
     QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
     system("tar xzvf ./tmp/upgrade.tar.gz -C /");
@@ -59,6 +59,12 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
 
     m_backupT = new QBackupLocalThread(this);
     m_upgradeT = new QUpgradeThread(this);
+
+    m_cli = HNSingleUpgradeClient(this);
+    connect(m_cli, SIGNAL(connected()), this, SLOT(logined()));
+    connect(m_cli, SIGNAL(signalCheckVersionResult()), this, SLOT(versionR()));
+    connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
+    connect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
 }
 
 HNUpgradeWidget::~HNUpgradeWidget()
@@ -87,18 +93,65 @@ void HNUpgradeWidget::setValue(int value)
 void HNUpgradeWidget::download()
 {
     //开始下载过程
+    ui->lbUpgrade->setText(tr("Checking version..."));
+    m_cli->SendConnectMessage();
+}
+
+void HNUpgradeWidget::logined()
+{
+    m_newSoftwareID = "-1";
+    ui->tbVersion->clear();
+    m_cli->sendCheckVersion();
+}
+
+void HNUpgradeWidget::versionR()
+{
+    QTCheckVersionResult t = m_cli->GetVersionResult();
+    if(m_newSoftwareID == "-1")
+    {
+        pline() << "cur";
+
+        ui->tbVersion->append(tr("Version:%1").arg(t.m_version));
+        ui->tbVersion->append(tr("Explain:%1").arg(t.m_Explain));
+        ui->tbVersion->append(tr("ReleaseStatus:%1").arg(t.m_ReleaseStatus));
+        ui->tbVersion->append(tr("ReleaseDate:%1").arg(t.m_ReleaseDate));
+        ui->tbVersion->append(tr("FileMD5:%1").arg(t.m_FileMD5));
+        ui->tbVersion->append(tr("FileSize:%1").arg(t.m_FileSize));
+
+        m_newSoftwareID = t.m_NewSoftwareID;
+        if(t.m_NewSoftwareID == "0")
+        {
+            ui->lbUpgrade->setText(tr("This is latest version."));
+            return;
+        }
+        m_cli->sendCheckNewVersion();
+    }
+    else
+    {
+        pline() << "new";
+        ui->tbVersion->append(tr("------------------------------------"));
+        ui->tbVersion->append(tr("FileName:%1").arg(t.m_FileName));
+        ui->tbVersion->append(tr("Version:%1").arg(t.m_version));
+        ui->tbVersion->append(tr("Explain:%1").arg(t.m_Explain));
+        ui->tbVersion->append(tr("ReleaseStatus:%1").arg(t.m_ReleaseStatus));
+        ui->tbVersion->append(tr("ReleaseDate:%1").arg(t.m_ReleaseDate));
+        ui->tbVersion->append(tr("FileMD5:%1").arg(t.m_FileMD5));
+        ui->tbVersion->append(tr("FileSize:%1").arg(t.m_FileSize));
+        ui->lbUpgrade->setText(tr("Found new version."));
+    }
+}
+
+void HNUpgradeWidget::on_btnDown_clicked()
+{
     ui->lbUpgrade->setText(tr("Downloading..."));
-    m_cli = HNSingleClient(this);
-    connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
-    connect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
-    m_cli->sendDownDevFiles("./tmp", "356", "upgrade.tar.gz");
+    m_cli->sendDownUpgradeFile("./tmp", m_newSoftwareID, "upgrade.tar.gz");
 }
 
 void HNUpgradeWidget::downOK()
 {
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
     disconnect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
-    ui->lbUpgrade->setText(tr("Success"));
+    ui->lbUpgrade->setText(tr("Download success"));
     m_upgradeT->start();
 }
 
@@ -115,4 +168,10 @@ void HNUpgradeWidget::restart()
     i--;
     ui->lbUpgrade->setText(tr("Upgrade success, Restarting... %1").arg(i));
     timer->start(1000);
+}
+
+void HNUpgradeWidget::on_btnCancel_clicked()
+{
+    m_cli->SendDisConnectFromHost();
+    emit sigCancelUpgrade();
 }

@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>theme/basic/bk_progress_background.png</file>
+        <file>theme/basic/bk_progress_chunk.png</file>
+        <file>theme/basic/bk_main.png</file>
+        <file>theme/basic/basic.qss</file>
+        <file>language/en_US.qm</file>
+        <file>language/en_US.ts</file>
+        <file>language/zh_CN.qm</file>
+        <file>language/zh_CN.ts</file>
+    </qresource>
+</RCC>

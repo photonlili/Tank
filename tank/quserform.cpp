@@ -27,7 +27,6 @@ QUserForm::QUserForm(QWidget *parent) :
     connect(ui->radioButton_user3pic, SIGNAL(toggled(bool)), this, SLOT(user3PicToggled(bool)));
     connect(ui->pushButton_logout, SIGNAL(clicked()), this, SIGNAL(signalLogout()));
 
-    pline() << rect();
     int iconSize = 79;
     int iconSizeHeight = 59;
     ui->radioButton_userpic->setFixedSize(iconSize, iconSizeHeight);

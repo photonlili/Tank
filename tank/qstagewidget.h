@@ -43,7 +43,7 @@ public slots:
     void delStage();
     void delAllStage();
     void cleanStage();
-    void saveStage();
+    void saveStage(quint8 stage, quint8 vessel, quint16 ramp, quint16 press, quint16 tempture, quint16 hold);
     void prev();
     void next();
 

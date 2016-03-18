@@ -65,6 +65,7 @@ if ! [ -d /DWINFile ]; then
 	mkfs.ext4 /dev/ndextern
 fi
 mount /dev/ndextern /DWINFile
+
 /DWINFile/net.sh &
 /DWINFile/starttank.sh &
 

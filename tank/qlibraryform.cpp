@@ -37,6 +37,13 @@ void QLibraryForm::on_btn_lib_select_clicked()
 
 void QLibraryForm::on_btn_lib_save_clicked()
 {
+    QString dbName = ui->tbv_lib->currentdb();
+
+    if(dbName == DB_HANON ||
+            dbName == DB_EXTRACT ||
+            dbName == DB_USER)
+        return;
+
     QFile::rename(QString("%1/%2.db").arg(DB_METHOD).arg(ui->tbv_lib->currentdb()),
                   QString("%1/%2.db").arg(DB_METHOD).arg(ui->le_lib_name->text()));
     ui->tbv_lib->setdbname(ui->le_lib_name->text());

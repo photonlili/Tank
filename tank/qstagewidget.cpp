@@ -39,6 +39,7 @@ void QStageWidget::refresh(QString filter)
 void QStageWidget::refresh(int methodid, int type)
 {
     m_model->setFilter(QString("M_Id = %1").arg(methodid));
+    //异步的操作，不会立即返回选择好的数据
     m_model->select();
 
     m_model->setHeaderData(Stage_Index, Qt::Horizontal, tr("Stage"));
@@ -206,10 +207,20 @@ void QStageWidget::cleanStage()
     m_model->submit();
 }
 
-void QStageWidget::saveStage()
+void QStageWidget::saveStage(quint8 stage, quint8 vessel, quint16 ramp,
+                             quint16 press, quint16 tempture, quint16 hold)
 {
-    int row = currentIndex().row();
-    m_mapper->submit();
+    int row = stage;
+
+    m_model->setData(m_model->index(row, Stage_Vessel), vessel);
+    m_model->setData(m_model->index(row, Stage_Timeramp), ramp);
+    m_model->setData(m_model->index(row, Stage_Presspsi), press);
+    m_model->setData(m_model->index(row, Stage_Tempture), tempture);
+    m_model->setData(m_model->index(row, Stage_Hold), hold);
+    m_model->setData(m_model->index(row, Stage_MethodId), m_methodid);
+    m_model->submit();
+    //m_mapper->submit();
+
     selectStage(row);
 }
 

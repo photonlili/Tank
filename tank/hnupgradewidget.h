@@ -37,12 +37,21 @@ public:
 
     void initAll();
 
+signals:
+    void sigCancelUpgrade();
+
 private slots:
     void setText(QString text);
     void setValue(int value);
     void download();
+    void logined();
+    void versionR();
     void downOK();
     void restart();
+
+    void on_btnDown_clicked();
+
+    void on_btnCancel_clicked();
 
 private:
     Ui::HNUpgradeWidget *ui;
@@ -50,6 +59,7 @@ private:
     QTimer* timer;
     QBackupLocalThread* m_backupT;
     QUpgradeThread* m_upgradeT;
+    QString m_newSoftwareID;
 };
 
 #endif // HNUPGRADEWIDGET_H

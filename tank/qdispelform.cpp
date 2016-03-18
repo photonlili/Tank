@@ -146,14 +146,15 @@ void QDispelForm::timeNewData()
 
     if(m_lastPointKey-m_initPointKey == 0)
     {
-        m_curRamp = 0;
+        ramp = 0;
         ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, hold);
-        preRamp = 0;
+        preRamp = ramp;
         ramp = m_curRamp;
     }
     else if(m_lastPointKey-m_initPointKey > m_totalStageRamp)
     {
         // stop
+        on_btn_stop_clicked();
     }
     else if(m_lastPointKey-m_initPointKey == ramp)
     {
@@ -163,32 +164,37 @@ void QDispelForm::timeNewData()
         ramp += m_curRamp;
     }
 
-    pline() << m_curRamp << ramp;
     //获取温度和压力
-    double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-    int key = currentPointKey - m_initPointKey;
-    int temp = tempture * key / m_curRamp;
-    int press = tempture * key / m_curRamp;
+    //从单片机获取temp和press
+    int temp = 300;
+    int press = 200;
 
-    pline() << currentPointKey << temp << pressure << currentPointKey-m_initPointKey << currentPointKey-m_lastPointKey;
-    if (currentPointKey-m_lastPointKey > 0.01) // at most add point every 10 ms
+    pline() << m_curRamp << ramp << m_totalStageRamp <<
+               temp << pressure << m_lastPointKey-m_initPointKey;
+
+    //table
+    quint16 curRamp = ramp-(quint16)(m_lastPointKey-m_initPointKey-m_pauseTime);
+    ui->tbv_stage->setRamp(curRamp-1);
+
+    //stat
+    ui->label_curtemp->setText(QString("%1").arg(temp));
+    ui->label_stressure->setText(QString("%1").arg(press));
+
+    //plot
+    int key = m_lastPointKey - m_initPointKey;
+    ui->page_plot->addTempture(key, temp);
+    ui->page_plot->addPressure(key, press);
+    //if(key>20)
+        //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
+    if(key > 20)
     {
-        ui->label_curtemp->setText(QString("%1").arg(temp));
-        ui->label_stressure->setText(QString("%1").arg(press));
-        ui->page_plot->addTempture(key, temp);
-        ui->page_plot->addPressure(key, press);
-        //if(key>20)
-            //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
-        if(key > 20)
-        {
-            ui->page_plot->xAxis->setTickStep(10);
-            ui->page_plot->xAxis->setRange(0, key, Qt::AlignLeft);
-        }
-        ui->page_plot->replot();
-        m_lastPointKey = currentPointKey;
-        ui->tbv_stage->setRamp(ramp-(m_lastPointKey-m_initPointKey-m_pauseTime));
+        ui->page_plot->xAxis->setTickStep(10);
+        ui->page_plot->xAxis->setRange(0, key, Qt::AlignLeft);
     }
-    //pline() << ui->tbv_stage->rect();
+    ui->page_plot->replot();
+
+    m_lastPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
+
 }
 
 void QDispelForm::timeNewData2()
@@ -217,6 +223,8 @@ void QDispelForm::timeNewData2()
     else if(m_lastPointKey2-m_initPointKey2 > m_totalStageRamp2)
     {
         // stop
+        on_btn_stop_2_clicked();
+        return;
     }
     else if(m_lastPointKey2-m_initPointKey2 == ramp)
     {
@@ -226,32 +234,36 @@ void QDispelForm::timeNewData2()
         ramp += m_curRamp2;
     }
 
-    pline() << m_curRamp2 << ramp;
     //获取温度和压力
-    double currentPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
-    int key = currentPointKey - m_initPointKey2;
-    int temp = tempture * key / m_curRamp2;
-    int press = tempture * key / m_curRamp2;
+    //从单片机获取temp和press
+    int temp = 230;
+    int press = 124;
 
-    pline() << currentPointKey << temp << pressure << currentPointKey-m_initPointKey2 << currentPointKey-m_lastPointKey2;
-    if (currentPointKey-m_lastPointKey2 > 0.01) // at most add point every 10 ms
+    pline() << m_curRamp2 << ramp << m_totalStageRamp2 <<
+               temp << pressure << m_lastPointKey2-m_initPointKey2;
+
+    //table
+    quint16 curRamp = ramp-(quint16)(m_lastPointKey2-m_initPointKey2-m_pauseTime2);
+    ui->tbv_stage_2->setRamp(curRamp-1);
+
+    //stat
+    ui->label_curtemp_2->setText(QString("%1").arg(temp));
+    ui->label_stressure_2->setText(QString("%1").arg(press));
+
+    //plot
+    int key = m_lastPointKey2 - m_initPointKey2;
+    ui->page_plot_2->addTempture(key, temp);
+    ui->page_plot_2->addPressure(key, press);
+    //if(key>20)
+        //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
+    if(key > 20)
     {
-        ui->label_curtemp_2->setText(QString("%1").arg(temp));
-        ui->label_stressure_2->setText(QString("%1").arg(press));
-        ui->page_plot_2->addTempture(key, temp);
-        ui->page_plot_2->addPressure(key, press);
-        //if(key>20)
-            //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
-        if(key > 20)
-        {
-            ui->page_plot_2->xAxis->setTickStep(10);
-            ui->page_plot_2->xAxis->setRange(0, key, Qt::AlignLeft);
-        }
-        ui->page_plot_2->replot();
-        m_lastPointKey2 = currentPointKey;
-        ui->tbv_stage_2->setRamp(ramp-(m_lastPointKey2-m_initPointKey2-m_pauseTime2));
+        ui->page_plot_2->xAxis->setTickStep(10);
+        ui->page_plot_2->xAxis->setRange(0, key, Qt::AlignLeft);
     }
-    //pline() << ui->tbv_stage->rect();
+    ui->page_plot_2->replot();
+
+    m_lastPointKey2 = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
 }
 
 void QDispelForm::initLanguage()
@@ -307,14 +319,15 @@ void QDispelForm::on_btn_play_clicked()
     {
         emit signalLockPage(true);
 
+        ui->tbv_stage->selectStage(0);
         m_initPointKey = QDateTime::currentDateTime().toMSecsSinceEpoch()/1000.0;
         m_lastPointKey = m_initPointKey;
         bRunning = ePlay;
         m_pauseTime = 0;
         timer->start(1000);
         startHeating();
-        serialNo = m_dlg->newReport(methodForm->currentLibrary(),
-                         methodForm->currentMethodName());
+        //serialNo = m_dlg->newReport(methodForm->currentLibrary(),
+        //                 methodForm->currentMethodName());
     }
 }
 
@@ -324,7 +337,6 @@ void QDispelForm::startHeating()
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main->setCurrentIndex(0);
 
-    ui->tbv_stage->selectStage(0);
     quint8 stage;
     quint8 vessel;
     quint16 ramp;
@@ -474,9 +486,11 @@ void QDispelForm::on_btn_play_2_clicked()
         bRunning = ePlay;
         m_pauseTime2 = 0;
         timer2->start(1000);
+        ui->tbv_stage_2->selectStage(0);
+
         startHeatingExtract();
-        serialNo = m_dlg->newReport(methodForm->currentLibrary(),
-                         methodForm->currentMethodName());
+        //serialNo = m_dlg->newReport(methodForm->currentLibrary(),
+        //                 methodForm->currentMethodName());
     }
 }
 
@@ -540,18 +554,22 @@ void QDispelForm::pauseHeatingExtract()
 
 void QDispelForm::on_btn_stop_2_clicked()
 {
+    bRunning = eStop;
+    if(timer2->isActive())
+    {
+        ui->tbv_stage_2->setRamp(m_curRamp2);
+        ui->tbv_stage_2->selectStage(ui->tbv_stage_2->currentStage());
+    }
+    timer2->stop();
     emit signalLockPage(false);
     ui->btn_play_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
     ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
     ui->btn_play_2->update();
-    bRunning = eStop;
-    timer2->stop();
     stopHeatingExtract();
 }
 
 void QDispelForm::stopHeatingExtract()
 {
-    ui->btn_play_2->setText(tr("Play"));
     com0->sendMsgStop();
 
     QPixmap pix = ui->page_plot->toPixmap(600, 320);

@@ -3,6 +3,7 @@ QLoginDialog, HNUpgradeWidget QWidget#widgetHNUpgrade{
     border-image: url(://theme/basic/bk_main.png);
 }
 
+
 QWidget#widgetLogin{
     border-image: url(://theme/basic/bk_login.png);
 }

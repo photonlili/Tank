@@ -1,6 +1,7 @@
 #ifndef QTANKGUI_H
 #define QTANKGUI_H
 
+#include <QTranslator>
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include <QFileInfo>

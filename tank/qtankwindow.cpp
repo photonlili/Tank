@@ -22,6 +22,7 @@ QTankWindow::QTankWindow(QWidget *parent) :
     connect(ui->page_main, SIGNAL(changeLanguage()), ui->page_login, SLOT(initlanguage()));
     connect(ui->page_main, SIGNAL(changeLanguage()), this, SIGNAL(changeLanguage()));
     connect(ui->page_main, SIGNAL(sigUpgrade()), this, SLOT(slotUpgrade()));
+    connect(ui->page_upgrade, SIGNAL(sigCancelUpgrade()), this, SLOT(slotCancelUpgrade()));
 
     if(bOpenRights)
         slotStatus(Login_Request);
@@ -83,6 +84,11 @@ void QTankWindow::slotUpgrade()
 {
     setCurrentIndex(2);
     ui->page_upgrade->initAll();
+}
+
+void QTankWindow::slotCancelUpgrade()
+{
+    setCurrentIndex(1);
 }
 
 void QTankWindow::slotStatus(int index)
