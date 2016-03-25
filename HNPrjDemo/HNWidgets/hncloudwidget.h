@@ -6,16 +6,16 @@
 #include "hnprogressdialog.h"
 
 namespace Ui {
-class HNCloudForm;
+class HNCloudWidget;
 }
 
-class HNCloudForm : public QWidget
+class HNCloudWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit HNCloudForm(QWidget *parent = 0);
-    ~HNCloudForm();
+    explicit HNCloudWidget(QWidget *parent = 0);
+    ~HNCloudWidget();
 
     void chageLanguage();
 
@@ -32,7 +32,7 @@ public slots:
     void slotDelOK();
 
 private:
-    Ui::HNCloudForm *ui;
+    Ui::HNCloudWidget *ui;
     HNClient* m_cli;
     HNProgressDialog* m_prog;
     HNProgressDialog* m_progDown;

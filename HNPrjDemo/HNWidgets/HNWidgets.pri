@@ -55,7 +55,7 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/qcustomplot.cpp \
     $$PWD/hnclient.cpp \
     $$PWD/hnclientmessage.cpp \
-    $$PWD/hncloudform.cpp \
+    $$PWD/hncloudwidget.cpp \
     $$PWD/hncloudlocalmodel.cpp \
     $$PWD/hncloudlocaltreewidget.cpp \
     $$PWD/hncloudmodel.cpp \
@@ -83,7 +83,8 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnpassworddialog.cpp \
     $$PWD/qdevicewatcher.cpp \
     $$PWD/qdevicewatcher_linux.cpp \
-    $$PWD/hnprintpreviewdialog.cpp
+    $$PWD/hnprintpreviewdialog.cpp \
+    $$PWD/hnmanageethenetwidget.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -114,7 +115,7 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/qcustomplot.h \
     $$PWD/hnclient.h \
     $$PWD/hnclientmessage.h \
-    $$PWD/hncloudform.h \
+    $$PWD/hncloudwidget.h \
     $$PWD/hncloudlocalmodel.h \
     $$PWD/hncloudlocaltreewidget.h \
     $$PWD/hncloudmodel.h \
@@ -143,7 +144,8 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hnpassworddialog.h \
     $$PWD/qdevicewatcher.h \
     $$PWD/qdevicewatcher_p.h \
-    $$PWD/hnprintpreviewdialog.h
+    $$PWD/hnprintpreviewdialog.h \
+    $$PWD/hnmanageethenetwidget.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -160,7 +162,7 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnwidget.ui \
     $$PWD/hnwifiview.ui \
     $$PWD/hnwifiwidget.ui \
-    $$PWD/hncloudform.ui \
+    $$PWD/hncloudwidget.ui \
     $$PWD/hncloudlocaltreewidget.ui \
     $$PWD/hncloudtreeview.ui \
     $$PWD/hncloudtreewidget.ui \
@@ -172,4 +174,5 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnsyseventwidget.ui \
     $$PWD/hnupgradewidget.ui \
     $$PWD/hnpassworddialog.ui \
-    $$PWD/hnprintpreviewdialog.ui
+    $$PWD/hnprintpreviewdialog.ui \
+    $$PWD/hnmanageethenetwidget.ui

@@ -20,8 +20,8 @@
 #include "hnupgradewidget.h"
 #include "hncloudlocaltreewidget.h"
 #include "hncloudtreewidget.h"
-
-#include "hncloudform.h"
+#include "hncloudwidget.h"
+#include "hnmanageethenetwidget.h"
 
 #include "hnclient.h"
 #include "HNEthManager.h"

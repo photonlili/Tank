@@ -1,13 +1,13 @@
 
-#include "hncloudform.h"
-#include "ui_hncloudform.h"
+#include "hncloudwidget.h"
+#include "ui_hncloudwidget.h"
 #include "HNDefine.h"
 #include "hnprogressdialog.h"
 #include "hnmsgbox.h"
 
-HNCloudForm::HNCloudForm(QWidget *parent) :
+HNCloudWidget::HNCloudWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::HNCloudForm)
+    ui(new Ui::HNCloudWidget)
 {
     ui->setupUi(this);
 
@@ -30,31 +30,31 @@ HNCloudForm::HNCloudForm(QWidget *parent) :
     connect(ui->btn_print, SIGNAL(clicked()), ui->treeLocal, SLOT(printFile()));
 }
 
-HNCloudForm::~HNCloudForm()
+HNCloudWidget::~HNCloudWidget()
 {
     delete ui;
 }
 
-void HNCloudForm::chageLanguage()
+void HNCloudWidget::chageLanguage()
 {
     ui->retranslateUi(this);
 }
 
-void HNCloudForm::slotConnect()
+void HNCloudWidget::slotConnect()
 {
     ui->treeCloud->slotConnect();
 }
 
-void HNCloudForm::slotDisConnect()
+void HNCloudWidget::slotDisConnect()
 {
     ui->treeCloud->slotDisConnect();
 }
 
-void HNCloudForm::slotUpdateLabReport()
+void HNCloudWidget::slotUpdateLabReport()
 {
 }
 
-void HNCloudForm::slotOpenProgress()
+void HNCloudWidget::slotOpenProgress()
 {
     connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));
@@ -73,7 +73,7 @@ void HNCloudForm::slotOpenProgress()
     m_prog->show();
 }
 
-void HNCloudForm::slotOpenOK()
+void HNCloudWidget::slotOpenOK()
 {
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_prog, SLOT(setValue(int)));
@@ -98,7 +98,7 @@ void HNCloudForm::slotOpenOK()
         HNMsgBox::warning(this, "Upload Canceled");
 }
 
-void HNCloudForm::slotOpenDownProgress()
+void HNCloudWidget::slotOpenDownProgress()
 {
     connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
@@ -118,7 +118,7 @@ void HNCloudForm::slotOpenDownProgress()
 }
 
 
-void HNCloudForm::slotOpenDownOK()
+void HNCloudWidget::slotOpenDownOK()
 {
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
@@ -146,7 +146,7 @@ void HNCloudForm::slotOpenDownOK()
         HNMsgBox::warning(this, "Download Canceled");
 }
 
-void HNCloudForm::slotDelProgress()
+void HNCloudWidget::slotDelProgress()
 {
     connect(m_cli, SIGNAL(signalListFileOK()),
             this, SLOT(slotDelOK()));
@@ -154,7 +154,7 @@ void HNCloudForm::slotDelProgress()
     m_progDel->show();
 }
 
-void HNCloudForm::slotDelOK()
+void HNCloudWidget::slotDelOK()
 {
     m_progDel->setValue(100);
     m_progDel->accept();

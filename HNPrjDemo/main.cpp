@@ -10,11 +10,11 @@ int main(int argc, char *argv[])
     HNProgressDialog w1;
     HNProgressDialog w2;
     HNFrame w0;
-    w0.setFixedHeight(600);
+    //w0.setFixedHeight(600);
     QVBoxLayout l;
-    l.addWidget(&w);
-    l.addWidget(&w1);
-    l.addWidget(&w2);
+    //l.addWidget(&w);
+    //l.addWidget(&w1);
+    //l.addWidget(&w2);
     w0.setLayout(&l);
     w0.show();
 
@@ -30,6 +30,9 @@ int main(int argc, char *argv[])
     w2.setFixedWidth(600);
     w2.initAll();
     w2.setValue(value);
+
+    HNCloudWidget w3;
+    l.addWidget(&w3);
 
     return a.exec();
 }
