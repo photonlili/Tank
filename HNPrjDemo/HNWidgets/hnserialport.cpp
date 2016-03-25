@@ -1,5 +1,5 @@
-#include "qtankserialport.h"
-#include "qcomponent.h"
+#include "hnserialport.h"
+
 
 QTankSerialPort::QTankSerialPort(QObject *parent) :
     QSerialPort(parent)

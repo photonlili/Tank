@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
     //检查序列号
     QSettings set;
-    QString serial = set.value("/Device/SerialNo.").toString();
+    QString serial = set.value("/Device/DeviceNo").toString();
     if(serial.isEmpty())
     {
         QSerialWarning war(theWindow);

@@ -5,7 +5,7 @@ prevlevel=N
 umask 022
 export PATH runlevel prevlevel
 
-/bin/hostname DWIN
+/bin/hostname Hanon
 
 
 # mount filesystems
@@ -60,12 +60,12 @@ mdev -s
 #/bin/mount -t vfat /dev/mtdblock5 /mnt/mtdblock5
 
 
-if ! [ -d /DWINFile ]; then
-	mkdir /DWINFile
+if ! [ -d /HNApp ]; then
+	mkdir /HNApp
 	mkfs.ext4 /dev/ndextern
 fi
-mount /dev/ndextern /DWINFile
+mount /dev/ndextern /HNApp
 
-/DWINFile/net.sh &
-/DWINFile/starttank.sh &
+/HNApp/net.sh &
+/HNApp/starttank.sh &
 
