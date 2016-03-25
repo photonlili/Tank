@@ -4,7 +4,7 @@
 #include "HNDefine.h"
 
 
-QTankMessage::QTankMessage(QObject *parent) :
+HNClientMessage::HNClientMessage(QObject *parent) :
     QObject(parent)
 {
     m_Head = _TCPCMD_TAGHEAD;
@@ -13,7 +13,7 @@ QTankMessage::QTankMessage(QObject *parent) :
     m_Tail = _TCPCMD_TAGTAIL;
 }
 
-void QTankMessage::translate()
+void HNClientMessage::translate()
 {
     m_Size = m_Data.length() + 0x10;
     QByteArray qbaVerify;
@@ -27,7 +27,7 @@ void QTankMessage::translate()
     //m_Sum = qChecksum(qbaVerify.data(), qbaVerify.length());
 }
 
-QDebug operator<<(QDebug dbg, const QTankMessage &c)
+QDebug operator<<(QDebug dbg, const HNClientMessage &c)
 {
     dbg.nospace() << "{" << hex << c.head() << "|" <<
                      hex << c.size() << "=" << dec << c.size() << "|" <<
@@ -39,7 +39,7 @@ QDebug operator<<(QDebug dbg, const QTankMessage &c)
     return dbg.space();
 }
 
-quint16 QTankParser::parseBlockSize(const QByteArray &netData)
+quint16 HNClientParser::parseBlockSize(const QByteArray &netData)
 {
     QByteArray l = netData.left(4);
     quint16 b0 = 0, b1 = 0;
@@ -47,7 +47,7 @@ quint16 QTankParser::parseBlockSize(const QByteArray &netData)
     return b1;
 }
 
-void QTankParser::parse(QTankMessage &getter, const QByteArray &netData)
+void HNClientParser::parse(HNClientMessage &getter, const QByteArray &netData)
 {
     QByteArray l = netData;
     quint16 b0 = 0, b1 = 0, b2 = 0, b5 = 0;
@@ -65,7 +65,7 @@ void QTankParser::parse(QTankMessage &getter, const QByteArray &netData)
     getter.setTail(b6);
 }
 
-void QTankParser::pack(QByteArray &netData, const QTankMessage &setter)
+void HNClientParser::pack(QByteArray &netData, const HNClientMessage &setter)
 {
     netData << setter.head();
     netData << setter.size();

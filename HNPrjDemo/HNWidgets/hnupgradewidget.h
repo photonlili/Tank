@@ -55,7 +55,7 @@ private slots:
 
 private:
     Ui::HNUpgradeWidget *ui;
-    QTankClient* m_cli;
+    HNClient* m_cli;
     QTimer* timer;
     QBackupLocalThread* m_backupT;
     QUpgradeThread* m_upgradeT;

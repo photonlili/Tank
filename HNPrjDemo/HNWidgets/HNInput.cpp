@@ -4,20 +4,20 @@
 #include "HNDefine.h"
 #include "HNDefine.h"
 
-frmInput *frmInput::_instance = 0;
-frmInput::frmInput(QWidget *parent) :
+HNInput *HNInput::_instance = 0;
+HNInput::HNInput(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::frmInput)
 {
     ui->setupUi(this);
 }
 
-frmInput::~frmInput()
+HNInput::~HNInput()
 {
     delete ui;
 }
 
-void frmInput::Init(QString type, QString position, QString style, int btnFontSize, int labFontSize)
+void HNInput::Init(QString type, QString position, QString style, int btnFontSize, int labFontSize)
 {
     this->currentPosition = position;
     this->currentStyle = style;
@@ -33,7 +33,7 @@ void frmInput::Init(QString type, QString position, QString style, int btnFontSi
     this->changePosition();
 }
 
-void frmInput::mouseMoveEvent(QMouseEvent *e)
+void HNInput::mouseMoveEvent(QMouseEvent *e)
 {
     if (mousePressed && (e->buttons() && Qt::LeftButton)) {
         this->move(e->globalPos() - mousePoint);
@@ -41,7 +41,7 @@ void frmInput::mouseMoveEvent(QMouseEvent *e)
     }
 }
 
-void frmInput::mousePressEvent(QMouseEvent *e)
+void HNInput::mousePressEvent(QMouseEvent *e)
 {
     if (e->button() == Qt::LeftButton) {
         mousePressed = true;
@@ -50,12 +50,12 @@ void frmInput::mousePressEvent(QMouseEvent *e)
     }
 }
 
-void frmInput::mouseReleaseEvent(QMouseEvent *)
+void HNInput::mouseReleaseEvent(QMouseEvent *)
 {
     mousePressed = false;
 }
 
-void frmInput::InitForm()
+void HNInput::InitForm()
 {
     this->mousePressed = false;
     this->setWindowFlags(Qt::Tool | Qt::WindowStaysOnTopHint | Qt::FramelessWindowHint);
@@ -83,50 +83,50 @@ void frmInput::InitForm()
     currentBrowser = 0;
     currentEditType = "";
 
-    ui->btnDel->iconTable()[BTN_NORMAL] = "://theme/basic/key_del.png";
-    ui->btnDel->iconTable()[BTN_PRESS] = "://theme/basic/key_del_press.png";
-    ui->btnDel->iconTable()[BTN_UNCHECK] = "://theme/basic/key_del.png";
-    ui->btnDel->iconTable()[BTN_CHECK] = "://theme/basic/key_del_press.png";
-    ui->btnDel->iconTable()[BTN_HOVER] = "://theme/basic/key_del.png";
-    ui->btnDel->iconTable()[BTN_DISABLE] = "://theme/basic/key_del.png";
+    ui->btnDel->iconTable()[BTN_NORMAL] = "://pictures/key_del.png";
+    ui->btnDel->iconTable()[BTN_PRESS] = "://pictures/key_del_press.png";
+    ui->btnDel->iconTable()[BTN_UNCHECK] = "://pictures/key_del.png";
+    ui->btnDel->iconTable()[BTN_CHECK] = "://pictures/key_del_press.png";
+    ui->btnDel->iconTable()[BTN_HOVER] = "://pictures/key_del.png";
+    ui->btnDel->iconTable()[BTN_DISABLE] = "://pictures/key_del.png";
 
-    ui->btnDelete->iconTable()[BTN_NORMAL] = "://theme/basic/key_del.png";
-    ui->btnDelete->iconTable()[BTN_PRESS] = "://theme/basic/key_del_press.png";
-    ui->btnDelete->iconTable()[BTN_UNCHECK] = "://theme/basic/key_del.png";
-    ui->btnDelete->iconTable()[BTN_CHECK] = "://theme/basic/key_del_press.png";
-    ui->btnDelete->iconTable()[BTN_HOVER] = "://theme/basic/key_del.png";
-    ui->btnDelete->iconTable()[BTN_DISABLE] = "://theme/basic/key_del.png";
+    ui->btnDelete->iconTable()[BTN_NORMAL] = "://pictures/key_del.png";
+    ui->btnDelete->iconTable()[BTN_PRESS] = "://pictures/key_del_press.png";
+    ui->btnDelete->iconTable()[BTN_UNCHECK] = "://pictures/key_del.png";
+    ui->btnDelete->iconTable()[BTN_CHECK] = "://pictures/key_del_press.png";
+    ui->btnDelete->iconTable()[BTN_HOVER] = "://pictures/key_del.png";
+    ui->btnDelete->iconTable()[BTN_DISABLE] = "://pictures/key_del.png";
 
-    ui->btnClose->iconTable()[BTN_NORMAL] = "://theme/basic/key_close.png";
-    ui->btnClose->iconTable()[BTN_PRESS] = "://theme/basic/key_close_press.png";
-    ui->btnClose->iconTable()[BTN_UNCHECK] = "://theme/basic/key_close.png";
-    ui->btnClose->iconTable()[BTN_CHECK] = "://theme/basic/key_close_press.png";
-    ui->btnClose->iconTable()[BTN_HOVER] = "://theme/basic/key_close.png";
-    ui->btnClose->iconTable()[BTN_DISABLE] = "://theme/basic/key_close.png";
+    ui->btnClose->iconTable()[BTN_NORMAL] = "://pictures/key_close.png";
+    ui->btnClose->iconTable()[BTN_PRESS] = "://pictures/key_close_press.png";
+    ui->btnClose->iconTable()[BTN_UNCHECK] = "://pictures/key_close.png";
+    ui->btnClose->iconTable()[BTN_CHECK] = "://pictures/key_close_press.png";
+    ui->btnClose->iconTable()[BTN_HOVER] = "://pictures/key_close.png";
+    ui->btnClose->iconTable()[BTN_DISABLE] = "://pictures/key_close.png";
 
-    ui->btnSpace->iconTable()[BTN_NORMAL] = "://theme/basic/key_blank.png";
-    ui->btnSpace->iconTable()[BTN_PRESS] = "://theme/basic/key_blank_press.png";
-    ui->btnSpace->iconTable()[BTN_UNCHECK] = "://theme/basic/key_blank.png";
-    ui->btnSpace->iconTable()[BTN_CHECK] = "://theme/basic/key_blank_press.png";
-    ui->btnSpace->iconTable()[BTN_HOVER] = "://theme/basic/key_blank.png";
-    ui->btnSpace->iconTable()[BTN_DISABLE] = "://theme/basic/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_NORMAL] = "://pictures/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_PRESS] = "://pictures/key_blank_press.png";
+    ui->btnSpace->iconTable()[BTN_UNCHECK] = "://pictures/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_CHECK] = "://pictures/key_blank_press.png";
+    ui->btnSpace->iconTable()[BTN_HOVER] = "://pictures/key_blank.png";
+    ui->btnSpace->iconTable()[BTN_DISABLE] = "://pictures/key_blank.png";
 
-    ui->btnReturn->iconTable()[BTN_NORMAL] = "://theme/basic/key_return.png";
-    ui->btnReturn->iconTable()[BTN_PRESS] = "://theme/basic/key_return_press.png";
-    ui->btnReturn->iconTable()[BTN_UNCHECK] = "://theme/basic/key_return.png";
-    ui->btnReturn->iconTable()[BTN_CHECK] = "://theme/basic/key_return_press.png";
-    ui->btnReturn->iconTable()[BTN_HOVER] = "://theme/basic/key_return.png";
-    ui->btnReturn->iconTable()[BTN_DISABLE] = "://theme/basic/key_return.png";
+    ui->btnReturn->iconTable()[BTN_NORMAL] = "://pictures/key_return.png";
+    ui->btnReturn->iconTable()[BTN_PRESS] = "://pictures/key_return_press.png";
+    ui->btnReturn->iconTable()[BTN_UNCHECK] = "://pictures/key_return.png";
+    ui->btnReturn->iconTable()[BTN_CHECK] = "://pictures/key_return_press.png";
+    ui->btnReturn->iconTable()[BTN_HOVER] = "://pictures/key_return.png";
+    ui->btnReturn->iconTable()[BTN_DISABLE] = "://pictures/key_return.png";
 
-    ui->radioCN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
+    ui->radioCN->setPixmap("://pictures/key.png", "://pictures/key_press.png");
     ui->radioCN->setFixedSize(40, 40);
-    ui->radioCN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
+    ui->radioCN->setPixmap("://pictures/key.png", "://pictures/key_press.png");
     ui->radioEN->setFixedSize(40, 40);
-    ui->radioEN->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
+    ui->radioEN->setPixmap("://pictures/key.png", "://pictures/key_press.png");
     ui->radioEN->setFixedSize(40, 40);
-    ui->radioNum->setPixmap("://theme/basic/key.png", "://theme/basic/key_press.png");
+    ui->radioNum->setPixmap("://pictures/key.png", "://pictures/key_press.png");
     ui->radioNum->setFixedSize(40, 40);
-    ui->checkShift->setPixmap("://theme/basic/key_shift.png", "://theme/basic/key_shift_press.png");
+    ui->checkShift->setPixmap("://pictures/key_shift.png", "://pictures/key_shift_press.png");
     ui->checkShift->setFixedSize(40, 40);
 
     connect(ui->radioNum, SIGNAL(clicked()), this, SLOT(btn_clicked()));
@@ -148,7 +148,7 @@ void frmInput::InitForm()
     qApp->installEventFilter(this);
 }
 
-void frmInput::InitProperty()
+void HNInput::InitProperty()
 {
     ui->btnOther1->setProperty("btnOther", true);
     ui->btnOther2->setProperty("btnOther", true);
@@ -237,12 +237,12 @@ void frmInput::InitProperty()
     }
 }
 
-void frmInput::ShowPanel()
+void HNInput::ShowPanel()
 {
     this->setVisible(true);
 }
 
-bool frmInput::checkPress()
+bool HNInput::checkPress()
 {
     //只有属于输入法键盘的合法按钮才继续处理
     bool num_ok = btnPress->property("btnNum").toBool();
@@ -254,7 +254,7 @@ bool frmInput::checkPress()
     return false;
 }
 
-void frmInput::reClicked()
+void HNInput::reClicked()
 {
     if (isPress) {
         timerPress->setInterval(30);
@@ -262,7 +262,7 @@ void frmInput::reClicked()
     }
 }
 
-void frmInput::btn_clicked()
+void HNInput::btn_clicked()
 {
     //如果当前焦点控件类型为空,则返回不需要继续处理
     if (currentEditType == "") {
@@ -295,7 +295,7 @@ void frmInput::btn_clicked()
     } else if (objectName == "radioCN") {
         if (currentType == "min" || currentType == "max") {
             currentType = "chinese";
-            ui->checkShift->setPixmap("://theme/basic/key_hidden.png", "://theme/basic/key_hidden.png");
+            ui->checkShift->setPixmap("://pictures/key_hidden.png", "://pictures/key_hidden.png");
             if(ui->checkShift->isChecked())
                 ui->checkShift->setChecked(false);
             ui->checkShift->update();
@@ -310,7 +310,7 @@ void frmInput::btn_clicked()
         if (currentType == "min" || currentType == "max") {
         } else if (currentType == "chinese") {
             currentType = "min";
-            ui->checkShift->setPixmap("://theme/basic/key_shift.png", "://theme/basic/key_shift_press.png");
+            ui->checkShift->setPixmap("://pictures/key_shift.png", "://pictures/key_shift_press.png");
             if(ui->checkShift->isChecked())
                 ui->checkShift->setChecked(false);
             ui->checkShift->update();
@@ -404,7 +404,7 @@ void frmInput::btn_clicked()
 }
 
 //事件过滤器,用于识别鼠标单击汉字标签处获取对应汉字
-bool frmInput::eventFilter(QObject *obj, QEvent *event)
+bool HNInput::eventFilter(QObject *obj, QEvent *event)
 {
     //pline() << obj->objectName() << currentEditType << event->type();
     if (event->type() == QEvent::MouseButtonPress) {
@@ -527,7 +527,7 @@ bool frmInput::eventFilter(QObject *obj, QEvent *event)
     return QWidget::eventFilter(obj, event);
 }
 
-void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
+void HNInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
 {
     currentFocusWidget = nowWidget;
     //pline() << currentEditType << "oldWidget:" << oldWidget << " nowWidget:" << nowWidget;
@@ -596,7 +596,7 @@ void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
     //pline() << currentEditType;
 }
 
-void frmInput::changeType()
+void HNInput::changeType()
 {
     //如果需要更改输入法初始模式,改变currentType这个变量即可
     //min--小写模式  max--大写模式  chinese--中文模式
@@ -628,7 +628,7 @@ void frmInput::changeType()
     ui->labPY->setText("");
 }
 
-void frmInput::changeLetter(bool isUpper)
+void HNInput::changeLetter(bool isUpper)
 {
     QList<QPushButton *> btn = this->findChildren<QPushButton *>();
     foreach (QPushButton * b, btn) {
@@ -642,7 +642,7 @@ void frmInput::changeLetter(bool isUpper)
     }
 }
 
-void frmInput::selectChinese()
+void HNInput::selectChinese()
 {
     clearChinese();
     QSqlQuery query(m_db);
@@ -663,7 +663,7 @@ void frmInput::selectChinese()
     showChinese();
 }
 
-void frmInput::showChinese()
+void HNInput::showChinese()
 {
     //每个版面最多显示10个汉字
     int count = 0;
@@ -685,7 +685,7 @@ void frmInput::showChinese()
     qDebug() << "currentPY_index:" << currentPY_index << "currentPY_count:" << currentPY_count;
 }
 
-void frmInput::insertValue(QString value)
+void HNInput::insertValue(QString value)
 {
     if (currentEditType == "QLineEdit") {
         currentLineEdit->insert(value);
@@ -701,7 +701,7 @@ void frmInput::insertValue(QString value)
     }
 }
 
-void frmInput::deleteValue()
+void HNInput::deleteValue()
 {
     if (currentEditType == "QLineEdit") {
         currentLineEdit->backspace();
@@ -735,7 +735,7 @@ void frmInput::deleteValue()
     }
 }
 
-void frmInput::setChinese(int index)
+void HNInput::setChinese(int index)
 {
     int count = currentPY.count();
     if (count > index) {
@@ -746,7 +746,7 @@ void frmInput::setChinese(int index)
     }
 }
 
-void frmInput::clearChinese()
+void HNInput::clearChinese()
 {
     //清空汉字,重置索引
     for (int i = 0; i < 10; i++) {
@@ -758,7 +758,7 @@ void frmInput::clearChinese()
     currentPY_count = 0;
 }
 
-void frmInput::changeRect()
+void HNInput::changeRect()
 {
     QRect geo = geometry();
     if (currentType == "min" || currentType == "max") {
@@ -770,7 +770,7 @@ void frmInput::changeRect()
     setGeometry(geo);
 }
 
-void frmInput::changePosition()
+void HNInput::changePosition()
 {
     //如果需要更改输入法面板的显示位置,改变currentPosition这个变量即可
     //control--显示在对应输入框的正下方 bottom--填充显示在底部  center--窗体居中显示
@@ -826,7 +826,7 @@ void frmInput::changePosition()
     }
 }
 
-void frmInput::ChangeStyle()
+void HNInput::ChangeStyle()
 {
     //如果需要更改输入法面板的样式,改变currentStyle这个变量即可
     //blue--淡蓝色  dev--dev风格  black--黑色  brown--灰黑色  lightgray--浅灰色  darkgray--深灰色  gray--灰色  silvery--银色
@@ -853,7 +853,7 @@ void frmInput::ChangeStyle()
     }
 }
 
-void frmInput::ChangeFont()
+void HNInput::ChangeFont()
 {
     //输入法面板字体大小,如果需要更改面板字体大小,该这里即可
     //btnFontSize = 10;
@@ -876,7 +876,7 @@ void frmInput::ChangeFont()
     ui->btnClose->setFont(labFont);
 }
 
-void frmInput::changeStyle(QString topColor, QString bottomColor, QString borderColor, QString textColor)
+void HNInput::changeStyle(QString topColor, QString bottomColor, QString borderColor, QString textColor)
 {
     QStringList qss;
 

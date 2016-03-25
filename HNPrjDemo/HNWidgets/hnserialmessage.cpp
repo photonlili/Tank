@@ -1,7 +1,7 @@
 #include "hnserialmessage.h"
 #include "HNDefine.h"
 
-QTankSerialMessage::QTankSerialMessage(QObject *parent) :
+HNSerialMessage::HNSerialMessage(QObject *parent) :
     QObject(parent)
 {
     m_Head = _SERIAL_HEAD;
@@ -10,7 +10,7 @@ QTankSerialMessage::QTankSerialMessage(QObject *parent) :
     m_Tail = _SERIAL_TAIL;
 }
 
-void QTankSerialMessage::translate()
+void HNSerialMessage::translate()
 {
     m_Size = m_Data.length() + 0x0A;
     QByteArray qbaVerify;
@@ -22,7 +22,7 @@ void QTankSerialMessage::translate()
         m_Sum += quint8(qbaVerify.at(i));
 }
 
-QDebug operator<<(QDebug dbg, const QTankSerialMessage &c)
+QDebug operator<<(QDebug dbg, const HNSerialMessage &c)
 {
 #if 1
     dbg.nospace() << "{" << hex << c.head() << "|" <<
@@ -60,7 +60,7 @@ QDebug operator<<(QDebug dbg, const QTankSerialMessage &c)
     return dbg.space();
 }
 
-quint16 QTankSerialMessage::parseBlockSize(const QByteArray &netData)
+quint16 HNSerialMessage::parseBlockSize(const QByteArray &netData)
 {
     QByteArray l = netData.left(4);
     quint16 b0 = 0, b1 = 0;
@@ -68,7 +68,7 @@ quint16 QTankSerialMessage::parseBlockSize(const QByteArray &netData)
     return b1;
 }
 
-void QTankSerialMessage::parse(const QByteArray &netData)
+void HNSerialMessage::parse(const QByteArray &netData)
 {
     QByteArray l = netData;
     quint16 b0 = 0, b1 = 0, b2 = 0, b4 = 0, b5 = 0;
@@ -84,7 +84,7 @@ void QTankSerialMessage::parse(const QByteArray &netData)
     setTail(b5);
 }
 
-void QTankSerialMessage::pack(QByteArray &netData) const
+void HNSerialMessage::pack(QByteArray &netData) const
 {
     netData << head();
     netData << size();
@@ -99,7 +99,7 @@ void QTankWritePassAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_WRITEPASSACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -107,7 +107,7 @@ void QTankWriteSerialNoAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_WRITEDEVNOACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -115,7 +115,7 @@ void QTankHandupAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_HANDACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -123,7 +123,7 @@ void QTankCloseAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_CLOSEACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -131,7 +131,7 @@ void QTankReadSerialNoAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_READDEVNOACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -139,7 +139,7 @@ void QTankReadPassAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_READPASSACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }
 
 
@@ -147,5 +147,5 @@ void QTankExceptionAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_EXCEPTIONACK);
     translate();
-    QTankSerialMessage::pack(l);
+    HNSerialMessage::pack(l);
 }

@@ -7,12 +7,12 @@
 #include "HNDefine.h"
 
 //屏通过这个类和单片机进行通信
-class QTankPeerPort : public QSerialPort
+class HNPeerPort : public QSerialPort
 {
     Q_OBJECT
 public:
-    explicit QTankPeerPort(QObject *parent = 0);
-    ~QTankPeerPort();
+    explicit HNPeerPort(QObject *parent = 0);
+    ~HNPeerPort();
 
     void setHeatParam(quint8 stage, quint8 vessel, quint16 ramp, quint16 press, quint16 hold);
     void sendMsgConnectToC51();
@@ -59,6 +59,6 @@ private:
     QTankHeatRAMPStruct m_heat;
 };
 
-QTankPeerPort *HNPeerPort(QObject* parent = 0);
+HNPeerPort *HNPeerPortInstance(QObject* parent = 0);
 
 #endif // QTANKPEERPORT_H

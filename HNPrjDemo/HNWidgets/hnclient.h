@@ -16,12 +16,12 @@
 #define TANK_Q_SOCKET 1
 #define TANK_Q_THREAD 0
 
-class QTankClient : public QTcpSocket
+class HNClient : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit QTankClient(QObject *parent = 0);
-    virtual ~QTankClient();
+    explicit HNClient(QObject *parent = 0);
+    virtual ~HNClient();
 
     void setServPort(quint32 p = 7079) { m_PORT = p; }
     void SendConnectMessage();
@@ -87,7 +87,7 @@ private:
     template <typename T>
     void sendMessage(quint16 cmd, const T &t)
     {
-        QTankMessage qMsg;
+        HNClientMessage qMsg;
         qMsg.setUid(m_UID);
         qMsg.setCmd(cmd);
         QByteArray d;
@@ -96,7 +96,7 @@ private:
         qMsg.translate();
         pline() << qMsg;
         QByteArray b;
-        QTankParser::pack(b, qMsg);
+        HNClientParser::pack(b, qMsg);
         write(b);
         /*
         qint64 bb = bytesToWrite();
@@ -131,26 +131,26 @@ private slots:
     void sendDownFileSuccess();
     void readyReadData();
     void dispatchRecvedMessage(QByteArray& blockOnNet);
-    void recvLoginResultMessage(QTankMessage&);
-    void recvHeatBeatResultMessage(QTankMessage&);
-    void recvConnPoolFullMessage(QTankMessage&){}
-    void recvListDirResultMessage(QTankMessage&);
-    void recvAddDirResultMessage(QTankMessage&){}
-    void recvDelDirResultMessage(QTankMessage&){}
-    void recvModDirResultMessage(QTankMessage&){}
-    void recvListFilesResultMessage(QTankMessage&);
-    void recvListPubDirResultMessage(QTankMessage&);
-    void recvListPubFilesResultMessage(QTankMessage&);
-    void recvDownFileResultMessage(QTankMessage&);
-    void recvDownFileDataResultMessage(QTankMessage&);
-    void recvUploadFileResult(QTankMessage&);
-    void recvUploadFileDataResult(QTankMessage&);
-    void recvUploadFileSuccess(QTankMessage&);
-    void recvCheckVersionResult(QTankMessage&);
+    void recvLoginResultMessage(HNClientMessage&);
+    void recvHeatBeatResultMessage(HNClientMessage&);
+    void recvConnPoolFullMessage(HNClientMessage&){}
+    void recvListDirResultMessage(HNClientMessage&);
+    void recvAddDirResultMessage(HNClientMessage&){}
+    void recvDelDirResultMessage(HNClientMessage&){}
+    void recvModDirResultMessage(HNClientMessage&){}
+    void recvListFilesResultMessage(HNClientMessage&);
+    void recvListPubDirResultMessage(HNClientMessage&);
+    void recvListPubFilesResultMessage(HNClientMessage&);
+    void recvDownFileResultMessage(HNClientMessage&);
+    void recvDownFileDataResultMessage(HNClientMessage&);
+    void recvUploadFileResult(HNClientMessage&);
+    void recvUploadFileDataResult(HNClientMessage&);
+    void recvUploadFileSuccess(HNClientMessage&);
+    void recvCheckVersionResult(HNClientMessage&);
 };
 
-QTankClient *HNSingleClient(QObject *parent = 0);
-QTankClient *HNSingleUpgradeClient(QObject *parent = 0);
+HNClient *HNSingleClient(QObject *parent = 0);
+HNClient *HNSingleUpgradeClient(QObject *parent = 0);
 
 
 #endif // QTANKCLIENT_H

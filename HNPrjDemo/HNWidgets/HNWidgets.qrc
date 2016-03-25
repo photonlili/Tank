@@ -1,0 +1,25 @@
+<RCC>
+    <qresource prefix="/">
+        <file>pictures/bk_progress_background.png</file>
+        <file>pictures/bk_progress_chunk.png</file>
+        <file>pictures/bk_sel.png</file>
+        <file>pictures/bt_brower.png</file>
+        <file>pictures/bt_bt_disable.png</file>
+        <file>pictures/bt_bt_hover.png</file>
+        <file>pictures/bt_bt_normal.png</file>
+        <file>pictures/bt_bt_press.png</file>
+        <file>pictures/key.png</file>
+        <file>pictures/key_blank.png</file>
+        <file>pictures/key_blank_press.png</file>
+        <file>pictures/key_close.png</file>
+        <file>pictures/key_close_press.png</file>
+        <file>pictures/key_del.png</file>
+        <file>pictures/key_del_press.png</file>
+        <file>pictures/key_hidden.png</file>
+        <file>pictures/key_press.png</file>
+        <file>pictures/key_return.png</file>
+        <file>pictures/key_return_press.png</file>
+        <file>pictures/key_shift.png</file>
+        <file>pictures/key_shift_press.png</file>
+    </qresource>
+</RCC>

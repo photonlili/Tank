@@ -1,13 +1,13 @@
 #include "hnplayermodel.h"
 #include "HNDefine.h"
 
-QMPlayerModel::QMPlayerModel(QObject *parent) :
+HNPlayerModel::HNPlayerModel(QObject *parent) :
     QObject(parent)
 {
     app = new QProcess(this);
 }
 
-void QMPlayerModel::play(QString filename, int wid, int width, int height)
+void HNPlayerModel::play(QString filename, int wid, int width, int height)
 {
     QString mppath="mplayer";
     QStringList mpargs;
@@ -32,14 +32,14 @@ void QMPlayerModel::play(QString filename, int wid, int width, int height)
     pline() << "mpp start success :)";
 }
 
-void QMPlayerModel::pause()
+void HNPlayerModel::pause()
 {
     char buf[256]= {0};
     sprintf(buf, "pause\n");
     app->write(buf);
 }
 
-void QMPlayerModel::stop()
+void HNPlayerModel::stop()
 {
     char buf[256]= {0};
     sprintf(buf, "stop\n");
@@ -48,7 +48,7 @@ void QMPlayerModel::stop()
     app->write(buf);
 }
 
-double QMPlayerModel::timeLength()
+double HNPlayerModel::timeLength()
 {
     char buf[256]= {0};
     sprintf(buf, "get_time_length\n");
@@ -60,7 +60,7 @@ double QMPlayerModel::timeLength()
     return length;
 }
 
-double QMPlayerModel::timePos()
+double HNPlayerModel::timePos()
 {
     char buf[256]= {0};
     sprintf(buf, "get_time_pos\n");
@@ -72,7 +72,7 @@ double QMPlayerModel::timePos()
     return pos;
 }
 
-int QMPlayerModel::percent()
+int HNPlayerModel::percent()
 {
     char buf[256]= {0};
     sprintf(buf, "get_percent\n");
@@ -84,28 +84,28 @@ int QMPlayerModel::percent()
     return pos;
 }
 
-void QMPlayerModel::seekPos(double second)
+void HNPlayerModel::seekPos(double second)
 {
     char buf[256]= {0};
     sprintf(buf, "seek %lf\n", second);
     app->write(buf);
 }
 
-void QMPlayerModel::setVolume(int v)
+void HNPlayerModel::setVolume(int v)
 {
     char buf[256]= {0};
     sprintf(buf, "volume %d 1\n", v);
     app->write(buf);
 }
 
-void QMPlayerModel::mute(bool m)
+void HNPlayerModel::mute(bool m)
 {
     char buf[256]= {0};
     sprintf(buf, "mute %d\n", m);
     app->write(buf);
 }
 
-void QMPlayerModel::setRect(int x, int y, int width, int height)
+void HNPlayerModel::setRect(int x, int y, int width, int height)
 {
     char buf[256] = {0};
     sprintf(buf, "change_rectangle 0 %d \n", width);

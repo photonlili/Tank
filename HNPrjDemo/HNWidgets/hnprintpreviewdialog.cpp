@@ -6,7 +6,7 @@
 #include "HNDefine.h"
 
 
-QReportViewDialog::QReportViewDialog(QWidget *parent) :
+HNPrintPreviewDialog::HNPrintPreviewDialog(QWidget *parent) :
     HNDialog(parent),
     ui(new Ui::QReportViewDialog)
 {
@@ -28,13 +28,13 @@ QReportViewDialog::QReportViewDialog(QWidget *parent) :
     }
 }
 
-QReportViewDialog::~QReportViewDialog()
+HNPrintPreviewDialog::~HNPrintPreviewDialog()
 {
     closeDatabase(m_db);
     delete ui;
 }
 
-QString QReportViewDialog::newReport(QString library, QString method)
+QString HNPrintPreviewDialog::newReport(QString library, QString method)
 {
     QSettings set;
     QString company = set.value("Company").toString();
@@ -56,7 +56,7 @@ QString QReportViewDialog::newReport(QString library, QString method)
     return serialNo;
 }
 
-void QReportViewDialog::endReport(QString serialNo, QString Exception, QString stopReason, QByteArray &plot)
+void HNPrintPreviewDialog::endReport(QString serialNo, QString Exception, QString stopReason, QByteArray &plot)
 {
     QSqlQuery query(m_db);
     query.prepare(QString("UPDATE %1 SET Exception='%2',StopReason='%3',Plot=? WHERE serialNo = '%4'")
@@ -66,7 +66,7 @@ void QReportViewDialog::endReport(QString serialNo, QString Exception, QString s
     query.finish();
 }
 
-void QReportViewDialog::initAll(QString name)
+void HNPrintPreviewDialog::initAll(QString name)
 {
     QStringList lsl = name.split("_");
     if(lsl.size() < 1)
@@ -136,7 +136,7 @@ void QReportViewDialog::initAll(QString name)
     m_text->append(et);
 }
 
-void QReportViewDialog::printToPdf()
+void HNPrintPreviewDialog::printToPdf()
 {
     QString fileName = QString("Report.pdf");
     QFile::remove(fileName);
@@ -153,7 +153,7 @@ void QReportViewDialog::printToPdf()
     m_text->print(&printer);
 }
 
-void QReportViewDialog::print()
+void HNPrintPreviewDialog::print()
 {
     HNPrinter p;
     p.printpdf("Report.pdf");

@@ -33,7 +33,7 @@ public slots:
 
 private:
     Ui::HNCloudForm *ui;
-    QTankClient* m_cli;
+    HNClient* m_cli;
     HNProgressDialog* m_prog;
     HNProgressDialog* m_progDown;
     HNProgressDialog* m_progDel;

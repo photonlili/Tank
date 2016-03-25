@@ -2,49 +2,49 @@
 #include "HNDefine.h"
 
 
-QTankServer::QTankServer(QObject *parent) :
+HNServer::HNServer(QObject *parent) :
     QTcpServer(parent)
 {
     listen(QHostAddress::Any, 8000);
 }
 
-QTankServer::~QTankServer()
+HNServer::~HNServer()
 {
     close();
 }
 
-void QTankServer::incomingConnection(int handle)
+void HNServer::incomingConnection(int handle)
 {
-    QTankClientConnection* clientSocket = new QTankClientConnection(this);
+    HNClientConnection* clientSocket = new HNClientConnection(this);
     clientSocket->setSocketDescriptor(handle);
 }
 
-QTankClientConnection::QTankClientConnection(QObject *parent) :
+HNClientConnection::HNClientConnection(QObject *parent) :
     QTcpSocket(parent)
 {
     connect(this, SIGNAL(readyRead()), this, SLOT(readyReadData()));
     connect(this, SIGNAL(disconnected()), this, SLOT(deleteLater()));
 }
 
-QTankClientConnection::~QTankClientConnection()
+HNClientConnection::~HNClientConnection()
 {
 
 }
 
-void QTankClientConnection::dispatchRecvedMessage(QByteArray &blockOnNet)
+void HNClientConnection::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
-    QTankSerialMessage qMsg;
+    HNSerialMessage qMsg;
     qMsg.parse(blockOnNet);
     pline() << qMsg;
 }
 
-void QTankClientConnection::readyReadData()
+void HNClientConnection::readyReadData()
 {
     static QByteArray m_blockOnNet;
     m_blockOnNet += readAll();
 
     do{
-        quint16 nBlockLen = QTankSerialMessage::parseBlockSize(m_blockOnNet);
+        quint16 nBlockLen = HNSerialMessage::parseBlockSize(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
@@ -69,9 +69,9 @@ void QTankClientConnection::readyReadData()
 }
 
 
-QTankServer *HNSingleServer(QObject *parent)
+HNServer *HNSingleServer(QObject *parent)
 {
-    static QTankServer* s = new QTankServer(parent);
+    static HNServer* s = new HNServer(parent);
     return s;
 }
 

@@ -8,7 +8,7 @@ class HNCloudModel : public HNStandardItemModel
 {
     Q_OBJECT
 public:
-    explicit HNCloudModel(QObject *parent = 0, QTankClient* clientHandle = NULL);
+    explicit HNCloudModel(QObject *parent = 0, HNClient* clientHandle = NULL);
 
 signals:
     void sigDownSuccess();
@@ -28,7 +28,7 @@ private:
     QStandardItem* findDirByCode(QString code);
 
 private:
-    QTankClient* m_client;
+    HNClient* m_client;
 };
 
 #endif // QCLOUDMODEL_H

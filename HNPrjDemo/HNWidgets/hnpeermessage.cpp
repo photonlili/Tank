@@ -1,7 +1,7 @@
 #include "hnpeermessage.h"
 #include "HNDefine.h"
 
-QTankPeerMessage::QTankPeerMessage(QObject *parent) :
+HNPeerMessage::HNPeerMessage(QObject *parent) :
     QObject(parent)
 {
     m_Head = _PEER_HEAD;
@@ -10,7 +10,7 @@ QTankPeerMessage::QTankPeerMessage(QObject *parent) :
     m_Tail = _PEER_TAIL;
 }
 
-void QTankPeerMessage::translate()
+void HNPeerMessage::translate()
 {
     m_Size = m_Data.length() + 0x0A;
     QByteArray qbaVerify;
@@ -22,7 +22,7 @@ void QTankPeerMessage::translate()
         m_Sum += quint8(qbaVerify.at(i));
 }
 
-QDebug operator<<(QDebug dbg, const QTankPeerMessage &c)
+QDebug operator<<(QDebug dbg, const HNPeerMessage &c)
 {
     dbg.nospace() << "{" << hex << c.head() << "|" <<
                      hex << c.size() << "@@" << dec << c.size() << "|" <<
@@ -33,7 +33,7 @@ QDebug operator<<(QDebug dbg, const QTankPeerMessage &c)
     return dbg.space();
 }
 
-quint16 QTankPeerMessage::parseBlockSize(const QByteArray &netData)
+quint16 HNPeerMessage::parseBlockSize(const QByteArray &netData)
 {
     QByteArray l = netData.left(4);
     quint16 b0 = 0, b1 = 0;
@@ -41,7 +41,7 @@ quint16 QTankPeerMessage::parseBlockSize(const QByteArray &netData)
     return b1;
 }
 
-void QTankPeerMessage::parse(const QByteArray &netData)
+void HNPeerMessage::parse(const QByteArray &netData)
 {
     QByteArray l = netData;
     quint16 b0 = 0, b1 = 0, b2 = 0, b4 = 0, b5 = 0;
@@ -57,7 +57,7 @@ void QTankPeerMessage::parse(const QByteArray &netData)
     setTail(b5);
 }
 
-void QTankPeerMessage::pack(QByteArray &netData)
+void HNPeerMessage::pack(QByteArray &netData)
 {
     netData << head();
     netData << size();
@@ -72,13 +72,13 @@ void QTankConnC51Struct::pack(QByteArray &l)
 {
     setCmd(_PEER_CONC51);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
 void QTankCmd2C51Ack::parse(const QByteArray &l)
 {
-    QTankPeerMessage::parse(l);
+    HNPeerMessage::parse(l);
 }
 
 
@@ -91,7 +91,7 @@ void QTankHeatStandardStruct::pack(QByteArray &l)
          quint16(0x0000) << quint16(0x0000) << wTempture << wHold;
     setData(d);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
@@ -99,7 +99,7 @@ void QTankPauseStruct::pack(QByteArray &l)
 {
     setCmd(_PEER_PAUSE);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
@@ -107,7 +107,7 @@ void QTankStopStruct::pack(QByteArray &l)
 {
     setCmd(_PEER_STOP);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
@@ -120,7 +120,7 @@ void QTankHeatPressStruct::pack(QByteArray &l)
          quint16(0x0000) << wPress << quint16(0x0000) << quint16(0x0000);
     setData(d);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
@@ -133,7 +133,7 @@ void QTankHeatRAMPStruct::pack(QByteArray &l)
          wRamp << wPress << wTempture  << wHold;
     setData(d);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }
 
 
@@ -146,5 +146,5 @@ void QTankHeatExtractStruct::pack(QByteArray &l)
          quint16(0x0000) << quint16(0x0000) << wTempture << wHold;
     setData(d);
     translate();
-    QTankPeerMessage::pack(l);
+    HNPeerMessage::pack(l);
 }

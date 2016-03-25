@@ -5,12 +5,12 @@
 #include <QTcpSocket>
 #include "hnserialmessage.h"
 
-class QTankServer : public QTcpServer
+class HNServer : public QTcpServer
 {
     Q_OBJECT
 public:
-    explicit QTankServer(QObject *parent = 0);
-    ~QTankServer();
+    explicit HNServer(QObject *parent = 0);
+    ~HNServer();
 
 signals:
     // QTcpServer interface
@@ -18,12 +18,12 @@ protected:
     void incomingConnection(int handle);
 };
 
-class QTankClientConnection : public QTcpSocket
+class HNClientConnection : public QTcpSocket
 {
     Q_OBJECT
 public:
-    explicit QTankClientConnection(QObject *parent = 0);
-    ~QTankClientConnection();
+    explicit HNClientConnection(QObject *parent = 0);
+    ~HNClientConnection();
 
 signals:
 
@@ -32,6 +32,6 @@ public slots:
     void readyReadData();
 };
 
-QTankServer *HNSingleServer(QObject* parent);
+HNServer *HNSingleServer(QObject* parent);
 
 #endif // QTANKSERVER_H

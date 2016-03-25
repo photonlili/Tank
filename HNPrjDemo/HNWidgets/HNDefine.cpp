@@ -58,18 +58,18 @@ QByteArray &operator>>(QByteArray &l, QByteArray &r)
 
 tagBtnIconTable::tagBtnIconTable()
 {
-    pixmap[BTN_NORMAL] = "://theme/basic/bt_bt_normal.png";
-    pixmap[BTN_UNCHECK] = "://theme/basic/bt_bt_normal.png";
+    pixmap[BTN_NORMAL] = "://pictures/bt_bt_normal.png";
+    pixmap[BTN_UNCHECK] = "://pictures/bt_bt_normal.png";
 #ifdef __MIPS_LINUX__
-    pixmap[BTN_HOVER] = "://theme/basic/bt_bt_hover.png";
-    pixmap[BTN_CHECK] = "://theme/basic/bt_bt_hover.png";
-    pixmap[BTN_PRESS] = "://theme/basic/bt_bt_hover.png";
+    pixmap[BTN_HOVER] = "://pictures/bt_bt_hover.png";
+    pixmap[BTN_CHECK] = "://pictures/bt_bt_hover.png";
+    pixmap[BTN_PRESS] = "://pictures/bt_bt_hover.png";
 #else
-    pixmap[BTN_HOVER] = "://theme/basic/bt_bt_hover.png";
-    pixmap[BTN_CHECK] = "://theme/basic/bt_bt_check.png";
-    pixmap[BTN_PRESS] = "://theme/basic/bt_bt_press.png";
+    pixmap[BTN_HOVER] = "://pictures/bt_bt_hover.png";
+    pixmap[BTN_CHECK] = "://pictures/bt_bt_check.png";
+    pixmap[BTN_PRESS] = "://pictures/bt_bt_press.png";
 #endif
-    pixmap[BTN_DISABLE] = "://theme/basic/bt_bt_disable.png";
+    pixmap[BTN_DISABLE] = "://pictures/bt_bt_disable.png";
 }
 
 QString tagBtnIconTable::pixMap(int index)

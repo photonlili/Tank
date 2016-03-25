@@ -6,12 +6,12 @@
 #include "HNDefine.h"
 
 //生产部门使用这个串口操作机器
-class QTankSerialPort : public QSerialPort
+class HNSerialPort : public QSerialPort
 {
     Q_OBJECT
 public:
-    explicit QTankSerialPort(QObject *parent = 0);
-    ~QTankSerialPort();
+    explicit HNSerialPort(QObject *parent = 0);
+    ~HNSerialPort();
 
 signals:
     void sigSerialUnlock();
@@ -37,6 +37,6 @@ private slots:
 private:
 };
 
-QTankSerialPort *HNSerialPort(QObject* parent = 0);
+HNSerialPort *HNSerialPortInst(QObject* parent = 0);
 
 #endif // QTANKSERIALPORT_H

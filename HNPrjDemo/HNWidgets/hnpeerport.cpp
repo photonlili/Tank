@@ -6,7 +6,7 @@
 #define MAX_CONNCOUNT 5 //(+1)
 #define MAX_SERIALTIME 1000
 
-QTankPeerPort::QTankPeerPort(QObject *parent) :
+HNPeerPort::HNPeerPort(QObject *parent) :
     QSerialPort(parent)
 {
 #ifdef __MIPS_LINUX__
@@ -37,12 +37,12 @@ QTankPeerPort::QTankPeerPort(QObject *parent) :
     m_msgType = 0;
 }
 
-QTankPeerPort::~QTankPeerPort()
+HNPeerPort::~HNPeerPort()
 {
     close();
 }
 
-void QTankPeerPort::sendMsgConnectToC51()
+void HNPeerPort::sendMsgConnectToC51()
 {
     //if(m_conCount)
     //    return;
@@ -51,7 +51,7 @@ void QTankPeerPort::sendMsgConnectToC51()
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgHeatPress(quint8 stage, quint8 vessel, quint16 press)
+void HNPeerPort::sendMsgHeatPress(quint8 stage, quint8 vessel, quint16 press)
 {
     m_cmdCount = 0;
     m_msgType = _PEER_HEAT;
@@ -62,7 +62,7 @@ void QTankPeerPort::sendMsgHeatPress(quint8 stage, quint8 vessel, quint16 press)
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgHeatStandard(quint8 stage, quint8 vessel, quint16 tempture, quint16 hold)
+void HNPeerPort::sendMsgHeatStandard(quint8 stage, quint8 vessel, quint16 tempture, quint16 hold)
 {
     m_cmdCount = 0;
     m_msgType = _PEER_HEAT;
@@ -74,7 +74,7 @@ void QTankPeerPort::sendMsgHeatStandard(quint8 stage, quint8 vessel, quint16 tem
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgHeatRAMP(quint8 stage, quint8 vessel,
+void HNPeerPort::sendMsgHeatRAMP(quint8 stage, quint8 vessel,
                                     quint16 ramp, quint16 press, quint16 tempture, quint16 hold)
 {
     m_cmdCount = 0;
@@ -89,7 +89,7 @@ void QTankPeerPort::sendMsgHeatRAMP(quint8 stage, quint8 vessel,
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 hold)
+void HNPeerPort::sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 hold)
 {
     m_cmdCount = 0;
     m_msgType = _PEER_HEAT;
@@ -100,21 +100,21 @@ void QTankPeerPort::sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 h
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgPause()
+void HNPeerPort::sendMsgPause()
 {
     m_cmdCount = 0;
     m_msgType = _PEER_PAUSE;
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::sendMsgStop()
+void HNPeerPort::sendMsgStop()
 {
     m_cmdCount = 0;
     m_msgType = _PEER_STOP;
     timer->start(MAX_SERIALTIME);
 }
 
-void QTankPeerPort::SendSerialMessage()
+void HNPeerPort::SendSerialMessage()
 {
     if(m_cmdCount > MAX_CONNCOUNT)
     {
@@ -160,7 +160,7 @@ void QTankPeerPort::SendSerialMessage()
     m_cmdCount++;
 }
 
-void QTankPeerPort::sendConnectToC51()
+void HNPeerPort::sendConnectToC51()
 {
     QTankConnC51Struct t;
     QByteArray l;
@@ -169,7 +169,7 @@ void QTankPeerPort::sendConnectToC51()
     pline() << "connect to c51" << m_cmdCount;
 }
 
-void QTankPeerPort::sendHeatPress()
+void HNPeerPort::sendHeatPress()
 {
     QTankHeatPressStruct t;
     t.setStage(m_heat.stage());
@@ -180,7 +180,7 @@ void QTankPeerPort::sendHeatPress()
     write(l);
 }
 
-void QTankPeerPort::sendHeatStandard()
+void HNPeerPort::sendHeatStandard()
 {
     QTankHeatStandardStruct t;
     t.setStage(m_heat.stage());
@@ -192,7 +192,7 @@ void QTankPeerPort::sendHeatStandard()
     write(l);
 }
 
-void QTankPeerPort::sendHeatRAMP()
+void HNPeerPort::sendHeatRAMP()
 {
     QTankHeatRAMPStruct t;
     t.setStage(m_heat.stage());
@@ -206,7 +206,7 @@ void QTankPeerPort::sendHeatRAMP()
     write(l);
 }
 
-void QTankPeerPort::sendHeatExtract()
+void HNPeerPort::sendHeatExtract()
 {
     QTankHeatExtractStruct t;
     t.setStage(m_heat.stage());
@@ -217,7 +217,7 @@ void QTankPeerPort::sendHeatExtract()
     write(l);
 }
 
-void QTankPeerPort::sendPause()
+void HNPeerPort::sendPause()
 {
     QTankPauseStruct t;
     QByteArray l;
@@ -225,7 +225,7 @@ void QTankPeerPort::sendPause()
     write(l);
 }
 
-void QTankPeerPort::sendStop()
+void HNPeerPort::sendStop()
 {
     QTankStopStruct t;
     QByteArray l;
@@ -234,7 +234,7 @@ void QTankPeerPort::sendStop()
 }
 
 
-void QTankPeerPort::readyReadData()
+void HNPeerPort::readyReadData()
 {
     // queued conn and queued package;
     // direct conn and ???
@@ -244,7 +244,7 @@ void QTankPeerPort::readyReadData()
     //pline() << aaa;
     //TODO:已经具备判断已经接受完全的装备
     do{
-        quint16 nBlockLen = QTankPeerMessage::parseBlockSize(m_blockOnNet);
+        quint16 nBlockLen = HNPeerMessage::parseBlockSize(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
@@ -270,14 +270,14 @@ void QTankPeerPort::readyReadData()
     m_blockOnNet.clear();
 }
 
-void QTankPeerPort::updateProgress(qint64)
+void HNPeerPort::updateProgress(qint64)
 {
 
 }
 
-void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
+void HNPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
-    QTankPeerMessage qMsg;
+    HNPeerMessage qMsg;
     qMsg.parse(blockOnNet);
     pline() << qMsg;
     emit sigRecvMsg(blockOnNet);
@@ -294,21 +294,21 @@ void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
     }
 }
 
-void QTankPeerPort::recvCmdAck(const QByteArray &l)
+void HNPeerPort::recvCmdAck(const QByteArray &l)
 {
     pline() << "command run success";
     timer->stop();
     //m_conCount = 0;
 }
 
-void QTankPeerPort::recvCmdNAck(const QByteArray &l)
+void HNPeerPort::recvCmdNAck(const QByteArray &l)
 {
     pline() << "command run fail";
     // 重发
 }
 
-QTankPeerPort *HNPeerPort(QObject *parent)
+HNPeerPort *HNPeerPortInstance(QObject *parent)
 {
-    static QTankPeerPort* com0 = new QTankPeerPort(parent);
+    static HNPeerPort* com0 = new HNPeerPort(parent);
     return com0;
 }

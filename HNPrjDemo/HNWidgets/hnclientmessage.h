@@ -252,11 +252,11 @@ typedef struct tagQTCheckVersionResult
     QString m_FileSize;
 }QTCheckVersionResult;
 
-class QTankMessage : public QObject
+class HNClientMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit QTankMessage(QObject *parent = 0);
+    explicit HNClientMessage(QObject *parent = 0);
 
     const quint16& head() const { return m_Head; }
     void setHead(quint16 head) { m_Head = head; }
@@ -288,16 +288,16 @@ private:
     quint32 m_Tail;
 };
 
-QDebug operator<< (QDebug dbg, const QTankMessage &c);
+QDebug operator<< (QDebug dbg, const HNClientMessage &c);
 
-class QTankParser : public QObject
+class HNClientParser : public QObject
 {
 public:
-    explicit QTankParser(QObject *parent = 0) : QObject(parent) {}
+    explicit HNClientParser(QObject *parent = 0) : QObject(parent) {}
 
     static quint16 parseBlockSize(const QByteArray &netData);
-    static void parse(QTankMessage& getter, const QByteArray &netData);
-    static void pack(QByteArray& netData, const QTankMessage& setter);
+    static void parse(HNClientMessage& getter, const QByteArray &netData);
+    static void pack(QByteArray& netData, const HNClientMessage& setter);
 
 private:
 };

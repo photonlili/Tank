@@ -20,11 +20,11 @@
 #define _SERIAL_READPASSACK     0x8006
 #define _SERIAL_EXCEPTIONACK    0x800F
 
-class QTankSerialMessage : public QObject
+class HNSerialMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit QTankSerialMessage(QObject *parent = 0);
+    explicit HNSerialMessage(QObject *parent = 0);
 
     const quint16& head() const { return m_Head; }
     void setHead(quint16 head) { m_Head = head; }
@@ -59,69 +59,69 @@ private:
     quint16 m_Tail;
 };
 
-QDebug operator<< (QDebug dbg, const QTankSerialMessage &c);
+QDebug operator<< (QDebug dbg, const HNSerialMessage &c);
 
-class QTankHandupAck : public QTankSerialMessage
+class QTankHandupAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankHandupAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankHandupAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankCloseAck : public QTankSerialMessage
+class QTankCloseAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankCloseAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankCloseAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray &l);
 };
 
-class QTankWriteSerialNoAck : public QTankSerialMessage
+class QTankWriteSerialNoAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankWriteSerialNoAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankWriteSerialNoAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankReadSerialNoAck : public QTankSerialMessage
+class QTankReadSerialNoAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankReadSerialNoAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankReadSerialNoAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankWritePassAck : public QTankSerialMessage
+class QTankWritePassAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankWritePassAck(QObject *parent = 0) : QTankSerialMessage(parent){}
-
-    void pack(QByteArray &l);
-};
-
-
-class QTankReadPassAck : public QTankSerialMessage
-{
-    Q_OBJECT
-public:
-    explicit QTankReadPassAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankWritePassAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray &l);
 };
 
 
-class QTankExceptionAck : public QTankSerialMessage
+class QTankReadPassAck : public HNSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankExceptionAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankReadPassAck(QObject *parent = 0) : HNSerialMessage(parent){}
+
+    void pack(QByteArray &l);
+};
+
+
+class QTankExceptionAck : public HNSerialMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankExceptionAck(QObject *parent = 0) : HNSerialMessage(parent){}
 
     void pack(QByteArray &l);
 };

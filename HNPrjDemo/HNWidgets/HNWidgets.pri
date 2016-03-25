@@ -7,29 +7,28 @@
 QT       += core gui network sql
 CONFIG += serialport
 DEFINES += _TTY_POSIX_
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
 INCLUDEPATH += $$PWD
 
 QT_KIT = $$(QKIT)
-
 message($${QT_KIT} Defined - HNWidgets )
-
 DEFINES += _TTY_POSIX_
-
 equals(QT_KIT, MIPS32) {
     QT += multimedia
     DEFINES += __MIPS_LINUX__
 } else {
     DEFINES += __LINUX64__
 }
-
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
 }
 
+RESOURCES += \
+    $$PWD/HNWidgets.qrc
+
+OTHER_FILES += \
+    $$PWD/HNWidgets.rc
 
 SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/HNDefine.cpp \
@@ -174,6 +173,3 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnupgradewidget.ui \
     $$PWD/hnpassworddialog.ui \
     $$PWD/hnprintpreviewdialog.ui
-
-OTHER_FILES += \
-    $$PWD/version.rc

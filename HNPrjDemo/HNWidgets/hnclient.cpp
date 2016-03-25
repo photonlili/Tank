@@ -7,7 +7,7 @@
 
 #define MAX_HEARDBEAT 10
 
-QTankClient::QTankClient(QObject *parent) :
+HNClient::HNClient(QObject *parent) :
     QTcpSocket(parent)
 {
     connect(this, SIGNAL(stateChanged(QAbstractSocket::SocketState)), this, SLOT(socketStateChanged(QAbstractSocket::SocketState)) );
@@ -45,11 +45,11 @@ QTankClient::QTankClient(QObject *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(sendHeatBeatMessage()));
 }
 
-QTankClient::~QTankClient()
+HNClient::~HNClient()
 {
 }
 
-void QTankClient::SendConnectMessage()
+void HNClient::SendConnectMessage()
 {
     pline() << isValid() << isOpen();
     if(isValid())
@@ -59,7 +59,7 @@ void QTankClient::SendConnectMessage()
 }
 
 
-void QTankClient::SendDisConnectFromHost()
+void HNClient::SendDisConnectFromHost()
 {
     if(!isValid())
         return;
@@ -67,12 +67,12 @@ void QTankClient::SendDisConnectFromHost()
     close();
 }
 
-void QTankClient::domainHostFound()
+void HNClient::domainHostFound()
 {
     pline();
 }
 
-void QTankClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
+void HNClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
 {
     pline() << eSocketState;
     switch(eSocketState)
@@ -90,7 +90,7 @@ void QTankClient::socketStateChanged(QAbstractSocket::SocketState eSocketState)
     }
 }
 
-void QTankClient::socketErrorOccured(QAbstractSocket::SocketError e)
+void HNClient::socketErrorOccured(QAbstractSocket::SocketError e)
 {
     //在错误状态下重新连接其他热点，直到确定连接类型，写入配置文件
     pline() << e;
@@ -101,7 +101,7 @@ void QTankClient::socketErrorOccured(QAbstractSocket::SocketError e)
     }
 }
 
-void QTankClient::socketConnected()
+void HNClient::socketConnected()
 {
     pline() << peerName() << peerAddress().toString() << peerPort();
     //这个步骤，socket重建，资源重新开始
@@ -112,19 +112,19 @@ void QTankClient::socketConnected()
     timer->start(5 * 1000);
 }
 
-void QTankClient::socketDisconnect()
+void HNClient::socketDisconnect()
 {
     pline();
     m_heartCount = MAX_HEARDBEAT + 1;
     timer->stop();
 }
 
-void QTankClient::updateProgress(qint64 bytes)
+void HNClient::updateProgress(qint64 bytes)
 {
     //pline() << bytes;
 }
 
-void QTankClient::saveConType()
+void HNClient::saveConType()
 {
     QSettings setting;
     eConType = ( eConType + 1 ) % E_CONNMAX;
@@ -132,13 +132,13 @@ void QTankClient::saveConType()
     setting.sync();
 }
 
-void QTankClient::readConType()
+void HNClient::readConType()
 {
     QSettings setting;
     eConType = setting.value("ConnType").toInt();
 }
 
-void QTankClient::connectToSingelHost()
+void HNClient::connectToSingelHost()
 {
     switch(eConType)
     {
@@ -156,7 +156,7 @@ void QTankClient::connectToSingelHost()
     pline() << peerName() << m_PORT;
 }
 
-void QTankClient::sendHeatBeatMessage()
+void HNClient::sendHeatBeatMessage()
 {
     //断链判断 如果断链 TODO:
     if(m_heartCount > MAX_HEARDBEAT)
@@ -177,18 +177,18 @@ void QTankClient::sendHeatBeatMessage()
     }
     pline() << "HeartBeat Count:" << m_heartCount;
     m_heartCount++;
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_TCPCMD_HEART);
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     write(b);
     //waitForBytesWritten();
 }
 
-void QTankClient::sendLoginMessage()
+void HNClient::sendLoginMessage()
 {
     QSettings set;
     QByteArray _name = set.value("Device/SerialNo.").toByteArray();
@@ -205,7 +205,7 @@ void QTankClient::sendLoginMessage()
     QTCloudLogin t;
     t.m_name = name;
     t.m_password = pwd;
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_TCPCMD_LOGIN);
     QByteArray d;
@@ -214,28 +214,28 @@ void QTankClient::sendLoginMessage()
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     write(b);
 }
 
-void QTankClient::sendLogoutMessage()
+void HNClient::sendLogoutMessage()
 {
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_TCPCMD_EXIT);
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     write(b);
 }
 
-void QTankClient::sendListDirectory(QString code)
+void HNClient::sendListDirectory(QString code)
 {
     QTCloudListDir t;
     t.m_code = code;
     quint16 _tcpcmd = _TCPCMD_SEARCHDIR;
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_tcpcmd);
     QByteArray d;
@@ -244,11 +244,11 @@ void QTankClient::sendListDirectory(QString code)
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     write(b);
 }
 
-void QTankClient::sendAddDirectory()
+void HNClient::sendAddDirectory()
 {
     QTCloudAddDir t;
     t.m_upcode = "";
@@ -258,7 +258,7 @@ void QTankClient::sendAddDirectory()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendModDirectory()
+void HNClient::sendModDirectory()
 {
     QTCloudModDirName t;
     t.m_upcode = "";
@@ -268,7 +268,7 @@ void QTankClient::sendModDirectory()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDelDirectory()
+void HNClient::sendDelDirectory()
 {
     QTCloudDelDir t;
     t.m_upcode = "";
@@ -278,7 +278,7 @@ void QTankClient::sendDelDirectory()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendListFiles(QString code)
+void HNClient::sendListFiles(QString code)
 {
     QTCloudListFile t;
     t.m_code = code;
@@ -286,7 +286,7 @@ void QTankClient::sendListFiles(QString code)
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDelFile(QString code, QString id)
+void HNClient::sendDelFile(QString code, QString id)
 {
     QTCloudDelFile t;
     t.m_code = code;
@@ -296,7 +296,7 @@ void QTankClient::sendDelFile(QString code, QString id)
     pline() << t.m_code << t.m_id;
 }
 
-void QTankClient::sendListPubDirectory()
+void HNClient::sendListPubDirectory()
 {
     QTCloudListPubDir t;
     t.m_code = "";
@@ -304,7 +304,7 @@ void QTankClient::sendListPubDirectory()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendListPubFiles()
+void HNClient::sendListPubFiles()
 {
     QTCloudListPubFile t;
     t.m_code = "";
@@ -312,7 +312,7 @@ void QTankClient::sendListPubFiles()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDownDevFiles(QString path, QString id, QString local)
+void HNClient::sendDownDevFiles(QString path, QString id, QString local)
 {
     m_downfileresult.m_path = path;
     m_downfileresult.m_file = local;
@@ -322,7 +322,7 @@ void QTankClient::sendDownDevFiles(QString path, QString id, QString local)
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDownPubFiles()
+void HNClient::sendDownPubFiles()
 {
     QTCloudDownPubFile t;
     _QTCloudListFileResult _result;
@@ -334,14 +334,14 @@ void QTankClient::sendDownPubFiles()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDownFileData()
+void HNClient::sendDownFileData()
 {
     pline() << m_downfiledata.m_fileno << m_downfiledata.m_dno;
     quint16 _tcpcmd = _TCPCMD_COMFIREFILEINFO;
     sendMessage(_tcpcmd, m_downfiledata);
 }
 
-void QTankClient::sendCancelDown()
+void HNClient::sendCancelDown()
 {
     QTCloudCancelDownFile t;
     t.m_fileno = m_downfiledata.m_fileno;
@@ -349,7 +349,7 @@ void QTankClient::sendCancelDown()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDownFileSuccess()
+void HNClient::sendDownFileSuccess()
 {
     QTCloudDownFileSuccess t;
     t.m_fileno = m_downfiledata.m_fileno;
@@ -357,7 +357,7 @@ void QTankClient::sendDownFileSuccess()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendUploadFile(QString code, QString path, QString filename, int filelength)
+void HNClient::sendUploadFile(QString code, QString path, QString filename, int filelength)
 {
     m_uploadfile.m_code = code;
     m_uploadfile.m_name = filename;
@@ -365,7 +365,7 @@ void QTankClient::sendUploadFile(QString code, QString path, QString filename, i
     m_uploadfile.m_length = QString::number(filelength);
     m_uploadfile.m_overwrite = _TCP_RESULT_TRUE;
     quint16 _tcpcmd = _TCPCMD_SENDFILEINFO;
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_tcpcmd);
     QByteArray d;
@@ -374,12 +374,12 @@ void QTankClient::sendUploadFile(QString code, QString path, QString filename, i
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     write(b);
     //waitForBytesWritten(-1);
 }
 
-void QTankClient::sendUploadFileData()
+void HNClient::sendUploadFileData()
 {
     m_uploadfiledata.m_addr = m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE;
     QFile f(QString("%1/%2").arg(m_uploadfile.m_path).arg(m_uploadfile.m_name));
@@ -392,7 +392,7 @@ void QTankClient::sendUploadFileData()
     f.close();
     m_uploadfiledata.m_dlen = m_uploadfiledata.m_data.length();
     quint16 _tcpcmd = _TCPCMD_SENDFILEDATA;
-    QTankMessage qMsg;
+    HNClientMessage qMsg;
     qMsg.setUid(m_UID);
     qMsg.setCmd(_tcpcmd);
     QByteArray d;
@@ -401,13 +401,13 @@ void QTankClient::sendUploadFileData()
     qMsg.translate();
     pline() << qMsg;
     QByteArray b;
-    QTankParser::pack(b, qMsg);
+    HNClientParser::pack(b, qMsg);
     writeData(b.data(), b.length());
     //waitForBytesWritten();
     pline() << m_uploadfile.m_name << m_uploadfiledata.m_fileno << m_uploadfiledata.m_dno << m_uploadfiledata.m_addr << m_uploadfiledata.m_dlen;
 }
 
-void QTankClient::sendCancelUpload()
+void HNClient::sendCancelUpload()
 {
     QTCloudCancelUploadFile t;
     t.m_fileno = m_uploadfiledata.m_fileno;
@@ -415,7 +415,7 @@ void QTankClient::sendCancelUpload()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendCheckVersion()
+void HNClient::sendCheckVersion()
 {
     QTCheckVersion t;
     t.m_softwareid = "0";
@@ -426,7 +426,7 @@ void QTankClient::sendCheckVersion()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendCheckNewVersion()
+void HNClient::sendCheckNewVersion()
 {
     QTCheckVersion t;
     t.m_softwareid = m_versionresult.m_NewSoftwareID;
@@ -437,7 +437,7 @@ void QTankClient::sendCheckNewVersion()
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::sendDownUpgradeFile(QString path, QString id, QString local)
+void HNClient::sendDownUpgradeFile(QString path, QString id, QString local)
 {
     m_downfileresult.m_path = path;
     m_downfileresult.m_file = local;
@@ -447,7 +447,7 @@ void QTankClient::sendDownUpgradeFile(QString path, QString id, QString local)
     sendMessage(_tcpcmd, t);
 }
 
-void QTankClient::readyReadData()
+void HNClient::readyReadData()
 {
     // queued conn and queued package;
     // direct conn and ???
@@ -457,7 +457,7 @@ void QTankClient::readyReadData()
     //pline() << aaa;
     //TODO:假设具备判断已经接受完全的装备
     do{
-        quint16 nBlockLen = QTankParser::parseBlockSize(m_blockOnNet);
+        quint16 nBlockLen = HNClientParser::parseBlockSize(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
@@ -483,10 +483,10 @@ void QTankClient::readyReadData()
     m_blockOnNet.clear();
 }
 
-void QTankClient::dispatchRecvedMessage(QByteArray &blockOnNet)
+void HNClient::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
-    QTankMessage qMsg;
-    QTankParser::parse(qMsg, blockOnNet);
+    HNClientMessage qMsg;
+    HNClientParser::parse(qMsg, blockOnNet);
     pline() << qMsg;
     switch(qMsg.cmd())
     {
@@ -541,7 +541,7 @@ void QTankClient::dispatchRecvedMessage(QByteArray &blockOnNet)
     }
 }
 
-void QTankClient::recvLoginResultMessage(QTankMessage& qMsg)
+void HNClient::recvLoginResultMessage(HNClientMessage& qMsg)
 {
     m_UID = qMsg.uid();
     QTCloudLoginResult qtLoginResult;
@@ -575,13 +575,13 @@ void QTankClient::recvLoginResultMessage(QTankMessage& qMsg)
     }
 }
 
-void QTankClient::recvHeatBeatResultMessage(QTankMessage &)
+void HNClient::recvHeatBeatResultMessage(HNClientMessage &)
 {
     m_heartCount = 0;
     pline() << "HeartBeat Callback";
 }
 
-void QTankClient::recvListDirResultMessage(QTankMessage &qMsg)
+void HNClient::recvListDirResultMessage(HNClientMessage &qMsg)
 {
     m_dirs.m_upcode = "";
     m_dirs.m_dir.clear();
@@ -595,7 +595,7 @@ void QTankClient::recvListDirResultMessage(QTankMessage &qMsg)
     emit signalListDirOK();
 }
 
-void QTankClient::recvListFilesResultMessage(QTankMessage &qMsg)
+void HNClient::recvListFilesResultMessage(HNClientMessage &qMsg)
 {
     m_files.m_code = "";
     m_files.m_file.clear();
@@ -609,7 +609,7 @@ void QTankClient::recvListFilesResultMessage(QTankMessage &qMsg)
     emit signalListFileOK();
 }
 
-void QTankClient::recvListPubDirResultMessage(QTankMessage &qMsg)
+void HNClient::recvListPubDirResultMessage(HNClientMessage &qMsg)
 {
     m_pubdirs.m_upcode = "";
     m_pubdirs.m_dir.clear();
@@ -622,7 +622,7 @@ void QTankClient::recvListPubDirResultMessage(QTankMessage &qMsg)
     }
 }
 
-void QTankClient::recvListPubFilesResultMessage(QTankMessage &qMsg)
+void HNClient::recvListPubFilesResultMessage(HNClientMessage &qMsg)
 {
     m_pubfiles.m_code = "";
     m_pubfiles.m_file.clear();
@@ -635,7 +635,7 @@ void QTankClient::recvListPubFilesResultMessage(QTankMessage &qMsg)
     }
 }
 
-void QTankClient::recvDownFileResultMessage(QTankMessage &qMsg)
+void HNClient::recvDownFileResultMessage(HNClientMessage &qMsg)
 {
     QTankData::parse(m_downfileresult, qMsg.cmd(), qMsg.data());
     pline() << m_downfileresult.m_fileno << m_downfileresult.m_name << m_downfileresult.m_length;
@@ -653,7 +653,7 @@ void QTankClient::recvDownFileResultMessage(QTankMessage &qMsg)
     emit signalDownData();
 }
 
-void QTankClient::recvDownFileDataResultMessage(QTankMessage &qMsg)
+void HNClient::recvDownFileDataResultMessage(HNClientMessage &qMsg)
 {
     QTCloudDownFileDataResult result;
     QTankData::parse(result, qMsg.cmd(), qMsg.data());
@@ -684,7 +684,7 @@ void QTankClient::recvDownFileDataResultMessage(QTankMessage &qMsg)
     }
 }
 
-void QTankClient::recvUploadFileResult(QTankMessage &qMsg)
+void HNClient::recvUploadFileResult(HNClientMessage &qMsg)
 {
     QTCloudUploadFileResult result;
     QTankData::parse(result, qMsg.cmd(), qMsg.data());
@@ -706,7 +706,7 @@ void QTankClient::recvUploadFileResult(QTankMessage &qMsg)
     }
 }
 
-void QTankClient::recvUploadFileDataResult(QTankMessage &qMsg)
+void HNClient::recvUploadFileDataResult(HNClientMessage &qMsg)
 {
     QTCloudUploadFileDataResult result;
 
@@ -727,7 +727,7 @@ void QTankClient::recvUploadFileDataResult(QTankMessage &qMsg)
     }
 }
 
-void QTankClient::recvUploadFileSuccess(QTankMessage &qMsg)
+void HNClient::recvUploadFileSuccess(HNClientMessage &qMsg)
 {
     QTCloudUploadFileSuccess result;
     QTankData::parse(result, qMsg.cmd(), qMsg.data());
@@ -736,30 +736,30 @@ void QTankClient::recvUploadFileSuccess(QTankMessage &qMsg)
     emit signalUploadSucc(m_uploadfile.m_code);
 }
 
-void QTankClient::recvCheckVersionResult(QTankMessage &qMsg)
+void HNClient::recvCheckVersionResult(HNClientMessage &qMsg)
 {
     QTankData::parse(m_versionresult, qMsg.cmd(), qMsg.data());
     emit signalCheckVersionResult();
 }
 
-static QTankClient* gSingleClient = NULL;
+static HNClient* gSingleClient = NULL;
 
-QTankClient *HNSingleClient(QObject* parent)
+HNClient *HNSingleClient(QObject* parent)
 {
     if(!gSingleClient)
     {
-        gSingleClient = new QTankClient(parent);
+        gSingleClient = new HNClient(parent);
         gSingleClient->setServPort(7079);
     }
     return gSingleClient;
 }
 
-QTankClient *HNSingleUpgradeClient(QObject *parent)
+HNClient *HNSingleUpgradeClient(QObject *parent)
 {
-    static QTankClient* sClient = NULL;
+    static HNClient* sClient = NULL;
     if(!sClient)
     {
-        sClient = new QTankClient(parent);
+        sClient = new HNClient(parent);
         sClient->setServPort(8089);
     }
     return sClient;

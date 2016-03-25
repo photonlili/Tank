@@ -19,18 +19,18 @@ namespace Ui
     class frmInput;
 }
 
-class frmInput : public QWidget
+class HNInput : public QWidget
 {
     Q_OBJECT
 
-    explicit frmInput(QWidget *parent = 0);
-    ~frmInput();
+    explicit HNInput(QWidget *parent = 0);
+    ~HNInput();
 
 public:
     //单例模式,保证一个程序只存在一个输入法实例对象
-    static frmInput *Instance() {
+    static HNInput *Instance() {
         if (!_instance) {
-            _instance = new frmInput;
+            _instance = new HNInput;
         }
         return _instance;
     }
@@ -61,7 +61,7 @@ private slots:
 
 private:
     Ui::frmInput *ui;
-    static frmInput *_instance;     //实例对象
+    static HNInput *_instance;     //实例对象
 
     int deskWidth;                  //桌面宽度
     int deskHeight;                 //桌面高度

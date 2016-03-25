@@ -3,8 +3,8 @@
 #include <QWSServer>
 #include <QMouseDriverFactory>
 
-QHotplugWatcher* QHotplugWatcher::_instance = NULL;
-QHotplugWatcher::QHotplugWatcher(QObject *parent) :
+HNPluginWatcher* HNPluginWatcher::_instance = NULL;
+HNPluginWatcher::HNPluginWatcher(QObject *parent) :
     QThread(parent)
 {
     m_devType = E_NULLDEV;
@@ -28,15 +28,15 @@ QHotplugWatcher::QHotplugWatcher(QObject *parent) :
     watcher->start();
 }
 
-QHotplugWatcher *QHotplugWatcher::Instance()
+HNPluginWatcher *HNPluginWatcher::Instance()
 {
     if(_instance)
         return _instance;
-    _instance = new QHotplugWatcher();
+    _instance = new HNPluginWatcher();
     return _instance;
 }
 
-void QHotplugWatcher::slotDeviceAdded(const QString &dev)
+void HNPluginWatcher::slotDeviceAdded(const QString &dev)
 {
     qDebug("tid=%#x %s: add %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 
@@ -50,19 +50,19 @@ void QHotplugWatcher::slotDeviceAdded(const QString &dev)
     timer->start(1000);
 }
 
-void QHotplugWatcher::slotDeviceRemoved(const QString &dev)
+void HNPluginWatcher::slotDeviceRemoved(const QString &dev)
 {
     qDebug("tid=%#x %s: remove %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
     m_devStat = E_RM;
     timer->start(1000);
 }
 
-void QHotplugWatcher::slotDeviceChanged(const QString &dev)
+void HNPluginWatcher::slotDeviceChanged(const QString &dev)
 {
     qDebug("tid=%#x %s: change %s", (quintptr)QThread::currentThreadId(), __PRETTY_FUNCTION__, qPrintable(dev));
 }
 
-void QHotplugWatcher::slotDeviceDriver()
+void HNPluginWatcher::slotDeviceDriver()
 {
 #ifdef __MIPS_LINUX__
     if(E_MOUSE == m_devType)
@@ -84,7 +84,7 @@ void QHotplugWatcher::slotDeviceDriver()
     if(E_KEYBOARD == m_devType);
 }
 
-bool QHotplugWatcher::event(QEvent *e) {
+bool HNPluginWatcher::event(QEvent *e) {
     if (e->type() == QDeviceChangeEvent::registeredType()) {
         QDeviceChangeEvent *event = (QDeviceChangeEvent*)e;
         QString action("Change");

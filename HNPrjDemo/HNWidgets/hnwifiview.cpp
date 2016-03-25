@@ -57,5 +57,5 @@ void HNWIFIViewTextDelegate::drawCheck(QPainter *painter, const QStyleOptionView
 void HNWIFIViewTextDelegate::drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const
 {
     if("COMPLETED" == text)
-        painter->drawImage(rect, QImage("://theme/basic/bt_wifi_select.png"));
+        painter->drawImage(rect, QImage("://pictures/bk_sel.png"));
 }

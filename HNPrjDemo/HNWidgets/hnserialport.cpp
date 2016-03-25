@@ -1,7 +1,7 @@
 #include "hnserialport.h"
 
 
-QTankSerialPort::QTankSerialPort(QObject *parent) :
+HNSerialPort::HNSerialPort(QObject *parent) :
     QSerialPort(parent)
 {
 #ifdef __MIPS_LINUX__
@@ -27,18 +27,18 @@ QTankSerialPort::QTankSerialPort(QObject *parent) :
     //connect(this, SIGNAL(readChannelFinished()), this, SLOT(readChannelFinished()));
 }
 
-QTankSerialPort::~QTankSerialPort()
+HNSerialPort::~HNSerialPort()
 {
     close();
 }
 
-void QTankSerialPort::readyReadData()
+void HNSerialPort::readyReadData()
 {
     static QByteArray m_blockOnNet;
     m_blockOnNet += readAll();
 
     do{
-        quint16 nBlockLen = QTankSerialMessage::parseBlockSize(m_blockOnNet);
+        quint16 nBlockLen = HNSerialMessage::parseBlockSize(m_blockOnNet);
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
@@ -62,9 +62,9 @@ void QTankSerialPort::readyReadData()
     m_blockOnNet.clear();
 }
 
-void QTankSerialPort::dispatchRecvedMessage(QByteArray &blockOnNet)
+void HNSerialPort::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
-    QTankSerialMessage qMsg;
+    HNSerialMessage qMsg;
     qMsg.parse(blockOnNet);
     pline() << qMsg;
     switch(qMsg.cmd())
@@ -93,12 +93,12 @@ void QTankSerialPort::dispatchRecvedMessage(QByteArray &blockOnNet)
     }
 }
 
-void QTankSerialPort::recvHandup(const QByteArray &l)
+void HNSerialPort::recvHandup(const QByteArray &l)
 {
     sendHandupAck();
 }
 
-void QTankSerialPort::sendHandupAck()
+void HNSerialPort::sendHandupAck()
 {
     //status c51 + local
     QByteArray s;
@@ -110,12 +110,12 @@ void QTankSerialPort::sendHandupAck()
     write(l);
 }
 
-void QTankSerialPort::recvClose(const QByteArray &l)
+void HNSerialPort::recvClose(const QByteArray &l)
 {
     sendCloseAck();
 }
 
-void QTankSerialPort::sendCloseAck()
+void HNSerialPort::sendCloseAck()
 {
     QByteArray s;
     s << quint8(0x00);
@@ -126,7 +126,7 @@ void QTankSerialPort::sendCloseAck()
     write(l);
 }
 
-void QTankSerialPort::recvWriteSerialNumber(const QByteArray &l)
+void HNSerialPort::recvWriteSerialNumber(const QByteArray &l)
 {
     QSettings set;
     set.setValue("Device/SerialNo.", l);
@@ -135,7 +135,7 @@ void QTankSerialPort::recvWriteSerialNumber(const QByteArray &l)
     emit sigSerialUnlock();
 }
 
-void QTankSerialPort::sendWriteSerialNumberAck()
+void HNSerialPort::sendWriteSerialNumberAck()
 {
     QTankWriteSerialNoAck ack;
     QSettings set;
@@ -146,12 +146,12 @@ void QTankSerialPort::sendWriteSerialNumberAck()
     write(l);
 }
 
-void QTankSerialPort::recvReadSerial(const QByteArray &l)
+void HNSerialPort::recvReadSerial(const QByteArray &l)
 {
     sendReadSerialAck();
 }
 
-void QTankSerialPort::sendReadSerialAck()
+void HNSerialPort::sendReadSerialAck()
 {
     QSettings set;
     QByteArray serial = set.value("Device/SerialNo.").toByteArray();
@@ -162,7 +162,7 @@ void QTankSerialPort::sendReadSerialAck()
     write(l);
 }
 
-void QTankSerialPort::recvWritePassword(const QByteArray &l)
+void HNSerialPort::recvWritePassword(const QByteArray &l)
 {
     QSettings set;
     set.setValue("Device/Password", l);
@@ -170,7 +170,7 @@ void QTankSerialPort::recvWritePassword(const QByteArray &l)
     sendWritePasswordAck();
 }
 
-void QTankSerialPort::sendWritePasswordAck()
+void HNSerialPort::sendWritePasswordAck()
 {
     QTankWritePassAck ack;
     QSettings set;
@@ -181,12 +181,12 @@ void QTankSerialPort::sendWritePasswordAck()
     write(l);
 }
 
-void QTankSerialPort::  recvReadPassword(const QByteArray &l)
+void HNSerialPort::  recvReadPassword(const QByteArray &l)
 {
     sendReadPasswordAck();
 }
 
-void QTankSerialPort::sendReadPasswordAck()
+void HNSerialPort::sendReadPasswordAck()
 {
     QSettings set;
     QByteArray serial = set.value("Device/Password").toByteArray();
@@ -197,7 +197,7 @@ void QTankSerialPort::sendReadPasswordAck()
     write(l);
 }
 
-void QTankSerialPort::sendExceptionAck()
+void HNSerialPort::sendExceptionAck()
 {
     //机器运行出现异常自动通过这个串口上报
     QByteArray l;
@@ -208,8 +208,8 @@ void QTankSerialPort::sendExceptionAck()
 }
 
 
-QTankSerialPort *HNSerialPort(QObject *parent)
+HNSerialPort *HNSerialPortInst(QObject *parent)
 {
-    static QTankSerialPort* s2 = new QTankSerialPort(parent);
+    static HNSerialPort* s2 = new HNSerialPort(parent);
     return s2;
 }

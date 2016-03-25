@@ -3,7 +3,7 @@
 #include "HNDefine.h"
 #include "hngui-qt.h"
 
-QExceptionWidget::QExceptionWidget(QWidget *parent) :
+HNExceptionWidget::HNExceptionWidget(QWidget *parent) :
     HNExceptionView(parent),
     ui(new Ui::QExceptionWidget)
 {
@@ -18,7 +18,7 @@ QExceptionWidget::QExceptionWidget(QWidget *parent) :
     m_model->setRelation(Event_Name, QSqlRelation(TABLE_EVTYPE, "id", "Type"));
 }
 
-QExceptionWidget::~QExceptionWidget()
+HNExceptionWidget::~HNExceptionWidget()
 {
     delete ui;
 }

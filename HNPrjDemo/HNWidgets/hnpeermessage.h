@@ -18,11 +18,11 @@
 #define _HEAT_PRESS         0x03
 #define _HEAT_EXTRACT       0x01
 
-class QTankPeerMessage : public QObject
+class HNPeerMessage : public QObject
 {
     Q_OBJECT
 public:
-    explicit QTankPeerMessage(QObject *parent = 0);
+    explicit HNPeerMessage(QObject *parent = 0);
 
     const quint16& head() const { return m_Head; }
     void setHead(quint16 head) { m_Head = head; }
@@ -57,22 +57,22 @@ private:
     quint16 m_Tail;
 };
 
-QDebug operator<< (QDebug dbg, const QTankPeerMessage &c);
+QDebug operator<< (QDebug dbg, const HNPeerMessage &c);
 
-class QTankConnC51Struct : public QTankPeerMessage
+class QTankConnC51Struct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankConnC51Struct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankConnC51Struct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankHeatStandardStruct : public QTankPeerMessage
+class QTankHeatStandardStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankHeatStandardStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankHeatStandardStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void setStage(quint8 arg) {uStage = arg;}
     void setVessel(quint8 arg) {uVessel = arg;}
@@ -86,11 +86,11 @@ private:
     quint16 wHold;
 };
 
-class QTankHeatPressStruct : public QTankPeerMessage
+class QTankHeatPressStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankHeatPressStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankHeatPressStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void setStage(quint8 arg) {uStage = arg;}
     void setVessel(quint8 arg) {uVessel = arg;}
@@ -102,11 +102,11 @@ private:
     quint16 wPress;
 };
 
-class QTankHeatRAMPStruct : public QTankPeerMessage
+class QTankHeatRAMPStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankHeatRAMPStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankHeatRAMPStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     quint8 stage() { return uStage; }
     quint8 vessel() { return uVessel; }
@@ -131,11 +131,11 @@ private:
     quint16 wHold;
 };
 
-class QTankHeatExtractStruct : public QTankPeerMessage
+class QTankHeatExtractStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankHeatExtractStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankHeatExtractStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void setStage(quint8 arg) {uStage = arg;}
     void setTempture(quint16 arg) {wTempture = arg;}
@@ -147,29 +147,29 @@ private:
     quint16 wHold;
 };
 
-class QTankPauseStruct : public QTankPeerMessage
+class QTankPauseStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankPauseStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankPauseStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankStopStruct : public QTankPeerMessage
+class QTankStopStruct : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankStopStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankStopStruct(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void pack(QByteArray& l);
 };
 
-class QTankCmd2C51Ack : public QTankPeerMessage
+class QTankCmd2C51Ack : public HNPeerMessage
 {
     Q_OBJECT
 public:
-    explicit QTankCmd2C51Ack(QObject *parent = 0) : QTankPeerMessage(parent){}
+    explicit QTankCmd2C51Ack(QObject *parent = 0) : HNPeerMessage(parent){}
 
     void parse(const QByteArray& l);
 };

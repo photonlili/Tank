@@ -29,11 +29,11 @@
 #define __PRETTY_FUNCTION__  __FUNCTION__
 #endif
 
-class QHotplugWatcher : public QThread
+class HNPluginWatcher : public QThread
 {
 	Q_OBJECT
 public:
-    static QHotplugWatcher *Instance();
+    static HNPluginWatcher *Instance();
 
     enum {
         E_NULLDEV,
@@ -71,8 +71,8 @@ private:
 
 private:
     QDeviceWatcher *watcher;
-    explicit QHotplugWatcher(QObject *parent = 0);
-    static QHotplugWatcher* _instance;
+    explicit HNPluginWatcher(QObject *parent = 0);
+    static HNPluginWatcher* _instance;
     quint32 m_devType;
     quint32 m_devStat;
     QString m_storage;

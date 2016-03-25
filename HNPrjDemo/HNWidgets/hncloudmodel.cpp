@@ -3,7 +3,7 @@
 #include "qdir.h"
 #include "qfileinfo.h"
 
-HNCloudModel::HNCloudModel(QObject *parent, QTankClient *clientHandle) :
+HNCloudModel::HNCloudModel(QObject *parent, HNClient *clientHandle) :
     HNStandardItemModel(parent), m_client(clientHandle)
 {
     setColumnCount(FILE_MAX);

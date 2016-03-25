@@ -22,7 +22,7 @@ signals:
     void sigUploadSuccess();
 public slots:
 private:
-    QTankClient* m_client;
+    HNClient* m_client;
 };
 
 #endif // QCLOUDLOCALMODEL_H

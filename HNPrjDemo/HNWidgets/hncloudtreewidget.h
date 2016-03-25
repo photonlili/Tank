@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::HNCloudTreeWidget *ui;
-    QTankClient* m_client;
+    HNClient* m_client;
     HNCloudModel* model;
     QString m_tmpfile, m_localfile;
     HNMsgBox* m_box;

@@ -10,13 +10,13 @@ namespace Ui {
 class QMPlayerUI;
 }
 
-class QMPlayerUI : public QWidget
+class HNPlayerWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit QMPlayerUI(QWidget *parent = 0);
-    ~QMPlayerUI();
+    explicit HNPlayerWidget(QWidget *parent = 0);
+    ~HNPlayerWidget();
 
 private slots:
     void on_toolButton_mute_clicked();
@@ -31,7 +31,7 @@ private slots:
 
 private:
     Ui::QMPlayerUI *ui;
-    QMPlayerModel* app;
+    HNPlayerModel* app;
     QTimer* timer;
     quint8 m_bplayed;
 };

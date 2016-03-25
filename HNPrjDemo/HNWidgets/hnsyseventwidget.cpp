@@ -2,7 +2,7 @@
 #include "ui_hnsyseventwidget.h"
 #include "HNDefine.h"
 
-QSysEventWidget::QSysEventWidget(QWidget *parent) :
+HNSysEventWidget::HNSysEventWidget(QWidget *parent) :
     HNSysEventView(parent),
     ui(new Ui::QSysEventWidget)
 {
@@ -21,7 +21,7 @@ QSysEventWidget::QSysEventWidget(QWidget *parent) :
     resizeColumnToContents(Event_Time);
 }
 
-QSysEventWidget::~QSysEventWidget()
+HNSysEventWidget::~HNSysEventWidget()
 {
     delete ui;
 }

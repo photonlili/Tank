@@ -9,13 +9,13 @@ namespace Ui {
 class QReportViewDialog;
 }
 
-class QReportViewDialog : public HNDialog
+class HNPrintPreviewDialog : public HNDialog
 {
     Q_OBJECT
 
 public:
-    explicit QReportViewDialog(QWidget *parent = 0);
-    ~QReportViewDialog();
+    explicit HNPrintPreviewDialog(QWidget *parent = 0);
+    ~HNPrintPreviewDialog();
 
     //SerialNo;
     QString newReport(QString library, QString method);

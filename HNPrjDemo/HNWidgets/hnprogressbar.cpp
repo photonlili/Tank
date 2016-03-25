@@ -12,10 +12,12 @@ HNProgressBar::HNProgressBar(QWidget *parent) :
     ui->setupUi(this);
     m_value = m_min = 0;
     m_max = 100;
-    m_back = "://theme/basic/bk_progress_background.png";
-    m_trunk = "://theme/basic/bk_progress_chunk.png";
-    ui->lbTrunk->setPixmap(QPixmap(m_trunk));
+    m_back = "://pictures/bk_progress_background.png";
+    m_trunk = "://pictures/bk_progress_chunk.png";
+    ui->widthTrunk->setPixmap(m_trunk);
     ui->widgetBack->setPixmap(m_back);
+    ui->widthTrunk->setType(HNWidget::HNTILEDWIDTH);
+    ui->widgetBack->setType(HNWidget::HNZOOMWIDTH);
 }
 
 HNProgressBar::~HNProgressBar()
@@ -27,17 +29,17 @@ void HNProgressBar::setPixMap(QString back, QString trunk)
 {
     m_back = back;
     m_trunk = trunk;
-    ui->lbTrunk->setPixmap(QPixmap(m_trunk));
+    ui->widthTrunk->setPixmap(m_trunk);
     ui->widgetBack->setPixmap(m_back);
 }
 
 void HNProgressBar::setValue(int value)
 {
     m_value = value;
-    int w = width() * value / (m_max-m_min);
-    int h = height();
-    ui->lbTrunk->setFixedSize(w, h);
-    ui->lbTrunk->update();
+    int w = ui->widgetBack->width() * m_value / (m_max-m_min);
+    int h = ui->widgetBack->height();
+    ui->widthTrunk->setFixedSize(w, h);
+    pline() << width() << ui->widgetBack->width() << w << h;
 }
 
 void HNProgressBar::setRange(int min, int max)

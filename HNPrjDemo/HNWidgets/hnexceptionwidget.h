@@ -8,13 +8,13 @@ namespace Ui {
 class QExceptionWidget;
 }
 
-class QExceptionWidget : public HNExceptionView
+class HNExceptionWidget : public HNExceptionView
 {
     Q_OBJECT
 
 public:
-    explicit QExceptionWidget(QWidget *parent = 0);
-    ~QExceptionWidget();
+    explicit HNExceptionWidget(QWidget *parent = 0);
+    ~HNExceptionWidget();
 
 private:
     Ui::QExceptionWidget *ui;

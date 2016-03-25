@@ -3,32 +3,32 @@
 #include "hnlinux.h"
 #include "HNDefine.h"
 
-QMPlayerUI::QMPlayerUI(QWidget *parent) :
+HNPlayerWidget::HNPlayerWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::QMPlayerUI)
 {
     ui->setupUi(this);
 
     m_bplayed = 0;
-    app = new QMPlayerModel(this);
+    app = new HNPlayerModel(this);
     timer = new QTimer(this);
     timer->setSingleShot(false);
     connect(timer, SIGNAL(timeout()), this, SLOT(posChanged()));
 }
 
-QMPlayerUI::~QMPlayerUI()
+HNPlayerWidget::~HNPlayerWidget()
 {
     delete ui;
 }
 
-void QMPlayerUI::on_toolButton_mute_clicked()
+void HNPlayerWidget::on_toolButton_mute_clicked()
 {
     static bool m = false;
     m = ~m;
     app->mute(m);
 }
 
-void QMPlayerUI::posChanged()
+void HNPlayerWidget::posChanged()
 {
     int curPercent = app->percent();
     ui->horizontalSlider_seek->setValue(curPercent);
@@ -42,7 +42,7 @@ void QMPlayerUI::posChanged()
     if(curPercent >= 99) app->stop();
 }
 
-void QMPlayerUI::on_btn_play_clicked()
+void HNPlayerWidget::on_btn_play_clicked()
 {
     if(0 == m_bplayed)
     {
@@ -71,7 +71,7 @@ void QMPlayerUI::on_btn_play_clicked()
     }
 }
 
-void QMPlayerUI::on_btn_stop_clicked()
+void HNPlayerWidget::on_btn_stop_clicked()
 {
     m_bplayed = 0;
     ui->horizontalSlider_seek->setValue(0);
@@ -79,7 +79,7 @@ void QMPlayerUI::on_btn_stop_clicked()
     app->stop();
 }
 
-void QMPlayerUI::on_sliderVol_valueChanged(int value)
+void HNPlayerWidget::on_sliderVol_valueChanged(int value)
 {
     app->setVolume(value);
 }

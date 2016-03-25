@@ -45,7 +45,7 @@ void HNCloudLocalTreeWidget::printFile()
     if(m_model->index(parIndex.row(), DIR_CODE).data().toString() == "001")
         return;
 
-    static QReportViewDialog* dlg = new QReportViewDialog(this);
+    static HNPrintPreviewDialog* dlg = new HNPrintPreviewDialog(this);
     dlg->initAll("恒功率1600W_2015-12-01-16-25-52");
     if(QDialog::Accepted != dlg->exec())
         return;

@@ -3,11 +3,11 @@
 
 #include <QProcess>
 
-class QMPlayerModel : public QObject
+class HNPlayerModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit QMPlayerModel(QObject *parent = 0);
+    explicit HNPlayerModel(QObject *parent = 0);
 
     void play(QString filename, int wid = 0, int width = 20, int height = 20);
     void pause();

@@ -8,13 +8,13 @@ namespace Ui {
 class QSysEventWidget;
 }
 
-class QSysEventWidget : public HNSysEventView
+class HNSysEventWidget : public HNSysEventView
 {
     Q_OBJECT
 
 public:
-    explicit QSysEventWidget(QWidget *parent = 0);
-    ~QSysEventWidget();
+    explicit HNSysEventWidget(QWidget *parent = 0);
+    ~HNSysEventWidget();
 
 private:
     Ui::QSysEventWidget *ui;

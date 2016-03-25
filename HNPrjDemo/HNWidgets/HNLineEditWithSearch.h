@@ -4,11 +4,11 @@
 #include <QLineEdit>
 #include <QPushButton>
 
-class QSearchLineEdit : public QLineEdit
+class HNLineEditWithSearch : public QLineEdit
 {
     Q_OBJECT
 public:
-    explicit QSearchLineEdit(QWidget *parent = 0);
+    explicit HNLineEditWithSearch(QWidget *parent = 0);
     void setButtonText(QString text);
     void setObjectName(const QString &name);
 

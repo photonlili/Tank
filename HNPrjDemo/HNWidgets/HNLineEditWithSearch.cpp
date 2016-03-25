@@ -2,7 +2,7 @@
 #include <QHBoxLayout>
 #include "HNDefine.h"
 
-QSearchLineEdit::QSearchLineEdit(QWidget *parent) :
+HNLineEditWithSearch::HNLineEditWithSearch(QWidget *parent) :
     QLineEdit(parent)
 {
     m_btnBrower = new QPushButton(this);
@@ -11,7 +11,7 @@ QSearchLineEdit::QSearchLineEdit(QWidget *parent) :
     m_btnBrower->setFocusPolicy(Qt::NoFocus);    // 得到焦点时，不显示虚线框
     m_btnBrower->setFlat(true);
     m_btnBrower->setCursor(QCursor(Qt::PointingHandCursor));
-    m_btnBrower->setIcon(QIcon("://theme/basic/bt_brower.png"));
+    m_btnBrower->setIcon(QIcon("://pictures/bt_brower.png"));
     m_btnBrower->setIconSize(size);
 
     QHBoxLayout *hLayout = new QHBoxLayout(this);
@@ -26,12 +26,12 @@ QSearchLineEdit::QSearchLineEdit(QWidget *parent) :
     connect(m_btnBrower, SIGNAL(clicked()), this, SIGNAL(btnClicked()));
 }
 
-void QSearchLineEdit::setButtonText(QString text)
+void HNLineEditWithSearch::setButtonText(QString text)
 {
     m_btnBrower->setText(text);
 }
 
-void QSearchLineEdit::setObjectName(const QString &name)
+void HNLineEditWithSearch::setObjectName(const QString &name)
 {
     QLineEdit::setObjectName(name);
     m_btnBrower->setObjectName(QString("%1_button").arg(name));
