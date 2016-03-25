@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
     w2.initAll();
     w2.setValue(value);
 
-    HNCloudWidget w3;
+    HNUpgradeWidget w3;
     l.addWidget(&w3);
 
     return a.exec();

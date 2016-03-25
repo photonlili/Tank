@@ -22,6 +22,7 @@
 #include "hncloudtreewidget.h"
 #include "hncloudwidget.h"
 #include "hnmanageethenetwidget.h"
+#include "HNPreviewWidget.h"
 
 #include "hnclient.h"
 #include "HNEthManager.h"

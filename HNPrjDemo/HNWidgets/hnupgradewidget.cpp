@@ -53,7 +53,7 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), this, SLOT(restart()));
 
     ui->lbUpgrade->setFixedWidth(300);
-    ui->widgetUpgrade->setFixedSize(240, 20);
+    ui->widgetUpgrade->setFixedSize(600, 30);
     ui->widgetUpgrade->setRange(0, 100);
     ui->widgetUpgrade->setValue(0);
 

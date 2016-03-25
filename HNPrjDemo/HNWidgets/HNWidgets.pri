@@ -28,7 +28,7 @@ RESOURCES += \
     $$PWD/HNWidgets.qrc
 
 OTHER_FILES += \
-    $$PWD/HNWidgets.rc
+    $$PWD/HNWidgets.rc \
 
 SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/HNDefine.cpp \
@@ -84,7 +84,9 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/qdevicewatcher.cpp \
     $$PWD/qdevicewatcher_linux.cpp \
     $$PWD/hnprintpreviewdialog.cpp \
-    $$PWD/hnmanageethenetwidget.cpp
+    $$PWD/hnmanageethenetwidget.cpp \
+    HNWidgets/HNPreviewWidget.cpp \
+    HNWidgets/dmmu.c
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -145,7 +147,12 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/qdevicewatcher.h \
     $$PWD/qdevicewatcher_p.h \
     $$PWD/hnprintpreviewdialog.h \
-    $$PWD/hnmanageethenetwidget.h
+    $$PWD/hnmanageethenetwidget.h \
+    $$PWD/dmmu.h \
+    $$PWD/graphics.h \
+    $$PWD/hal.h \
+    $$PWD/HNPreviewWidget.h \
+    $$PWD/jz_cim.h \
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -175,4 +182,5 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnupgradewidget.ui \
     $$PWD/hnpassworddialog.ui \
     $$PWD/hnprintpreviewdialog.ui \
-    $$PWD/hnmanageethenetwidget.ui
+    $$PWD/hnmanageethenetwidget.ui \
+    $$PWD/HNPreviewWidget.ui \
