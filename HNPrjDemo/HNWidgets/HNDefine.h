@@ -163,6 +163,9 @@ enum {
 #define WARNING "Warning"
 #define NOTICE "Notice"
 
+extern QSqlDatabase managerDB;
+extern QString gUserName;
+extern QString gPassword;
 
 
 //自定义组件的公共部分
