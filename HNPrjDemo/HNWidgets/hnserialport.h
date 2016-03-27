@@ -1,7 +1,7 @@
 #ifndef QTANKSERIALPORT_H
 #define QTANKSERIALPORT_H
 
-#include <QSerialPort>
+#include <QtSerialPort/QSerialPort>
 #include "hnserialmessage.h"
 #include "HNDefine.h"
 
