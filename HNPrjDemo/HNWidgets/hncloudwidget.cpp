@@ -11,7 +11,7 @@ HNCloudWidget::HNCloudWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_cli = HNSingleClient(this);
+    m_cli = HNClientInstance(this);
 
     m_prog = new HNProgressDialog(this);
     m_progDown = new HNProgressDialog(this);

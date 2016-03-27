@@ -744,7 +744,7 @@ void HNClient::recvCheckVersionResult(HNClientMessage &qMsg)
 
 static HNClient* gSingleClient = NULL;
 
-HNClient *HNSingleClient(QObject* parent)
+HNClient *HNClientInstance(QObject* parent)
 {
     if(!gSingleClient)
     {
@@ -754,7 +754,7 @@ HNClient *HNSingleClient(QObject* parent)
     return gSingleClient;
 }
 
-HNClient *HNSingleUpgradeClient(QObject *parent)
+HNClient *HNUpgradeClientInstance(QObject *parent)
 {
     static HNClient* sClient = NULL;
     if(!sClient)

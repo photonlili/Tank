@@ -21,5 +21,28 @@
         <file>pictures/key_return_press.png</file>
         <file>pictures/key_shift.png</file>
         <file>pictures/key_shift_press.png</file>
+        <file>HNWidgets.qss</file>
+        <file>languages/en_US.qm</file>
+        <file>languages/en_US.ts</file>
+        <file>languages/zh_CN.qm</file>
+        <file>languages/zh_CN.ts</file>
+        <file>pictures/bk_check_normal.png</file>
+        <file>pictures/bk_check_press.png</file>
+        <file>pictures/bk_lineedit.png</file>
+        <file>pictures/bk_lineedit_focus.png</file>
+        <file>pictures/bk_radio_normal.png</file>
+        <file>pictures/bk_radio_press.png</file>
+        <file>pictures/bk_wifi_connected.png</file>
+        <file>pictures/bk_wifi_connecting.png</file>
+        <file>pictures/bk_wifi_unconnected.png</file>
+        <file>pictures/bt_brower_press.png</file>
+        <file>pictures/bt_close.png</file>
+        <file>pictures/bt_close_press.png</file>
+        <file>pictures/btn_down.png</file>
+        <file>pictures/btn_down_focus.png</file>
+        <file>pictures/btn_down_press.png</file>
+        <file>pictures/btn_up.png</file>
+        <file>pictures/btn_up_focus.png</file>
+        <file>pictures/btn_up_press.png</file>
     </qresource>
 </RCC>

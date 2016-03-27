@@ -149,8 +149,8 @@ private slots:
     void recvCheckVersionResult(HNClientMessage&);
 };
 
-HNClient *HNSingleClient(QObject *parent = 0);
-HNClient *HNSingleUpgradeClient(QObject *parent = 0);
+HNClient *HNClientInstance(QObject *parent = 0);
+HNClient *HNUpgradeClientInstance(QObject *parent = 0);
 
 
 #endif // QTANKCLIENT_H

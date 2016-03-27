@@ -8,7 +8,7 @@ HNCloudLocalModel::HNCloudLocalModel(QObject *parent) :
 {
     setColumnCount(DIR_MAX);
     queryRootDirs();
-    m_client = HNSingleClient(this);
+    m_client = HNClientInstance(this);
     connect(m_client, SIGNAL(signalUploadSucc(QString)), this, SIGNAL(sigUploadSuccess()));
 }
 

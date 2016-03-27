@@ -60,7 +60,7 @@ HNUpgradeWidget::HNUpgradeWidget(QWidget *parent) :
     m_backupT = new QBackupLocalThread(this);
     m_upgradeT = new QUpgradeThread(this);
 
-    m_cli = HNSingleUpgradeClient(this);
+    m_cli = HNUpgradeClientInstance(this);
     connect(m_cli, SIGNAL(connected()), this, SLOT(logined()));
     connect(m_cli, SIGNAL(signalCheckVersionResult()), this, SLOT(versionR()));
     connect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));

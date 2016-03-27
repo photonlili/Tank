@@ -12,7 +12,7 @@ HNCloudTreeWidget::HNCloudTreeWidget(QWidget *parent) :
     ui(new Ui::HNCloudTreeWidget)
 {
     ui->setupUi(this);
-    m_client = HNSingleClient(this);
+    m_client = HNClientInstance(this);
     connect(m_client, SIGNAL(connected()), this, SLOT(slotConnected()));
     model = new HNCloudModel(this, m_client);
     setModel(model);

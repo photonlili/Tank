@@ -4,7 +4,7 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
+    HNApp a(argc, argv);
 
     HNProgressDialog w;
     HNProgressDialog w1;
@@ -31,8 +31,21 @@ int main(int argc, char *argv[])
     w2.initAll();
     w2.setValue(value);
 
-    HNUpgradeWidget w3;
+    HNCloudWidget w3;
     l.addWidget(&w3);
+
+    HNManageEthenetWidget w4;
+    l.addWidget(&w4);
+
+    HNInput *im = HNInput::Instance();
+    //im->Init("min", "control", "hanon", 14, 14);
+
+    HNLineEditWithSearch w5;
+    //l.addWidget(&w5);
+
+    HNCheckBox w6;
+    //l.addWidget(&w6);
+
 
     return a.exec();
 }

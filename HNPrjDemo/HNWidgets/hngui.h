@@ -1,6 +1,9 @@
 #ifndef HNGUI_H
 #define HNGUI_H
 
+#include "hnversion.h"
+#include "hnapp.h"
+
 #include "hncheckbox.h"
 #include "hnradiobutton.h"
 #include "hnpushbutton.h"

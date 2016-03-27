@@ -71,10 +71,10 @@ void HNManageEthenetWidget::on_chk_dhcp_stateChanged(int arg1)
     setting.setValue("EnableDHCP", arg1);
     setting.sync();
 
-    HNEthManager::Instance()->setDHCP(arg1?true:false);
-
-    ui->lineEdit_ip->setDisabled(arg1);
-    ui->lineEdit_mask->setDisabled(arg1);
-    ui->lineEdit_gateway->setDisabled(arg1);
-    ui->lineEdit_dns->setDisabled(arg1);
+    bool bChecked = arg1?true:false;
+    HNEthManager::Instance()->setDHCP(bChecked);
+    ui->lineEdit_ip->setDisabled(bChecked);
+    ui->lineEdit_mask->setDisabled(bChecked);
+    ui->lineEdit_gateway->setDisabled(bChecked);
+    ui->lineEdit_dns->setDisabled(bChecked);
 }
