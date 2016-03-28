@@ -88,7 +88,8 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnmanageethenetwidget.cpp \
     $$PWD/HNPreviewWidget.cpp \
     $$PWD/dmmu.c \
-    $$PWD/hnapp.cpp
+    $$PWD/hnapp.cpp \
+    HNWidgets/hnmainform.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -155,7 +156,8 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hal.h \
     $$PWD/HNPreviewWidget.h \
     $$PWD/jz_cim.h \
-    $$PWD/hnapp.h
+    $$PWD/hnapp.h \
+    HNWidgets/hnmainform.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -186,4 +188,5 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnpassworddialog.ui \
     $$PWD/hnprintpreviewdialog.ui \
     $$PWD/hnmanageethenetwidget.ui \
-    $$PWD/HNPreviewWidget.ui
+    $$PWD/HNPreviewWidget.ui \
+    HNWidgets/hnmainform.ui
