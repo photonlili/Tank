@@ -5,20 +5,26 @@
 #-------------------------------------------------
 
 QT       += core gui network sql
+
 CONFIG += serialport
+
 DEFINES += _TTY_POSIX_
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
 INCLUDEPATH += $$PWD
 
 QT_KIT = $$(QKIT)
+
 message($${QT_KIT} Defined - HNWidgets )
-DEFINES += _TTY_POSIX_
+
 equals(QT_KIT, MIPS32) {
     QT += multimedia
     DEFINES += __MIPS_LINUX__
 } else {
     DEFINES += __LINUX64__
 }
+
 CONFIG(debug, debug|release) {
 } else {
     DEFINES -= QT_NO_DEBUG_OUTPUT
@@ -29,7 +35,7 @@ RESOURCES += \
 
 OTHER_FILES += \
     $$PWD/HNWidgets.rc \
-    HNWidgets/HNWidgets.qss
+    $$PWD/HNWidgets.qss
 
 SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/HNDefine.cpp \
@@ -89,7 +95,9 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/HNPreviewWidget.cpp \
     $$PWD/dmmu.c \
     $$PWD/hnapp.cpp \
-    HNWidgets/hnmainform.cpp
+    $$PWD/hnmainform.cpp \
+    $$PWD/hnwindow.cpp \
+    $$PWD/hnloginform.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -157,7 +165,9 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNPreviewWidget.h \
     $$PWD/jz_cim.h \
     $$PWD/hnapp.h \
-    HNWidgets/hnmainform.h
+    $$PWD/hnmainform.h \
+    $$PWD/hnwindow.h \
+    $$PWD/hnloginform.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -189,4 +199,6 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnprintpreviewdialog.ui \
     $$PWD/hnmanageethenetwidget.ui \
     $$PWD/HNPreviewWidget.ui \
-    HNWidgets/hnmainform.ui
+    $$PWD/hnmainform.ui \
+    $$PWD/hnwindow.ui \
+    $$PWD/hnloginform.ui

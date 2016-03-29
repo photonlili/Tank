@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     HNApp a(argc, argv);
 
     HNFrame w;
-    w.setFixedHeight(340);
+    //w.setFixedHeight(340);
     QVBoxLayout l;
     w.setLayout(&l);
     w.show();
@@ -15,9 +15,9 @@ int main(int argc, char *argv[])
     HNProgressDialog w0;
     HNProgressDialog w1;
     HNProgressDialog w2;
-    l.addWidget(&w0);
-    l.addWidget(&w1);
-    l.addWidget(&w2);
+    //l.addWidget(&w0);
+    //l.addWidget(&w1);
+    //l.addWidget(&w2);
 
     int value = 100;
     w0.setFixedWidth(800);
@@ -47,6 +47,10 @@ int main(int argc, char *argv[])
     HNCheckBox w6;
     //l.addWidget(&w6);
 
+
+    HNMainForm w7;
+    w7.setFixedSize(HN_SCRN_WIDTH, HN_SCRN_HEIGHT);
+    //l.addWidget(&w7);
 
     return a.exec();
 }

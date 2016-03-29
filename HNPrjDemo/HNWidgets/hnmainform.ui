@@ -328,7 +328,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="usesScrollButtons">
       <bool>false</bool>
@@ -359,6 +359,23 @@
           <attribute name="title">
            <string>Network</string>
           </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_7">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="HNManageEthenetWidget" name="widget_6" native="true"/>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
@@ -390,6 +407,23 @@
           <attribute name="title">
            <string>Content</string>
           </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="HNCloudWidget" name="widget_7" native="true"/>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>
@@ -410,6 +444,18 @@
    <class>HNTabWidget</class>
    <extends>QTabWidget</extends>
    <header>hntabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNManageEthenetWidget</class>
+   <extends>QWidget</extends>
+   <header>hnmanageethenetwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNCloudWidget</class>
+   <extends>QWidget</extends>
+   <header>hncloudwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -191,7 +191,7 @@ void HNClient::sendHeatBeatMessage()
 void HNClient::sendLoginMessage()
 {
     QSettings set;
-    QByteArray _name = set.value("Device/SerialNo.").toByteArray();
+    QByteArray _name = set.value("Device/DeviceNo").toByteArray();
     QByteArray _pwd = set.value("Device/Password").toByteArray();
 
     QString name, pwd;

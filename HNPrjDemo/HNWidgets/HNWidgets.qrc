@@ -44,5 +44,10 @@
         <file>pictures/btn_up.png</file>
         <file>pictures/btn_up_focus.png</file>
         <file>pictures/btn_up_press.png</file>
+        <file>pictures/bt_cloud.png</file>
+        <file>pictures/bt_cloud_press.png</file>
+        <file>pictures/bt_setting.png</file>
+        <file>pictures/bt_setting_press.png</file>
+        <file>pictures/bk_logo.png</file>
     </qresource>
 </RCC>

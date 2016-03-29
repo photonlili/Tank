@@ -39,7 +39,7 @@ void HNProgressBar::setValue(int value)
     int w = ui->widgetBack->width() * m_value / (m_max-m_min);
     int h = ui->widgetBack->height();
     ui->widthTrunk->setFixedSize(w, h);
-    pline() << width() << ui->widgetBack->width() << w << h;
+    //pline() << width() << ui->widgetBack->width() << w << h;
 }
 
 void HNProgressBar::setRange(int min, int max)

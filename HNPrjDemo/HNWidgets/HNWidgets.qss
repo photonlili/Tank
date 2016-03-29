@@ -39,7 +39,7 @@ QComboBox::down-arrow {
     image: url(://pictures/btn_down.png);
 }
 
-MainWindow QCTabWidget#tabWidget QCTabBar#tabWidget_bar::tab {
+HNMainForm HNTabWidget#tabWidget HNTabBar#tabWidget_bar::tab {
     padding: 0px;
     margin: 0px;
     width: 76 ex;
@@ -157,11 +157,11 @@ QDoubleSpinBox::down-button:pressed,QSpinBox::down-button:pressed{
     height: 28px;
 }
 
-MainWindow QWidget#widget_logo {
+HNMainForm QWidget#widget_logo {
     border-image: url(://pictures/bk_logo.png);
 }
 
-MainWindow QCTabWidget::pane {
+HNMainForm HNTabWidget::pane {
     border-image:url(-);
     background:transparent;
 }

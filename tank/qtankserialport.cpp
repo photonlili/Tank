@@ -129,7 +129,7 @@ void QTankSerialPort::sendCloseAck()
 void QTankSerialPort::recvWriteSerialNumber(const QByteArray &l)
 {
     QSettings set;
-    set.setValue("Device/SerialNo.", l);
+    set.setValue("Device/DeviceNo", l);
     set.sync();
     sendWriteSerialNumberAck();
     emit sigSerialUnlock();
@@ -154,7 +154,7 @@ void QTankSerialPort::recvReadSerial(const QByteArray &l)
 void QTankSerialPort::sendReadSerialAck()
 {
     QSettings set;
-    QByteArray serial = set.value("Device/SerialNo.").toByteArray();
+    QByteArray serial = set.value("Device/DeviceNo").toByteArray();
     QByteArray l;
     QTankReadSerialNoAck ack;
     ack.setData(serial);
