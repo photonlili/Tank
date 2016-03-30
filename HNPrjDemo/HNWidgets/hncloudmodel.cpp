@@ -2,16 +2,18 @@
 #include "HNDefine.h"
 #include "qdir.h"
 #include "qfileinfo.h"
+#include "hnmsgbox.h"
 
-HNCloudModel::HNCloudModel(QObject *parent, HNClient *clientHandle) :
-    HNStandardItemModel(parent), m_client(clientHandle)
+HNCloudModel::HNCloudModel(QObject *parent) :
+    HNStandardItemModel(parent)
 {
     setColumnCount(FILE_MAX);
+    m_client = HNClientInstance(this);
     connect(m_client, SIGNAL(signalListDirOK()), this, SLOT(queryRootDirsResult()));
     connect(m_client, SIGNAL(signalListFileOK()), this, SLOT(queryFilesResult()));
     connect(m_client, SIGNAL(signalLogined()), this, SLOT(queryRootDirs()));
-    connect(m_client, SIGNAL(signalUploadSucc(QString)), this, SLOT(queryFiles(QString)));
-    connect(m_client, SIGNAL(signalDownSucc()), this, SIGNAL(sigDownSuccess()));
+    connect(m_client, SIGNAL(signalDownSucc()), this, SLOT(slotDownSuccess()));
+    connect(m_client, SIGNAL(signalCancelDown()), this, SLOT(slotCancelDown()));
 }
 
 void HNCloudModel::queryRootDirs()
@@ -24,14 +26,36 @@ void HNCloudModel::queryFiles(QString code)
     m_client->sendListFiles(code);
 }
 
-void HNCloudModel::downFile(QString path, QString id, QString localname)
+void HNCloudModel::downFile(QString path, QString id, QString tmpfile)
 {
-    m_client->sendDownDevFiles(path, id, localname);
+    m_path = path;
+    m_servname = tmpfile;
+    m_localname = tmpfile.split("_").at(1);
+    pline() << m_path << m_servname << m_localname;
+    m_client->sendDownDevFiles(path, id, tmpfile);
 }
 
 void HNCloudModel::delFile(QString code, QString id)
 {
     m_client->sendDelFile(code, id);
+}
+
+void HNCloudModel::slotDownSuccess()
+{
+    QString downedFile = m_servname;
+    QString localname = QString("%1/%2").arg(m_path).arg(m_localname);
+    pline() << "down ok" << downedFile << localname;
+    system(QString("mv %1 %2").arg(downedFile).arg(localname).toAscii().data());
+}
+
+void HNCloudModel::slotCancelDown()
+{
+    QString tmpfile = m_servname;
+    if(tmpfile.isEmpty())
+        return;
+    pline() << "cancel" << tmpfile;
+    QFile::remove(tmpfile);
+    system(QString("rm %1").arg(tmpfile).toAscii().data());
 }
 
 void HNCloudModel::queryRootDirsResult()

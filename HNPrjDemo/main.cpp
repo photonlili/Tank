@@ -50,7 +50,10 @@ int main(int argc, char *argv[])
 
     HNMainForm w7;
     w7.setFixedSize(HN_SCRN_WIDTH, HN_SCRN_HEIGHT);
-    //l.addWidget(&w7);
+    l.addWidget(&w7);
+
+    HNProgressDialog w9;
+    //l.addWidget(&w9);
 
     return a.exec();
 }

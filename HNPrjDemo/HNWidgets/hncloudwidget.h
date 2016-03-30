@@ -23,20 +23,9 @@ signals:
 public slots:
     void slotConnect();
     void slotDisConnect();
-    void slotUpdateLabReport();
-    void slotOpenProgress();
-    void slotOpenDownProgress();
-    void slotOpenOK();
-    void slotOpenDownOK();
-    void slotDelProgress();
-    void slotDelOK();
 
 private:
     Ui::HNCloudWidget *ui;
-    HNClient* m_cli;
-    HNProgressDialog* m_prog;
-    HNProgressDialog* m_progDown;
-    HNProgressDialog* m_progDel;
 };
 
 #endif // QCLOUDFORM_H

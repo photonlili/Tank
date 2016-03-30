@@ -149,8 +149,6 @@ void HNUpgradeWidget::on_btnDown_clicked()
 
 void HNUpgradeWidget::downOK()
 {
-    disconnect(m_cli, SIGNAL(signalUpdateProgress(int)), ui->widgetUpgrade, SLOT(setValue(int)));
-    disconnect(m_cli, SIGNAL(signalDownSucc()), this, SLOT(downOK()));
     ui->lbUpgrade->setText(tr("Download success"));
     m_upgradeT->start();
 }

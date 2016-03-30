@@ -316,6 +316,7 @@ void HNClient::sendDownDevFiles(QString path, QString id, QString local)
 {
     m_downfileresult.m_path = path;
     m_downfileresult.m_file = local;
+    m_work = 1;
     QTCloudDownDevFile t;
     t.m_id = id;
     quint16 _tcpcmd = _TCPCMD_DOWNLOADFILE;
@@ -346,6 +347,8 @@ void HNClient::sendCancelDown()
     QTCloudCancelDownFile t;
     t.m_fileno = m_downfiledata.m_fileno;
     quint16 _tcpcmd = _TCPCMD_CANCELREVFILE;
+    m_work = 0;
+    emit signalCancelDown();;
     sendMessage(_tcpcmd, t);
 }
 
@@ -413,6 +416,7 @@ void HNClient::sendCancelUpload()
     t.m_fileno = m_uploadfiledata.m_fileno;
     quint16 _tcpcmd = _TCPCMD_CANCELSENDFILE;
     sendMessage(_tcpcmd, t);
+    emit signalCancelUpload();
 }
 
 void HNClient::sendCheckVersion()
@@ -655,6 +659,8 @@ void HNClient::recvDownFileResultMessage(HNClientMessage &qMsg)
 
 void HNClient::recvDownFileDataResultMessage(HNClientMessage &qMsg)
 {
+    if(0 == m_work)
+        return;
     QTCloudDownFileDataResult result;
     QTankData::parse(result, qMsg.cmd(), qMsg.data());
     pline() << result.m_fileno << result.m_dno << result.m_addr <<
@@ -733,7 +739,7 @@ void HNClient::recvUploadFileSuccess(HNClientMessage &qMsg)
     QTankData::parse(result, qMsg.cmd(), qMsg.data());
     pline() << result.m_fileno << m_uploadfiledata.m_dno << m_uploadfiledata.m_dno * _TCP_BLOCKDATA_SIZE << m_uploadfile.m_length.toInt() << "upload success";
     emit signalUpdateProgress(100);
-    emit signalUploadSucc(m_uploadfile.m_code);
+    emit signalUploadSucc();
 }
 
 void HNClient::recvCheckVersionResult(HNClientMessage &qMsg)

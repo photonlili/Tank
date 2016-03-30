@@ -9,7 +9,8 @@ HNCloudLocalModel::HNCloudLocalModel(QObject *parent) :
     setColumnCount(DIR_MAX);
     queryRootDirs();
     m_client = HNClientInstance(this);
-    connect(m_client, SIGNAL(signalUploadSucc(QString)), this, SIGNAL(sigUploadSuccess()));
+    connect(m_client, SIGNAL(signalUploadSucc()), this, SLOT(slotUploadSuccess()));
+    connect(m_client, SIGNAL(signalCancelUpload()), this, SLOT(slotUploadSuccess()));
 }
 
 void HNCloudLocalModel::queryRootDirs()
@@ -31,6 +32,8 @@ void HNCloudLocalModel::queryRootDirs()
 
 void HNCloudLocalModel::uploadFile(QString code, QString path, QString filename, int len)
 {
+    m_path = path;
+    m_filename = filename;
     m_client->sendUploadFile(code, path, filename, len);
 }
 
@@ -92,4 +95,10 @@ QStandardItem *HNCloudLocalModel::findDirByCode(QString code)
             return item(i, 0);
     }
     return NULL;
+}
+
+void HNCloudLocalModel::slotUploadSuccess()
+{
+    QString localfile = QString("%1/%2").arg(m_path).arg(m_filename);
+    QFile::remove(localfile);
 }

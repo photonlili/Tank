@@ -19,10 +19,13 @@ protected:
 
 signals:
     void sigQueryRootDirSuccess();
-    void sigUploadSuccess();
+private slots:
+    void slotUploadSuccess();
 public slots:
 private:
     HNClient* m_client;
+    QString m_path;
+    QString m_filename;
 };
 
 #endif // QCLOUDLOCALMODEL_H

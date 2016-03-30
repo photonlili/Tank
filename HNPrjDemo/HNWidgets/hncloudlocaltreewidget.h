@@ -3,6 +3,7 @@
 
 #include "hncloudtreeview.h"
 #include "hncloudlocalmodel.h"
+#include "hnprogressdialog.h"
 
 namespace Ui {
 class HNCloudLocalTreeWidget;
@@ -22,12 +23,16 @@ private slots:
     void currentRowChanged();
     void printFile();
     void uploadFile();
+    void slotUploadSuccess();
 
 private:
     QString m_uploadFileName;
     QString m_localPath;
     Ui::HNCloudLocalTreeWidget *ui;
     HNCloudLocalModel* m_model;
+    HNClient* m_client;
+    HNProgressDialog* m_prog;
+
 };
 
 #endif // HNCLOUDLOCALTREEWIDGET_H

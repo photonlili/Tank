@@ -31,11 +31,13 @@ public:
     QTCloudListFileResult& GetListedFiles() { return m_files; }
     QTCheckVersionResult& GetVersionResult() { return m_versionresult; }
 signals:
+    void signalCancelDown();
     void signalDownSucc();
     void signalListDirOK();
     void signalListFileOK();
     void signalLogined();
-    void signalUploadSucc(QString code);
+    void signalCancelUpload();
+    void signalUploadSucc();
     void signalCheckVersionResult();
 public slots:
     //服务器需要解析收到的命令，而此处不需要，所以客户端和服务器代码分开编写。
@@ -80,6 +82,7 @@ private:
     qint8 m_heartCount;
     quint32 m_PORT;
     QTimer* timer;
+    quint8 m_work;
     void saveConType();
     void readConType();
     void connectToSingelHost();

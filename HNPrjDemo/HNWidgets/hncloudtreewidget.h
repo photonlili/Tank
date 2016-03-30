@@ -4,6 +4,7 @@
 #include "hncloudtreeview.h"
 #include "hncloudmodel.h"
 #include "hnmsgbox.h"
+#include "hnprogressdialog.h"
 
 namespace Ui {
 class HNCloudTreeWidget;
@@ -17,9 +18,6 @@ public:
     explicit HNCloudTreeWidget(QWidget *parent = 0);
     ~HNCloudTreeWidget();
 
-    QString currentDownloadingFile();
-    QString currentDownloadingFilelocalName();
-
 public slots:
     void slotConnect();
     void slotDisConnect();
@@ -29,6 +27,7 @@ private slots:
     void currentRowChanged();
     void downFile();
     void delFile();
+    void slotDownSuccess();
 
 private:
     Ui::HNCloudTreeWidget *ui;
@@ -36,6 +35,7 @@ private:
     HNCloudModel* model;
     QString m_tmpfile, m_localfile;
     HNMsgBox* m_box;
+    HNProgressDialog* m_progDown;
 };
 
 #endif // QCLOUDTREEWIDGET_H

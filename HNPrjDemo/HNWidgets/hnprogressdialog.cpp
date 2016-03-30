@@ -10,6 +10,7 @@ HNProgressDialog::HNProgressDialog(QWidget *parent) :
     bar = ui->widgetBar;
     connect(ui->btnCancel, SIGNAL(clicked()),
             this, SLOT(reject()));
+    setFixedWidth(260);
 }
 
 HNProgressDialog::~HNProgressDialog()
@@ -25,6 +26,7 @@ void HNProgressDialog::initAll()
 
 void HNProgressDialog::setValue(int value)
 {
+    ui->label->setText(tr("Progressing... %1%").arg(value));
     bar->setValue(value);
 }
 

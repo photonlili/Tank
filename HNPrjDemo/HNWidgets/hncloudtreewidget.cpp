@@ -14,7 +14,7 @@ HNCloudTreeWidget::HNCloudTreeWidget(QWidget *parent) :
     ui->setupUi(this);
     m_client = HNClientInstance(this);
     connect(m_client, SIGNAL(connected()), this, SLOT(slotConnected()));
-    model = new HNCloudModel(this, m_client);
+    model = new HNCloudModel(this);
     setModel(model);
 
     setColumnHidden(FILE_ID, true);
@@ -27,21 +27,25 @@ HNCloudTreeWidget::HNCloudTreeWidget(QWidget *parent) :
     cloudFont.setPointSize(16);
     setFont(cloudFont);
     connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), this, SLOT(currentRowChanged()));
+
+    m_progDown = new HNProgressDialog(this);
+
+    connect(m_client, SIGNAL(signalUpdateProgress(int)),
+            m_progDown, SLOT(setValue(int)));
+    connect(m_client, SIGNAL(signalDownSucc()),
+            m_progDown, SLOT(accept()));
+    connect(m_progDown, SIGNAL(rejected()),
+            m_client, SLOT(sendCancelDown()));
+
+    //connect(m_client, SIGNAL(signalDownSucc()),
+    //        this, SLOT(slotDownSuccess()));
+    //connect(m_client, SIGNAL(signalCancelDown()),
+    //        this, SLOT(slotDownSuccess()));
 }
 
 HNCloudTreeWidget::~HNCloudTreeWidget()
 {
     delete ui;
-}
-
-QString HNCloudTreeWidget::currentDownloadingFile()
-{
-    return m_tmpfile;
-}
-
-QString HNCloudTreeWidget::currentDownloadingFilelocalName()
-{
-    return m_localfile;
 }
 
 void HNCloudTreeWidget::slotConnect(){
@@ -73,6 +77,8 @@ void HNCloudTreeWidget::downFile()
     m_localfile = QString("%1/%2").arg(path).arg(localname);
     m_tmpfile = QString("%1/%2").arg(path).arg(filename);
     model->downFile(path, fileid, m_tmpfile);
+    m_progDown->initAll();
+    m_progDown->show();
 }
 
 void HNCloudTreeWidget::delFile()
@@ -85,6 +91,14 @@ void HNCloudTreeWidget::delFile()
     QString fileid = model->index(curIndex.row(), FILE_ID, parIndex).data().toString();
     pline() << code << fileid;
     model->delFile(code, fileid);
+}
+
+void HNCloudTreeWidget::slotDownSuccess()
+{
+    if(QDialog::Accepted == m_progDown->result() )
+        HNMsgBox::warning(this, "Download Success");
+    else
+        HNMsgBox::warning(this, "Download Canceled");
 }
 
 void HNCloudTreeWidget::currentRowChanged()

@@ -9,6 +9,7 @@ HNCloudLocalTreeWidget::HNCloudLocalTreeWidget(QWidget *parent) :
     ui(new Ui::HNCloudLocalTreeWidget)
 {
     ui->setupUi(this);
+    m_client = HNClientInstance(this);
     m_model = new HNCloudLocalModel(this);
     setModel(m_model);
     setColumnHidden(DIR_CODE, true);
@@ -19,6 +20,19 @@ HNCloudLocalTreeWidget::HNCloudLocalTreeWidget(QWidget *parent) :
     setFont(cloudFont);
     connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
             this, SLOT(currentRowChanged()));
+
+    m_prog = new HNProgressDialog(this);
+    connect(m_client, SIGNAL(signalUpdateProgress(int)),
+            m_prog, SLOT(setValue(int)));
+    connect(m_client, SIGNAL(signalUploadSucc()),
+            m_prog, SLOT(accept()));
+    connect(m_prog, SIGNAL(rejected()),
+            m_client, SLOT(sendCancelUpload()));
+
+    //connect(m_prog, SIGNAL(rejected()),
+    //        this, SLOT(slotUploadSuccess()));
+    //connect(m_prog, SIGNAL(accepted()),
+    //        this, SLOT(slotUploadSuccess()));
 }
 
 HNCloudLocalTreeWidget::~HNCloudLocalTreeWidget()
@@ -74,6 +88,16 @@ void HNCloudLocalTreeWidget::uploadFile()
     QFileInfo file(QString("%1/%2").arg(m_localPath).arg(m_uploadFileName));
     int len = file.size();
     m_model->uploadFile(code, m_localPath, m_uploadFileName, len);
+    m_prog->initAll();
+    m_prog->show();
+}
+
+void HNCloudLocalTreeWidget::slotUploadSuccess()
+{
+    if(QDialog::Accepted == m_prog->result() )
+        HNMsgBox::warning(this, "Upload Success");
+    else
+        HNMsgBox::warning(this, "Upload Canceled");
 }
 
 void HNCloudLocalTreeWidget::currentRowChanged()

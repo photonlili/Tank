@@ -11,7 +11,7 @@ HNMainForm::HNMainForm(QWidget *parent) :
     bar->setTabPixmap(0, "://pictures/bt_setting.png", "://pictures/bt_setting_press.png");
     bar->setTabPixmap(1, "://pictures/bt_cloud.png", "://pictures/bt_cloud_press.png");
 
-
+    HNClientInstance(this)->SendConnectMessage();
 }
 
 HNMainForm::~HNMainForm()
