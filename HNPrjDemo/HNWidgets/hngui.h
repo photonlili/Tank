@@ -2,7 +2,6 @@
 #define HNGUI_H
 
 #include "hnversion.h"
-#include "hnapp.h"
 
 #include "hncheckbox.h"
 #include "hnradiobutton.h"
@@ -26,7 +25,6 @@
 #include "hncloudwidget.h"
 #include "hnmanageethenetwidget.h"
 #include "HNPreviewWidget.h"
-#include "hnmainform.h"
 
 #include "hnclient.h"
 #include "HNEthManager.h"

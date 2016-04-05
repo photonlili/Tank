@@ -34,7 +34,6 @@ RESOURCES += \
     $$PWD/HNWidgets.qrc
 
 OTHER_FILES += \
-    $$PWD/HNWidgets.rc \
     $$PWD/HNWidgets.qss
 
 SOURCES += $$PWD/hncheckbox.cpp \
@@ -94,10 +93,6 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnmanageethenetwidget.cpp \
     $$PWD/HNPreviewWidget.cpp \
     $$PWD/dmmu.c \
-    $$PWD/hnapp.cpp \
-    $$PWD/hnmainform.cpp \
-    $$PWD/hnwindow.cpp \
-    $$PWD/hnloginform.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -164,10 +159,6 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hal.h \
     $$PWD/HNPreviewWidget.h \
     $$PWD/jz_cim.h \
-    $$PWD/hnapp.h \
-    $$PWD/hnmainform.h \
-    $$PWD/hnwindow.h \
-    $$PWD/hnloginform.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -199,6 +190,3 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnprintpreviewdialog.ui \
     $$PWD/hnmanageethenetwidget.ui \
     $$PWD/HNPreviewWidget.ui \
-    $$PWD/hnmainform.ui \
-    $$PWD/hnwindow.ui \
-    $$PWD/hnloginform.ui

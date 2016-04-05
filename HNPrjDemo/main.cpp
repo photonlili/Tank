@@ -1,12 +1,16 @@
-#include "hnframe.h"
 #include <QApplication>
 #include "HNPub.h"
+#include "hnapp.h"
+#include "hnwindow.h"
+#include "hnmainform.h"
 
 int main(int argc, char *argv[])
 {
     HNApp a(argc, argv);
 
-    HNFrame w;
+
+
+    QWidget w;
     //w.setFixedHeight(340);
     QVBoxLayout l;
     w.setLayout(&l);
