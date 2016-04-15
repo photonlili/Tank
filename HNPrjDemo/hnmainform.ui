@@ -328,7 +328,7 @@
       <enum>QTabWidget::West</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="usesScrollButtons">
       <bool>false</bool>
@@ -353,7 +353,7 @@
        <item>
         <widget class="QTabWidget" name="tabWidget_3">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_2">
           <attribute name="title">
@@ -374,6 +374,28 @@
            </property>
            <item>
             <widget class="HNManageEthenetWidget" name="widget_6" native="true"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tab_3">
+          <attribute name="title">
+           <string>SetUser</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_9">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="HNManageUserWidget" name="widget_9"/>
            </item>
           </layout>
          </widget>
@@ -457,6 +479,11 @@
    <extends>QWidget</extends>
    <header>hncloudwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>HNManageUserWidget</class>
+   <extends>QTableView</extends>
+   <header>hnmanageuserwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

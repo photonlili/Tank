@@ -24,9 +24,6 @@ CODECFORTR = UTF-8
 
 RESOURCES +=
 
-RC_FILE += \
-    hnversion.rc
-
 
 SOURCES += main.cpp\
     hnapp.cpp \
@@ -39,7 +36,6 @@ HEADERS  += \
     hnloginform.h \
     hnmainform.h \
     hnwindow.h \
-    hnversion.h
 
 FORMS    += \
     hnloginform.ui \
@@ -48,4 +44,3 @@ FORMS    += \
 
 OTHER_FILES += \
     HNPrjDemo.pro.user \
-    hnversion.rc

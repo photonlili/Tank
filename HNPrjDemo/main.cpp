@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     //l.addWidget(&w4);
 
     HNInput *im = HNInput::Instance();
-    //im->Init("min", "control", "hanon", 14, 14);
+    im->Init("min", "control", "hanon", 14, 14);
 
     HNLineEditWithSearch w5;
     //l.addWidget(&w5);

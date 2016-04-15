@@ -40,8 +40,8 @@ HNApp::HNApp(int &argc, char **argv) : QApplication(argc, argv)
     setLanguage();
 
     //打开方法数据库
-    //managerDB = newDatabaseConn();
-    //setDatabaseName(managerDB, DB_MANAGER);
+    managerDB = newDatabaseConn();
+    setDatabaseName(managerDB, DB_MANAGER);
 
     QFile styleFile("://HNWidgets.qss");
     styleFile.open(QIODevice::ReadOnly);

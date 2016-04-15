@@ -33,8 +33,12 @@ CONFIG(debug, debug|release) {
 RESOURCES += \
     $$PWD/HNWidgets.qrc
 
+RC_FILE += \
+    $$PWD/hnversion.rc
+
 OTHER_FILES += \
-    $$PWD/HNWidgets.qss
+    $$PWD/HNWidgets.qss \
+    $$PWD/hnversion.rc
 
 SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/HNDefine.cpp \
@@ -93,6 +97,10 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnmanageethenetwidget.cpp \
     $$PWD/HNPreviewWidget.cpp \
     $$PWD/dmmu.c \
+    $$PWD/hnuserinfomodel.cpp \
+    $$PWD/hnuserinfoview.cpp \
+    $$PWD/hnuserinfowidget.cpp \
+    $$PWD/hnmanageuserwidget.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -159,6 +167,10 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hal.h \
     $$PWD/HNPreviewWidget.h \
     $$PWD/jz_cim.h \
+    $$PWD/hnuserinfomodel.h \
+    $$PWD/hnuserinfoview.h \
+    $$PWD/hnuserinfowidget.h \
+    $$PWD/hnmanageuserwidget.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -190,3 +202,6 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnprintpreviewdialog.ui \
     $$PWD/hnmanageethenetwidget.ui \
     $$PWD/HNPreviewWidget.ui \
+    $$PWD/hnuserinfoview.ui \
+    $$PWD/hnuserinfowidget.ui \
+    $$PWD/hnmanageuserwidget.ui

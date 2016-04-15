@@ -153,6 +153,10 @@ const QString &tagWifi::operator[](int index) const
     return operator [](index);
 }
 
+QSqlDatabase managerDB;
+QString gUserName;
+QString gPassword;
+
 
 QSqlDatabase newDatabaseConn()
 {

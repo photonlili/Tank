@@ -37,6 +37,6 @@ private slots:
 private:
 };
 
-HNSerialPort *HNSerialPortInst(QObject* parent = 0);
+HNSerialPort *HNSerialPortInstance(QObject* parent = 0);
 
 #endif // QTANKSERIALPORT_H

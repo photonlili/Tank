@@ -208,7 +208,7 @@ void HNSerialPort::sendExceptionAck()
 }
 
 
-HNSerialPort *HNSerialPortInst(QObject *parent)
+HNSerialPort *HNSerialPortInstance(QObject *parent)
 {
     static HNSerialPort* s2 = new HNSerialPort(parent);
     return s2;

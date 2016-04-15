@@ -545,9 +545,13 @@ void HNInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
 
         isFirst = false;
         if (nowWidget->inherits("QLineEdit")) {
-            currentLineEdit = (QLineEdit *)nowWidget;
-            currentEditType = "QLineEdit";
-            ShowPanel();
+            QLineEdit *lineedit = (QLineEdit *)nowWidget;
+            if(!lineedit->isReadOnly())
+            {
+                currentLineEdit = (QLineEdit *)nowWidget;
+                currentEditType = "QLineEdit";
+                ShowPanel();
+            }
         } else if (nowWidget->inherits("QTextEdit")) {
             currentTextEdit = (QTextEdit *)nowWidget;
             currentEditType = "QTextEdit";
