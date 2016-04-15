@@ -15,6 +15,8 @@ HNManageUserWidget::HNManageUserWidget(QWidget *parent) :
     connect(ui->tbvUserInfo->selectionModel(), SIGNAL(currentRowChanged(const QModelIndex &, const QModelIndex &)),
             ui->tbvUserInfo, SLOT(updateMap()));
     ui->tbvUserInfo->refresh();
+
+
 }
 
 HNManageUserWidget::~HNManageUserWidget()

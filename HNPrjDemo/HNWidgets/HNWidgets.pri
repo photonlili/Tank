@@ -100,7 +100,8 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnuserinfomodel.cpp \
     $$PWD/hnuserinfoview.cpp \
     $$PWD/hnuserinfowidget.cpp \
-    $$PWD/hnmanageuserwidget.cpp
+    $$PWD/hnmanageuserwidget.cpp \
+    HNWidgets/hncreateuserdialog.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -170,7 +171,8 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hnuserinfomodel.h \
     $$PWD/hnuserinfoview.h \
     $$PWD/hnuserinfowidget.h \
-    $$PWD/hnmanageuserwidget.h
+    $$PWD/hnmanageuserwidget.h \
+    HNWidgets/hncreateuserdialog.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -204,4 +206,5 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/HNPreviewWidget.ui \
     $$PWD/hnuserinfoview.ui \
     $$PWD/hnuserinfowidget.ui \
-    $$PWD/hnmanageuserwidget.ui
+    $$PWD/hnmanageuserwidget.ui \
+    HNWidgets/hncreateuserdialog.ui
