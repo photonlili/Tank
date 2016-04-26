@@ -101,7 +101,12 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnuserinfoview.cpp \
     $$PWD/hnuserinfowidget.cpp \
     $$PWD/hnmanageuserwidget.cpp \
-    HNWidgets/hncreateuserdialog.cpp
+    $$PWD/hncreateuserdialog.cpp \
+    $$PWD/hnsamplemutipagewidget.cpp \
+    $$PWD/hnsamplemodel.cpp \
+    $$PWD/hnsampleview.cpp \
+    $$PWD/hnsamplewidget.cpp \
+    HNWidgets/hnsamplefoundationwidget.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -172,7 +177,12 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hnuserinfoview.h \
     $$PWD/hnuserinfowidget.h \
     $$PWD/hnmanageuserwidget.h \
-    HNWidgets/hncreateuserdialog.h
+    $$PWD/hncreateuserdialog.h \
+    $$PWD/hnsamplemutipagewidget.h \
+    $$PWD/hnsamplemodel.h \
+    $$PWD/hnsampleview.h \
+    $$PWD/hnsamplewidget.h \
+    HNWidgets/hnsamplefoundationwidget.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \
@@ -207,4 +217,8 @@ FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hnuserinfoview.ui \
     $$PWD/hnuserinfowidget.ui \
     $$PWD/hnmanageuserwidget.ui \
-    HNWidgets/hncreateuserdialog.ui
+    $$PWD/hncreateuserdialog.ui \
+    $$PWD/hnsamplemutipagewidget.ui \
+    $$PWD/hnsampleview.ui \
+    $$PWD/hnsamplewidget.ui \
+    HNWidgets/hnsamplefoundationwidget.ui

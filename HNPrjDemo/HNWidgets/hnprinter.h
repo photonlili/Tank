@@ -1,14 +1,24 @@
 #ifndef HNPRINTER_H
 #define HNPRINTER_H
 
-#include <QString>
+#include <QObject>
+#include <QTableView>
 
-class HNPrinter
+class HNPrinter : public QObject
 {
-public:
-    HNPrinter();
+    Q_OBJECT
 
-    void printpdf(QString filename);
+public:
+    explicit HNPrinter(QObject* parent = 0);
+
+    void addTable(QTableView* table);
+
+public:
+    static void htmltopdf(QString pdf, QString html);
+    static void printpdf(QString pdf);
+
+private:
+
 };
 
 #endif // HNPRINTER_H

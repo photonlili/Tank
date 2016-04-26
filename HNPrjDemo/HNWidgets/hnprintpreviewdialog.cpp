@@ -155,6 +155,5 @@ void HNPrintPreviewDialog::printToPdf()
 
 void HNPrintPreviewDialog::print()
 {
-    HNPrinter p;
-    p.printpdf("Report.pdf");
+    HNPrinter::printpdf("Report.pdf");
 }

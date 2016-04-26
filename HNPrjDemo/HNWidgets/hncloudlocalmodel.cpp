@@ -20,12 +20,12 @@ void HNCloudLocalModel::queryRootDirs()
     insertRows(row, 1);
     setData(index(row, DIR_NAME), tr("Method"));
     setData(index(row, DIR_CODE), "001");
-    setData(index(row, DIR_PATH), DB_METHOD);
+    setData(index(row, DIR_PATH), DB_METHOD_PATH);
     row++;
     insertRows(row, 1);
     setData(index(row, DIR_NAME), tr("Data"));
     setData(index(row, DIR_CODE), "002");
-    setData(index(row, DIR_PATH), DB_DATA);
+    setData(index(row, DIR_PATH), DB_DATA_PATH);
     submit();
     emit sigQueryRootDirSuccess();
 }

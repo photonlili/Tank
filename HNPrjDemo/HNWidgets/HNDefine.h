@@ -138,11 +138,11 @@ enum {
 
 #define MAX_LEN 1024
 
-#define CONFIG_PATH "./conf"
-#define LOG_PATH "./log"
-#define DB_PATH "./db"
-#define DB_METHOD "./db/Method"
-#define DB_DATA "./db/Data"
+#define CONFIG_PATH "./conf/"
+#define LOG_PATH "./log/"
+#define DB_PATH "./db/"
+#define DB_METHOD_PATH "Method/"
+#define DB_DATA_PATH "Data/"
 #define AV_PATH "./res"
 #define DB_TYPE "QSQLITE"
 #define DB_PINYIN "PinYin"
@@ -152,6 +152,7 @@ enum {
 #define DB_EXTRACT "Extract"
 #define DB_REPORT_P "Data/Method_Time.db"
 #define DB_EVENT "SysEvent"
+#define DB_DATA "_Data"
 #define TABLE_USERINFO "User"
 #define TABLE_AUTHORITY "Authority"
 #define TABLE_LIBRARY "Library"
@@ -159,6 +160,7 @@ enum {
 #define TABLE_STAGE "Stage"
 #define TABLE_EVENT "Event"
 #define TABLE_EVTYPE "Type"
+#define TABLE_YANGPINDATA "data"
 
 #define WARNING "Warning"
 #define NOTICE "Notice"

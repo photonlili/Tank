@@ -72,9 +72,9 @@ void HNCloudModel::queryRootDirsResult()
             setData(index(row, DIR_NAME), tr("Data"));
         setData(index(row, DIR_CODE), _r.m_code);
         if("001" == _r.m_code)
-            setData(index(row, DIR_PATH), DB_METHOD);
+            setData(index(row, DIR_PATH), DB_METHOD_PATH);
         else if("002" == _r.m_code)
-            setData(index(row, DIR_PATH), DB_DATA);
+            setData(index(row, DIR_PATH), DB_DATA_PATH);
         row++;
     }
     submit();

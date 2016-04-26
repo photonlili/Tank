@@ -6,9 +6,9 @@ HNTableView::HNTableView(QWidget *parent) :
     ui(new Ui::HNTableView)
 {
     m_header = new HNHeaderView(Qt::Horizontal, this);
-    setHorizontalHeader(m_header);
+    //setHorizontalHeader(m_header);
     m_vheader = new HNHeaderView(Qt::Vertical, this);
-    setVerticalHeader(m_vheader);
+    //setVerticalHeader(m_vheader);
 
     ui->setupUi(this);
 }

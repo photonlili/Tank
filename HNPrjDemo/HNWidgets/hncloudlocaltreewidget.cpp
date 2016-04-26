@@ -80,7 +80,7 @@ void HNCloudLocalTreeWidget::uploadFile()
     QString fileName = m_model->index(curIndex.row(), FILE_NAME, parIndex).data().toString();
     QString time = QDateTime::currentDateTime().toString("yyyy-MM-dd-hh-mm-ss");
     m_uploadFileName = QString("%1_%2").arg(time).arg(fileName);
-    m_localPath = path;
+    m_localPath = QString("%1/%2").arg(DB_PATH).arg(path);
 
     QFile::copy(QString("%1/%2").arg(m_localPath).arg(fileName),
                 QString("%1/%2").arg(m_localPath).arg(m_uploadFileName));

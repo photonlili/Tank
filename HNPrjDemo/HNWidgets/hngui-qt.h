@@ -1,6 +1,11 @@
 #ifndef HNGUIQT_H
 #define HNGUIQT_H
 
+#include <QTextFormat>
+#include <QPrinter>
+#include <QTextTable>
+#include <QTextEdit>
+#include <QTextBrowser>
 #include <QSqlRelationalDelegate>
 #include <QTranslator>
 #include <QPrintDialog>

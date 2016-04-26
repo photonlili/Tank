@@ -54,10 +54,22 @@ int main(int argc, char *argv[])
 
     HNMainForm w7;
     w7.setFixedSize(HN_SCRN_WIDTH, HN_SCRN_HEIGHT);
-    l.addWidget(&w7);
+    //l.addWidget(&w7);
 
     HNProgressDialog w9;
     //l.addWidget(&w9);
+
+    HNSampleMutiPageWidget w10;
+    //l.addWidget(&w10);
+
+    HNSampleWidget w11;
+    //l.addWidget(&w11);
+
+    HNSampleMutiPageWidget w12;
+    w12.setDB(QString("%1/%2").arg(DB_DATA_PATH).arg(DB_DATA));
+    w12.setTable(TABLE_YANGPINDATA);
+    w12.query();
+    l.addWidget(&w12);
 
     return a.exec();
 }

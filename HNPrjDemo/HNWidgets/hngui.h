@@ -27,6 +27,8 @@
 #include "HNPreviewWidget.h"
 #include "hncreateuserdialog.h"
 #include "hnmanageuserwidget.h"
+#include "hnsamplewidget.h"
+#include "hnsamplemutipagewidget.h"
 
 #include "hnclient.h"
 #include "HNEthManager.h"
