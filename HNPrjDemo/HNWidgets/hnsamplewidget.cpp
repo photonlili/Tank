@@ -40,8 +40,9 @@ void HNSampleWidget::query(QString excp)
     m_model->setHeaderData(1, Qt::Horizontal, tr("样品名称"));
     m_model->setHeaderData(2, Qt::Horizontal, tr("样品编号"));
     m_model->setHeaderData(3, Qt::Horizontal, tr("样品量"));
-    m_model->setHeaderData(4, Qt::Horizontal, tr("结果"));
-    m_model->setHeaderData(5, Qt::Horizontal, tr("结果单位"));
-    m_model->setHeaderData(6, Qt::Horizontal, tr("测试人"));
-    m_model->setHeaderData(7, Qt::Horizontal, tr("测试时间"));
+    m_model->setHeaderData(4, Qt::Horizontal, tr("样品量单位"));
+    m_model->setHeaderData(5, Qt::Horizontal, tr("结果"));
+    m_model->setHeaderData(6, Qt::Horizontal, tr("结果单位"));
+    m_model->setHeaderData(7, Qt::Horizontal, tr("测试人"));
+    m_model->setHeaderData(8, Qt::Horizontal, tr("测试时间"));
 }

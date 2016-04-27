@@ -74,18 +74,26 @@ int main(int argc, char *argv[])
 
     QGraphicsView v;
     HNReporter r;
-    r.setView(&v);
-    //r.setTitle("");
-    r.insertTable(&w11);
+    QStringList text;
+    text << "山东海能仪器股份有限公司";
+    text << "页脚写什么？";
+
+    w11.setFixedWidth(700);
+    w11.resizeColumnsToContents();
+    w11.setFixedWidth(700);
+    r.insertSamplePaper("K1160定氮仪结果报告", text, &w11);
     pline() << r.pageNum();
-    r.getPage(1);
-    v.scale(1/1.5, 1/1.5);
-    v.scale(1/1.5, 1/1.5);
-    //v.show();
+    QGraphicsScene* pageScene = r.getPage(1);
+    pageScene->addRect(0,0,pageScene->width(),pageScene->height(),QPen(Qt::black, 2.0));
+    v.setScene(pageScene);
+    //v.scale(1/1.5, 1/1.5);
+    //v.scale(1/1.5, 1/1.5);
+    v.show();
+    //r.exportPdf("data.pdf");
 
     HNSampleFoundationWidget w13;
     w13.initAll();
-    l.addWidget(&w13);
+    //l.addWidget(&w13);
 
     return a.exec();
 }

@@ -9,7 +9,6 @@ HNSampleView::HNSampleView(QWidget *parent) :
     setSelectionMode(QAbstractItemView::SingleSelection);
     setSelectionBehavior(QAbstractItemView::SelectRows);
     setEditTriggers(QAbstractItemView::NoEditTriggers);
-    //horizontalHeader()->setResizeMode(QHeaderView::Stretch);
     horizontalHeader()->setStretchLastSection(true);
 
 #ifdef __MIPS_LINUX__

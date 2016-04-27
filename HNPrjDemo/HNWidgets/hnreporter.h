@@ -10,45 +10,53 @@ class HNReporter : public QObject
 public:
     explicit HNReporter(QObject *parent = 0);
 
+
     //定氮仪简单打印需要的数据
-    void insertSamplePaper(QString title, QStringList text, QTableView* table);
-    //生成简单打印模板
-    void GenerateTemplateSample();
+    virtual void insertSamplePaper(QString title, QStringList text, QTableView* table);
 
     //定氮仪详细打印需要的数据
     //未实现
 
     //导出pdf
-    void exportPdf(const QString &filename);
-
-    int pageNum() { return pages; }
-    void getPage(QGraphicsView* view, int num);
+    virtual void exportPdf(const QString &filename);
+    int pageNum() { return pageSceneVector.size(); }
+    int paperWidth() { return rectScene.width(); }
+    int paperHeight() { return rectScene.height(); }
+    //单页浏览
+    virtual QGraphicsScene *getPage(int num);
 
 signals:
 
 public slots:
 
 protected:
+    //生成简单打印模板
+    virtual void GenerateSampleTemplate();
     //在一次交易中规则不能改变，如果要改变需要等待下一阶段
-    virtual void paintPage(int pagenum);
+    virtual bool paintSamplePage(int pagenum);
+
+    virtual void paintPageHeader();
+    virtual void paintPageFooter();
+    virtual void paintPageTitle();
 
 private:
     //输出
     QPrinter *printer;
-    //显示
-    QVector<QGraphicsScene> pageSceneVector;
-    QGraphicsScene pageScene;
+    //对页面元素高度不能迅速统计的场景
+    QVector<QGraphicsScene*> pageSceneVector;
+    QGraphicsScene* pageScene;
 
     //页面元素
-    int pages;
+    int xpos, xposr, ypos, ypos2;
+    int dx, dy;
+    QRectF rectScene;
+    int currentPage;
+    int currentTableRow;
     int leftMargin;
     int rightMargin;
     int topMargin;
     int bottomMargin;
     int spacing;
-    int sceneZoomFactor;
-    double columnZoomFactor;
-    double columnMultiplier;
 
     //页眉
     int headerSize;
@@ -69,6 +77,10 @@ private:
     QFontMetrics *fmt;
     //表格
     QTableView *tableView;
+    QFont tableHeaderFont;
+    QFont tableContentFont;
+    QFontMetrics *tableHeaderFmt;
+    QFontMetrics *tableContentFmt;
     QVector<QTextLength> colSizes;
     QAbstractItemModel* model;
     int lines;

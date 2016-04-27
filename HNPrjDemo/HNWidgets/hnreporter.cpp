@@ -11,8 +11,6 @@ HNReporter::HNReporter(QObject *parent) :
     spacing=6;
     headerSize=60;
     footerSize=60;
-    sceneZoomFactor=100;
-    columnZoomFactor=0.65;
 
     //setup printer
     printer= new QPrinter(QPrinter::HighResolution);
@@ -27,12 +25,12 @@ HNReporter::HNReporter(QObject *parent) :
     QString time=QTime::currentTime().toString(QLocale().timeFormat(QLocale::ShortFormat));
     headerStdText = date+"  "+time;
     headerText = tr("济南海能仪器股份有限公司");
-    footerText = tr("页");
+    footerText = tr("第 1 页");
 
     //header font
     headerFont = QApplication::font();;
-    headerFont.setBold(true);
-    headerFont.setUnderline(true);
+    headerFont.setBold(false);
+    headerFont.setUnderline(false);
     headerFont.setPointSize(9);
     headerFmt =new QFontMetrics(headerFont);
 
@@ -45,11 +43,21 @@ HNReporter::HNReporter(QObject *parent) :
 
     //normal font
     font=QApplication::font();
-    fmt =new  QFontMetrics(font);
+    fmt = new QFontMetrics(font);
 
     QRectF rect=printer->paperRect();
-    QRectF rectNew = QRectF(0,0,rect.width() / printer->logicalDpiX() * sceneZoomFactor, rect.height() / printer->logicalDpiY() * sceneZoomFactor);
-    pageScene.setSceneRect(rectNew);
+    rectScene = QRectF(0,0,rect.width() / printer->logicalDpiX() * 100,
+                            rect.height() / printer->logicalDpiY() * 100);
+
+    rowHeight = font.pointSize() + spacing;
+    xpos = leftMargin;
+    xposr = rectScene.width() - rightMargin;
+    ypos = headerSize + topMargin + rowHeight;
+    ypos2 = rectScene.height() - footerSize - bottomMargin - rowHeight;
+    dx = xpos;
+    dy = ypos;
+
+    lines = ((ypos2-ypos)/rowHeight);
 }
 
 void HNReporter::insertSamplePaper(QString title, QStringList text, QTableView *table)
@@ -57,15 +65,17 @@ void HNReporter::insertSamplePaper(QString title, QStringList text, QTableView *
     this->titleText = title;
     this->text = text;
     this->tableView = table;
-    model = tableView->model();
+    GenerateSampleTemplate();
 }
 
-void HNReporter::GenerateTemplateSample()
+
+void HNReporter::GenerateSampleTemplate()
 {
-    //row height
-    rowHeight = font.pointSize() + spacing;
-    //count lines
-    lines = ((pageScene.height()-topMargin-bottomMargin-headerSize-footerSize)/rowHeight);
+    model = tableView->model();
+    tableHeaderFont = tableView->horizontalHeader()->font();
+    tableHeaderFmt = new QFontMetrics(tableHeaderFont);
+    tableContentFont = tableView->font();
+    tableContentFmt = new QFontMetrics(tableContentFont);
 
     //get column widths
     for (int i=0; i<model->columnCount(); i++) {
@@ -73,19 +83,173 @@ void HNReporter::GenerateTemplateSample()
         colSizes.append(QTextLength(QTextLength::FixedLength,colWidth));
     }
 
-    //count pages
-    int rowCount=model->rowCount();
-    double div = rowCount / lines;
-    int modulo = rowCount % lines;
-    if (modulo == 0 ) {
-        pages = QVariant(div).toInt();
-    } else {
-        div = div+1.0;
-        pages = QVariant(div).toInt();
-    }
-    columnMultiplier=pageScene.width()/tableView->width()*columnZoomFactor;
+    currentTableRow = 0;
+    currentPage = 0;
 
+    //Delete all
+    while ( ! pageSceneVector.isEmpty() ) {
+        QGraphicsScene* pageScene = pageSceneVector.first();
+        pageScene->clear();
+        delete pageScene;
+        pageSceneVector.remove(0);
+    }
+
+    for(int i = 1; ; i++)
+    {
+        pageScene = new QGraphicsScene(rectScene, this);
+        //header
+        paintPageHeader();
+        //body
+        bool ret = paintSamplePage(i);
+        //footer
+        paintPageFooter();
+
+        pageSceneVector.append(pageScene);
+        if(ret == true)
+            break;
+    }
 }
+
+
+bool HNReporter::paintSamplePage(int pagenum)
+{
+    QGraphicsProxyWidget* w = pageScene->addWidget(tableView);
+    w->moveBy(xpos, ypos);
+    currentPage++;
+    return true;
+
+    int sdx=0;
+    int sdy=0;
+    int tableRowHeight = 0;
+
+    if(pagenum == 1)
+    {
+        paintPageTitle();
+        dy = ypos + titleFmt->height();
+    }
+    else
+        dy=sdy+ypos;
+
+
+    //Table header
+    dx=sdx+xpos;
+
+    for (int i=0; i<model->columnCount(); i++) {
+        int logicalIndex=tableView->horizontalHeader()->logicalIndex(i);
+        int actColSize=QVariant(colSizes[logicalIndex].rawValue()).toInt();
+        tableRowHeight = tableView->horizontalHeader()->height();
+        QString txt = model->headerData(logicalIndex,Qt::Horizontal,Qt::DisplayRole).toString();
+        QGraphicsTextItem *item=new QGraphicsTextItem();
+        item->setFont(tableHeaderFont);
+        txt=tableHeaderFmt->elidedText(txt, Qt::ElideRight, actColSize-8);
+        item->setPlainText(txt);
+        item->moveBy(dx, dy);
+        pageScene->addRect(dx,dy,actColSize,tableRowHeight);
+        pageScene->addItem(item);
+        dx += actColSize;
+    }
+
+    //Table rows
+    QPen pen(Qt::gray, 1);
+    QBrush brush(Qt::gray,Qt::SolidPattern);
+    bool ret = true;
+    int sypos = (ypos2-dy)/tableRowHeight;
+    for (int i=0; i<sypos; i++) {
+        dx=sdx+xpos;
+        dy += tableRowHeight;
+        if(dy + tableRowHeight > ypos2)
+        {
+            ret = false;
+            break;
+        }
+
+        if (currentTableRow>=model->rowCount()) {
+            ret = true;
+            break;
+        }
+
+        tableRowHeight = tableView->rowHeight(currentTableRow);
+        for (int j=0; j<model->columnCount(); j++) {
+            int logicalIndex=tableView->horizontalHeader()->logicalIndex(j);
+            int actColSize=QVariant(colSizes[logicalIndex].rawValue()).toInt();
+            QString txt = model->data(model->index(currentTableRow,logicalIndex)).toString();
+            QGraphicsTextItem *item=new QGraphicsTextItem();
+            item->setFont(tableContentFont);
+            txt=tableContentFmt->elidedText(txt,Qt::ElideRight,actColSize-8);
+            item->setPlainText(txt);
+            item->moveBy(dx,dy);
+
+            //rectangle
+#if 1
+            pageScene->addRect(dx,dy,actColSize,tableRowHeight);
+#else
+            int modulo=i % 2;
+            if (modulo==0) {
+                //rectangle grey
+                QGraphicsRectItem *rItem=pageScene->addRect(leftMargin,dy+borderAdjust,csize,rowHeight,pen,brush);
+                rItem->setZValue(-1);
+            }
+#endif
+            pageScene->addItem(item);
+            dx+=actColSize;
+        }
+        currentTableRow++;
+    }
+
+    currentPage++;
+
+    return ret;
+}
+
+void HNReporter::paintPageHeader()
+{
+    // Page header
+    if (headerSize > 0)
+    {
+        //line
+        pageScene->addLine(xpos, ypos-rowHeight, xposr, ypos-rowHeight, QPen(Qt::black, 1.0));
+
+        //页眉
+        QGraphicsTextItem *headerItem=new QGraphicsTextItem();
+        headerItem->setFont(headerFont);
+        headerItem->setPlainText(headerText);
+        headerItem->moveBy(xpos, ypos-(rowHeight)*2 - spacing);
+        pageScene->addItem(headerItem);
+
+        //std text
+        QGraphicsTextItem *item=new QGraphicsTextItem();
+        item->setFont(headerFont);
+        item->setPlainText(headerStdText);
+        item->moveBy(xposr - headerFmt->width(headerStdText), ypos-(rowHeight)*2 - spacing);
+        pageScene->addItem(item);
+    }
+}
+
+void HNReporter::paintPageFooter()
+{
+    // footer
+    if (footerSize > 0) {
+        pageScene->addLine(xpos, ypos2 + rowHeight, xposr, ypos2 + rowHeight, QPen(Qt::black, 1.0));
+        QGraphicsTextItem *item=new QGraphicsTextItem();
+        item->setFont(font);
+        footerText = tr("第 ") + QString::number(currentPage) + tr(" 页");
+        item->setPlainText( footerText );
+        item->moveBy(xposr - fmt->width(footerText), ypos2 + (rowHeight)*2);
+        pageScene->addItem(item);
+    }
+}
+
+void HNReporter::paintPageTitle()
+{
+    //title
+    QGraphicsTextItem *titleItem=new QGraphicsTextItem();
+    titleItem->setFont(titleFont);
+    titleItem->setPlainText(titleText);
+    int titleWidth=titleFmt->width(titleText);
+    titleItem->moveBy((pageScene->width()/2)-(titleWidth/2), ypos);
+    pageScene->addItem(titleItem);
+}
+
 
 void HNReporter::exportPdf(const QString &filename)
 {
@@ -95,123 +259,15 @@ void HNReporter::exportPdf(const QString &filename)
 
     // print pdf
     QPainter painter(printer);
-    for (int pagenum=1; pagenum<=pages; pagenum++) {
-        paintPage(pagenum);
-        pageScene.render(&painter);
-        if (pagenum < pages) {
-            printer->newPage();
-        }
+    foreach (pageScene, pageSceneVector) {
+        pageScene->render(&painter);
+        printer->newPage();
     }
 }
 
-void HNReporter::getPage(QGraphicsView *view, int num)
+QGraphicsScene* HNReporter::getPage(int num)
 {
-    view->setScene(&pageScene);
-    view->ensureVisible(0,0,10,10);
-    paintPage(num);
-    pageScene.addRect(0,0,pageScene.width(),pageScene.height(),QPen(Qt::black, 2.0));
-}
-
-void HNReporter::paintPage(int pagenum)
-{
-    //Delete all
-    QList<QGraphicsItem*> L = pageScene.items();
-    while ( ! L.empty() ) {
-        pageScene.removeItem( L.first() );
-        delete L.first();
-        L.removeFirst();
-    }
-
-
-    //Table header
-    int csize=0;
-    for (int i=0; i<model->columnCount(); i++) {
-        int logicalIndex=tableView->horizontalHeader()->logicalIndex(i);
-        QString txt = model->headerData(logicalIndex,Qt::Horizontal,Qt::DisplayRole).toString();
-        QGraphicsTextItem *item=new QGraphicsTextItem();
-        item->setFont(headerFont);
-        txt=headerFmt->elidedText(txt,Qt::ElideRight,QVariant(colSizes[logicalIndex].rawValue()).toInt()-8);
-        item->setPlainText(txt);
-        //item->moveBy((csize*columnMultiplier)+leftMargin,topMargin+headerSize+(spacing*2));
-        item->moveBy(csize+leftMargin,topMargin+headerSize+(spacing*2));
-        csize=csize+QVariant(colSizes[logicalIndex].rawValue()).toInt();
-        pageScene.addItem(item);
-    }
-
-    //Table rows
-    qreal dx,dy;
-    QPen pen(Qt::gray, 1);
-    QBrush brush(Qt::gray,Qt::SolidPattern);
-    int borderAdjust=rowHeight / 5;
-
-    for (int i=0; i<lines; i++) {
-        csize=0;
-        dy=(i*rowHeight)+topMargin+headerSize+(rowHeight*2);
-        int modelIdxY=(pagenum-1)*lines+i;
-        if (modelIdxY>=model->rowCount()) {
-            break;
-        }
-
-        for (int j=0; j<model->columnCount(); j++) {
-            int logicalIndex=tableView->horizontalHeader()->logicalIndex(j);
-            int actColSize=QVariant(colSizes[logicalIndex].rawValue()).toInt();
-            QString txt = model->data(model->index(modelIdxY,logicalIndex)).toString();
-            QGraphicsTextItem *item=new QGraphicsTextItem();
-            item->setFont(font);
-            txt=fmt->elidedText(txt,Qt::ElideRight,actColSize-8);
-            item->setPlainText(txt);
-            //qreal dx=(csize*columnMultiplier)+leftMargin;
-            dx=csize+leftMargin;
-            item->moveBy(dx,dy);
-
-            //rectangle
-#if 1
-            pageScene.addRect(dx,dy+borderAdjust,actColSize,rowHeight);
-#else
-            int modulo=i % 2;
-            if (modulo==0) {
-                //rectangle grey
-                QGraphicsRectItem *rItem=pageScene.addRect(leftMargin,dy+borderAdjust,csize,rowHeight,pen,brush);
-                rItem->setZValue(-1);
-            }
-#endif
-            pageScene.addItem(item);
-            csize=csize+actColSize;
-        }
-
-    }
-
-    // Page header
-    if (headerSize > 0) {
-        //line
-        pageScene.addLine(leftMargin,headerSize+topMargin,pageScene.width()-rightMargin, headerSize+topMargin,QPen(Qt::black, 1.0));
-
-        //tile
-        QGraphicsTextItem *titleItem=new QGraphicsTextItem();
-        titleItem->setFont(titleFont);
-        titleItem->setPlainText(headerText);
-        int titleWidth=titleFmt->width(headerText);
-        double xpos=(pageScene.width()/2)-(titleWidth/2);
-        double ypos=(headerSize/2)-(titleFmt->height()/2);
-        titleItem->moveBy(xpos,ypos+topMargin);
-        pageScene.addItem(titleItem);
-
-        //std text
-        QGraphicsTextItem *item=new QGraphicsTextItem();
-        item->setFont(font);
-        item->setPlainText(headerStdText);
-        item->moveBy(leftMargin,headerSize-rowHeight-spacing+topMargin);
-        pageScene.addItem(item);
-    }
-
-    // footer
-    if (footerSize > 0) {
-        pageScene.addLine(leftMargin,pageScene.height()-footerSize-bottomMargin,pageScene.width()-rightMargin, pageScene.height()-footerSize-bottomMargin,QPen(Qt::black, 1.0));
-        QGraphicsTextItem *item=new QGraphicsTextItem();
-        item->setFont(font);
-        item->setPlainText(footerText+QString::number(pages)+" / "+QString::number(pagenum));
-        item->moveBy(leftMargin,pageScene.height()-footerSize-bottomMargin+spacing);
-        pageScene.addItem(item);
-    }
-    //pageScene.update();
+    if(num < 1 || num > pageSceneVector.size())
+        return NULL;
+    return pageSceneVector.at(num-1);
 }

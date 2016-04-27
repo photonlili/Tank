@@ -13,11 +13,8 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <attribute name="horizontalHeaderDefaultSectionSize">
-   <number>30</number>
-  </attribute>
   <attribute name="horizontalHeaderMinimumSectionSize">
-   <number>21</number>
+   <number>20</number>
   </attribute>
  </widget>
  <resources/>
