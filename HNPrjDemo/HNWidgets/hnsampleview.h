@@ -1,13 +1,13 @@
 #ifndef HNSAMPLEVIEW_H
 #define HNSAMPLEVIEW_H
 
-#include "hntableview.h"
+#include <QTableView>
 
 namespace Ui {
 class HNSampleView;
 }
 
-class HNSampleView : public HNTableView
+class HNSampleView : public QTableView
 {
     Q_OBJECT
 

@@ -24,10 +24,18 @@ public:
     void initAll(QString name);
     void printToPdf();
     void print();
+    QSqlDatabase m_db;
+
+    void setTitle(QString title);
+    void addText(QString text);
+    void addTable(QTableView* table);
+
+public:
+    static void htmltopdf(QString pdf, QString html);
+    static void printpdf(QString pdf);
 
 private:
     Ui::QReportViewDialog *ui;
-    QSqlDatabase m_db;
 };
 
 #endif // QREPORTVIEWDIALOG_H

@@ -15,6 +15,9 @@ public:
     explicit HNSampleFoundationWidget(QWidget *parent = 0);
     ~HNSampleFoundationWidget();
 
+public slots:
+    void initAll();
+
 private slots:
     void on_btnPrint_clicked();
 

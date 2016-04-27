@@ -29,11 +29,13 @@
 #include "hnmanageuserwidget.h"
 #include "hnsamplewidget.h"
 #include "hnsamplemutipagewidget.h"
+#include "hnsamplefoundationwidget.h"
 
 #include "hnclient.h"
 #include "HNEthManager.h"
 #include "hnpluginwatcher.h"
 #include "hnprinter.h"
+#include "hnreporter.h"
 #include "hnserver.h"
 #include "hnpeerport.h"
 #include "hnserialport.h"

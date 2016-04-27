@@ -1,29 +1,7 @@
 #include "hnprinter.h"
 #include "stdlib.h"
-#include <hngui-qt.h>
 
-HNPrinter::HNPrinter(QObject *parent) :
-    QObject(parent)
-{
-
-}
-
-void HNPrinter::htmltopdf(QString pdf, QString html)
-{
-    QPrinter printer(QPrinter::HighResolution);
-    printer.setColorMode(QPrinter::Color);
-    printer.setFullPage(true);
-    printer.setPaperSize(QPrinter::A4);
-    printer.setOrientation(QPrinter::Portrait);
-    printer.setOutputFormat(QPrinter::PdfFormat);
-    printer.setOutputFileName(pdf);
-
-    QTextDocument textDocument;
-    textDocument.setHtml(html);
-    textDocument.print(&printer);
-}
-
-void HNPrinter::printpdf(QString pdf)
+void HNPrinter::print(QString pdf)
 {
     // 此处不会影响打印质量，不必再调试
     QString cmd;

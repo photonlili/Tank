@@ -44,5 +44,4 @@ void HNSampleWidget::query(QString excp)
     m_model->setHeaderData(5, Qt::Horizontal, tr("结果单位"));
     m_model->setHeaderData(6, Qt::Horizontal, tr("测试人"));
     m_model->setHeaderData(7, Qt::Horizontal, tr("测试时间"));
-
 }

@@ -106,7 +106,8 @@ SOURCES += $$PWD/hncheckbox.cpp \
     $$PWD/hnsamplemodel.cpp \
     $$PWD/hnsampleview.cpp \
     $$PWD/hnsamplewidget.cpp \
-    HNWidgets/hnsamplefoundationwidget.cpp
+    HNWidgets/hnsamplefoundationwidget.cpp \
+    HNWidgets/hnreporter.cpp
 
 HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/HNDefine.h \
@@ -182,7 +183,8 @@ HEADERS  += $$PWD/hncheckbox.h \
     $$PWD/hnsamplemodel.h \
     $$PWD/hnsampleview.h \
     $$PWD/hnsamplewidget.h \
-    HNWidgets/hnsamplefoundationwidget.h
+    HNWidgets/hnsamplefoundationwidget.h \
+    HNWidgets/hnreporter.h
 
 FORMS    += $$PWD/hncheckbox.ui \
     $$PWD/hndialog.ui \

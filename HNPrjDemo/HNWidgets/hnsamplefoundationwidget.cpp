@@ -1,6 +1,7 @@
 #include "hnsamplefoundationwidget.h"
 #include "ui_hnsamplefoundationwidget.h"
 #include "hngui-qt.h"
+#include "HNDefine.h"
 
 HNSampleFoundationWidget::HNSampleFoundationWidget(QWidget *parent) :
     QWidget(parent),
@@ -14,6 +15,13 @@ HNSampleFoundationWidget::HNSampleFoundationWidget(QWidget *parent) :
 HNSampleFoundationWidget::~HNSampleFoundationWidget()
 {
     delete ui;
+}
+
+void HNSampleFoundationWidget::initAll()
+{
+    ui->widgetSampleTable->setDB(QString("%1/%2").arg(DB_DATA_PATH).arg(DB_DATA));
+    ui->widgetSampleTable->setTable(TABLE_YANGPINDATA);
+    ui->widgetSampleTable->query();
 }
 
 void HNSampleFoundationWidget::on_btnPrint_clicked()

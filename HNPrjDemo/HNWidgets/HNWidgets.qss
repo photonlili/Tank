@@ -194,10 +194,6 @@ QWidget#widgetCloud{
     border-image: url(://pictures/bk_set500.png);
 }
 
-QHeaderView, QHeaderView::section{
-    background:transparent;
-}
-
 QMethodWidget#bb {
     border-image: url(://pictures/bk_table_method.png);
 }

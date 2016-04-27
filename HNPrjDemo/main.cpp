@@ -8,10 +8,8 @@ int main(int argc, char *argv[])
 {
     HNApp a(argc, argv);
 
-
-
     QWidget w;
-    //w.setFixedHeight(340);
+    w.setMinimumSize(500, 300);
     QVBoxLayout l;
     w.setLayout(&l);
     w.show();
@@ -63,13 +61,31 @@ int main(int argc, char *argv[])
     //l.addWidget(&w10);
 
     HNSampleWidget w11;
+    w11.setDB(QString("%1/%2").arg(DB_DATA_PATH).arg(DB_DATA));
+    w11.setTable(TABLE_YANGPINDATA);
+    w11.query();
     //l.addWidget(&w11);
 
     HNSampleMutiPageWidget w12;
     w12.setDB(QString("%1/%2").arg(DB_DATA_PATH).arg(DB_DATA));
     w12.setTable(TABLE_YANGPINDATA);
     w12.query();
-    l.addWidget(&w12);
+    //l.addWidget(&w12);
+
+    QGraphicsView v;
+    HNReporter r;
+    r.setView(&v);
+    //r.setTitle("");
+    r.insertTable(&w11);
+    pline() << r.pageNum();
+    r.getPage(1);
+    v.scale(1/1.5, 1/1.5);
+    v.scale(1/1.5, 1/1.5);
+    //v.show();
+
+    HNSampleFoundationWidget w13;
+    w13.initAll();
+    l.addWidget(&w13);
 
     return a.exec();
 }

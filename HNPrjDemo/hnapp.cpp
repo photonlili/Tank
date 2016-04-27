@@ -32,6 +32,11 @@ HNApp::HNApp(int &argc, char **argv) : QApplication(argc, argv)
     pline() << fontName;
     QFont font(fontName, 14);
     QApplication::setFont(font);
+#elif defined(_MIPS_LINUX_ENV_)
+    QFontDatabase db;
+    int fontId = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
+    QString wenquanyi = db.applicationFontFamilies ( fontId ).at(0);
+    QFont font(wenquanyi,11);
 #endif
 
     pline() << qApp->applicationDirPath();

@@ -71,7 +71,7 @@ void HNSampleMutiPageWidget::query()
         page->setDB(m_name);
         page->setTable(m_table);
         page->query(QString("1=1 limit %1 offset %2").arg(m_numPerPage).arg(i*m_numPerPage));
-
+        page->resizeColumnsToContents();
         ui->stWidgetPage->addWidget(page);
     }
 

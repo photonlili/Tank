@@ -1,9 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>HNSampleView</class>
- <widget class="HNTableView" name="HNSampleView">
+ <widget class="QTableView" name="HNSampleView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -15,7 +13,13 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <attribute name="horizontalHeaderDefaultSectionSize">
+   <number>30</number>
+  </attribute>
+  <attribute name="horizontalHeaderMinimumSectionSize">
+   <number>21</number>
+  </attribute>
  </widget>
- <pixmapfunction/>
+ <resources/>
  <connections/>
 </ui>
