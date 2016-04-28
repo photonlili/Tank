@@ -12,18 +12,18 @@ public:
 
 
     //定氮仪简单打印需要的数据
-    virtual void insertSamplePaper(QString title, QStringList text, QTableView* table);
+    void insertSamplePaper(QString title, QStringList text, QTableView* table);
 
     //定氮仪详细打印需要的数据
     //未实现
 
     //导出pdf
-    virtual void exportPdf(const QString &filename);
+    void exportPdf(const QString &filename);
     int pageNum() { return pageSceneVector.size(); }
     int paperWidth() { return rectScene.width(); }
     int paperHeight() { return rectScene.height(); }
     //单页浏览
-    virtual QGraphicsScene *getPage(int num);
+    QGraphicsScene *getPage(int num);
 
 signals:
 

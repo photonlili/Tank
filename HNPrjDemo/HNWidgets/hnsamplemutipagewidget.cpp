@@ -2,7 +2,6 @@
 #include "ui_hnsamplemutipagewidget.h"
 #include "HNDefine.h"
 #include "hngui.h"
-#include "hnsamplewidget.h"
 
 HNSampleMutiPageWidget::HNSampleMutiPageWidget(QWidget *parent) :
     QWidget(parent),

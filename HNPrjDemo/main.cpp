@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     HNApp a(argc, argv);
 
     QWidget w;
-    w.setMinimumSize(500, 300);
+    w.setMinimumSize(800, 600);
     QVBoxLayout l;
     w.setLayout(&l);
     w.show();
@@ -60,6 +60,15 @@ int main(int argc, char *argv[])
     HNSampleMutiPageWidget w10;
     //l.addWidget(&w10);
 
+#ifdef __MIPS_LINUX__
+    QFontDatabase db;
+    int wenquanyiFontID = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
+    QString wenquanyi = db.applicationFontFamilies ( wenquanyiFontID ).at(0);
+    pline() << wenquanyi;
+    QFont font(wenquanyi, 11);
+    QApplication::setFont(font);
+#endif
+
     HNSampleWidget w11;
     w11.setDB(QString("%1/%2").arg(DB_DATA_PATH).arg(DB_DATA));
     w11.setTable(TABLE_YANGPINDATA);
@@ -77,10 +86,9 @@ int main(int argc, char *argv[])
     QStringList text;
     text << "山东海能仪器股份有限公司";
     text << "页脚写什么？";
-
     w11.setFixedWidth(700);
     w11.resizeColumnsToContents();
-    w11.setFixedWidth(700);
+    //w11.setFixedWidth(600);
     r.insertSamplePaper("K1160定氮仪结果报告", text, &w11);
     pline() << r.pageNum();
     QGraphicsScene* pageScene = r.getPage(1);
@@ -88,8 +96,21 @@ int main(int argc, char *argv[])
     v.setScene(pageScene);
     //v.scale(1/1.5, 1/1.5);
     //v.scale(1/1.5, 1/1.5);
-    v.show();
-    //r.exportPdf("data.pdf");
+    //v.show();
+
+    //只有这个构造函数决定输出高分辨率PDF。
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setColorMode(QPrinter::Color);
+    printer.setFullPage(true);
+    printer.setPaperSize(QPrinter::A4);
+    printer.setOrientation(QPrinter::Portrait);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName("data.pdf");
+    //QPainter painter(&printer);
+    //v.render(&painter);
+    r.exportPdf("data.pdf");
+    //system("cp -f data.pdf /mnt/usb_sda1");
+    //HNPrinter::print("data.pdf");
 
     HNSampleFoundationWidget w13;
     w13.initAll();

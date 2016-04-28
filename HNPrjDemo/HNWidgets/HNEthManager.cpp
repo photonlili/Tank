@@ -1,6 +1,5 @@
 #include "HNEthManager.h"
 #include "hnlinux.h"
-#include "hngui.h"
 #include "HNDefine.h"
 
 HNEthManager* HNEthManager::_instance = NULL;

@@ -6,13 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>78</width>
+    <height>78</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <attribute name="horizontalHeaderDefaultSectionSize">
+   <number>60</number>
+  </attribute>
   <attribute name="horizontalHeaderMinimumSectionSize">
    <number>20</number>
   </attribute>

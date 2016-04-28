@@ -25,18 +25,21 @@ HNApp::HNApp(int &argc, char **argv) : QApplication(argc, argv)
 #endif
 
 #ifdef __MIPS_LINUX__
-    QString fontName;
     QFontDatabase db;
-    int fontId = db.addApplicationFont("/usr/lib/fonts/heiti.ttf");
-    fontName = db.applicationFontFamilies ( fontId ).at(0);
-    pline() << fontName;
-    QFont font(fontName, 14);
+    int heitiFontID = db.addApplicationFont("/usr/lib/fonts/heiti.ttf");
+    QString heiti = db.applicationFontFamilies ( heitiFontID ).at(0);
+    pline() << heiti;
+    QFont font(heiti, 14);
     QApplication::setFont(font);
-#elif defined(_MIPS_LINUX_ENV_)
+#endif
+
+#ifdef _MIPS_LINUX_ENV_
     QFontDatabase db;
-    int fontId = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
-    QString wenquanyi = db.applicationFontFamilies ( fontId ).at(0);
-    QFont font(wenquanyi,11);
+    int wenquanyiFontID = db.addApplicationFont("/usr/lib/fonts/wenquanyi.ttf");
+    QString wenquanyi = db.applicationFontFamilies ( wenquanyiFontID ).at(0);
+    pline() << wenquanyi;
+    QFont font(wenquanyi, 11);
+    QApplication::setFont(font);
 #endif
 
     pline() << qApp->applicationDirPath();

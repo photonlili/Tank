@@ -2,6 +2,7 @@
 #define HNSAMPLEFOUNDATIONWIDGET_H
 
 #include <QWidget>
+#include "hnreporter.h"
 
 namespace Ui {
 class HNSampleFoundationWidget;
@@ -25,6 +26,7 @@ private slots:
 
 private:
     Ui::HNSampleFoundationWidget *ui;
+    HNReporter* reporter;
 };
 
 #endif // HNSAMPLEFOUNDATIONWIDGET_H

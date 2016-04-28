@@ -1,4 +1,5 @@
 #include "hnreporter.h"
+#include "HNDefine.h"
 
 HNReporter::HNReporter(QObject *parent) :
     QObject(parent)
@@ -45,9 +46,7 @@ HNReporter::HNReporter(QObject *parent) :
     font=QApplication::font();
     fmt = new QFontMetrics(font);
 
-    QRectF rect=printer->paperRect();
-    rectScene = QRectF(0,0,rect.width() / printer->logicalDpiX() * 100,
-                            rect.height() / printer->logicalDpiY() * 100);
+    rectScene = printer->paperRect();
 
     rowHeight = font.pointSize() + spacing;
     xpos = leftMargin;
@@ -96,7 +95,7 @@ void HNReporter::GenerateSampleTemplate()
 
     for(int i = 1; ; i++)
     {
-        pageScene = new QGraphicsScene(rectScene, this);
+        pageScene = new QGraphicsScene(rectScene);
         //header
         paintPageHeader();
         //body
@@ -113,10 +112,6 @@ void HNReporter::GenerateSampleTemplate()
 
 bool HNReporter::paintSamplePage(int pagenum)
 {
-    QGraphicsProxyWidget* w = pageScene->addWidget(tableView);
-    w->moveBy(xpos, ypos);
-    currentPage++;
-    return true;
 
     int sdx=0;
     int sdy=0;
@@ -125,7 +120,7 @@ bool HNReporter::paintSamplePage(int pagenum)
     if(pagenum == 1)
     {
         paintPageTitle();
-        dy = ypos + titleFmt->height();
+        dy = ypos + titleFmt->height() + rowHeight;
     }
     else
         dy=sdy+ypos;
@@ -259,9 +254,32 @@ void HNReporter::exportPdf(const QString &filename)
 
     // print pdf
     QPainter painter(printer);
+
     foreach (pageScene, pageSceneVector) {
-        pageScene->render(&painter);
-        printer->newPage();
+        QGraphicsView v;
+        //v.setSceneRect(rectScene);
+        v.setScene(pageScene);
+        v.show();
+
+        qreal sourceDpiX = v.logicalDpiX();
+        qreal sourceDpiY = v.logicalDpiY();
+        const qreal dpiScaleX = qreal(printer->logicalDpiX()) / sourceDpiX;
+        const qreal dpiScaleY = qreal(printer->logicalDpiY()) / sourceDpiY;
+        // scale to dpi
+        //painter.scale(dpiScaleX, dpiScaleY);
+
+        QSizeF scaledPageSize = v.rect().size();
+        scaledPageSize.rwidth() *= dpiScaleX;
+        scaledPageSize.rheight() *= dpiScaleY;
+        const QSizeF printerPageSize(printer->pageRect().size());
+        // scale to page
+        painter.scale(printerPageSize.width() / scaledPageSize.width(), printerPageSize.height() / scaledPageSize.height());
+
+        v.render(&painter);
+
+        break;
+        if(pageScene != pageSceneVector.last())
+            printer->newPage();
     }
 }
 
