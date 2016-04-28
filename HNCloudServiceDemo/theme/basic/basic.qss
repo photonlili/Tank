@@ -1,4 +1,0 @@
-HNUpgradeWidget QWidget#widgetHNUpgrade{
-    border-image: url(://theme/basic/bk_main.png);
-}
-
