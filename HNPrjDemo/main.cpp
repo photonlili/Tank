@@ -9,7 +9,12 @@ int main(int argc, char *argv[])
     HNApp a(argc, argv);
 
     QWidget w;
-    w.setMinimumSize(800, 600);
+    w.setWindowFlags(Qt::FramelessWindowHint|w.windowFlags());
+#ifdef __MIPS_LINUX__
+    w.setMinimumSize(1024, 768);
+#else
+    w.setMinimumSize(700, 500);
+#endif
     QVBoxLayout l;
     w.setLayout(&l);
     w.show();
@@ -81,8 +86,12 @@ int main(int argc, char *argv[])
     w12.query();
     //l.addWidget(&w12);
 
-    QGraphicsView v;
-    HNReporter r;
+    HNSampleFoundationWidget w13;
+    w13.initAll();
+    l.addWidget(&w13);
+
+    QGraphicsView w14;
+    HNReportEngine r;
     QStringList text;
     text << "山东海能仪器股份有限公司";
     text << "页脚写什么？";
@@ -93,10 +102,9 @@ int main(int argc, char *argv[])
     pline() << r.pageNum();
     QGraphicsScene* pageScene = r.getPage(1);
     pageScene->addRect(0,0,pageScene->width(),pageScene->height(),QPen(Qt::black, 2.0));
-    v.setScene(pageScene);
+    w14.setScene(pageScene);
     //v.scale(1/1.5, 1/1.5);
     //v.scale(1/1.5, 1/1.5);
-    //v.show();
 
     //只有这个构造函数决定输出高分辨率PDF。
     QPrinter printer(QPrinter::HighResolution);
@@ -108,13 +116,10 @@ int main(int argc, char *argv[])
     printer.setOutputFileName("data.pdf");
     //QPainter painter(&printer);
     //v.render(&painter);
-    r.exportPdf("data.pdf");
+    //r.exportPdf("data.pdf");
     //system("cp -f data.pdf /mnt/usb_sda1");
     //HNPrinter::print("data.pdf");
-
-    HNSampleFoundationWidget w13;
-    w13.initAll();
-    //l.addWidget(&w13);
+    //l.addWidget(&v);
 
     return a.exec();
 }

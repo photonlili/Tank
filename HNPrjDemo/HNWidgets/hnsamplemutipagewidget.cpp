@@ -70,11 +70,27 @@ void HNSampleMutiPageWidget::query()
         page->setDB(m_name);
         page->setTable(m_table);
         page->query(QString("1=1 limit %1 offset %2").arg(m_numPerPage).arg(i*m_numPerPage));
+        page->horizontalHeader()->setResizeMode(ESampleMingcheng, QHeaderView::ResizeToContents);
+        page->resizeColumnsToContents();
         ui->stWidgetPage->addWidget(page);
     }
 
     ui->stWidgetPage->setCurrentIndex(0);
     ui->lbPos->setText(QString("%1/%2").arg(1).arg(ui->stWidgetPage->count()));
+}
+
+void HNSampleMutiPageWidget::selectedItems(QVector<QStringList> &lid)
+{
+    for(int i = 0; i < ui->stWidgetPage->count(); i++)
+    {
+        HNSampleWidget* page = (HNSampleWidget*)ui->stWidgetPage->widget(i);
+        QVector<QStringList> ids;
+        page->selectedItems(ids);
+        QStringList l;
+        foreach (l, ids) {
+            lid.append(l);
+        }
+    }
 }
 
 void HNSampleMutiPageWidget::setRecordNumPerPage(int num)

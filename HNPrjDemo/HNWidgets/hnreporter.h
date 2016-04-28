@@ -4,11 +4,11 @@
 #include <QObject>
 #include "hngui-qt.h"
 
-class HNReporter : public QObject
+class HNReportEngine : public QObject
 {
     Q_OBJECT
 public:
-    explicit HNReporter(QObject *parent = 0);
+    explicit HNReportEngine(QObject *parent = 0);
 
 
     //定氮仪简单打印需要的数据
@@ -20,8 +20,6 @@ public:
     //导出pdf
     void exportPdf(const QString &filename);
     int pageNum() { return pageSceneVector.size(); }
-    int paperWidth() { return rectScene.width(); }
-    int paperHeight() { return rectScene.height(); }
     //单页浏览
     QGraphicsScene *getPage(int num);
 

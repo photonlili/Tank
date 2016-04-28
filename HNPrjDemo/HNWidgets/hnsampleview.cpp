@@ -1,5 +1,6 @@
 #include "hnsampleview.h"
 #include "ui_hnsampleview.h"
+#include "HNDefine.h"
 
 HNSampleView::HNSampleView(QWidget *parent) :
     QTableView(parent),

@@ -129,6 +129,19 @@ enum {
     Event_TypeName,
 };
 
+
+typedef enum tagSampleEnum{
+    ESampleId,
+    ESampleMingcheng,
+    ESampleBianhao,
+    ESampleYangpinliang,
+    ESampleYangpindanwei,
+    ESampleJieguo,
+    ESampleJieguodanwei,
+    ESampleCeshiren,
+    ESampleCeshishijian,
+}ESampleColomn;
+
 #define HN_SCRN_WIDTH 800
 #define HN_SCRN_HEIGHT 480
 

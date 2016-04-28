@@ -12,6 +12,7 @@ class HNSampleModel : public HNSqlTableModel
 public:
     explicit HNSampleModel(QObject *parent, QSqlDatabase db);
 
+    QModelIndexList selectedRows(int column = 0);
 signals:
 
 public slots:

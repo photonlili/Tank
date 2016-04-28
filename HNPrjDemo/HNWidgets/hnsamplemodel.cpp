@@ -7,6 +7,21 @@ HNSampleModel::HNSampleModel(QObject *parent, QSqlDatabase db) :
 {
 }
 
+QModelIndexList HNSampleModel::selectedRows(int column)
+{
+    QModelIndexList l;
+    for(QMap<int, Qt::CheckState>::Iterator itor = check_state_map.begin();
+        itor != check_state_map.end(); itor++)
+    {
+        if(itor.value() == Qt::Checked)
+        {
+            QModelIndex idx = index(itor.key(), column);
+            l.push_back(idx);
+        }
+    }
+    return l;
+}
+
 
 QVariant HNSampleModel::data(const QModelIndex &index, int role) const
 {

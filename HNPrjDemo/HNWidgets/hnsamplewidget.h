@@ -20,6 +20,8 @@ public:
     void setTable(QString table);
     void query(QString excp = "");
 
+    void selectedItems(QVector<QStringList> &ids);
+
 private:
     Ui::HNSampleWidget *ui;
     HNSampleModel* m_model;

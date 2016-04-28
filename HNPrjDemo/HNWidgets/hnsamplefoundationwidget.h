@@ -26,7 +26,7 @@ private slots:
 
 private:
     Ui::HNSampleFoundationWidget *ui;
-    HNReporter* reporter;
+    HNReportEngine* reporter;
 };
 
 #endif // HNSAMPLEFOUNDATIONWIDGET_H

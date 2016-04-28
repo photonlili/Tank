@@ -1,7 +1,7 @@
 #include "hnreporter.h"
 #include "HNDefine.h"
 
-HNReporter::HNReporter(QObject *parent) :
+HNReportEngine::HNReportEngine(QObject *parent) :
     QObject(parent)
 {
     //variables
@@ -46,7 +46,9 @@ HNReporter::HNReporter(QObject *parent) :
     font=QApplication::font();
     fmt = new QFontMetrics(font);
 
-    rectScene = printer->paperRect();
+    QRect rect = printer->paperRect();
+    int scDPi = 132;
+    rectScene = QRectF(0.0, 0.0, rect.width()/printer->logicalDpiX()*scDPi, rect.height()/printer->logicalDpiY()*scDPi);
 
     rowHeight = font.pointSize() + spacing;
     xpos = leftMargin;
@@ -59,7 +61,7 @@ HNReporter::HNReporter(QObject *parent) :
     lines = ((ypos2-ypos)/rowHeight);
 }
 
-void HNReporter::insertSamplePaper(QString title, QStringList text, QTableView *table)
+void HNReportEngine::insertSamplePaper(QString title, QStringList text, QTableView *table)
 {
     this->titleText = title;
     this->text = text;
@@ -68,7 +70,7 @@ void HNReporter::insertSamplePaper(QString title, QStringList text, QTableView *
 }
 
 
-void HNReporter::GenerateSampleTemplate()
+void HNReportEngine::GenerateSampleTemplate()
 {
     model = tableView->model();
     tableHeaderFont = tableView->horizontalHeader()->font();
@@ -95,7 +97,9 @@ void HNReporter::GenerateSampleTemplate()
 
     for(int i = 1; ; i++)
     {
-        pageScene = new QGraphicsScene(rectScene);
+        pageScene = new QGraphicsScene;
+        pageScene->setSceneRect(rectScene);
+
         //header
         paintPageHeader();
         //body
@@ -110,9 +114,8 @@ void HNReporter::GenerateSampleTemplate()
 }
 
 
-bool HNReporter::paintSamplePage(int pagenum)
+bool HNReportEngine::paintSamplePage(int pagenum)
 {
-
     int sdx=0;
     int sdy=0;
     int tableRowHeight = 0;
@@ -196,7 +199,7 @@ bool HNReporter::paintSamplePage(int pagenum)
     return ret;
 }
 
-void HNReporter::paintPageHeader()
+void HNReportEngine::paintPageHeader()
 {
     // Page header
     if (headerSize > 0)
@@ -220,7 +223,7 @@ void HNReporter::paintPageHeader()
     }
 }
 
-void HNReporter::paintPageFooter()
+void HNReportEngine::paintPageFooter()
 {
     // footer
     if (footerSize > 0) {
@@ -234,7 +237,7 @@ void HNReporter::paintPageFooter()
     }
 }
 
-void HNReporter::paintPageTitle()
+void HNReportEngine::paintPageTitle()
 {
     //title
     QGraphicsTextItem *titleItem=new QGraphicsTextItem();
@@ -246,7 +249,7 @@ void HNReporter::paintPageTitle()
 }
 
 
-void HNReporter::exportPdf(const QString &filename)
+void HNReportEngine::exportPdf(const QString &filename)
 {
     // setup printer
     printer->setOutputFormat(QPrinter::PdfFormat);
@@ -256,34 +259,15 @@ void HNReporter::exportPdf(const QString &filename)
     QPainter painter(printer);
 
     foreach (pageScene, pageSceneVector) {
-        QGraphicsView v;
-        //v.setSceneRect(rectScene);
-        v.setScene(pageScene);
-        v.show();
 
-        qreal sourceDpiX = v.logicalDpiX();
-        qreal sourceDpiY = v.logicalDpiY();
-        const qreal dpiScaleX = qreal(printer->logicalDpiX()) / sourceDpiX;
-        const qreal dpiScaleY = qreal(printer->logicalDpiY()) / sourceDpiY;
-        // scale to dpi
-        //painter.scale(dpiScaleX, dpiScaleY);
+        pageScene->render(&painter);
 
-        QSizeF scaledPageSize = v.rect().size();
-        scaledPageSize.rwidth() *= dpiScaleX;
-        scaledPageSize.rheight() *= dpiScaleY;
-        const QSizeF printerPageSize(printer->pageRect().size());
-        // scale to page
-        painter.scale(printerPageSize.width() / scaledPageSize.width(), printerPageSize.height() / scaledPageSize.height());
-
-        v.render(&painter);
-
-        break;
         if(pageScene != pageSceneVector.last())
             printer->newPage();
     }
 }
 
-QGraphicsScene* HNReporter::getPage(int num)
+QGraphicsScene* HNReportEngine::getPage(int num)
 {
     if(num < 1 || num > pageSceneVector.size())
         return NULL;

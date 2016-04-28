@@ -20,6 +20,7 @@ public:
     void setTable(QString table);
     void setRecordNumPerPage(int num);
     void query();
+    void selectedItems(QVector<QStringList> &lid);
 
 private slots:
     void on_btnLeft_clicked();
