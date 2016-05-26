@@ -1,5 +1,6 @@
 #include "qtankpeermessage.h"
 #include "qcomponent.h"
+#include "qtankpublic.h"
 
 QTankPeerMessage::QTankPeerMessage(QObject *parent) :
     QObject(parent)
@@ -20,6 +21,7 @@ void QTankPeerMessage::translate()
     // 如果不添加quint8 0x0112+0x0088=0x009a 单字节到二字节进位的位置看不懂
     for(int i = 0; i < qbaVerify.length(); i++)
         m_Sum += quint8(qbaVerify.at(i));
+
 }
 
 QDebug operator<<(QDebug dbg, const QTankPeerMessage &c)
@@ -131,6 +133,8 @@ void QTankHeatRAMPStruct::pack(QByteArray &l)
     QByteArray d;
     d << quint8(_HEAT_RAMP) << uStage << uVessel <<
          wRamp << wPress << wTempture  << wHold;
+
+    pline() << hex << wRamp;
     setData(d);
     translate();
     QTankPeerMessage::pack(l);

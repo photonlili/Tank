@@ -88,7 +88,7 @@ QDispelForm::QDispelForm(QWidget *parent) :
     connect(com0, SIGNAL(sigRecvMsg(QByteArray)), m_debug, SLOT(slotRecvMsg(QByteArray)));
     m_debug->setGeometry(18, 260, 700, 70);
     m_debug->setShown(false);
-    //com0->sendMsgConnectToC51();
+    com0->sendMsgConnectToC51();
 
     ui->lb_libbuddy->setFixedWidth(50);
     ui->lb_libname->setFixedWidth(100);
@@ -347,6 +347,7 @@ void QDispelForm::startHeating()
     m_totalStageRamp = ui->tbv_stage->totalStageTimeRamp();
     m_currentStage = ui->tbv_stage->currentStage();
 
+    pline() << stage << vessel << ramp << press << tempture << hold;
     pline() << m_currentStage << m_totalStageRamp;
 
     int type = methodForm->currentMethodType();
@@ -364,7 +365,7 @@ void QDispelForm::startHeating()
     }
     else if(Type_Extract == type)
     {
-        com0->sendMsgHeatExtract(stage, tempture, hold);
+        //com0->sendMsgHeatExtract(stage, tempture, hold);
     }
 
     /*
@@ -515,15 +516,15 @@ void QDispelForm::startHeatingExtract()
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
     {
-        com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
+        //com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
     }
     else if(Type_Stressure == type)
     {
-        com0->sendMsgHeatPress(stage, vessel, press);
+        //com0->sendMsgHeatPress(stage, vessel, press);
     }
     else if(Type_Temprature == type)
     {
-        com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
+        //com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
     }
     else if(Type_Extract == type)
     {

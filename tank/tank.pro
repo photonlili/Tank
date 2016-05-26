@@ -31,7 +31,7 @@ CONFIG(debug, debug|release) {
 
 INCLUDEPATH +=  .
 
-target.path += /DWINFile
+target.path += /HNApp
 
 INSTALLS += target
 

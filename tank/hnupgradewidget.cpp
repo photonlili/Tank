@@ -12,7 +12,7 @@ void QBackupLocalThread::run()
     QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 12));
     QMetaObject::invokeMethod(parent(), "setValue", Q_ARG(int, 40));
 #ifdef __MIPS_LINUX__
-    system("tar czvf ./tmp/backup.tar.gz /DWINFile/tank");
+    system("tar czvf ./tmp/backup.tar.gz /HNApp/tank");
 #else
     system("tar czvf ./tmp/backup.tar.gz tank");
 #endif

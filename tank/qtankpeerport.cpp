@@ -3,14 +3,14 @@
 #include "qtankpeermessage.h"
 #include "qcomponent.h"
 
-#define MAX_CONNCOUNT 5 //(+1)
-#define MAX_SERIALTIME 1000
+#define MAX_CONNCOUNT 3 //(+1)
+#define MAX_SERIALTIME 100
 
 QTankPeerPort::QTankPeerPort(QObject *parent) :
     QSerialPort(parent)
 {
 #ifdef __MIPS_LINUX__
-    QString portName("/dev/ttyS1");
+    QString portName("/dev/ttyS0");
 #else
     QString portName("/dev/ttyS3");
 #endif
@@ -201,6 +201,7 @@ void QTankPeerPort::sendHeatRAMP()
     t.setPress(m_heat.press());
     t.setTempture(m_heat.tempture());
     t.setHold(m_heat.hold());
+
     QByteArray l;
     t.pack(l);
     write(l);

@@ -110,10 +110,10 @@ public:
 
     quint8 stage() { return uStage; }
     quint8 vessel() { return uVessel; }
-    quint8 ramp() { return wRamp; }
-    quint8 press() { return wPress; }
-    quint8 tempture() { return wTempture; }
-    quint8 hold() { return wHold; }
+    quint16 ramp() { return wRamp; }
+    quint16 press() { return wPress; }
+    quint16 tempture() { return wTempture; }
+    quint16 hold() { return wHold; }
 
     void setStage(quint8 arg) {uStage = arg;}
     void setVessel(quint8 arg) {uVessel = arg;}

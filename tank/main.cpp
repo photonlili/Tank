@@ -19,6 +19,9 @@ int main(int argc, char *argv[])
 
     //创建应用实例
     QTankApp* theApp = new QTankApp(argc, argv);
+
+    system("rm -f /tmp/LCK..ttyS*");
+
     QTankWindow* theWindow  = new QTankWindow();
     QObject::connect(theWindow, SIGNAL(changeLanguage()), theApp, SLOT(setLanguage()));
 

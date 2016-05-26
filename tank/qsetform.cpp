@@ -48,7 +48,7 @@ void QBackupThread::run()
     QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 16));
     system("rm -f /mnt/usb_sda1/backup.tar.gz");
     QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 36));
-    system("tar czvf /mnt/usb_sda1/backup.tar.gz /DWINFile/tank");
+    system("tar czvf /mnt/usb_sda1/backup.tar.gz /HNApp/tank");
     QMetaObject::invokeMethod(m_prog, "setValue", Q_ARG(int, 100));
     QMetaObject::invokeMethod(parent(), "slotInvokeWarning", Q_ARG(QString, tr("Backup success")));
 #endif
@@ -403,14 +403,16 @@ void QSetForm::initLanguage()
 
 }
 
+#define FAC_PAGE_NUMBER 6
+
 bool QSetForm::eventFilter(QObject * obj, QEvent * e)
 {
     if(ui->tabWidget_set->tabBar() == obj && e->type() == QEvent::MouseButtonPress)
     {
         QMouseEvent* me = (QMouseEvent*)e;
         if(m_facPass->isHidden() &&
-                ui->tabWidget_set->currentIndex() != 5 &&
-                ui->tabWidget_set->tabBar()->tabRect(5).contains(me->pos()))
+                ui->tabWidget_set->currentIndex() != FAC_PAGE_NUMBER &&
+                ui->tabWidget_set->tabBar()->tabRect(FAC_PAGE_NUMBER).contains(me->pos()))
         {
             m_facPass->initAll();
             moveCenter(m_facPass);
@@ -441,7 +443,10 @@ void QSetForm::on_scb_bcklight_valueChanged(int value)
 
 void QSetForm::on_btn_calibrate_clicked()
 {
-
+    QDesktopWidget* desktop = qApp->desktop();
+    desktop->hide();
+    system("ts_calibrate");
+    desktop->show();
 }
 
 void QSetForm::on_btn_saveip_clicked()
