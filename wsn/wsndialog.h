@@ -18,6 +18,9 @@ public:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_btnWrite_clicked();
+
 private:
     Ui::WSNDialog *ui;
 };

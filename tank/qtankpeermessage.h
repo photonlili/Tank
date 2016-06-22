@@ -9,14 +9,21 @@
 #define _PEER_CONC51       0x0000
 #define _PEER_CONC51ACK    0x0001
 #define _PEER_CMDNACK      0x0002
-#define _PEER_HEAT         0x0003
-#define _PEER_PAUSE        0x0004
-#define _PEER_STOP         0x0005
 
+#define _PEER_HEAT         0x0003
 #define _HEAT_STANDARD      0x02
 #define _HEAT_RAMP          0x01
 #define _HEAT_PRESS         0x03
 #define _HEAT_EXTRACT       0x01
+
+#define _PEER_PAUSE        0x0004
+#define _PEER_STOP         0x0005
+#define _PEER_STAT          0x000A
+#define _PEER_DEBUG         0x000C
+
+#define _PEER_STIRSET         0x000D
+#define _PEER_CALIBRATE         0x000E
+#define _PEER_EXCEPTION         0x000F
 
 class QTankPeerMessage : public QObject
 {
@@ -174,5 +181,106 @@ public:
     void parse(const QByteArray& l);
 };
 
+
+class QTankStatStruct : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankStatStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void pack(QByteArray& l);
+};
+
+class QTankStatAck : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankStatAck(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void parse(const QByteArray& l);
+
+    quint16 tempture() { return tmpe; }
+    quint16 pressure() { return press; }
+    quint8 status() { return stat; }
+
+private:
+    quint16 tmpe;
+    quint16 press;
+    quint8 stat;
+};
+
+
+class QTankDebugStruct : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankDebugStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void pack(QByteArray& l);
+};
+
+class QTankDebugAck : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankDebugAck(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void parse(const QByteArray& l);
+};
+
+
+class QTankStirSetStruct : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankStirSetStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    void setSpeed(quint8 speed);
+    void pack(QByteArray& l);
+private:
+    QByteArray d;
+};
+
+class QTankStirSetAck : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankStirSetAck(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void parse(const QByteArray& l);
+};
+
+
+class QTankCalibrateStruct : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankCalibrateStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+    void setParams(quint8 guangxian, quint8 hongwai, quint8 hongwai2,
+                   quint8 yali, quint8 optional = 0);
+    void pack(QByteArray& l);
+private:
+    QByteArray d;
+};
+
+class QTankCalibrateAck : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankCalibrateAck(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void parse(const QByteArray& l);
+};
+
+
+class QTankExceptionAck : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankExceptionAck(QObject *parent = 0) : QTankPeerMessage(parent){}
+    quint16 status();
+    void parse(const QByteArray& l);
+private:
+    quint16 st;
+};
 
 #endif // QTANKPEERMESSAGE_H

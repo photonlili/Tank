@@ -234,6 +234,44 @@ void QTankPeerPort::sendStop()
     write(l);
 }
 
+void QTankPeerPort::sendStat()
+{
+    QTankStatStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
+void QTankPeerPort::sendDebug()
+{
+    QTankDebugStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
+void QTankPeerPort::sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali)
+{
+    QTankCalibrateStruct t;
+    t.setParams(guangxian, hongwai, hongwai2, yali, 0);
+
+    QByteArray l;
+    t.pack(l);
+    write(l);
+
+}
+
+void QTankPeerPort::sendStirSet(quint8 speed)
+{
+    QTankStirSetStruct t;
+    t.setSpeed(speed);
+
+    QByteArray l;
+    t.pack(l);
+    write(l);
+
+}
+
 
 void QTankPeerPort::readyReadData()
 {
@@ -276,6 +314,27 @@ void QTankPeerPort::updateProgress(qint64)
 
 }
 
+void QTankPeerPort::recvStatAck(const QByteArray &l)
+{
+    QTankStatAck ack;
+    ack.parse(l);
+    emit sigStat(ack.tempture(), ack.pressure(), ack.status());
+}
+
+void QTankPeerPort::recvDebugAck(const QByteArray &l)
+{
+    QTankDebugAck ack;
+    ack.parse(l);
+    emit sigDebug(ack.data());
+}
+
+void QTankPeerPort::recvExceptionAck(const QByteArray &l)
+{
+    QTankExceptionAck ack;
+    ack.parse(l);
+    emit sigPeerException(ack.status());
+}
+
 void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
     QTankPeerMessage qMsg;
@@ -284,6 +343,16 @@ void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
     emit sigRecvMsg(blockOnNet);
     switch(qMsg.cmd())
     {
+    case _PEER_STAT:
+        recvStatAck(blockOnNet);
+        break;
+    case _PEER_DEBUG:
+        recvDebugAck(blockOnNet);
+        break;
+    case _PEER_EXCEPTION:
+        recvExceptionAck(blockOnNet);
+        break;
+
     case _PEER_CMDNACK:
         recvCmdNAck(qMsg.data());
         break;

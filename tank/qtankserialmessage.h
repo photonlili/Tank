@@ -117,11 +117,11 @@ public:
 };
 
 
-class QTankExceptionAck : public QTankSerialMessage
+class QTankSerialExceptionAck : public QTankSerialMessage
 {
     Q_OBJECT
 public:
-    explicit QTankExceptionAck(QObject *parent = 0) : QTankSerialMessage(parent){}
+    explicit QTankSerialExceptionAck(QObject *parent = 0) : QTankSerialMessage(parent){}
 
     void pack(QByteArray &l);
 };

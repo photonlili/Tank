@@ -143,7 +143,7 @@ void QTankReadPassAck::pack(QByteArray &l)
 }
 
 
-void QTankExceptionAck::pack(QByteArray &l)
+void QTankSerialExceptionAck::pack(QByteArray &l)
 {
     setCmd(_SERIAL_EXCEPTIONACK);
     translate();

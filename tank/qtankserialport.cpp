@@ -201,7 +201,7 @@ void QTankSerialPort::sendExceptionAck()
 {
     //机器运行出现异常自动通过这个串口上报
     QByteArray l;
-    QTankExceptionAck ack;
+    QTankSerialExceptionAck ack;
     //ack.setData("");
     ack.pack(l);
     write(l);

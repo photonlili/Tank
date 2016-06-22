@@ -140,6 +140,11 @@ QSetForm::QSetForm(QWidget *parent) :
     prog->initAll();
 
     t->setProgressWidget(prog);
+
+    com0 = HNPeerPort(this);
+    ui->sbSensor->setRange(0, 255);
+    ui->sbSensor2->setRange(0, 255);
+    ui->sbFiber->setRange(0, 255);
 }
 
 QSetForm::~QSetForm()
@@ -481,4 +486,12 @@ void QSetForm::on_btnRestore_clicked()
     //网络设置
     //主题
     //头像
+}
+
+void QSetForm::on_btnCalibrate_clicked()
+{
+    quint8 sen = ui->sbSensor->value();
+    quint8 sen2 = ui->sbSensor2->value();
+    quint8 sen3 = ui->sbFiber->value();
+    com0->sendCalibrate(sen3, sen, sen2, 0);
 }

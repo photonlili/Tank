@@ -152,3 +152,93 @@ void QTankHeatExtractStruct::pack(QByteArray &l)
     translate();
     QTankPeerMessage::pack(l);
 }
+
+
+void QTankStatAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+    QByteArray d = data();
+    d >> tmpe >> press >> stat;
+}
+
+
+void QTankStatStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_STAT);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankDebugStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_DEBUG);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankDebugAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+}
+
+
+void QTankStirSetStruct::setSpeed(quint8 speed)
+{
+    d.clear();
+    d << speed;
+}
+
+void QTankStirSetStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_STIRSET);
+    setData(d);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankStirSetAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+}
+
+
+void QTankCalibrateStruct::setParams(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali, quint8 optional)
+{
+    d.clear();
+    d << guangxian
+      << hongwai
+      << hongwai2
+      << yali << optional;
+
+}
+
+void QTankCalibrateStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_CALIBRATE);
+    setData(d);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankCalibrateAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+}
+
+
+quint16 QTankExceptionAck::status()
+{
+    return st;
+}
+
+void QTankExceptionAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+    QByteArray d = data();
+    d >> st;
+    pline() << st;
+}

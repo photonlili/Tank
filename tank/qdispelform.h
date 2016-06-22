@@ -59,6 +59,7 @@ private slots:
 
     void startHeating();
     void pauseHeating();
+    void continueHeating();
     void stopHeating();
     void saveLabReport();
     void on_btn_stop_clicked();
@@ -80,10 +81,9 @@ private slots:
 
     void on_btnStir_clicked();
 
-    void on_btn_turn_clicked();
+    void slotException(quint16);
 
-    void slotException(int);
-
+    void slotStat(quint16,quint16,quint8);
 private:
     Ui::QDispelForm *ui;
 

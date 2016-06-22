@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include "qfactorysetpassform.h"
 #include "qprogresswindow.h"
+#include "qtankpeerport.h"
 
 namespace Ui {
 class QSetForm;
@@ -56,10 +57,13 @@ private slots:
 
     void on_btnRestore_clicked();
 
+    void on_btnCalibrate_clicked();
+
 private:
     Ui::QSetForm *ui;
     QFactorySetPassForm* m_facPass;
     QProgressWindow* prog;
+    QTankPeerPort* com0;
 
     // QObject interface
 public:

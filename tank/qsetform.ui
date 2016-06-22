@@ -41,7 +41,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -588,7 +588,7 @@
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
         <widget class="QWidget" name="widgetDevice" native="true">
-         <widget class="QCPushButton" name="pushButton">
+         <widget class="QCPushButton" name="btnCalibrate">
           <property name="geometry">
            <rect>
             <x>280</x>
@@ -601,7 +601,7 @@
            <string>Check</string>
           </property>
          </widget>
-         <widget class="QSpinBox" name="spinBox_2">
+         <widget class="QSpinBox" name="sbSensor">
           <property name="geometry">
            <rect>
             <x>340</x>
@@ -614,7 +614,7 @@
            <set>Qt::AlignCenter</set>
           </property>
          </widget>
-         <widget class="QSpinBox" name="spinBox">
+         <widget class="QSpinBox" name="sbFiber">
           <property name="geometry">
            <rect>
             <x>340</x>
@@ -653,7 +653,7 @@
            <string>Infrared sensor outer ring</string>
           </property>
          </widget>
-         <widget class="QSpinBox" name="spinBox_3">
+         <widget class="QSpinBox" name="sbSensor2">
           <property name="geometry">
            <rect>
             <x>340</x>

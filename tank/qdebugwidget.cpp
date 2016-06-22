@@ -21,5 +21,6 @@ void QDebugWidget::slotRecvMsg(QByteArray msg)
         s.sprintf("0x%02x ", (unsigned char)msg.at(i));
         buf += s;
     }
+    ui->txtBrower->clear();
     ui->txtBrower->append(buf);
 }

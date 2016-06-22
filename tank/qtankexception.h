@@ -21,13 +21,10 @@ public:
     ~QTankException();
 
 public slots:
-    int newExcp(QString content);
-    void delExcp(int id);
+    void newExcp(quint16 e);
 
 private:
     Ui::QTankException *ui;
-    int newId();
-    int nCount;
 };
 
 QTankException* HNSingleException(QWidget* parent = 0);

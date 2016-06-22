@@ -13,6 +13,4 @@ QTankCrossCenter::QTankCrossCenter(QObject *parent) :
 void QTankCrossCenter::slotException(int eCode)
 {
     pline() ;
-    e0->newExcp("GFFFF");
-    e0->show();;
 }

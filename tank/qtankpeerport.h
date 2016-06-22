@@ -22,11 +22,16 @@ public:
     void sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 hold);
     void sendMsgPause();
     void sendMsgStop();
+    void sendStat();
+    void sendDebug();
+    void sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali);
+    void sendStirSet(quint8 speed);
 
 signals:
     void sigRecvMsg(QByteArray msg);
-    void sigPeerException(int eCode);
-
+    void sigPeerException(quint16 eCode);
+    void sigStat(quint16 temp, quint16 press, quint8 stat);
+    void sigDebug(QByteArray d);
 private slots:
     void sendConnectToC51();
     void sendHeatPress();
@@ -44,6 +49,9 @@ private slots:
 private:
     void recvCmdAck(const QByteArray &l);
     void recvCmdNAck(const QByteArray &l);
+    void recvStatAck(const QByteArray &l);
+    void recvDebugAck(const QByteArray &l);
+    void recvExceptionAck(const QByteArray &l);
 
     enum{
         Heat_Standart,
