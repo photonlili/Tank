@@ -47,53 +47,56 @@ signals:
 public slots:
     void showDebugWindow(int);
 private slots:
-    void prepareRunning(QString, int);
-    void prepareExtractRunning(QString, int);
+    void prepareRunning(QString, int, QString name, int type);
+    void prepareExtractRunning(QString db, int mid, QString name, int type);
 
     void timeNewData();
+    void timeStatus();
+    void slotTankNum(quint8);
+
     void timeNewData2();
-
-    void on_btn_open_clicked();
-
-    void on_btn_play_clicked();
 
     void startHeating();
     void pauseHeating();
     void continueHeating();
     void stopHeating();
+    void slotStat(quint16,quint16,quint8);
+
+
+    void on_btnStir_clicked();
+    void startHeatingExtract();
+    void pauseHeatingExtract();
+    void continueHeatingExtract();
+    void stopHeatingExtract();
+
+    void slotException(quint16);
     void saveLabReport();
+
+    void on_btn_open_clicked();
+
+    void on_btn_play_clicked();
+
     void on_btn_stop_clicked();
 
     void on_btn_trans_clicked();
+    void on_btn_turn_clicked();
+
+    void on_btn_turn_2_clicked();
 
     void on_btn_open_2_clicked();
 
     void on_btn_play_2_clicked();
 
-    void startHeatingExtract();
-    void pauseHeatingExtract();
-
     void on_btn_stop_2_clicked();
-
-    void stopHeatingExtract();
 
     void on_btn_trans_2_clicked();
 
-    void on_btnStir_clicked();
+    void on_btnStirD_clicked();
 
-    void slotException(quint16);
-
-    void slotStat(quint16,quint16,quint8);
 private:
     Ui::QDispelForm *ui;
 
     quint8 m_currentStage;
-    quint16 m_totalStageRamp;
-    quint16 m_totalStageRamp2;
-    double m_initPointKey;
-    double m_lastPointKey;
-    double m_initPointKey2;
-    double m_lastPointKey2;
 
     QTankException* excp;
 
@@ -107,23 +110,32 @@ private:
         ePlay,
     };
     int bRunning;
+    int funcType;
+    QTimer* timerStatus;
+    quint32 m_testTime;
 
     QTimer* timer;
-    QTimer* timer2;
-
+    quint32 m_totalStageRamp;
+    quint32 m_initPointKey;
+    quint32 m_lastPointKey;
     quint32 m_pauseTime;
+    quint16 m_curRamp;
+
+    QTimer* timer2;
+    quint32 m_initPointKey2;
+    quint32 m_lastPointKey2;
+    quint32 m_totalStageHold;
     quint32 m_pauseTime2;
+    quint16 m_curHold;
 
     QMethodForm* methodForm;
     QMethodForm* methodForm2;
+
     QCPDocumentObject* m_plotObjectHandler;
     QTextEdit* m_text;
     QTankPeerPort* com0;
     QTankSerialPort* s2;
     QDebugWidget* m_debug;
-
-    quint16 m_curRamp;
-    quint16 m_curRamp2;
 
     // QObject interface
 public:

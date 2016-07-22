@@ -91,7 +91,7 @@ void QTankApp::slotUPanAutoRun(int status)
         QString app = QString("%1/autorun.sh").arg(mP);
         QFile file(app);
         if(file.exists())
-            if(QDialog::Rejected == HNMsgBox::tips(0, tr("Some app want to run in u disk!accepted?")))
+            if(QDialog::Rejected == HNMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
                 return;
         system(auth.toAscii().constData());
         QProcess* p = new QProcess(this);

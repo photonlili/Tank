@@ -19,69 +19,76 @@ QTankException::~QTankException()
 
 void QTankException::newExcp(quint16 e)
 {
-    if(e&0x0000 == 1)
+    if(e&E_NOEXCEP == 1)
         //正常
     {
         ui->lwWarn->clear();
         return;
     }
-    else if(e&0x0001 == 1)
+    else if(e&E_DOOROPEN == 1)
         //炉门打开提示
     {
 
         QListWidgetItem* item = new QListWidgetItem(tr("Oven door open"), ui->lwWarn);
         ui->lwWarn->addItem(item);
     }
-    else if(e&0x0002 == 1)
+    else if(e&E_CORRROR == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("COT Exception"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0004 == 1)
+    else if(e&E_GUXIANERROR == 1)
+        //炉门打开提示
+    {
+        QListWidgetItem* item = new QListWidgetItem(tr("guangxianwenduchuanganqi error"), ui->lwWarn);
+        ui->lwWarn->addItem(item);
+        ;
+    }
+    else if(e&E_SENSOR1ERR == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Optical fiber temperature sensor fault"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0008 == 1)
+    else if(e&E_SENSOR2ERR == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Optical fiber temperature sensor fault 2"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0010 == 1)
+    else if(e&E_JIGUANG1 == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Infrared fault inner ring"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0020 == 1)
+    else if(e&E_JIGUANG2 == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("The infrared failure outer ring"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0040 == 1)
+    else if(e&E_VOLERR == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Abnormal voltage"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0080 == 1)
+    else if(e&E_POSION == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Position sensor fault inner ring"), ui->lwWarn);
         ui->lwWarn->addItem(item);
         ;
     }
-    else if(e&0x0100 == 1)
+    else if(e&E_MAINCOMM == 1)
         //炉门打开提示
     {
         QListWidgetItem* item = new QListWidgetItem(tr("Main communication failures"), ui->lwWarn);

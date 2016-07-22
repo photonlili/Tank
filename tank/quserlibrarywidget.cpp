@@ -119,8 +119,8 @@ void QUserLibraryWidget::newDB()
     QSqlQuery iquery(idb);
     iquery.exec(QString("CREATE TABLE Method ( id  INTEGER NOT NULL, M_Name  TEXT, Type  INTEGER, PRIMARY KEY (id) )"));
     iquery.exec(QString("CREATE TABLE Stage (id  INTEGER NOT NULL, Stage  INTEGER, Vessel  INTEGER, TimeRAMP  INTEGER, PressPSI  INTEGER, Tempture  INTEGER, Hold  INTEGER, M_Id  INTEGER, PRIMARY KEY (id ASC), CONSTRAINT fkey0 FOREIGN KEY (M_Id) REFERENCES Method (id) )"));
-    iquery.exec(QString("INSERT INTO Method VALUES (1, 'New Method (0)', 0)"));
-    iquery.exec(QString("INSERT INTO Stage VALUES (1, 1, 12, 600, 500, 800, 600, 1)"));
+    //iquery.exec(QString("INSERT INTO Method VALUES (1, 'New Method (0)', 0)"));
+    //iquery.exec(QString("INSERT INTO Stage VALUES (1, 1, 12, 600, 500, 800, 600, 1)"));
     iquery.finish();
     closeDatabase(idb);
 

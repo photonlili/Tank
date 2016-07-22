@@ -117,6 +117,7 @@ enum {
 enum {
     Event_ID,
     Event_Name,
+    Event_Status,
     Event_Time,
     Event_User,
     Event_Content,

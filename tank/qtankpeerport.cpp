@@ -2,6 +2,7 @@
 #include "qtankpublic.h"
 #include "qtankpeermessage.h"
 #include "qcomponent.h"
+#include "qtankexception.h"
 
 #define MAX_CONNCOUNT 3 //(+1)
 #define MAX_SERIALTIME 100
@@ -114,6 +115,38 @@ void QTankPeerPort::sendMsgStop()
     timer->start(MAX_SERIALTIME);
 }
 
+void QTankPeerPort::sendLeft()
+{
+    QTankTurnLeftStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
+void QTankPeerPort::sendRight()
+{
+    QTankTurnRightStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
+void QTankPeerPort::sendSurround()
+{
+    QTankSurroundStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
+void QTankPeerPort::sendStopTurn()
+{
+    QTankStopRunStruct t;
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
 void QTankPeerPort::SendSerialMessage()
 {
     if(m_cmdCount > MAX_CONNCOUNT)
@@ -122,7 +155,7 @@ void QTankPeerPort::SendSerialMessage()
         m_cmdCount = 0;
         //报警
         pline();
-        emit sigPeerException(1);
+        emit sigPeerException(E_MAINCOMM);
         return;
     }
 
@@ -241,7 +274,6 @@ void QTankPeerPort::sendStat()
     t.pack(l);
     write(l);
 }
-
 void QTankPeerPort::sendDebug()
 {
     QTankDebugStruct t;
@@ -250,10 +282,10 @@ void QTankPeerPort::sendDebug()
     write(l);
 }
 
-void QTankPeerPort::sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali)
+void QTankPeerPort::sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali, quint8 option)
 {
     QTankCalibrateStruct t;
-    t.setParams(guangxian, hongwai, hongwai2, yali, 0);
+    t.setParams(guangxian, hongwai, hongwai2, yali, option);
 
     QByteArray l;
     t.pack(l);
@@ -321,11 +353,25 @@ void QTankPeerPort::recvStatAck(const QByteArray &l)
     emit sigStat(ack.tempture(), ack.pressure(), ack.status());
 }
 
+void QTankPeerPort::recvTankNumAck(const QByteArray &l)
+{
+    QTankTankNumAck ack;
+    ack.parse(l);
+    emit sigTankNum(ack.num());
+}
+
 void QTankPeerPort::recvDebugAck(const QByteArray &l)
 {
     QTankDebugAck ack;
     ack.parse(l);
     emit sigDebug(ack.data());
+}
+
+void QTankPeerPort::recvCalibrateAck(const QByteArray &l)
+{
+    QTankCalibrateAck ack;
+    ack.parse(l);
+    emit sigCaliAck(ack.guanxianRamp(), ack.hongwai1Ramp(), ack.hongwai2Ramp(), ack.press());
 }
 
 void QTankPeerPort::recvExceptionAck(const QByteArray &l)
@@ -346,10 +392,16 @@ void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
     case _PEER_STAT:
         recvStatAck(blockOnNet);
         break;
+    case _PEER_REPORTTANKNUM:
+        recvTankNumAck(blockOnNet);
+        break;
     case _PEER_DEBUG:
         recvDebugAck(blockOnNet);
         break;
-    case _PEER_EXCEPTION:
+    case _PEER_CALIBRATE:
+        recvCalibrateAck(blockOnNet);
+        break;
+    case _PEER_REPORTEXCEPTION:
         recvExceptionAck(blockOnNet);
         break;
 

@@ -8,7 +8,6 @@ QHelpForm::QHelpForm(QWidget *parent) :
     ui(new Ui::QHelpForm)
 {
     ui->setupUi(this);
-    ui->lb_log->setFixedHeight(30);
 }
 
 QHelpForm::~QHelpForm()

@@ -33,7 +33,8 @@ public slots:
     void slotSerialUnlock();
     void slotInvokeWarning(QString msg);
     void slotStorageChanged(int stat);
-
+    void slotCalibrate();
+    void slotCalibrateAck(quint16,quint16,quint16,quint16);
 private slots:
     void userRightsChanged(int bChecked);
     void englishPressed(bool bChecked);
@@ -59,11 +60,16 @@ private slots:
 
     void on_btnCalibrate_clicked();
 
+    void on_radioButton_turn0_toggled(bool checked);
+
+    void on_radioButton_turn1_toggled(bool checked);
+
 private:
     Ui::QSetForm *ui;
     QFactorySetPassForm* m_facPass;
     QProgressWindow* prog;
     QTankPeerPort* com0;
+    QTimer* timer;
 
     // QObject interface
 public:

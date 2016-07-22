@@ -41,7 +41,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -460,123 +460,193 @@
        </property>
        <item>
         <widget class="QWidget" name="widgetUserManager" native="true">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="topMargin">
-           <number>4</number>
+         <widget class="QLabel" name="label_14">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>4</y>
+            <width>99</width>
+            <height>17</height>
+           </rect>
           </property>
-          <property name="bottomMargin">
-           <number>40</number>
+          <property name="text">
+           <string>User Manager:</string>
           </property>
-          <item>
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>User Manager:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="widget" native="true">
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="5" column="2" rowspan="2">
-              <widget class="QTextEdit" name="textEdit_set_comment"/>
-             </item>
-             <item row="0" column="2">
-              <widget class="QLineEdit" name="lineEdit_set_name"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="label_7">
-               <property name="text">
-                <string>Password:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLineEdit" name="lineEdit_set_password"/>
-             </item>
-             <item row="4" column="2">
-              <widget class="QLineEdit" name="le_createtime"/>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLabel" name="label_9">
-               <property name="text">
-                <string>Authority:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QComboBox" name="comboBox_set_authority"/>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="label_6">
-               <property name="text">
-                <string>Name:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0" rowspan="7">
-              <widget class="QUserSetWidget" name="tableView_userlist"/>
-             </item>
-             <item row="3" column="2">
-              <widget class="QLineEdit" name="le_creater"/>
-             </item>
-             <item row="3" column="1">
-              <widget class="QLabel" name="label_16">
-               <property name="text">
-                <string>Creater:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QLabel" name="label_8">
-               <property name="text">
-                <string>CreateTime:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="1" rowspan="2">
-              <widget class="QLabel" name="label_10">
-               <property name="text">
-                <string>Comment:</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QWidget" name="widget_2" native="true">
-            <layout class="QHBoxLayout" name="horizontalLayout_2">
-             <item>
-              <widget class="QCPushButton" name="pushButton_set_new">
-               <property name="text">
-                <string>New</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCPushButton" name="pushButton_set_del">
-               <property name="text">
-                <string>Delete</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>173</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
-           </widget>
-          </item>
-         </layout>
+         </widget>
+         <widget class="QCPushButton" name="pushButton_set_del">
+          <property name="geometry">
+           <rect>
+            <x>571</x>
+            <y>310</y>
+            <width>101</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+         <widget class="QCPushButton" name="pushButton_set_new">
+          <property name="geometry">
+           <rect>
+            <x>450</x>
+            <y>310</y>
+            <width>101</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>New</string>
+          </property>
+         </widget>
+         <widget class="QUserSetWidget" name="tableView_userlist">
+          <property name="geometry">
+           <rect>
+            <x>7</x>
+            <y>38</y>
+            <width>261</width>
+            <height>311</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QTextEdit" name="textEdit_set_comment">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>200</y>
+            <width>231</width>
+            <height>51</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_9">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>101</y>
+            <width>83</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Authority:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_16">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>134</y>
+            <width>83</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Creater:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_8">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>167</y>
+            <width>83</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>CreateTime:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="le_creater">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>134</y>
+            <width>231</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QComboBox" name="comboBox_set_authority">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>101</y>
+            <width>231</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_set_password">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>68</y>
+            <width>231</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_set_name">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>35</y>
+            <width>231</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="le_createtime">
+          <property name="geometry">
+           <rect>
+            <x>410</x>
+            <y>167</y>
+            <width>231</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_6">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>35</y>
+            <width>83</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Name:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_7">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>68</y>
+            <width>83</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Password:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_10">
+          <property name="geometry">
+           <rect>
+            <x>321</x>
+            <y>200</y>
+            <width>83</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Comment:</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -591,21 +661,21 @@
          <widget class="QCPushButton" name="btnCalibrate">
           <property name="geometry">
            <rect>
-            <x>280</x>
-            <y>250</y>
+            <x>520</x>
+            <y>300</y>
             <width>99</width>
             <height>27</height>
            </rect>
           </property>
           <property name="text">
-           <string>Check</string>
+           <string>Save</string>
           </property>
          </widget>
          <widget class="QSpinBox" name="sbSensor">
           <property name="geometry">
            <rect>
-            <x>340</x>
-            <y>130</y>
+            <x>230</x>
+            <y>90</y>
             <width>141</width>
             <height>27</height>
            </rect>
@@ -617,92 +687,209 @@
          <widget class="QSpinBox" name="sbFiber">
           <property name="geometry">
            <rect>
-            <x>340</x>
-            <y>100</y>
+            <x>230</x>
+            <y>60</y>
             <width>141</width>
             <height>27</height>
            </rect>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_2">
-          <property name="geometry">
-           <rect>
-            <x>120</x>
-            <y>100</y>
-            <width>171</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Optical fiber sensing</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_3">
-          <property name="geometry">
-           <rect>
-            <x>120</x>
-            <y>130</y>
-            <width>231</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Infrared sensor outer ring</string>
           </property>
          </widget>
          <widget class="QSpinBox" name="sbSensor2">
           <property name="geometry">
            <rect>
-            <x>340</x>
-            <y>160</y>
+            <x>230</x>
+            <y>120</y>
             <width>141</width>
             <height>27</height>
            </rect>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_5">
-          <property name="geometry">
-           <rect>
-            <x>120</x>
-            <y>190</y>
-            <width>181</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Pressure pickup</string>
-          </property>
-         </widget>
-         <widget class="QCheckBox" name="checkBox_4">
-          <property name="geometry">
-           <rect>
-            <x>120</x>
-            <y>160</y>
-            <width>231</width>
-            <height>22</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Infrared sensor inner ring</string>
           </property>
          </widget>
          <widget class="QLabel" name="label_15">
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>10</y>
+            <y>0</y>
             <width>251</width>
-            <height>17</height>
+            <height>21</height>
            </rect>
           </property>
           <property name="text">
            <string>Device Check:</string>
+          </property>
+         </widget>
+         <widget class="QSpinBox" name="sbPress">
+          <property name="geometry">
+           <rect>
+            <x>230</x>
+            <y>150</y>
+            <width>141</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_17">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>200</y>
+            <width>201</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Fiber:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lbFiber">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>200</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_20">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>230</y>
+            <width>201</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Sensor:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lbSensor">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>230</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_22">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>260</y>
+            <width>201</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Sensor2:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lbSensor2">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>260</y>
+            <width>70</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_24">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>290</y>
+            <width>201</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pressure:</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lbPressure">
+          <property name="geometry">
+           <rect>
+            <x>240</x>
+            <y>290</y>
+            <width>67</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>0</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_26">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>154</y>
+            <width>131</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Pressure pickup</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_27">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>125</y>
+            <width>191</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Infrared sensor inner ring</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_28">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>94</y>
+            <width>181</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Infrared sensor outer ring</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_29">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>64</y>
+            <width>151</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Optical fiber sensing</string>
           </property>
          </widget>
         </widget>
@@ -716,138 +903,206 @@
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <widget class="QWidget" name="widgetIP" native="true">
-         <layout class="QGridLayout" name="gridLayout_9">
-          <property name="topMargin">
-           <number>2</number>
+         <widget class="QLabel" name="label_11">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>0</y>
+            <width>103</width>
+            <height>21</height>
+           </rect>
           </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_11">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Select network</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_12">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>0</y>
+            <width>82</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>IP configure</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lb_curnet">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>37</y>
+            <width>171</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Current:</string>
+          </property>
+         </widget>
+         <widget class="QWIFIWidget" name="tableView_Wifi">
+          <property name="geometry">
+           <rect>
+            <x>9</x>
+            <y>60</y>
+            <width>221</width>
+            <height>281</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="chk_dhcp">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>48</y>
+            <width>151</width>
+            <height>22</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Use DHCP</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>111</y>
+            <width>74</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Ip address:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_ip">
+          <property name="geometry">
+           <rect>
+            <x>463</x>
+            <y>111</y>
+            <width>146</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>144</y>
+            <width>40</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Mask:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_mask">
+          <property name="geometry">
+           <rect>
+            <x>463</x>
+            <y>144</y>
+            <width>146</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>177</y>
+            <width>63</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Gateway:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_gateway">
+          <property name="geometry">
+           <rect>
+            <x>463</x>
+            <y>177</y>
+            <width>146</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>358</x>
+            <y>210</y>
+            <width>34</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>DNS:</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="lineEdit_dns">
+          <property name="geometry">
+           <rect>
+            <x>463</x>
+            <y>210</y>
+            <width>146</width>
+            <height>27</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QCPushButton" name="btn_saveip">
+          <property name="geometry">
+           <rect>
+            <x>580</x>
+            <y>290</y>
+            <width>85</width>
+            <height>27</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_5">
+      <attribute name="title">
+       <string>SysEvent</string>
+      </attribute>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QWidget" name="widget_log" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="lb_log">
             <property name="text">
-             <string>Select network</string>
+             <string>System Event:</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>IP configure</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="lb_curnet">
-            <property name="text">
-             <string>Current:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" rowspan="7">
-           <widget class="QWIFIWidget" name="tableView_Wifi"/>
-          </item>
-          <item row="2" column="2">
-           <widget class="QCheckBox" name="chk_dhcp">
-            <property name="text">
-             <string>Use DHCP</string>
-            </property>
-            <property name="checked">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="2">
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>Ip address:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLineEdit" name="lineEdit_ip"/>
-          </item>
-          <item row="4" column="2">
-           <widget class="QLabel" name="label_2">
-            <property name="text">
-             <string>Mask:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
-           <widget class="QLineEdit" name="lineEdit_mask"/>
-          </item>
-          <item row="4" column="4">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>59</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="5" column="2">
-           <widget class="QLabel" name="label_3">
-            <property name="text">
-             <string>Gateway:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="5" column="3">
-           <widget class="QLineEdit" name="lineEdit_gateway"/>
-          </item>
-          <item row="6" column="1">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Expanding</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>60</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="6" column="2">
-           <widget class="QLabel" name="label_4">
-            <property name="text">
-             <string>DNS:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="6" column="3">
-           <widget class="QLineEdit" name="lineEdit_dns"/>
-          </item>
-          <item row="7" column="3">
-           <widget class="QCPushButton" name="btn_saveip">
-            <property name="text">
-             <string>Save</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="3">
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>119</height>
-             </size>
-            </property>
-           </spacer>
+          <item>
+           <widget class="QSysEventWidget" name="tableView"/>
           </item>
          </layout>
         </widget>
@@ -861,7 +1116,7 @@
       <widget class="QLabel" name="lbCheckVer">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>230</x>
          <y>70</y>
          <width>201</width>
          <height>17</height>
@@ -874,20 +1129,20 @@
       <widget class="QCPushButton" name="btnUpgrade">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>120</y>
-         <width>151</width>
+         <x>360</x>
+         <y>310</y>
+         <width>91</width>
          <height>27</height>
         </rect>
        </property>
        <property name="text">
-        <string>Check</string>
+        <string>Upgrade</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_13">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>30</x>
          <y>70</y>
          <width>31</width>
          <height>17</height>
@@ -900,7 +1155,7 @@
       <widget class="QLabel" name="lbVer">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>70</x>
          <y>70</y>
          <width>67</width>
          <height>17</height>
@@ -913,8 +1168,8 @@
       <widget class="QLabel" name="label_18">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>30</y>
+         <x>30</x>
+         <y>40</y>
          <width>67</width>
          <height>17</height>
         </rect>
@@ -926,8 +1181,8 @@
       <widget class="QLabel" name="lb_serial_2">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>30</y>
+         <x>110</x>
+         <y>40</y>
          <width>161</width>
          <height>17</height>
         </rect>
@@ -936,30 +1191,12 @@
         <string>TextLabel</string>
        </property>
       </widget>
-     </widget>
-     <widget class="QWidget" name="tab_5">
-      <attribute name="title">
-       <string>Recovery</string>
-      </attribute>
-      <widget class="QLabel" name="lbBackup">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>250</y>
-         <width>241</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Please insert u disk.</string>
-       </property>
-      </widget>
       <widget class="QCPushButton" name="btnBackup">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>290</y>
-         <width>151</width>
+         <x>480</x>
+         <y>310</y>
+         <width>91</width>
          <height>27</height>
         </rect>
        </property>
@@ -970,14 +1207,27 @@
       <widget class="QCPushButton" name="pushButton_3">
        <property name="geometry">
         <rect>
-         <x>250</x>
-         <y>290</y>
-         <width>131</width>
+         <x>600</x>
+         <y>310</y>
+         <width>81</width>
          <height>27</height>
         </rect>
        </property>
        <property name="text">
         <string>Recovery</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbBackup">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>100</y>
+         <width>241</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Please insert u disk.</string>
        </property>
       </widget>
      </widget>
@@ -995,9 +1245,9 @@
           <widget class="QCPushButton" name="btn_calibrate">
            <property name="geometry">
             <rect>
-             <x>30</x>
-             <y>60</y>
-             <width>158</width>
+             <x>370</x>
+             <y>280</y>
+             <width>101</width>
              <height>27</height>
             </rect>
            </property>
@@ -1008,8 +1258,8 @@
           <widget class="QCheckBox" name="chkDebug">
            <property name="geometry">
             <rect>
-             <x>30</x>
-             <y>220</y>
+             <x>60</x>
+             <y>160</y>
              <width>161</width>
              <height>22</height>
             </rect>
@@ -1021,8 +1271,8 @@
           <widget class="QScrollBar" name="scb_bcklight">
            <property name="geometry">
             <rect>
-             <x>30</x>
-             <y>160</y>
+             <x>60</x>
+             <y>90</y>
              <width>212</width>
              <height>13</height>
             </rect>
@@ -1034,10 +1284,10 @@
           <widget class="QLabel" name="label_5">
            <property name="geometry">
             <rect>
-             <x>30</x>
-             <y>100</y>
+             <x>60</x>
+             <y>60</y>
              <width>81</width>
-             <height>41</height>
+             <height>21</height>
             </rect>
            </property>
            <property name="layoutDirection">
@@ -1053,9 +1303,9 @@
           <widget class="QCPushButton" name="btnRestore">
            <property name="geometry">
             <rect>
-             <x>240</x>
-             <y>60</y>
-             <width>141</width>
+             <x>490</x>
+             <y>280</y>
+             <width>101</width>
              <height>27</height>
             </rect>
            </property>
@@ -1159,6 +1409,11 @@
    <class>QWIFIWidget</class>
    <extends>QTableView</extends>
    <header>qwifiwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QSysEventWidget</class>
+   <extends>QTableView</extends>
+   <header>qsyseventwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

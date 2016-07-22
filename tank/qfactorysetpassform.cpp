@@ -18,7 +18,7 @@ QFactorySetPassForm::QFactorySetPassForm(QWidget *parent) :
 
 void QFactorySetPassForm::passYes()
 {
-    if("123456" == ui->lineEdit_facpassword->text())
+    if("4006186188" == ui->lineEdit_facpassword->text())
         accept();
     else
         HNMsgBox::warning(this, tr("Password error"));;

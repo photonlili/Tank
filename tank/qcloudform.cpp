@@ -39,6 +39,7 @@ QCloudForm::~QCloudForm()
 void QCloudForm::chageLanguage()
 {
     ui->retranslateUi(this);
+    //pline() << ui->widgetCloud->size();
 }
 
 void QCloudForm::slotConnect()
@@ -104,15 +105,15 @@ void QCloudForm::slotOpenDownProgress()
     connect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
 
-    connect(m_cli, SIGNAL(signalUploadSucc(QString)),
+    connect(m_cli, SIGNAL(signalDownSucc()),
             m_progDown, SLOT(accept()));
     connect(m_progDown, SIGNAL(rejected()),
-            m_cli, SLOT(sendCancelUpload()));
+            m_cli, SLOT(sendCancelDown()));
 
     connect(m_progDown, SIGNAL(accepted()),
-            this, SLOT(slotOpenOK()));
+            this, SLOT(slotOpenDownOK()));
     connect(m_progDown, SIGNAL(rejected()),
-            this, SLOT(slotOpenOK()));
+            this, SLOT(slotOpenDownOK()));
 
     m_progDown->initAll();
     m_progDown->show();
@@ -124,15 +125,15 @@ void QCloudForm::slotOpenDownOK()
     disconnect(m_cli, SIGNAL(signalUpdateProgress(int)),
             m_progDown, SLOT(setValue(int)));
 
-    disconnect(m_cli, SIGNAL(signalUploadSucc(QString)),
+    disconnect(m_cli, SIGNAL(signalDownSucc()),
             m_progDown, SLOT(accept()));
     disconnect(m_progDown, SIGNAL(rejected()),
-            m_cli, SLOT(sendCancelUpload()));
+            m_cli, SLOT(sendCancelDown()));
 
     disconnect(m_progDown, SIGNAL(accepted()),
-            this, SLOT(slotOpenOK()));
+            this, SLOT(slotOpenDownOK()));
     disconnect(m_progDown, SIGNAL(rejected()),
-            this, SLOT(slotOpenOK()));
+            this, SLOT(slotOpenDownOK()));
 
     QString downedFile = ui->treeCloud->currentDownloadingFile();
     QString localname = ui->treeCloud->currentDownloadingFilelocalName();
@@ -161,4 +162,5 @@ void QCloudForm::slotDelOK()
     m_progDel->accept();
     disconnect(m_cli, SIGNAL(signalListFileOK()),
                this, SLOT(slotDelOK()));
+    HNMsgBox::warning(this, tr("Del succ!"));
 }

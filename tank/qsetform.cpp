@@ -120,9 +120,9 @@ QSetForm::QSetForm(QWidget *parent) :
     ui->widget_language->setFixedWidth(218);
     ui->widget_userrights->setFixedWidth(218);
     ui->widget_steering->setFixedWidth(218);
-    ui->radioButton_turn0->setFixedSize(100,30);
-    ui->radioButton_turn0->setFixedSize(100,30);
-    ui->checkBox_userrights->setFixedSize(100, 30);
+    ui->radioButton_turn0->setFixedSize(100,40);
+    ui->radioButton_turn1->setFixedSize(100,40);
+    ui->checkBox_userrights->setFixedSize(100, 40);
 
     ui->lb_serial->setFixedSize(300, 60);
     QPalette plt = ui->lb_serial->palette();
@@ -142,9 +142,19 @@ QSetForm::QSetForm(QWidget *parent) :
     t->setProgressWidget(prog);
 
     com0 = HNPeerPort(this);
-    ui->sbSensor->setRange(0, 255);
-    ui->sbSensor2->setRange(0, 255);
-    ui->sbFiber->setRange(0, 255);
+    connect(com0, SIGNAL(sigCaliAck(quint16,quint16,quint16,quint16)),
+            this, SLOT(slotCalibrateAck(quint16,quint16,quint16,quint16)));
+    ui->sbFiber->setRange(-128, 127);
+    ui->sbSensor->setRange(-128, 127);
+    ui->sbSensor2->setRange(-128, 127);
+    ui->sbPress->setRange(-128, 127);
+
+    ui->lb_log->setFixedHeight(30);
+
+    timer = new QTimer(this);
+    timer->setSingleShot(false);
+    connect(timer, SIGNAL(timeout()), this, SLOT(slotCalibrate()));
+
 }
 
 QSetForm::~QSetForm()
@@ -178,6 +188,10 @@ void QSetForm::initAll()
     Language_English == eLanguage ? ui->radioButton_english->setChecked(true) :
                 ui->radioButton_chinese->setChecked(true);
 
+    int oneway = setting.value("OneWayTurn", 1).toInt();
+    1 == oneway ? ui->radioButton_turn0->setChecked(true) :
+                ui->radioButton_turn1->setChecked(true);
+
     ui->tableView_userlist->refresh();
     QSettings set;
     int id = set.value("DefaultLogin").toInt();
@@ -191,6 +205,15 @@ void QSetForm::initAll()
     ui->lb_serial_2->setText(sn);
 
     ui->lbVer->setText(VER_FILEVERSION_STR);
+
+    quint8 sen1 = set.value("Machine/Fiber").toUInt();
+    quint8 sen2 = set.value("Machine/Sen1").toUInt();
+    quint8 sen3 = set.value("Machine/Sen2").toUInt();
+    quint8 sen4 = set.value("Machine/Press").toUInt();
+    ui->sbFiber->setValue(sen1);
+    ui->sbSensor->setValue(sen2);
+    ui->sbSensor2->setValue(sen3);
+    ui->sbPress->setValue(sen4);
 
 }
 
@@ -390,6 +413,23 @@ void QSetForm::slotStorageChanged(int stat)
         ui->lbBackup->setText(tr("Please insert u disk."));
 }
 
+void QSetForm::slotCalibrate()
+{
+    quint8 sen1 = ui->sbFiber->value();
+    quint8 sen2 = ui->sbSensor->value();
+    quint8 sen3 = ui->sbSensor2->value();
+    quint8 sen4 = ui->sbPress->value();
+    com0->sendCalibrate(sen1, sen2, sen3, sen4, 0);
+}
+
+void QSetForm::slotCalibrateAck(quint16 a, quint16 a1, quint16 a2, quint16 a3)
+{
+    ui->lbFiber->setText(QString::number(a));
+    ui->lbSensor->setText(QString::number(a1));
+    ui->lbSensor2->setText(QString::number(a2));
+    ui->lbPressure->setText(QString::number(a3));
+}
+
 void QSetForm::initLanguage()
 {
     ui->retranslateUi(this);
@@ -409,6 +449,7 @@ void QSetForm::initLanguage()
 }
 
 #define FAC_PAGE_NUMBER 6
+#define CALI_PAGE_NUMBER 2
 
 bool QSetForm::eventFilter(QObject * obj, QEvent * e)
 {
@@ -428,8 +469,26 @@ bool QSetForm::eventFilter(QObject * obj, QEvent * e)
                 return true;
             }
         }
-        else if(ui->tabWidget_set->tabBar()->tabRect(3).contains(me->pos()))
+        else if(ui->tabWidget_set->currentIndex() != CALI_PAGE_NUMBER &&
+                ui->tabWidget_set->tabBar()->tabRect(CALI_PAGE_NUMBER).contains(me->pos()))
         {
+            //qieru calibrate
+            int r = HNMsgBox::question(this, tr("Start machine calibrate?"));
+            if(r == HNMsgBox::Rejected)
+            {
+                return true;
+            }
+            timer->start(700);
+        }
+        else if(ui->tabWidget_set->currentIndex() == CALI_PAGE_NUMBER &&
+                !ui->tabWidget_set->tabBar()->tabRect(CALI_PAGE_NUMBER).contains(me->pos()))
+        {
+            //qiechu calibrate
+            timer->stop();
+        }
+        else
+        {
+
         }
     }
 
@@ -490,8 +549,41 @@ void QSetForm::on_btnRestore_clicked()
 
 void QSetForm::on_btnCalibrate_clicked()
 {
-    quint8 sen = ui->sbSensor->value();
-    quint8 sen2 = ui->sbSensor2->value();
-    quint8 sen3 = ui->sbFiber->value();
-    com0->sendCalibrate(sen3, sen, sen2, 0);
+    timer->stop();
+
+    quint8 sen1 = ui->sbFiber->value();
+    quint8 sen2 = ui->sbSensor->value();
+    quint8 sen3 = ui->sbSensor2->value();
+    quint8 sen4 = ui->sbPress->value();
+    com0->sendCalibrate(sen1, sen2, sen3, sen4, 1);
+
+    QSettings set;
+    set.setValue("Machine/Fiber", sen1);
+    set.setValue("Machine/Sen1", sen2);
+    set.setValue("Machine/Sen2", sen3);
+    set.setValue("Machine/Press", sen4);
+    set.sync();
+
+    HNMsgBox::warning(this, tr("Params saved!"));
+    timer->start(700);
+}
+
+void QSetForm::on_radioButton_turn0_toggled(bool checked)
+{
+    pline() << checked;
+    if(!checked)
+        return;
+    QSettings setting;
+    setting.setValue("OneWayTurn", 1);
+    setting.sync();
+}
+
+void QSetForm::on_radioButton_turn1_toggled(bool checked)
+{
+    pline() << checked;
+    if(!checked)
+        return;
+    QSettings setting;
+    setting.setValue("OneWayTurn", 0);
+    setting.sync();
 }

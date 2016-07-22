@@ -545,13 +545,21 @@ void frmInput::focusChanged(QWidget *oldWidget, QWidget *nowWidget)
 
         isFirst = false;
         if (nowWidget->inherits("QLineEdit")) {
+            QLineEdit *widget = (QLineEdit *)nowWidget;
+            //只有当下拉选择框处于编辑模式才可以输入
+            if (!widget->isReadOnly()) {
             currentLineEdit = (QLineEdit *)nowWidget;
             currentEditType = "QLineEdit";
             ShowPanel();
+            }
         } else if (nowWidget->inherits("QTextEdit")) {
-            currentTextEdit = (QTextEdit *)nowWidget;
-            currentEditType = "QTextEdit";
-            ShowPanel();
+            QTextEdit *widget = (QTextEdit *)nowWidget;
+            //只有当下拉选择框处于编辑模式才可以输入
+            if (!widget->isReadOnly()) {
+                currentTextEdit = (QTextEdit *)nowWidget;
+                currentEditType = "QTextEdit";
+                ShowPanel();
+            }
         } else if (nowWidget->inherits("QPlainTextEdit")) {
             currentPlain = (QPlainTextEdit *)nowWidget;
             currentEditType = "QPlainTextEdit";

@@ -22,15 +22,23 @@ public:
     void sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 hold);
     void sendMsgPause();
     void sendMsgStop();
+    void sendLeft();
+    void sendRight();
+    void sendSurround();
+    void sendStopTurn();
     void sendStat();
+
     void sendDebug();
-    void sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali);
     void sendStirSet(quint8 speed);
+    void sendCalibrate(quint8 guangxian, quint8 hongwai, quint8 hongwai2, quint8 yali, quint8 option = 0);
 
 signals:
     void sigRecvMsg(QByteArray msg);
     void sigPeerException(quint16 eCode);
+    void sigPeerReset();
     void sigStat(quint16 temp, quint16 press, quint8 stat);
+    void sigTankNum(quint8 num);
+    void sigCaliAck(quint16 temp, quint16 temp2, quint16 temp3, quint16 pressure);
     void sigDebug(QByteArray d);
 private slots:
     void sendConnectToC51();
@@ -50,7 +58,9 @@ private:
     void recvCmdAck(const QByteArray &l);
     void recvCmdNAck(const QByteArray &l);
     void recvStatAck(const QByteArray &l);
+    void recvTankNumAck(const QByteArray &l);
     void recvDebugAck(const QByteArray &l);
+    void recvCalibrateAck(const QByteArray &l);
     void recvExceptionAck(const QByteArray &l);
 
     enum{

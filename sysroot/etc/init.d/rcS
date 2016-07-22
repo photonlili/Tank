@@ -66,6 +66,6 @@ if ! [ -d /HNApp ]; then
 fi
 mount /dev/ndextern /HNApp
 
-/HNApp/net.sh &
+/HNApp/net.sh
 /HNApp/starttank.sh &
 

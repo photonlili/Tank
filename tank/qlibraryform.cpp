@@ -1,5 +1,6 @@
 #include "qlibraryform.h"
 #include "ui_qlibraryform.h"
+#include "hnmsgbox.h"
 
 QLibraryForm::QLibraryForm(QWidget *parent) :
     QCDialog(parent),
@@ -27,10 +28,18 @@ void QLibraryForm::initAll()
 
 void QLibraryForm::on_btn_lib_select_clicked()
 {
-    QString db = ui->tbv_lib->currentdb();
-    QString dbName = ui->tbv_lib->currentDBDisplayed();
-    emit libSelected(db);
-    emit libSelectedDisplayed(dbName);
+    QString dbName = ui->tbv_lib->currentdb();
+    QString db = ui->tbv_lib->currentDBDisplayed();
+
+    if(dbName == DB_HANON)
+    {
+        HNMsgBox::warning(this, tr("You cant edit system db!"));
+        return;
+    }
+
+
+    emit libSelected(dbName);
+    emit libSelectedDisplayed(db);
 
     accept();
 }
@@ -38,11 +47,28 @@ void QLibraryForm::on_btn_lib_select_clicked()
 void QLibraryForm::on_btn_lib_save_clicked()
 {
     QString dbName = ui->tbv_lib->currentdb();
+    QString dbNewName = ui->le_lib_name->text();
 
     if(dbName == DB_HANON ||
             dbName == DB_EXTRACT ||
             dbName == DB_USER)
+    {
+        HNMsgBox::warning(this, tr("You cant modify default db!"));
         return;
+    }
+
+    if(dbNewName == "System" ||
+            dbNewName == "Extract" ||
+            dbNewName == "User" ||
+
+            dbNewName == tr("System") ||
+            dbNewName == tr("Extract") ||
+            dbNewName == tr("User"))
+    {
+        HNMsgBox::warning(this, tr("You cant use default db name!"));
+        return;
+    }
+
 
     QFile::rename(QString("%1/%2.db").arg(DB_METHOD).arg(ui->tbv_lib->currentdb()),
                   QString("%1/%2.db").arg(DB_METHOD).arg(ui->le_lib_name->text()));
@@ -51,6 +77,16 @@ void QLibraryForm::on_btn_lib_save_clicked()
 
 void QLibraryForm::on_btn_lib_del_clicked()
 {
+    QString dbName = ui->tbv_lib->currentdb();
+
+    if(dbName == DB_HANON ||
+            dbName == DB_EXTRACT ||
+            dbName == DB_USER)
+    {
+        HNMsgBox::warning(this, tr("You cant delete default db!"));
+        return;
+    }
+
     ui->tbv_lib->delDB();
 }
 

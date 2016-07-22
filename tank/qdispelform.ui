@@ -41,7 +41,7 @@
    <item>
     <widget class="HNTabWidget" name="tabWidget_dispel">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab_dispel_run">
       <attribute name="title">
@@ -199,7 +199,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QLabel" name="label_5">
+              <widget class="QLabel" name="label_typebuddy">
                <property name="text">
                 <string>Type:</string>
                </property>
@@ -213,7 +213,37 @@
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_3">
+              <spacer name="hs_4">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Vessel:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_tanknum">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_11">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
@@ -849,7 +879,7 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLabel" name="label_stressure_2">
+                 <widget class="QLabel" name="label_speed">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                     <horstretch>0</horstretch>
@@ -857,7 +887,7 @@
                    </sizepolicy>
                   </property>
                   <property name="text">
-                   <string/>
+                   <string>0</string>
                   </property>
                  </widget>
                 </item>
@@ -876,7 +906,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string/>
+                   <string>Speed:</string>
                   </property>
                  </widget>
                 </item>
@@ -940,6 +970,13 @@
                  </widget>
                 </item>
                 <item>
+                 <widget class="QCPushButton" name="btnStirD">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="horizontalSpacer_9">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -962,6 +999,7 @@
                <zorder>btnStir</zorder>
                <zorder>btn_trans_2</zorder>
                <zorder>horizontalSpacer_9</zorder>
+               <zorder>btnStirD</zorder>
               </widget>
              </item>
              <item>
@@ -999,6 +1037,12 @@
    <header>qcpushbutton.h</header>
   </customwidget>
   <customwidget>
+   <class>HNTabWidget</class>
+   <extends>QTabWidget</extends>
+   <header>hntabwidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
    <class>QStageWidget</class>
    <extends>QTableView</extends>
    <header>qstagewidget.h</header>
@@ -1007,12 +1051,6 @@
    <class>QRunPlot</class>
    <extends>QWidget</extends>
    <header>qrunplot.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>HNTabWidget</class>
-   <extends>QTabWidget</extends>
-   <header>hntabwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

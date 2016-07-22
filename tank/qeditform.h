@@ -47,6 +47,8 @@ private slots:
     void on_btn_stage_del_clicked();
 
     void on_btn_stage_add_clicked();    
+    void on_comboBox_method_type_currentIndexChanged(int index);
+
 private:
     Ui::QEditForm *ui;
 

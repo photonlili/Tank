@@ -227,6 +227,8 @@ void QTankCalibrateStruct::pack(QByteArray &l)
 void QTankCalibrateAck::parse(const QByteArray &l)
 {
     QTankPeerMessage::parse(l);
+    QByteArray d = data();
+    d >> ramp1 >> ramp2 >> ramp3 >> press4;
 }
 
 
@@ -241,4 +243,72 @@ void QTankExceptionAck::parse(const QByteArray &l)
     QByteArray d = data();
     d >> st;
     pline() << st;
+}
+
+
+void QTankTurnLeftStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_LEFT);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankTurnRightStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_RIGHT);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankSurroundStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_SURROUND);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankStopRunStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_STOPRUN);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankTankNumStruct::pack(QByteArray &l)
+{
+}
+
+
+void QTankTankNumAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+    QByteArray d = data();
+    d >> m_num;
+    pline() << m_num;
+}
+
+
+void QTankResetAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+    QByteArray d = data();
+}
+
+
+void QTankFactoryStruct::pack(QByteArray &l)
+{
+    setCmd(_PEER_FACTORY);
+    translate();
+    QTankPeerMessage::pack(l);
+}
+
+
+void QTankFactoryAck::parse(const QByteArray &l)
+{
+    QTankPeerMessage::parse(l);
+    QByteArray d = data();
 }

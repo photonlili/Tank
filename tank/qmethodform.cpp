@@ -107,12 +107,14 @@ void QMethodForm::on_btn_sure_clicked()
 {
     QString curDB = ui->tbv_lib->currentdb();
     int mid = ui->tbv_method->currentMethodId();
+    QString method = ui->tbv_method->currentMethodName();
+    int type = ui->tbv_method->currentMethodType();
     QString curDBDisplayed = ui->tbv_lib->currentDBDisplayed();
 
     pline() << curDB << curDBDisplayed << mid;
     emit tellLibrary(curDB);
     emit tellLibraryDisplayed(curDBDisplayed);
-    emit selMethod(curDB, mid);
+    emit selMethod(curDB, mid, method, type);
     accept();
 }
 

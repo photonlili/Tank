@@ -10,12 +10,13 @@ QMethodWidget::QMethodWidget(QWidget *parent) :
     m_db = newDatabaseConn();
     m_model = new QMethodModel(this, m_db);
     setModel(m_model);
-    m_mapper = new QDataWidgetMapper(this);
-    m_mapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
-    m_mapper->setModel(m_model);
-    m_mapper->setItemDelegate(new QSqlRelationalDelegate(this));
+    //m_mapper = new QDataWidgetMapper(this);
+    //m_mapper->setSubmitPolicy(QDataWidgetMapper::AutoSubmit);
+    //m_mapper->setModel(m_model);
+    //m_mapper->setItemDelegate(new QSqlRelationalDelegate(this));
 
-    connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), m_mapper, SLOT(setCurrentModelIndex(QModelIndex)));
+    //connect(this->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)), m_mapper, SLOT(setCurrentModelIndex(QModelIndex)));
+    setItemDelegate(new QSqlRelationalDelegate(this));
 }
 
 QMethodWidget::~QMethodWidget()
@@ -103,21 +104,21 @@ void QMethodWidget::setMethodName(int row, QString name)
 {
     m_model->setData(m_model->index(row, Method_Name), name);
     m_model->submit();
-    selectMethod(row);
+    //selectMethod(row);
 }
 
 void QMethodWidget::setMethodVessel(int row, int vessel)
 {
     m_model->setData(m_model->index(row, Method_Vessel), vessel);
     m_model->submit();
-    selectMethod(row);
+    //selectMethod(row);
 }
 
 void QMethodWidget::setMethodType(int row, int type)
 {
     m_model->setData(m_model->index(row, Method_Type), type);
     m_model->submit();
-    selectMethod(row);
+    //selectMethod(row);
 }
 
 void QMethodWidget::prev()

@@ -20,7 +20,7 @@ QUserSetView::QUserSetView(QWidget *parent) :
 #endif
 
     horizontalHeader()->setResizeMode(QHeaderView::Stretch);
-    setShowGrid(true);
+    setShowGrid(false);
 
     m_dg = new QUserSetViewTextDelegate(this);
     setItemDelegateForColumn(Auth_Id, m_dg);

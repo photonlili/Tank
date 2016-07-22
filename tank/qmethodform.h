@@ -30,7 +30,7 @@ signals:
     void tellLibrary(QString name);
     void tellLibraryDisplayed(QString name);
     void tellType(QString type);
-    void selMethod(QString dbname, int id);
+    void selMethod(QString dbname, int id, QString name, int type);
 
 public slots:
     void libChanged();

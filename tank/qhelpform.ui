@@ -69,32 +69,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>Log</string>
-      </attribute>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QWidget" name="widget_log" native="true">
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <item>
-           <widget class="QLabel" name="lb_log">
-            <property name="text">
-             <string>System Event:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QSysEventWidget" name="tableView"/>
-          </item>
-         </layout>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
   </layout>
@@ -105,11 +79,6 @@
    <extends>QWidget</extends>
    <header>qmplayerui.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>QSysEventWidget</class>
-   <extends>QTableView</extends>
-   <header>qsyseventwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
