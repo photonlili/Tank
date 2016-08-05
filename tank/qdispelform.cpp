@@ -31,8 +31,11 @@ QDispelForm::QDispelForm(QWidget *parent) :
 
     ui->btn_open->iconTable()[BTN_NORMAL] = "://theme/basic/bt_open.png";
     ui->btn_open->iconTable()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+    ui->btn_open->iconTable()[BTN_DISABLE] = "://theme/basic/bt_open_disable.png";
+
     ui->btn_open_2->iconTable()[BTN_NORMAL] = "://theme/basic/bt_open.png";
     ui->btn_open_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_open_press.png";
+    ui->btn_open_2->iconTable()[BTN_DISABLE] = "://theme/basic/bt_open_disable.png";
 
     ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_play.png";
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
@@ -240,19 +243,20 @@ void QDispelForm::slotStat(quint16 temp, quint16 press, quint8 stat)
 void QDispelForm::timeNewData()
 {
 
-    quint8 stage;
-    quint8 vessel;
-    static quint16 ramp = 0;
-    static quint16 pressure = 0;
-    static quint16 tempture = 0;
-    quint16 hold = 0;
+    static qint8 stage = 0;
+    qint8 vessel;
+    static qint16 ramp = 0;
+    static qint16 pressure = 0;
+    static qint16 tempture = 0;
+    static qint16 hold = 0;
 
-    static double preLastPointKey = 0;
+    static qint32 preLastPointKey = 0;
 
     m_lastPointKey = QDateTime::currentDateTime().toTime_t();
     //use this time as lab time
     m_testTime = m_lastPointKey-m_initPointKey-m_pauseTime;
-    pline() << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime;
+
+    //pline() << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime;
 
     if(bRunning == ePause)
     {
@@ -264,47 +268,78 @@ void QDispelForm::timeNewData()
     preLastPointKey = m_lastPointKey;
 
 
-
     if( m_testTime - 1 == 0)
     {
+        //start
         ramp = 0;
-        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, hold);
+        hold = 0;
+        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, m_curHold);
         ramp = m_curRamp;
+        hold = m_curHold;
     }
-
-    //table
-    qint16 curRamp = ramp-m_testTime;
-    //pline()  << m_totalStageRamp << ramp << m_curRamp << curRamp << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
-    if(curRamp >= 0)
-        ui->tbv_stage->setRamp(curRamp);
-
-    if(m_testTime - m_totalStageRamp - 1 == 0)
+    else if(m_totalStageRamp + m_totalStageHold + 1 - m_testTime == 0)
     {
         // stop
         on_btn_stop_clicked();
+        return;
     }
-    else if(m_testTime - ramp - 1 == 0)
+    else if(ramp + hold + 1 - m_testTime== 0)
     {
+        //next
         ui->tbv_stage->setRamp(m_curRamp);
+        ui->tbv_stage->setHold(m_curHold);
         ui->tbv_stage->next();
-        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, hold);
+        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, m_curHold);
         ramp += m_curRamp;
+        hold += m_curHold;
+
         //pline()  << m_totalStageRamp << ramp << m_curRamp << 0 << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
         return;
     }
+
+
+    //{ stageRamp stageHold, 0 }
+    qint32 stageTime = hold + ramp - m_testTime;
+
+    qint32 rampTime = -1;
+    qint32 holdTime = -1;
+    //first
+    if(stageTime - m_curHold >= 0)
+        rampTime = stageTime - m_curHold;
+    //second
+    else if(stageTime >= 0)
+        holdTime = stageTime;
+
+    //pline() << stageTime << rampTime << holdTime;
+    //pline()  << m_totalStageRamp << ramp << m_curRamp << rampTime << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
+
+    if(rampTime >= 0)
+        ui->tbv_stage->setRamp(rampTime);
+    if(holdTime >= 0)
+        ui->tbv_stage->setHold(holdTime);
+
+    pline() << "-----------------------------";
+    pline() << m_testTime;
+    pline() << stageTime;
+    pline() << m_curRamp << m_curHold;
+    pline() << ramp << hold;
+    pline() << m_totalStageRamp << m_totalStageHold;
+    pline() << rampTime << holdTime;
+    pline() << m_totalStageRamp + m_totalStageHold + 1 - m_testTime;
+    pline() << ramp + hold + 1 - m_testTime;
 
 }
 
 void QDispelForm::timeNewData2()
 {
-    quint8 stage;
-    quint8 vessel;
-    quint16 ramp;
-    static quint16 pressure = 0;
-    static quint16 tempture = 0;
-    static quint16 hold = 0;
+    qint8 stage;
+    qint8 vessel;
+    qint16 ramp;
+    static qint16 pressure = 0;
+    static qint16 tempture = 0;
+    static qint16 hold = 0;
 
-    static double preLastPointKey = 0;
+    static qint32 preLastPointKey = 0;
 
     //整体时间，暂停时间，实验时间
 
@@ -329,9 +364,9 @@ void QDispelForm::timeNewData2()
 
     if( m_testTime - 1 == 0)
     {
-        m_curHold = 0;
-        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold);
-        hold = m_curHold;
+        m_curHold2 = 0;
+        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold2);
+        hold = m_curHold2;
     }
 
     qint16 curHold = hold-m_testTime;
@@ -341,7 +376,7 @@ void QDispelForm::timeNewData2()
     if(curHold >= 0)
         ui->tbv_stage_2->setHold(curHold);
 
-    if(m_testTime - m_totalStageHold - 1 == 0)
+    if(m_testTime - m_totalStageHold2 - 1 == 0)
     {
         // stop
         on_btn_stop_2_clicked();
@@ -350,10 +385,10 @@ void QDispelForm::timeNewData2()
     else if( m_testTime - hold - 1 == 0)
     {
         //允许这个阶段没做完直接跳到下各阶段。
-        ui->tbv_stage_2->setHold(m_curHold);
+        ui->tbv_stage_2->setHold(m_curHold2);
         ui->tbv_stage_2->next();
-        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold);
-        hold += m_curHold;
+        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold2);
+        hold += m_curHold2;
         //pline()  << m_totalStageHold << hold << m_curHold << 0 << tempture << m_lastPointKey2-m_initPointKey2 << m_testTime << m_pauseTime2 ;
         return;
     }
@@ -365,19 +400,20 @@ void QDispelForm::startHeating()
     ui->btn_play->iconTable()[BTN_NORMAL] = "://theme/basic/bt_playing.png";
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main->setCurrentIndex(0);
-
-    quint8 stage;
-    quint8 vessel;
-    quint16 ramp;
-    quint16 press;
-    quint16 tempture;
-    quint16 hold;
+    ui->btn_open->setEnabled(false);
+    qint8 stage;
+    qint8 vessel;
+    qint16 ramp;
+    qint16 press;
+    qint16 tempture;
+    qint16 hold;
     ui->tbv_stage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
     m_totalStageRamp = ui->tbv_stage->totalStageTimeRamp();
+    m_totalStageHold = ui->tbv_stage->totalStageHold();
     m_currentStage = ui->tbv_stage->currentStage();
 
     pline() << stage << vessel << ramp << press << tempture << hold;
-    pline() << m_currentStage << m_totalStageRamp;
+    pline() << m_currentStage << m_totalStageRamp << m_totalStageHold;
 
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
@@ -427,12 +463,12 @@ void QDispelForm::continueHeating()
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main->setCurrentIndex(0);
 
-    quint8 stage;
-    quint8 vessel;
-    quint16 ramp;
-    quint16 press;
-    quint16 tempture;
-    quint16 hold;
+    qint8 stage;
+    qint8 vessel;
+    qint16 ramp;
+    qint16 press;
+    qint16 tempture;
+    qint16 hold;
     ui->tbv_stage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
 
 
@@ -466,6 +502,7 @@ void QDispelForm::stopHeating()
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_play_press.png";
     ui->btn_play->update();
     com0->sendMsgStop();
+    ui->btn_open->setEnabled(true);
 
     /*
     QPixmap pix = ui->page_plot->toPixmap(600, 320);
@@ -499,17 +536,19 @@ void QDispelForm::startHeatingExtract()
     ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main_2->setCurrentIndex(0);
 
-    quint8 stage;
-    quint8 vessel;
-    quint16 ramp;
-    quint16 press;
-    quint16 tempture;
-    quint16 hold;
+    ui->btn_open_2->setEnabled(false);
+
+    qint8 stage;
+    qint8 vessel;
+    qint16 ramp;
+    qint16 press;
+    qint16 tempture;
+    qint16 hold;
     ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, press, tempture, hold);
-    m_totalStageHold = ui->tbv_stage_2->totalStageHold();
+    m_totalStageHold2 = ui->tbv_stage_2->totalStageHold();
     int currentStage2 = ui->tbv_stage_2->currentStage();
 
-    pline() << currentStage2 << m_totalStageHold;
+    pline() << currentStage2 << m_totalStageHold2;
 
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
@@ -560,12 +599,12 @@ void QDispelForm::continueHeatingExtract()
     ui->btn_play_2->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main_2->setCurrentIndex(0);
 
-    quint8 stage;
-    quint8 vessel;
-    quint16 ramp;
-    quint16 press;
-    quint16 tempture;
-    quint16 hold;
+    qint8 stage;
+    qint8 vessel;
+    qint16 ramp;
+    qint16 press;
+    qint16 tempture;
+    qint16 hold;
     ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, press, tempture, hold);
 
 
@@ -596,6 +635,8 @@ void QDispelForm::stopHeatingExtract()
     ui->btn_play_2->update();
     com0->sendMsgStop();
 
+    ui->btn_open_2->setEnabled(true);
+
     /*
     QPixmap pix = ui->page_plot->toPixmap(600, 320);
     QByteArray ba;
@@ -612,7 +653,7 @@ void QDispelForm::stopHeatingExtract()
 
 void QDispelForm::on_btn_open_clicked()
 {
-    methodForm->initAll("Library <> 'Extract'");
+    //methodForm->initAll("Library <> 'Extract'");
     methodForm->exec();
 }
 
@@ -635,7 +676,6 @@ void QDispelForm::on_btn_play_clicked()
     {
         emit signalLockPage(true);
 
-        ui->tbv_stage->selectStage(0);
         m_initPointKey = QDateTime::currentDateTime().toTime_t();
         m_lastPointKey = m_initPointKey;
         bRunning = ePlay;
@@ -643,6 +683,8 @@ void QDispelForm::on_btn_play_clicked()
         m_testTime = 0;
         funcType = 1;
         timer->start(1000);
+        m_stageIndex = 0;
+        ui->tbv_stage->selectStage(m_stageIndex);
         startHeating();
         //serialNo = m_dlg->newReport(methodForm->currentLibrary(),
         //                 methodForm->currentMethodName());
@@ -657,6 +699,7 @@ void QDispelForm::on_btn_stop_clicked()
     if(timer->isActive())
     {
         ui->tbv_stage->setRamp(m_curRamp);
+        ui->tbv_stage->setHold(m_curHold);
         ui->tbv_stage->selectStage(0);
     }
     timer->stop();
@@ -689,7 +732,7 @@ void QDispelForm::on_btn_turn_2_clicked()
 
 void QDispelForm::on_btn_open_2_clicked()
 {
-    methodForm2->initAll("Library = 'Extract'");
+    //methodForm2->initAll("Library = 'Extract'");
     methodForm2->exec();
 }
 
@@ -735,7 +778,7 @@ void QDispelForm::on_btn_stop_2_clicked()
     funcType = 0;
     if(timer2->isActive())
     {
-        ui->tbv_stage_2->setHold(m_curHold);
+        ui->tbv_stage_2->setHold(m_curHold2);
         ui->tbv_stage_2->selectStage(0);
     }
     timer2->stop();

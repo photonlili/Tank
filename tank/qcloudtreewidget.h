@@ -23,6 +23,7 @@ public:
 public slots:
     void slotConnect();
     void slotDisConnect();
+    void slotResize();
 
 private slots:
     void slotConnected();

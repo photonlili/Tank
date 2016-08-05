@@ -1,5 +1,6 @@
 #include "qcloudtreeview.h"
 #include "ui_qcloudtreeview.h"
+#include "QScrollBar"
 
 QCloudTreeView::QCloudTreeView(QWidget *parent) :
     QCTreeView(parent),
@@ -8,6 +9,7 @@ QCloudTreeView::QCloudTreeView(QWidget *parent) :
     ui->setupUi(this);
     setHeaderHidden(true);
     setEditTriggers(NoEditTriggers);
+
 }
 
 QCloudTreeView::~QCloudTreeView()

@@ -50,7 +50,8 @@ void QCPushButton::mousePressEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        state = BTN_PRESS;
+        if(isEnabled())
+            state = BTN_PRESS;
         QApplication::beep();
         //pline() << state;
     }
@@ -62,7 +63,8 @@ void QCPushButton::mouseReleaseEvent(QMouseEvent *e)
     if(e->button() == Qt::LeftButton)
     {
 #ifdef __MIPS_LINUX__
-        state = BTN_NORMAL;
+        if(isEnabled())
+            state = BTN_NORMAL;
         //pline() << state;
         update();
 #else
@@ -77,12 +79,14 @@ void QCPushButton::mouseReleaseEvent(QMouseEvent *e)
 
 void QCPushButton::enterEvent(QEvent *e)
 {
-    state = BTN_HOVER;
+    if(isEnabled())
+        state = BTN_HOVER;
     QPushButton::enterEvent(e);
 }
 
 void QCPushButton::leaveEvent(QEvent *e)
 {
+    if(isEnabled())
     state = BTN_NORMAL;
     QPushButton::leaveEvent(e);
 }

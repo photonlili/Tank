@@ -5,6 +5,7 @@
 #include "qprogresswindow.h"
 #include "qprogressdialog.h"
 #include "hnmsgbox.h"
+#include "hntextcodec.h"
 
 QCloudForm::QCloudForm(QWidget *parent) :
     QWidget(parent),
@@ -29,6 +30,14 @@ QCloudForm::QCloudForm(QWidget *parent) :
     connect(ui->pushButton_del, SIGNAL(clicked()), ui->treeCloud, SLOT(delFile()));
     connect(ui->pushButton_down, SIGNAL(clicked()), ui->treeCloud, SLOT(downFile()));
     connect(ui->btn_print, SIGNAL(clicked()), ui->treeLocal, SLOT(printFile()));
+
+    pline() << "-----------------------";
+    QByteArray in,out;
+    in = "新建库 hnge 你好().db";
+    HNTextCodec::ConvertBytes(in, out, EUTF82GBK);
+    QByteArray out2;
+    HNTextCodec::ConvertBytes(out, out2, EGBK2UTF8);
+    pline() << in << out << out2;
 }
 
 QCloudForm::~QCloudForm()
@@ -140,7 +149,7 @@ void QCloudForm::slotOpenDownOK()
 
     pline() << downedFile << localname;
 
-    system(QString("mv %1 %2").arg(downedFile).arg(localname).toAscii().data());
+    system(QString("mv \"%1\" \"%2\"").arg(downedFile).arg(localname).toAscii().data());
 
     if(QDialog::Accepted == m_progDown->result() )
         HNMsgBox::warning(this, "Download Success");

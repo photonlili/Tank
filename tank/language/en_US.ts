@@ -390,6 +390,11 @@
         <source>Print</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qcloudform.cpp" line="174"/>
+        <source>Del succ!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QCloudLocalModel</name>
@@ -441,7 +446,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qcloudtreewidget.cpp" line="48"/>
+        <location filename="../qcloudtreewidget.cpp" line="53"/>
         <source>Connecting...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -565,14 +570,14 @@
     <message>
         <location filename="../qdispelform.cpp" line="413"/>
         <location filename="../qdispelform.cpp" line="459"/>
-        <location filename="../qdispelform.cpp" line="546"/>
-        <location filename="../qdispelform.cpp" line="589"/>
+        <location filename="../qdispelform.cpp" line="548"/>
+        <location filename="../qdispelform.cpp" line="591"/>
         <source>Heating...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qdispelform.cpp" line="421"/>
-        <location filename="../qdispelform.cpp" line="554"/>
+        <location filename="../qdispelform.cpp" line="556"/>
         <source>Paused</source>
         <translation type="unfinished"></translation>
     </message>
@@ -582,7 +587,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="609"/>
+        <location filename="../qdispelform.cpp" line="613"/>
         <source>Stoped...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -686,17 +691,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="211"/>
+        <location filename="../qeditform.cpp" line="176"/>
+        <source>RAMP or HOLD couldnot be 00:00</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="219"/>
         <source>Standard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="212"/>
+        <location filename="../qeditform.cpp" line="220"/>
         <source>Tempture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="213"/>
+        <location filename="../qeditform.cpp" line="221"/>
         <source>Pressure</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1315,6 +1325,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qsetform.ui" line="762"/>
+        <location filename="../qsetform.ui" line="788"/>
+        <location filename="../qsetform.ui" line="814"/>
+        <location filename="../qsetform.ui" line="840"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qsetform.ui" line="775"/>
         <source>Sensor:</source>
         <translation type="unfinished"></translation>
@@ -1342,7 +1360,7 @@
     </message>
     <message>
         <location filename="../qsetform.ui" line="1230"/>
-        <location filename="../qsetform.cpp" line="413"/>
+        <location filename="../qsetform.cpp" line="410"/>
         <source>Please insert u disk.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1467,54 +1485,54 @@
         <translation type="obsolete">Warning</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="296"/>
-        <location filename="../qsetform.cpp" line="338"/>
+        <location filename="../qsetform.cpp" line="293"/>
+        <location filename="../qsetform.cpp" line="335"/>
         <source>Name couldn&apos;t be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="309"/>
-        <location filename="../qsetform.cpp" line="354"/>
+        <location filename="../qsetform.cpp" line="306"/>
+        <location filename="../qsetform.cpp" line="351"/>
         <source>This user is existed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="315"/>
+        <location filename="../qsetform.cpp" line="312"/>
         <source>Password confirm is not equal to password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="327"/>
+        <location filename="../qsetform.cpp" line="324"/>
         <source>You can&apos;t delete default user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="366"/>
+        <location filename="../qsetform.cpp" line="363"/>
         <source>Save success</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="374"/>
+        <location filename="../qsetform.cpp" line="371"/>
         <source>Current:Wired Lan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="379"/>
+        <location filename="../qsetform.cpp" line="376"/>
         <source>Current:%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="411"/>
+        <location filename="../qsetform.cpp" line="408"/>
         <source>U disk ready!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="476"/>
+        <location filename="../qsetform.cpp" line="471"/>
         <source>Start machine calibrate?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="567"/>
+        <location filename="../qsetform.cpp" line="562"/>
         <source>Params saved!</source>
         <translation type="unfinished"></translation>
     </message>

@@ -16,10 +16,6 @@ protected:
     void drawDisplay(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect, const QString &text) const;
 
 private:
-
-    // QItemDelegate interface
-protected:
-    void drawFocus(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect) const;
 };
 
 
@@ -40,6 +36,22 @@ private:
     Ui::QStageView *ui;
     QStageFormatTextDelegate* dg;
     QStageFormatTextDelegate* dgHold;
+
+    // QWidget interface
+protected:
+    void mousePressEvent(QMouseEvent *);
+
+    // QWidget interface
+protected:
+    void wheelEvent(QWheelEvent *);
+    void keyPressEvent(QKeyEvent *);
+
+    // QWidget interface
+protected:
+    void mouseReleaseEvent(QMouseEvent *);
+    void mouseDoubleClickEvent(QMouseEvent *);
+    void mouseMoveEvent(QMouseEvent *);
+    void keyReleaseEvent(QKeyEvent *);
 };
 
 #endif // QSTAGEVIEW_H

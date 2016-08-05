@@ -21,6 +21,11 @@ QCloudTreeWidget::QCloudTreeWidget(QWidget *parent) :
     setColumnHidden(FILE_SIZE, true);
     setColumnHidden(FILE_DATE, true);
 
+    header()->setResizeMode(QHeaderView::ResizeToContents);
+
+    connect(model, SIGNAL(sigQueryDirSuccess()),
+            this, SLOT(slotResize()));
+
     m_box = new HNMsgBox(this);
 
     QFont cloudFont = this->font();
@@ -58,6 +63,11 @@ void QCloudTreeWidget::slotConnected()
 void QCloudTreeWidget::slotDisConnect(){
     m_client->sendLogoutMessage();
     m_client->SendDisConnectFromHost();
+}
+
+void QCloudTreeWidget::slotResize()
+{
+    resizeColumnToContents(FILE_NAME);
 }
 
 void QCloudTreeWidget::downFile()

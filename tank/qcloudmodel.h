@@ -13,6 +13,7 @@ public:
 signals:
     void sigDownSuccess();
     void sigQueryRootDirSuccess();
+    void sigQueryDirSuccess();
 public slots:
     // 用户不可以创建文件夹
     void  queryRootDirs();

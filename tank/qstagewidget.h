@@ -27,12 +27,11 @@ public:
     int currentStage() { return currentIndex().row(); }
     int totalStageTimeRamp();
     int totalStageHold();
-    void setRamp(quint16 ramp);
-    void setHold(quint16 hold);
-    void stageParam(quint8& stage, quint8& vessel,
-                    quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold);
-    void currentStageParam(quint8& stage, quint8& vessel,
-                           quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold);
+    void setRamp(qint16 ramp);
+    void setHold(qint16 hold);
+    void stageParam(qint8& stage, qint8& vessel,
+                    qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold);
+    void currentStageParam(qint8 &stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold);
     int countStage() { return m_model->rowCount(); }
     inline void addMap(QWidget* w, int section) { m_mapper->addMapping(w, section); }
 

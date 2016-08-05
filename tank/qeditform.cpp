@@ -5,6 +5,7 @@
 #include "qtankdefine.h"
 #include <QSqlQuery>
 #include <QItemSelection>
+#include "hnmsgbox.h"
 
 QEditForm::QEditForm(QWidget *parent) :
     QWidget(parent),
@@ -89,8 +90,8 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
     tbvStage->refresh(ui->tableView_method->currentMethodId());
     tbvStage->selectStage();
 
-    quint8 stage, vessel;
-    quint16 ramp, press, tempture, hold;
+    qint8 stage, vessel;
+    qint16 ramp, press, tempture, hold;
 
     tbvStage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
 
@@ -98,8 +99,8 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
     qint32 hour = time / 60;
     qint32 minute = time % 60;
     QString tmStr = QString("%1:%2")
-                      .arg(hour, 2, 10, QLatin1Char('0'))
-                      .arg(minute, 2, 10, QLatin1Char('0'));
+            .arg(hour, 2, 10, QLatin1Char('0'))
+            .arg(minute, 2, 10, QLatin1Char('0'));
     ui->le_timeramp->setText(tmStr);
 
     ui->le_press->setText(QString::number(press));
@@ -109,8 +110,8 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
     hour = time / 60;
     minute = time % 60;
     tmStr = QString("%1:%2")
-                      .arg(hour, 2, 10, QLatin1Char('0'))
-                      .arg(minute, 2, 10, QLatin1Char('0'));
+            .arg(hour, 2, 10, QLatin1Char('0'))
+            .arg(minute, 2, 10, QLatin1Char('0'));
     ui->le_hold->setText(tmStr);
 
 
@@ -170,12 +171,41 @@ void QEditForm::saveM()
     quint16 hold = holdList[0].toUInt() * 60 + holdList[1].toUInt();
     pline() << ui->le_hold->text() << hold;
 
-
     int stage = ui->spin_stage->value();
     int vessel = ui->le_vessel->text().toInt();
     pline() << stage << ramp << press << tempture << hold;
-    tbvStage->saveStage(stage, vessel, ramp, press, tempture, hold);
 
+    if(stage <1 || stage > 42)
+    {
+        HNMsgBox::warning(this, tr("The field of stage is 1 - 42"));
+        return;
+    }
+
+    if(ramp < 1 || ramp > 9999)
+    {
+        HNMsgBox::warning(this, tr("The field of ramp is 00:01 - 20:00"));
+        return;
+    }
+    if(press < 1 || press > 2800)
+    {
+        HNMsgBox::warning(this, tr("The field of press is 00:01 - 20:00"));
+        return;
+    }
+    if(tempture < 1 || tempture > 300)
+    {
+        HNMsgBox::warning(this, tr("The field of tempture is 00:01 - 20:00"));
+        return;
+    }
+
+    if(hold < 1 || hold > 9999)
+    {
+        HNMsgBox::warning(this, tr("The field of HOLD is 00:01 - 20:00"));
+        return;
+    }
+
+
+
+    tbvStage->saveStage(stage, vessel, ramp, press, tempture, hold);
 
     int type = ui->comboBox_method_type->currentIndex();
     QString newName = ui->lineEdit_methodname->text();
@@ -192,8 +222,10 @@ void QEditForm::saveM()
 
 void QEditForm::delM()
 {
+    int row = ui->tableView_method->currentIndex().row();
     tbvStage->delAllStage();
-    ui->tableView_method->delMethod(ui->tableView_method->currentIndex().row());
+    ui->tableView_method->delMethod(row);
+    ui->tableView_method->selectMethod(row>0?row-1:0);
 }
 
 void QEditForm::newM()
@@ -226,8 +258,8 @@ void QEditForm::on_spin_stage_valueChanged(int arg1)
     pline() << tbvStage->currentStage() << arg1;
     tbvStage->selectStage(arg1-1);
     pline() << tbvStage->currentStage();
-    quint8 stage, vessel;
-    quint16 ramp, press, tempture, hold;
+    qint8 stage, vessel;
+    qint16 ramp, press, tempture, hold;
 
     tbvStage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
 
@@ -235,8 +267,8 @@ void QEditForm::on_spin_stage_valueChanged(int arg1)
     qint32 hour = time / 60;
     qint32 minute = time % 60;
     QString tmStr = QString("%1:%2")
-                      .arg(hour, 2, 10, QLatin1Char('0'))
-                      .arg(minute, 2, 10, QLatin1Char('0'));
+            .arg(hour, 2, 10, QLatin1Char('0'))
+            .arg(minute, 2, 10, QLatin1Char('0'));
     ui->le_timeramp->setText(tmStr);
 
     ui->le_press->setText(QString::number(press));
@@ -246,8 +278,8 @@ void QEditForm::on_spin_stage_valueChanged(int arg1)
     hour = time / 60;
     minute = time % 60;
     tmStr = QString("%1:%2")
-                      .arg(hour, 2, 10, QLatin1Char('0'))
-                      .arg(minute, 2, 10, QLatin1Char('0'));
+            .arg(hour, 2, 10, QLatin1Char('0'))
+            .arg(minute, 2, 10, QLatin1Char('0'));
     ui->le_hold->setText(tmStr);
 
 }

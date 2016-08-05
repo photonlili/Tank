@@ -197,11 +197,8 @@ void QSetForm::initAll()
     int id = set.value("DefaultLogin").toInt();
     ui->tableView_userlist->selectUser(id);
 
-    QByteArray serial = set.value("/Device/DeviceNo").toByteArray();
-    QString sn;
-    for(int i = 0; i < serial.size(); i++)
-        sn += QString::number((quint8)serial[i], 16);
-    sn = sn.toUpper();
+    QString sn = set.value("Device/DeviceNo").toString();
+
     ui->lb_serial_2->setText(sn);
 
     ui->lbVer->setText(VER_FILEVERSION_STR);
@@ -437,11 +434,9 @@ void QSetForm::initLanguage()
     ui->tableView_userlist->initLanguage();
 
     QSettings set;
-    QByteArray serial = set.value("/Device/DeviceNo").toByteArray();
-    QString sn;
-    for(int i = 0; i < serial.size(); i++)
-        sn += QString::number((quint8)serial[i], 16);
-    sn = sn.toUpper();
+
+    QString sn = set.value("Device/DeviceNo").toString();
+
     ui->lb_serial_2->setText(sn);
 
     ui->lbVer->setText(VER_FILEVERSION_STR);

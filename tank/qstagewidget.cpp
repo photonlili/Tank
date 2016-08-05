@@ -124,38 +124,40 @@ int QStageWidget::totalStageHold()
     return ramp;
 }
 
-void QStageWidget::setRamp(quint16 ramp)
+void QStageWidget::setRamp(qint16 ramp)
 {
+    //当切换到下一个阶段，设置ramp出现跳空的现象，不选中了。
+    //pline() << currentIndex() << ramp;
     int row = currentIndex().row();
     m_model->setData(m_model->index(row, Stage_Timeramp), ramp);
 }
 
-void QStageWidget::setHold(quint16 hold)
+void QStageWidget::setHold(qint16 hold)
 {
     int row = currentIndex().row();
     m_model->setData(m_model->index(row, Stage_Hold), hold);
 }
 
-void QStageWidget::stageParam(quint8 &stage, quint8 &vessel, quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold)
+void QStageWidget::stageParam(qint8 &stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold)
 {
     int row = stage - 1;
-    stage = m_model->index(row, Stage_Index).data().toUInt();
-    vessel = m_model->index(row, Stage_Vessel).data().toUInt();
-    ramp = m_model->index(row, Stage_Timeramp).data().toUInt();
-    press = m_model->index(row, Stage_Presspsi).data().toUInt();
-    tempture = m_model->index(row, Stage_Tempture).data().toUInt();
-    hold = m_model->index(row, Stage_Hold).data().toUInt();
+    stage = m_model->index(row, Stage_Index).data().toInt();
+    vessel = m_model->index(row, Stage_Vessel).data().toInt();
+    ramp = m_model->index(row, Stage_Timeramp).data().toInt();
+    press = m_model->index(row, Stage_Presspsi).data().toInt();
+    tempture = m_model->index(row, Stage_Tempture).data().toInt();
+    hold = m_model->index(row, Stage_Hold).data().toInt();
 }
 
-void QStageWidget::currentStageParam(quint8 &stage, quint8 &vessel, quint16 &ramp, quint16 &press, quint16 &tempture, quint16 &hold)
+void QStageWidget::currentStageParam(qint8 &stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold)
 {
     QModelIndex index = currentIndex();
-    stage = m_model->index(index.row(), Stage_Index).data().toUInt();
-    vessel = m_model->index(index.row(), Stage_Vessel).data().toUInt();
-    ramp = m_model->index(index.row(), Stage_Timeramp).data().toUInt();
-    press = m_model->index(index.row(), Stage_Presspsi).data().toUInt();
-    tempture = m_model->index(index.row(), Stage_Tempture).data().toUInt();
-    hold = m_model->index(index.row(), Stage_Hold).data().toUInt();
+    stage = m_model->index(index.row(), Stage_Index).data().toInt();
+    vessel = m_model->index(index.row(), Stage_Vessel).data().toInt();
+    ramp = m_model->index(index.row(), Stage_Timeramp).data().toInt();
+    press = m_model->index(index.row(), Stage_Presspsi).data().toInt();
+    tempture = m_model->index(index.row(), Stage_Tempture).data().toInt();
+    hold = m_model->index(index.row(), Stage_Hold).data().toInt();
 }
 
 void QStageWidget::openTransaction()
@@ -179,11 +181,11 @@ void QStageWidget::newStage()
     row = m_model->rowCount();
     m_model->insertRow(row);
     m_model->setData(m_model->index(row, Stage_Index), row+1);
-    m_model->setData(m_model->index(row, Stage_Vessel), 12);
-    m_model->setData(m_model->index(row, Stage_Timeramp), 300);
-    m_model->setData(m_model->index(row, Stage_Presspsi), 700);
-    m_model->setData(m_model->index(row, Stage_Tempture), 800);
-    m_model->setData(m_model->index(row, Stage_Hold), 300);
+    m_model->setData(m_model->index(row, Stage_Vessel), 1);
+    m_model->setData(m_model->index(row, Stage_Timeramp), 0);
+    m_model->setData(m_model->index(row, Stage_Presspsi), 0);
+    m_model->setData(m_model->index(row, Stage_Tempture), 0);
+    m_model->setData(m_model->index(row, Stage_Hold), 0);
     m_model->setData(m_model->index(row, Stage_MethodId), m_methodid);
     m_model->submit();
 }
@@ -245,12 +247,14 @@ void QStageWidget::saveStage(quint8 stage, quint8 vessel, quint16 ramp,
 
 void QStageWidget::prev()
 {
-    selectRow(currentIndex().row()-1);
-    setFocus(Qt::MouseFocusReason);
+    int row = currentIndex().row()-1;
+    selectStage(row);
+    //pline() << currentIndex();
 }
 
 void QStageWidget::next()
 {
-    selectRow(currentIndex().row()+1);
-    setFocus(Qt::MouseFocusReason);
+    int row = currentIndex().row()+1;
+    selectStage(row);
+    //pline() << currentIndex();
 }

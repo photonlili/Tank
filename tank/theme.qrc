@@ -127,5 +127,6 @@
         <file>theme/basic/bt_playing_press.png</file>
         <file>theme/basic/bt_stir2.png</file>
         <file>theme/basic/bt_stir2_press.png</file>
+        <file>theme/basic/bt_open_disable.png</file>
     </qresource>
 </RCC>

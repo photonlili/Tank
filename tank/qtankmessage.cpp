@@ -3,6 +3,7 @@
 #include <QBuffer>
 #include "qtankpublic.h"
 #include "qcomponent.h"
+#include "hntextcodec.h"
 
 QTankMessage::QTankMessage(QObject *parent) :
     QObject(parent)
@@ -154,8 +155,13 @@ void QTankData::parseListFileResultData(QTCloudListFileResult &r, const QByteArr
         QByteArray __r;
         __r = parseKeyWordInByteArray(b, _TCP_SECTION_ID, pos);
         _r.m_id = __r;
-        __r = parseKeyWordInByteArray(b, _TCP_SECTION_NAME, pos);
-        _r.m_name = __r;
+
+        QByteArray in = parseKeyWordInByteArray(b, _TCP_SECTION_NAME, pos);
+        QByteArray out;
+        HNTextCodec::ConvertBytes(in, out, EGBK2UTF8);
+        _r.m_name = out;
+        pline() << out << _r.m_name;
+
         __r = parseKeyWordInByteArray(b, _TCP_SECTION_SIZE, pos);
         _r.m_size = __r;
         __r = parseKeyWordInByteArray(b, _TCP_SECTION_DATE, pos);
@@ -199,7 +205,10 @@ void QTankData::parseDownDevFileDataResultData(QTCloudDownFileDataResult &t, con
 
 void QTankData::packUploadFileData(QByteArray &l, const QTCloudUploadFile &t)
 {
-    l = QString(_TCPCMD_DATASENDFILEINFO).arg(t.m_code).arg(t.m_name).arg(t.m_overwrite).arg(t.m_length).toAscii();
+    QByteArray in = QString(_TCPCMD_DATASENDFILEINFO).arg(t.m_code).arg(t.m_name).arg(t.m_overwrite).arg(t.m_length).toAscii();
+    HNTextCodec::ConvertBytes(in, l, EUTF82GBK);
+    pline() << in;
+    pline() << l;
 }
 
 void QTankData::parseUploadFileResultData(QTCloudUploadFileResult &t, const QByteArray &l)
@@ -242,7 +251,19 @@ void QTankData::parseCheckVersionResultData(QTCheckVersionResult &t, const QByte
     t.m_softwarecode = parseKeyWordInByteArray(b, _TCP_SECTION_SOFTWARECODE, pos);
     t.m_version = parseKeyWordInByteArray(b, _TCP_SECTION_VERSION, pos);
     t.m_NewSoftwareID = parseKeyWordInByteArray(b, _TCP_SECTION_NEWSOFTWAREID, pos);
-    t.m_Explain = parseKeyWordInByteArray(b, _TCP_SECTION_EXPLAIN, pos);
+
+    //t.m_Explain = parseKeyWordInByteArray(b, _TCP_SECTION_EXPLAIN, pos);
+#if 0
+    QByteArray explain = parseKeyWordInByteArray(b, _TCP_SECTION_EXPLAIN, pos);
+    QTextCodec *Codec = QTextCodec::codecForName("gbk");
+    t.m_Explain = Codec->toUnicode(explain);
+#else
+    QByteArray in = parseKeyWordInByteArray(b, _TCP_SECTION_EXPLAIN, pos);
+    QByteArray utf8;
+    HNTextCodec::ConvertBytes(in, utf8, EGBK2UTF8);
+    t.m_Explain = utf8;
+#endif
+
     t.m_ReleaseStatus = parseKeyWordInByteArray(b, _TCP_SECTION_RELEASESTAT, pos);
     t.m_ReleaseDate = parseKeyWordInByteArray(b, _TCP_SECTION_RELEASEDATE, pos);
     t.m_FileName = parseKeyWordInByteArray(b, _TCP_SECTION_FILENAME, pos);

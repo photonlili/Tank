@@ -51,7 +51,39 @@ void QStageFormatTextDelegate::drawDisplay(QPainter *painter, const QStyleOption
     painter->restore();
 }
 
-
-void QStageFormatTextDelegate::drawFocus(QPainter *painter, const QStyleOptionViewItem &option, const QRect &rect) const
+void QStageView::mousePressEvent(QMouseEvent *)
 {
+    pline();
+}
+
+
+void QStageView::wheelEvent(QWheelEvent *)
+{
+    pline();
+}
+
+void QStageView::keyPressEvent(QKeyEvent *)
+{
+    pline();
+}
+
+
+void QStageView::mouseReleaseEvent(QMouseEvent *)
+{
+    pline();
+}
+
+void QStageView::mouseDoubleClickEvent(QMouseEvent *)
+{
+    pline();
+}
+
+void QStageView::mouseMoveEvent(QMouseEvent *)
+{
+    pline();
+}
+
+void QStageView::keyReleaseEvent(QKeyEvent *)
+{
+    pline();
 }

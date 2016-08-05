@@ -96,7 +96,7 @@ private slots:
 private:
     Ui::QDispelForm *ui;
 
-    quint8 m_currentStage;
+    qint8 m_currentStage;
 
     QTankException* excp;
 
@@ -112,21 +112,24 @@ private:
     int bRunning;
     int funcType;
     QTimer* timerStatus;
-    quint32 m_testTime;
+    qint32 m_testTime;
 
     QTimer* timer;
-    quint32 m_totalStageRamp;
-    quint32 m_initPointKey;
-    quint32 m_lastPointKey;
-    quint32 m_pauseTime;
-    quint16 m_curRamp;
+    qint8 m_stageIndex;
+    qint32 m_totalStageRamp;
+    qint32 m_totalStageHold;
+    qint32 m_initPointKey;
+    qint32 m_lastPointKey;
+    qint32 m_pauseTime;
+    qint16 m_curRamp;
+    qint16 m_curHold;
 
     QTimer* timer2;
-    quint32 m_initPointKey2;
-    quint32 m_lastPointKey2;
-    quint32 m_totalStageHold;
-    quint32 m_pauseTime2;
-    quint16 m_curHold;
+    qint32 m_initPointKey2;
+    qint32 m_lastPointKey2;
+    qint32 m_totalStageHold2;
+    qint32 m_pauseTime2;
+    qint16 m_curHold2;
 
     QMethodForm* methodForm;
     QMethodForm* methodForm2;

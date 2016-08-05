@@ -50,7 +50,6 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     frminput.cpp \
     simplefile.cpp \
-    txtrecode.cpp \
     logindialog.cpp \
     qdispelform.cpp \
     qmlabel.cpp \
@@ -145,12 +144,12 @@ SOURCES += main.cpp\
     qtankcrosscenter.cpp \
     hnprogressbar.cpp \
     hnupgradewidget.cpp \
-    HNEthManager.cpp
+    HNEthManager.cpp \
+    hntextcodec.cpp
 
 HEADERS  += mainwindow.h \
     frminput.h \
     simplefile.h \
-    txtrecode.h \
     logindialog.h \
     qdispelform.h \
     qmlabel.h \
@@ -253,7 +252,8 @@ HEADERS  += mainwindow.h \
     hnprogressbar.h \
     hnupgradewidget.h \
     qversion.h \
-    HNEthManager.h
+    HNEthManager.h \
+    hntextcodec.h
 
 FORMS    += mainwindow.ui \
     frminput.ui \

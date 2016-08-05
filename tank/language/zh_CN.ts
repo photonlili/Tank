@@ -120,31 +120,31 @@
         <location filename="../hnupgradewidget.cpp" line="115"/>
         <location filename="../hnupgradewidget.cpp" line="135"/>
         <source>Explain:%1</source>
-        <translation>注释：</translation>
+        <translation>注释：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="116"/>
         <location filename="../hnupgradewidget.cpp" line="136"/>
         <source>ReleaseStatus:%1</source>
-        <translation>发布状态：</translation>
+        <translation>发布状态：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="117"/>
         <location filename="../hnupgradewidget.cpp" line="137"/>
         <source>ReleaseDate:%1</source>
-        <translation>发布日期：</translation>
+        <translation>发布日期：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="118"/>
         <location filename="../hnupgradewidget.cpp" line="138"/>
         <source>FileMD5:%1</source>
-        <translation>文件MD5：</translation>
+        <translation>文件MD5：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="119"/>
         <location filename="../hnupgradewidget.cpp" line="139"/>
         <source>FileSize:%1</source>
-        <translation>文件大小：</translation>
+        <translation>文件大小：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="124"/>
@@ -159,7 +159,7 @@
     <message>
         <location filename="../hnupgradewidget.cpp" line="133"/>
         <source>FileName:%1</source>
-        <translation>文件名：</translation>
+        <translation>文件名：%1</translation>
     </message>
     <message>
         <location filename="../hnupgradewidget.cpp" line="140"/>
@@ -434,6 +434,11 @@
         <source>Setting</source>
         <translation type="obsolete">云设置</translation>
     </message>
+    <message>
+        <location filename="../qcloudform.cpp" line="174"/>
+        <source>Del succ!</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QCloudLocalModel</name>
@@ -485,7 +490,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qcloudtreewidget.cpp" line="48"/>
+        <location filename="../qcloudtreewidget.cpp" line="53"/>
         <source>Connecting...</source>
         <translation>正在连接。。。</translation>
     </message>
@@ -717,14 +722,14 @@
     <message>
         <location filename="../qdispelform.cpp" line="413"/>
         <location filename="../qdispelform.cpp" line="459"/>
-        <location filename="../qdispelform.cpp" line="546"/>
-        <location filename="../qdispelform.cpp" line="589"/>
+        <location filename="../qdispelform.cpp" line="548"/>
+        <location filename="../qdispelform.cpp" line="591"/>
         <source>Heating...</source>
         <translation>正在加热。。。</translation>
     </message>
     <message>
         <location filename="../qdispelform.cpp" line="421"/>
-        <location filename="../qdispelform.cpp" line="554"/>
+        <location filename="../qdispelform.cpp" line="556"/>
         <source>Paused</source>
         <translation>暂停加热</translation>
     </message>
@@ -734,7 +739,7 @@
         <translation>停止加热</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="609"/>
+        <location filename="../qdispelform.cpp" line="613"/>
         <source>Stoped...</source>
         <translation>停止加热</translation>
     </message>
@@ -866,7 +871,7 @@
     <message>
         <location filename="../qeditform.ui" line="234"/>
         <source>PressPSI:</source>
-        <translation>压力：</translation>
+        <translation>功率：</translation>
     </message>
     <message>
         <location filename="../qeditform.ui" line="227"/>
@@ -911,19 +916,24 @@
         <translation>清空</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="211"/>
+        <location filename="../qeditform.cpp" line="176"/>
+        <source>RAMP or HOLD couldnot be 00:00</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="219"/>
         <source>Standard</source>
         <translation>标准控制</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="212"/>
+        <location filename="../qeditform.cpp" line="220"/>
         <source>Tempture</source>
         <translation>温度爬坡</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="213"/>
+        <location filename="../qeditform.cpp" line="221"/>
         <source>Pressure</source>
-        <translation>压力控制</translation>
+        <translation>功率控制</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -1631,6 +1641,14 @@
         <translation>光纤传感器温度：</translation>
     </message>
     <message>
+        <location filename="../qsetform.ui" line="762"/>
+        <location filename="../qsetform.ui" line="788"/>
+        <location filename="../qsetform.ui" line="814"/>
+        <location filename="../qsetform.ui" line="840"/>
+        <source>0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qsetform.ui" line="775"/>
         <source>Sensor:</source>
         <translation>红外传感器内圈温度：</translation>
@@ -1658,7 +1676,7 @@
     </message>
     <message>
         <location filename="../qsetform.ui" line="1230"/>
-        <location filename="../qsetform.cpp" line="413"/>
+        <location filename="../qsetform.cpp" line="410"/>
         <source>Please insert u disk.</source>
         <translation>请插入U盘</translation>
     </message>
@@ -1787,54 +1805,54 @@
         <translation type="obsolete">警告</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="296"/>
-        <location filename="../qsetform.cpp" line="338"/>
+        <location filename="../qsetform.cpp" line="293"/>
+        <location filename="../qsetform.cpp" line="335"/>
         <source>Name couldn&apos;t be empty</source>
         <translation>名字不能为空</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="309"/>
-        <location filename="../qsetform.cpp" line="354"/>
+        <location filename="../qsetform.cpp" line="306"/>
+        <location filename="../qsetform.cpp" line="351"/>
         <source>This user is existed</source>
         <translation>用户已经存在</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="315"/>
+        <location filename="../qsetform.cpp" line="312"/>
         <source>Password confirm is not equal to password</source>
         <translation>确认密码不相同</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="327"/>
+        <location filename="../qsetform.cpp" line="324"/>
         <source>You can&apos;t delete default user</source>
         <translation>不能删除管理员</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="366"/>
+        <location filename="../qsetform.cpp" line="363"/>
         <source>Save success</source>
         <translation>保存成功</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="374"/>
+        <location filename="../qsetform.cpp" line="371"/>
         <source>Current:Wired Lan</source>
         <translation>当前网络：有线</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="379"/>
+        <location filename="../qsetform.cpp" line="376"/>
         <source>Current:%1</source>
         <translation>当前网络：%1</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="411"/>
+        <location filename="../qsetform.cpp" line="408"/>
         <source>U disk ready!</source>
         <translation>检测到U盘！</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="476"/>
+        <location filename="../qsetform.cpp" line="471"/>
         <source>Start machine calibrate?</source>
         <translation>确定开始校准仪器？</translation>
     </message>
     <message>
-        <location filename="../qsetform.cpp" line="567"/>
+        <location filename="../qsetform.cpp" line="562"/>
         <source>Params saved!</source>
         <translation>校准参数已保存。</translation>
     </message>
@@ -1915,7 +1933,7 @@
         <location filename="../qstagewidget.cpp" line="35"/>
         <location filename="../qstagewidget.cpp" line="49"/>
         <source>PressPSI</source>
-        <translation>压力</translation>
+        <translation>功率</translation>
     </message>
     <message>
         <location filename="../qstagewidget.cpp" line="36"/>

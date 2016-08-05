@@ -191,16 +191,10 @@ void QTankClient::sendHeatBeatMessage()
 void QTankClient::sendLoginMessage()
 {
     QSettings set;
-    QByteArray _name = set.value("Device/DeviceNo").toByteArray();
-    QByteArray _pwd = set.value("Device/Password").toByteArray();
+    QString name = set.value("Device/DeviceNo").toString();
+    QString pwd = set.value("Device/Password").toString();
 
-    QString name, pwd;
-    for(int i = 0; i < _name.size(); i++)
-        name += QString::number((quint8)_name[i], 16);
-    for(int i = 0; i < _pwd.size(); i++)
-        pwd += QString::number((quint8)_pwd[i], 16);
-    name = name.toUpper();
-    pwd = pwd.toUpper();
+
 
     QTCloudLogin t;
     t.m_name = name;
@@ -640,6 +634,7 @@ void QTankClient::recvDownFileResultMessage(QTankMessage &qMsg)
     QTankData::parse(m_downfileresult, qMsg.cmd(), qMsg.data());
     pline() << m_downfileresult.m_fileno << m_downfileresult.m_name << m_downfileresult.m_length;
     m_downfiledata.m_fileno = m_downfileresult.m_fileno.toInt();
+    pline() << m_downfileresult.m_path;
 
     QString tmpFile = QString("%1/%2").arg(m_downfileresult.m_path).arg(m_downfileresult.m_name);
 #ifdef __MIPS_LINUX__
@@ -666,7 +661,7 @@ void QTankClient::recvDownFileDataResultMessage(QTankMessage &qMsg)
     f.write(result.m_data);
     nFileSize = f.size();
     f.close();
-    pline() << nFileSize << m_downfileresult.m_length;
+    pline() << nFileSize << m_downfileresult.m_length.toInt();
     int percent = 0;
     if(nFileSize > 0)
         percent = 100 * nFileSize / m_downfileresult.m_length.toInt();

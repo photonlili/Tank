@@ -78,6 +78,7 @@ void QCloudModel::queryFilesResult()
         row++;
     }
     submit();
+    emit sigQueryDirSuccess();
 }
 
 QStandardItem *QCloudModel::findDirByCode(QString code)

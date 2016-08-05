@@ -88,7 +88,7 @@ void QMethodWidget::newMethod()
     m_model->insertRow(row);
     m_model->setData(m_model->index(row, Method_Name), name);
     m_model->setData(m_model->index(row, Method_Type), type);
-    m_model->setData(m_model->index(row, Method_Vessel), 12);
+    m_model->setData(m_model->index(row, Method_Vessel), 1);
     m_model->submit();
 
     selectMethod(row);
