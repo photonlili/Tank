@@ -1,0 +1,371 @@
+/****************************************************************************
+** Meta object code from reading C++ file 'tst_qserialport.cpp'
+**
+** Created by: The Qt Meta Object Compiler version 63 (Qt 4.8.6)
+**
+** WARNING! All changes made in this file will be lost!
+*****************************************************************************/
+
+#if !defined(Q_MOC_OUTPUT_REVISION)
+#error "The header file 'tst_qserialport.cpp' doesn't include <QObject>."
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.6. It"
+#error "cannot be used with the include files from this version of Qt."
+#error "(The moc has changed too much.)"
+#endif
+
+QT_BEGIN_MOC_NAMESPACE
+static const uint qt_meta_data_tst_QSerialPort[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+      22,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      17,   16,   16,   16, 0x08,
+      32,   16,   16,   16, 0x08,
+      51,   16,   16,   16, 0x08,
+      69,   16,   16,   16, 0x08,
+      87,   16,   16,   16, 0x08,
+     107,   16,   16,   16, 0x08,
+     122,   16,   16,   16, 0x08,
+     145,   16,   16,   16, 0x08,
+     163,   16,   16,   16, 0x08,
+     171,   16,   16,   16, 0x08,
+     185,   16,   16,   16, 0x08,
+     207,   16,   16,   16, 0x08,
+     237,   16,   16,   16, 0x08,
+     267,   16,   16,   16, 0x08,
+     298,   16,   16,   16, 0x08,
+     328,   16,   16,   16, 0x08,
+     351,   16,   16,   16, 0x08,
+     390,   16,   16,   16, 0x08,
+     424,   16,   16,   16, 0x08,
+     456,   16,   16,   16, 0x08,
+     496,  483,   16,   16, 0x09,
+     538,  483,   16,   16, 0x09,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_tst_QSerialPort[] = {
+    "tst_QSerialPort\0\0initTestCase()\0"
+    "defaultConstruct()\0constructByName()\0"
+    "constructByInfo()\0openExisting_data()\0"
+    "openExisting()\0openNotExisting_data()\0"
+    "openNotExisting()\0flush()\0doubleFlush()\0"
+    "waitForBytesWritten()\0"
+    "waitForReadyReadWithTimeout()\0"
+    "waitForReadyReadWithOneByte()\0"
+    "waitForReadyReadWithAlphabet()\0"
+    "twoStageSynchronousLoopback()\0"
+    "synchronousReadWrite()\0"
+    "asynchronousWriteByBytesWritten_data()\0"
+    "asynchronousWriteByBytesWritten()\0"
+    "asynchronousWriteByTimer_data()\0"
+    "asynchronousWriteByTimer()\0bytesWritten\0"
+    "handleBytesWrittenAndExitLoopSlot(qint64)\0"
+    "handleBytesWrittenAndExitLoopSlot2(qint64)\0"
+};
+
+void tst_QSerialPort::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        tst_QSerialPort *_t = static_cast<tst_QSerialPort *>(_o);
+        switch (_id) {
+        case 0: _t->initTestCase(); break;
+        case 1: _t->defaultConstruct(); break;
+        case 2: _t->constructByName(); break;
+        case 3: _t->constructByInfo(); break;
+        case 4: _t->openExisting_data(); break;
+        case 5: _t->openExisting(); break;
+        case 6: _t->openNotExisting_data(); break;
+        case 7: _t->openNotExisting(); break;
+        case 8: _t->flush(); break;
+        case 9: _t->doubleFlush(); break;
+        case 10: _t->waitForBytesWritten(); break;
+        case 11: _t->waitForReadyReadWithTimeout(); break;
+        case 12: _t->waitForReadyReadWithOneByte(); break;
+        case 13: _t->waitForReadyReadWithAlphabet(); break;
+        case 14: _t->twoStageSynchronousLoopback(); break;
+        case 15: _t->synchronousReadWrite(); break;
+        case 16: _t->asynchronousWriteByBytesWritten_data(); break;
+        case 17: _t->asynchronousWriteByBytesWritten(); break;
+        case 18: _t->asynchronousWriteByTimer_data(); break;
+        case 19: _t->asynchronousWriteByTimer(); break;
+        case 20: _t->handleBytesWrittenAndExitLoopSlot((*reinterpret_cast< qint64(*)>(_a[1]))); break;
+        case 21: _t->handleBytesWrittenAndExitLoopSlot2((*reinterpret_cast< qint64(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData tst_QSerialPort::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject tst_QSerialPort::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_tst_QSerialPort,
+      qt_meta_data_tst_QSerialPort, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &tst_QSerialPort::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *tst_QSerialPort::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *tst_QSerialPort::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_tst_QSerialPort))
+        return static_cast<void*>(const_cast< tst_QSerialPort*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int tst_QSerialPort::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 22)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 22;
+    }
+    return _id;
+}
+static const uint qt_meta_data_AsyncReader[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      13,   12,   12,   12, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_AsyncReader[] = {
+    "AsyncReader\0\0receive()\0"
+};
+
+void AsyncReader::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        AsyncReader *_t = static_cast<AsyncReader *>(_o);
+        switch (_id) {
+        case 0: _t->receive(); break;
+        default: ;
+        }
+    }
+    Q_UNUSED(_a);
+}
+
+const QMetaObjectExtraData AsyncReader::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject AsyncReader::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_AsyncReader,
+      qt_meta_data_AsyncReader, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &AsyncReader::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *AsyncReader::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *AsyncReader::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_AsyncReader))
+        return static_cast<void*>(const_cast< AsyncReader*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int AsyncReader::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    return _id;
+}
+static const uint qt_meta_data_AsyncWriterByBytesWritten[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      27,   26,   26,   26, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_AsyncWriterByBytesWritten[] = {
+    "AsyncWriterByBytesWritten\0\0send()\0"
+};
+
+void AsyncWriterByBytesWritten::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        AsyncWriterByBytesWritten *_t = static_cast<AsyncWriterByBytesWritten *>(_o);
+        switch (_id) {
+        case 0: _t->send(); break;
+        default: ;
+        }
+    }
+    Q_UNUSED(_a);
+}
+
+const QMetaObjectExtraData AsyncWriterByBytesWritten::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject AsyncWriterByBytesWritten::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_AsyncWriterByBytesWritten,
+      qt_meta_data_AsyncWriterByBytesWritten, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &AsyncWriterByBytesWritten::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *AsyncWriterByBytesWritten::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *AsyncWriterByBytesWritten::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_AsyncWriterByBytesWritten))
+        return static_cast<void*>(const_cast< AsyncWriterByBytesWritten*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int AsyncWriterByBytesWritten::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    return _id;
+}
+static const uint qt_meta_data_AsyncWriterByTimer[] = {
+
+ // content:
+       6,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       1,   14, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+ // slots: signature, parameters, type, tag, flags
+      20,   19,   19,   19, 0x08,
+
+       0        // eod
+};
+
+static const char qt_meta_stringdata_AsyncWriterByTimer[] = {
+    "AsyncWriterByTimer\0\0send()\0"
+};
+
+void AsyncWriterByTimer::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        AsyncWriterByTimer *_t = static_cast<AsyncWriterByTimer *>(_o);
+        switch (_id) {
+        case 0: _t->send(); break;
+        default: ;
+        }
+    }
+    Q_UNUSED(_a);
+}
+
+const QMetaObjectExtraData AsyncWriterByTimer::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
+const QMetaObject AsyncWriterByTimer::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_AsyncWriterByTimer,
+      qt_meta_data_AsyncWriterByTimer, &staticMetaObjectExtraData }
+};
+
+#ifdef Q_NO_DATA_RELOCATION
+const QMetaObject &AsyncWriterByTimer::getStaticMetaObject() { return staticMetaObject; }
+#endif //Q_NO_DATA_RELOCATION
+
+const QMetaObject *AsyncWriterByTimer::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
+}
+
+void *AsyncWriterByTimer::qt_metacast(const char *_clname)
+{
+    if (!_clname) return 0;
+    if (!strcmp(_clname, qt_meta_stringdata_AsyncWriterByTimer))
+        return static_cast<void*>(const_cast< AsyncWriterByTimer*>(this));
+    return QObject::qt_metacast(_clname);
+}
+
+int AsyncWriterByTimer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = QObject::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 1)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 1;
+    }
+    return _id;
+}
+QT_END_MOC_NAMESPACE

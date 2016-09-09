@@ -68,7 +68,6 @@ void QStageWidget::refresh(int methodid, int type)
     case Type_Stressure:
         setColumnHidden(Stage_Timeramp, true);
         setColumnHidden(Stage_Tempture, true);
-        setColumnHidden(Stage_Hold, true);
         break;
     case Type_Extract:
         setColumnHidden(Stage_Vessel, true);
@@ -78,6 +77,15 @@ void QStageWidget::refresh(int methodid, int type)
     case Type_Temprature:
     default:
         break;
+    }
+
+    if(Type_Stressure == type)
+    {
+        m_model->setHeaderData(Stage_Presspsi, Qt::Horizontal, tr("gonglv"));
+    }
+    else
+    {
+        m_model->setHeaderData(Stage_Presspsi, Qt::Horizontal, tr("press"));
     }
 
 }
@@ -217,10 +225,10 @@ void QStageWidget::cleanStage()
 
     m_model->setData(m_model->index(row, Stage_Index), row+1);
     m_model->setData(m_model->index(row, Stage_Vessel), 12);
-    m_model->setData(m_model->index(row, Stage_Timeramp), 300);
-    m_model->setData(m_model->index(row, Stage_Presspsi), 800);
-    m_model->setData(m_model->index(row, Stage_Tempture), 700);
-    m_model->setData(m_model->index(row, Stage_Hold), 300);
+    m_model->setData(m_model->index(row, Stage_Timeramp), 0);
+    m_model->setData(m_model->index(row, Stage_Presspsi), 0);
+    m_model->setData(m_model->index(row, Stage_Tempture), 0);
+    m_model->setData(m_model->index(row, Stage_Hold), 0);
     m_model->setData(m_model->index(row, Stage_MethodId), m_methodid);
 
     row  = m_model->rowCount();

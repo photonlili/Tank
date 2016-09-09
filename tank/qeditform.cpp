@@ -175,29 +175,29 @@ void QEditForm::saveM()
     int vessel = ui->le_vessel->text().toInt();
     pline() << stage << ramp << press << tempture << hold;
 
-    if(stage <1 || stage > 42)
+    if(stage <0 || stage > 42)
     {
         HNMsgBox::warning(this, tr("The field of stage is 1 - 42"));
         return;
     }
 
-    if(ramp < 1 || ramp > 9999)
+    if(ramp < 0 || ramp > 9999)
     {
         HNMsgBox::warning(this, tr("The field of ramp is 00:01 - 20:00"));
         return;
     }
-    if(press < 1 || press > 2800)
+    if(press < 0 || press > 2800)
     {
         HNMsgBox::warning(this, tr("The field of press is 00:01 - 20:00"));
         return;
     }
-    if(tempture < 1 || tempture > 300)
+    if(tempture < 0 || tempture > 300)
     {
         HNMsgBox::warning(this, tr("The field of tempture is 00:01 - 20:00"));
         return;
     }
 
-    if(hold < 1 || hold > 9999)
+    if(hold < 0 || hold > 9999)
     {
         HNMsgBox::warning(this, tr("The field of HOLD is 00:01 - 20:00"));
         return;
@@ -218,6 +218,9 @@ void QEditForm::saveM()
 
     ui->tableView_method->selectMethod(index.row());
     ui->spin_stage->setValue(stage);
+
+    emit signalSaved();
+
 }
 
 void QEditForm::delM()
@@ -250,6 +253,12 @@ void QEditForm::initLanguage()
 void QEditForm::on_btn_open_clicked()
 {
     libForm->initAll();
+    static QPropertyAnimation* ani = new QPropertyAnimation(libForm, "geometry", this);
+    ani->setStartValue(QRect(140, 0, 520, 245));
+    ani->setEndValue(QRect(140, 120, 520, 245));
+    ani->setDuration(500);
+    ani->setEasingCurve(QEasingCurve::OutCurve);
+    ani->start();
     libForm->exec();
 }
 
@@ -346,5 +355,14 @@ void QEditForm::on_comboBox_method_type_currentIndexChanged(int index)
         ui->le_press->setHidden(false);
         ui->lb_temptureBuddy->setHidden(false);
         ui->le_tempture->setHidden(false);
+    }
+
+    if(Type_Stressure == index)
+    {
+        ui->lb_pressBuddy->setText(tr("gonglv"));
+    }
+    else
+    {
+        ui->lb_pressBuddy->setText(tr("press"));
     }
 }

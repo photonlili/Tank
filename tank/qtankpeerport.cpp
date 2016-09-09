@@ -101,6 +101,16 @@ void QTankPeerPort::sendMsgHeatExtract(quint8 stage, quint16 tempture, quint16 h
     timer->start(MAX_SERIALTIME);
 }
 
+void QTankPeerPort::sendHeatHold(quint16 hold)
+{
+    QTankHeatHoldStruct t;
+    t.setHold(hold);
+
+    QByteArray l;
+    t.pack(l);
+    write(l);
+}
+
 void QTankPeerPort::sendMsgPause()
 {
     m_cmdCount = 0;
@@ -319,7 +329,17 @@ void QTankPeerPort::readyReadData()
 
         pline() << m_blockOnNet.size() << "..." << nBlockLen;
 
-        if(m_blockOnNet.length() < nBlockLen)
+        if(nBlockLen <= 0)
+        {
+            return;
+        }
+        else if(nBlockLen > 40)
+        {
+            m_blockOnNet.clear();
+            pline() << "forbidden package" << m_blockOnNet.length() << nBlockLen;
+            return;
+        }
+        else if(m_blockOnNet.length() < nBlockLen)
         {
             return;
         }

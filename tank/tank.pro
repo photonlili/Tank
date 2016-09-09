@@ -145,7 +145,8 @@ SOURCES += main.cpp\
     hnprogressbar.cpp \
     hnupgradewidget.cpp \
     HNEthManager.cpp \
-    hntextcodec.cpp
+    hntextcodec.cpp \
+    hanonkeyring.cpp
 
 HEADERS  += mainwindow.h \
     frminput.h \
@@ -253,7 +254,8 @@ HEADERS  += mainwindow.h \
     hnupgradewidget.h \
     qversion.h \
     HNEthManager.h \
-    hntextcodec.h
+    hntextcodec.h \
+    hanonkeyring.h
 
 FORMS    += mainwindow.ui \
     frminput.ui \

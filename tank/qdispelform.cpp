@@ -6,6 +6,7 @@
 #include "qctabbar.h"
 #include "QTime"
 #include "qprogresswindow.h"
+#include "hnmsgbox.h"
 
 QDispelForm::QDispelForm(QWidget *parent) :
     QWidget(parent),
@@ -99,7 +100,7 @@ QDispelForm::QDispelForm(QWidget *parent) :
     connect(com0, SIGNAL(sigTankNum(quint8)), this, SLOT(slotTankNum(quint8)));
     m_debug = new QDebugWidget(this);
     connect(com0, SIGNAL(sigDebug(QByteArray)), m_debug, SLOT(slotRecvMsg(QByteArray)));
-    connect(com0, SIGNAL(sigStat(quint16,quint16,quint8)), this, SLOT(slotStat(quint16,quint16,quint8)));
+    connect(com0, SIGNAL(sigStat(qint16,qint16,qint8)), this, SLOT(slotStat(qint16,qint16,qint8)));
     m_debug->setGeometry(9, 260, 700, 70);
     m_debug->setShown(false);
     com0->sendMsgConnectToC51();
@@ -121,8 +122,9 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
-    ui->widget_9->setFixedWidth(140);
-    ui->widget_10->setFixedWidth(140);
+    ui->widget_9->setFixedWidth(146);
+    ui->widget_10->setFixedWidth(146);
+
     ui->widget_3->setFixedWidth(520);
     ui->widget_4->setFixedWidth(434);
     ui->widget_4->setFixedWidth(520);
@@ -142,13 +144,40 @@ void QDispelForm::initAll()
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
 
-    ui->lb_libname->setText(tr("System"));
-    QString name = methodForm->currentMethodName();
-    int type = methodForm->currentMethodType();
+    QString db, name; int mid, type;
+    QSettings set;
+    db = set.value(QString("%1/lastDB").arg(gUserName)).toString();
+    name = set.value(QString("%1/lastMethod").arg(gUserName)).toString();
+    mid = set.value(QString("%1/lastMethodId").arg(gUserName)).toInt();
+    type = set.value(QString("%1/lastMethodType").arg(gUserName)).toInt();
 
-    prepareRunning(DB_HANON, 1, name, type);
+    if(name.isEmpty())
+    {
+        ui->lb_libname->setText(tr("System"));
+        name = methodForm->currentMethodName();
+        mid = methodForm->currentMethodId();
+        type = methodForm->currentMethodType();
+        prepareRunning(DB_HANON, 1, name, type);
+    }
+    else
+    {
+        ui->lb_libname->setText(db);
+        prepareRunning(db, mid, name, type);
+    }
+
+    name = set.value(QString("%1/lastExtractMethod").arg(gUserName)).toString();
+    mid = set.value(QString("%1/lastExtractMethodId").arg(gUserName)).toInt();
     ui->lb_libname_2->setText(tr("Extract Lib"));
-    prepareExtractRunning(DB_EXTRACT, 1, name , 3);
+    if(name.isEmpty())
+    {
+        name = methodForm2->currentMethodName();
+        mid = methodForm2->currentMethodId();
+        prepareRunning(DB_EXTRACT, mid, name, 3);
+    }
+    else
+    {
+        prepareRunning(DB_EXTRACT, mid, name, 3);
+    }
 }
 
 void QDispelForm::initLanguage()
@@ -167,6 +196,12 @@ void QDispelForm::prepareRunning(QString db, int mid, QString name, int type)
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid, type);
     ui->lb_method->setText(name);
+
+    QSettings set;
+    set.setValue(QString("%1/lastMethod").arg(gUserName), name);
+    set.setValue(QString("%1/lastMethodId").arg(gUserName), mid);
+    set.setValue(QString("%1/lastMethodType").arg(gUserName), type);
+    set.sync();
 }
 
 void QDispelForm::prepareExtractRunning(QString db, int mid, QString name, int type)
@@ -174,6 +209,21 @@ void QDispelForm::prepareExtractRunning(QString db, int mid, QString name, int t
     ui->tbv_stage_2->initdb(DB_EXTRACT);
     ui->tbv_stage_2->refresh(mid, type);
     ui->lb_method_2->setText(name);
+
+    QSettings set;
+    set.setValue(QString("%1/lastExtractMethod").arg(gUserName), name);
+    set.setValue(QString("%1/lastExtractMethodId").arg(gUserName), mid);
+    set.sync();
+}
+
+void QDispelForm::startStat()
+{
+    timerStatus->start(800);
+}
+
+void QDispelForm::stopStat()
+{
+    timerStatus->stop();
 }
 
 
@@ -185,7 +235,7 @@ void QDispelForm::timeStatus()
     if(!m_debug->isHidden())
         com0->sendDebug();
 
-    static int i = 0;
+    //static int i = 0;
     //ui->label_tanknum->setText(QString::number(i++));
 }
 
@@ -194,7 +244,7 @@ void QDispelForm::slotTankNum(quint8 n)
     ui->label_tanknum->setText(QString::number(n));
 }
 
-void QDispelForm::slotStat(quint16 temp, quint16 press, quint8 stat)
+void QDispelForm::slotStat(qint16 temp, qint16 press, qint8 stat)
 {
     ui->label_curtemp->setText(QString("%1").arg(temp));
     ui->label_stressure->setText(QString("%1").arg(press));
@@ -209,14 +259,10 @@ void QDispelForm::slotStat(quint16 temp, quint16 press, quint8 stat)
         //plot
         ui->page_plot->addTempture(key, temp);
         ui->page_plot->addPressure(key, press);
-        //if(key>20)
-        //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
-        if(key > 20)
-        {
-            //ui->page_plot->xAxis->setTickStep(10);
-            ui->page_plot->xAxis->setRange(0, key, Qt::AlignLeft);
-        }
+        ui->page_plot->xAxis->setRange(0, key+20, Qt::AlignLeft);
         ui->page_plot->replot();
+        m_curTemprature = temp;
+        m_curPressure = press;
         break;
     }
     case 2:
@@ -224,13 +270,7 @@ void QDispelForm::slotStat(quint16 temp, quint16 press, quint8 stat)
         //plot
         ui->page_plot_2->addTempture(key, temp);
         ui->page_plot_2->addPressure(key, press);
-        //if(key>20)
-        //ui->page_plot->xAxis->setRange(key-20, 20, Qt::AlignLeft);
-        if(key > 20)
-        {
-            //ui->page_plot->xAxis->setTickStep(10);
-            ui->page_plot_2->xAxis->setRange(0, key, Qt::AlignLeft);
-        }
+        ui->page_plot_2->xAxis->setRange(0, key+20, Qt::AlignLeft);
         ui->page_plot_2->replot();
         break;
     }
@@ -240,9 +280,13 @@ void QDispelForm::slotStat(quint16 temp, quint16 press, quint8 stat)
 
 }
 
+/**
+ * @brief QDispelForm::timeNewData
+ * Hold时间不包括爬坡时间
+ * 加热和保持根据温度来进行状态切换
+ */
 void QDispelForm::timeNewData()
 {
-
     static qint8 stage = 0;
     qint8 vessel;
     static qint16 ramp = 0;
@@ -276,6 +320,7 @@ void QDispelForm::timeNewData()
         ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, m_curHold);
         ramp = m_curRamp;
         hold = m_curHold;
+        m_workstat = 0;
     }
     else if(m_totalStageRamp + m_totalStageHold + 1 - m_testTime == 0)
     {
@@ -293,10 +338,25 @@ void QDispelForm::timeNewData()
         ramp += m_curRamp;
         hold += m_curHold;
 
+        m_workstat = 0;
+
         //pline()  << m_totalStageRamp << ramp << m_curRamp << 0 << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
         return;
     }
 
+    int type = methodForm->currentMethodType();
+    if(Type_Standard == type)
+    {
+        ramp = 0;
+        pressure = 0;
+        m_totalStageRamp = 0;
+    }
+    else if(Type_Stressure == type)
+    {
+        ramp = 0;
+        tempture = 0;
+        m_totalStageRamp = 0;
+    }
 
     //{ stageRamp stageHold, 0 }
     qint32 stageTime = hold + ramp - m_testTime;
@@ -309,6 +369,38 @@ void QDispelForm::timeNewData()
     //second
     else if(stageTime >= 0)
         holdTime = stageTime;
+
+    type = methodForm->currentMethodType();
+    switch(type)
+    {
+    case Type_Standard:
+    case Type_Stressure:
+    {
+        if(m_curTemprature == tempture && m_workstat == 0)
+        {
+            m_workstat = 1;
+            com0->sendHeatHold(m_curHold);
+        }
+        break;
+    }
+    case Type_Temprature:
+    {
+        if(stageTime == hold + ramp - m_testTime)
+        {
+            //ramp start
+
+        }
+        else if(stageTime == m_curHold)
+        {
+            //hold start
+            com0->sendHeatHold(m_curHold);
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
 
     //pline() << stageTime << rampTime << holdTime;
     //pline()  << m_totalStageRamp << ramp << m_curRamp << rampTime << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
@@ -330,6 +422,10 @@ void QDispelForm::timeNewData()
 
 }
 
+/**
+ * @brief QDispelForm::timeNewData2
+ * Hold时间包括爬坡时间
+ */
 void QDispelForm::timeNewData2()
 {
     qint8 stage;
@@ -401,6 +497,7 @@ void QDispelForm::startHeating()
     ui->btn_play->iconTable()[BTN_PRESS] = "://theme/basic/bt_playing_press.png";
     ui->sw_main->setCurrentIndex(0);
     ui->btn_open->setEnabled(false);
+    m_workstat = 0;
     qint8 stage;
     qint8 vessel;
     qint16 ramp;
@@ -415,13 +512,21 @@ void QDispelForm::startHeating()
     pline() << stage << vessel << ramp << press << tempture << hold;
     pline() << m_currentStage << m_totalStageRamp << m_totalStageHold;
 
+    ui->page_plot->clearData();
+
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
     {
+        ramp = 0;
+        press = 0;
+        m_totalStageRamp = 0;
         com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
     }
     else if(Type_Stressure == type)
     {
+        ramp = 0;
+        tempture = 0;
+        m_totalStageRamp = 0;
         com0->sendMsgHeatPress(stage, vessel, press);
     }
     else if(Type_Temprature == type)
@@ -550,23 +655,9 @@ void QDispelForm::startHeatingExtract()
 
     pline() << currentStage2 << m_totalStageHold2;
 
-    int type = methodForm->currentMethodType();
-    if(Type_Standard == type)
-    {
-        //com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
-    }
-    else if(Type_Stressure == type)
-    {
-        //com0->sendMsgHeatPress(stage, vessel, press);
-    }
-    else if(Type_Temprature == type)
-    {
-        //com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
-    }
-    else if(Type_Extract == type)
-    {
-        com0->sendMsgHeatExtract(stage, tempture, hold);
-    }
+    ui->page_plot_2->clearData();
+
+    com0->sendMsgHeatExtract(stage, tempture, hold);
 
     /*
         m_text->clear();
@@ -650,10 +741,20 @@ void QDispelForm::stopHeatingExtract()
     ui->label_status_2->setText(tr("Stoped..."));
 }
 
+#include <QPropertyAnimation>
 
 void QDispelForm::on_btn_open_clicked()
 {
     //methodForm->initAll("Library <> 'Extract'");
+    static QPropertyAnimation* ani = new QPropertyAnimation(methodForm, "geometry", this);
+    ani->setStartValue(QRect(150, 0, 503, 243));
+    ani->setEndValue(QRect(150, 120, 503, 243));
+    ani->setDuration(500);
+    ani->setEasingCurve(QEasingCurve::OutCurve);
+    ani->start();
+
+
+
     methodForm->exec();
 }
 
@@ -717,15 +818,18 @@ void QDispelForm::on_btn_turn_clicked()
 {
     QSettings set;
     int one = set.value("OneWayTurn", 1).toInt();
-    if(one)
+
+    if(bRunning == eStop)
         com0->sendLeft();
+
 }
 
 void QDispelForm::on_btn_turn_2_clicked()
 {
     QSettings set;
     int one = set.value("OneWayTurn", 1).toInt();
-    if(one)
+
+    if(bRunning == eStop)
         com0->sendRight();
 }
 
@@ -733,6 +837,12 @@ void QDispelForm::on_btn_turn_2_clicked()
 void QDispelForm::on_btn_open_2_clicked()
 {
     //methodForm2->initAll("Library = 'Extract'");
+    static QPropertyAnimation* ani = new QPropertyAnimation(methodForm2, "geometry", this);
+    ani->setStartValue(QRect(150, 0, 503, 243));
+    ani->setEndValue(QRect(150, 120, 503, 243));
+    ani->setDuration(500);
+    ani->setEasingCurve(QEasingCurve::OutCurve);
+    ani->start();
     methodForm2->exec();
 }
 
@@ -817,6 +927,12 @@ void QDispelForm::on_btnStirD_clicked()
     com0->sendStirSet(speed);
 }
 
+void QDispelForm::refreshMethodForm()
+{
+    methodForm->initAll("Library <> 'Extract'");
+    methodForm2->initAll("Library = 'Extract'");
+}
+
 void QDispelForm::saveLabReport()
 {
     QPrinter printerText;
@@ -836,12 +952,15 @@ void QDispelForm::saveLabReport()
 
 void QDispelForm::slotException(quint16 e)
 {
-    return;
 
     pline() << e;
 
+    return;
+
     if(e == E_RESET)
     {
+        HNMsgBox::warning(this, tr("Controller reset. I will reboot."));
+        system("reboot");
         return;
     }
 

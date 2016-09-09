@@ -116,4 +116,7 @@ void QMPlayerModel::setRect(int x, int y, int width, int height)
     app->write(buf);
     sprintf(buf, "change_rectangle 3 %d \n", y);
     app->write(buf);
+    sprintf(buf, "ontop=2\n");
+    app->write(buf);
+
 }

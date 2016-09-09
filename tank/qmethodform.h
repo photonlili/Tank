@@ -24,6 +24,7 @@ public:
     QString currentLibrary();
     QString currentMethodName();
     int currentMethodType();
+    int currentMethodId();
 
 signals:
     void tellMethod(QString name);

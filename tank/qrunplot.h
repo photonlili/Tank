@@ -18,6 +18,7 @@ public:
 
     void addTempture(double key, double tempture);
     void addPressure(double key, double pressure);
+    void clearData();
 
 private:
     Ui::QRunPlot *ui;

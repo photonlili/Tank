@@ -3,6 +3,7 @@
 #include <QStylePainter>
 #include <QMouseEvent>
 #include "qtankpublic.h"
+#include "hanonkeyring.h"
 
 QCPushButton::QCPushButton(QWidget *parent) :
     QPushButton(parent),
@@ -52,7 +53,8 @@ void QCPushButton::mousePressEvent(QMouseEvent *e)
     {
         if(isEnabled())
             state = BTN_PRESS;
-        QApplication::beep();
+        HanonKeyRingInstance(this);
+        //QApplication::beep();
         //pline() << state;
     }
     QPushButton::mousePressEvent(e);

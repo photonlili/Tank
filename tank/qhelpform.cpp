@@ -20,3 +20,8 @@ void QHelpForm::initLanguage()
     ui->retranslateUi(this);
 }
 
+void QHelpForm::stop()
+{
+    ui->widget_2->stop();
+}
+

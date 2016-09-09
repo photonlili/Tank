@@ -40,6 +40,9 @@ public:
     void initAll();
     void initLanguage();
 
+    void startStat();
+    void stopStat();
+
 signals:
     void signalUpdateLabReport();
     void signalLockPage(bool block);
@@ -49,6 +52,7 @@ public slots:
 private slots:
     void prepareRunning(QString, int, QString name, int type);
     void prepareExtractRunning(QString db, int mid, QString name, int type);
+
 
     void timeNewData();
     void timeStatus();
@@ -60,7 +64,7 @@ private slots:
     void pauseHeating();
     void continueHeating();
     void stopHeating();
-    void slotStat(quint16,quint16,quint8);
+    void slotStat(qint16,qint16,qint8);
 
 
     void on_btnStir_clicked();
@@ -93,6 +97,7 @@ private slots:
 
     void on_btnStirD_clicked();
 
+    void refreshMethodForm();
 private:
     Ui::QDispelForm *ui;
 
@@ -123,6 +128,9 @@ private:
     qint32 m_pauseTime;
     qint16 m_curRamp;
     qint16 m_curHold;
+    qint16 m_curTemprature;
+    qint16 m_curPressure;
+    qint8  m_workstat;
 
     QTimer* timer2;
     qint32 m_initPointKey2;

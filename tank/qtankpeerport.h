@@ -1,4 +1,4 @@
-#ifndef QTANKPEERPORT_H
+﻿#ifndef QTANKPEERPORT_H
 #define QTANKPEERPORT_H
 
 #include <QtSerialPort/QSerialPort>
@@ -27,6 +27,7 @@ public:
     void sendSurround();
     void sendStopTurn();
     void sendStat();
+    void sendHeatHold(quint16 hold);
 
     void sendDebug();
     void sendStirSet(quint8 speed);
@@ -36,7 +37,7 @@ signals:
     void sigRecvMsg(QByteArray msg);
     void sigPeerException(quint16 eCode);
     void sigPeerReset();
-    void sigStat(quint16 temp, quint16 press, quint8 stat);
+    void sigStat(qint16 temp, qint16 press, qint8 stat);
     void sigTankNum(quint8 num);
     void sigCaliAck(quint16 temp, quint16 temp2, quint16 temp3, quint16 pressure);
     void sigDebug(QByteArray d);

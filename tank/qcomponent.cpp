@@ -152,3 +152,29 @@ const QString &tagWifi::operator[](int index) const
 {
     return operator [](index);
 }
+
+QByteArray &operator>>(QByteArray &l, qint8 &r)
+{
+    r = l.left(sizeof(qint8))[0];
+    return l.remove(0, sizeof(qint8));
+
+    quint8 a = 0;
+    l >> a;
+    r = qint8(a);
+    return l;
+}
+
+QByteArray &operator>>(QByteArray &l, qint16 &r)
+{
+#if 0
+    quint16 a = 0;
+    l >> a;
+    r = qint16(a);
+    return l;
+#endif
+    qint8 r0 = 0;
+    quint8 r1 = 0;
+    l >> r0 >> r1;
+    r = ( r0 << 8 ) | r1;
+    return l;
+}

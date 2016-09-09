@@ -14,7 +14,9 @@
 #define _HEAT_STANDARD      0x02
 #define _HEAT_RAMP          0x01
 #define _HEAT_PRESS         0x03
-#define _HEAT_EXTRACT       0x01
+#define _HEAT_EXTRACT       0x04
+#define _HEAT_HOLD       0x05
+
 
 #define _PEER_PAUSE                 0x0004
 #define _PEER_STOP                  0x0005
@@ -162,6 +164,18 @@ private:
     quint16 wHold;
 };
 
+class QTankHeatHoldStruct : public QTankPeerMessage
+{
+    Q_OBJECT
+public:
+    explicit QTankHeatHoldStruct(QObject *parent = 0) : QTankPeerMessage(parent){}
+
+    void setHold(quint16 arg) {wHold = arg;}
+    void pack(QByteArray& l);
+private:
+    quint16 wHold;
+};
+
 class QTankPauseStruct : public QTankPeerMessage
 {
     Q_OBJECT
@@ -244,14 +258,14 @@ public:
 
     void parse(const QByteArray& l);
 
-    quint16 tempture() { return tmpe; }
-    quint16 pressure() { return press; }
-    quint8 status() { return stat; }
+    qint16 tempture() { return tmpe; }
+    qint16 pressure() { return press; }
+    qint8 status() { return stat; }
 
 private:
-    quint16 tmpe;
-    quint16 press;
-    quint8 stat;
+    qint16 tmpe;
+    qint16 press;
+    qint8 stat;
 };
 
 

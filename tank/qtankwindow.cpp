@@ -1,5 +1,6 @@
 #include "qtankwindow.h"
 #include "ui_qtankwindow.h"
+#include <QPropertyAnimation>
 
 QTankWindow::QTankWindow(QWidget *parent) :
     QStackedWidget(parent),

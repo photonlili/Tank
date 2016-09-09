@@ -18,6 +18,11 @@ public:
     explicit QMPlayerUI(QWidget *parent = 0);
     ~QMPlayerUI();
 
+    void stop()
+    {
+        on_btn_stop_clicked();
+    }
+
 private slots:
     void on_toolButton_mute_clicked();
 
@@ -34,6 +39,8 @@ private:
     QMPlayerModel* app;
     QTimer* timer;
     quint8 m_bplayed;
+    int m_startPos;
+    int m_vol;
 };
 
 #endif // QMPLAYERUI_H

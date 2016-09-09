@@ -627,18 +627,18 @@
     </message>
     <message>
         <location filename="../qdispelform.ui" line="420"/>
-        <location filename="../qdispelform.ui" line="864"/>
+        <location filename="../qdispelform.ui" line="857"/>
         <source>Tempture:</source>
         <translation>当前温度：</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="440"/>
-        <location filename="../qdispelform.ui" line="842"/>
+        <location filename="../qdispelform.ui" line="453"/>
+        <location filename="../qdispelform.ui" line="909"/>
         <source>Stopped</source>
         <translation>停止加热</translation>
     </message>
     <message>
-        <location filename="../qdispelform.ui" line="909"/>
+        <location filename="../qdispelform.ui" line="902"/>
         <source>Speed:</source>
         <translation>搅拌转速：</translation>
     </message>
@@ -689,7 +689,7 @@
         <location filename="../qdispelform.ui" line="327"/>
         <location filename="../qdispelform.ui" line="372"/>
         <location filename="../qdispelform.ui" line="822"/>
-        <location filename="../qdispelform.ui" line="890"/>
+        <location filename="../qdispelform.ui" line="883"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
@@ -710,38 +710,43 @@
         <translation type="obsolete">当前压力</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="142"/>
+        <location filename="../qdispelform.cpp" line="147"/>
         <source>System</source>
         <translation>系统库</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="147"/>
+        <location filename="../qdispelform.cpp" line="152"/>
         <source>Extract Lib</source>
         <translation>萃取库</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="413"/>
-        <location filename="../qdispelform.cpp" line="459"/>
-        <location filename="../qdispelform.cpp" line="548"/>
-        <location filename="../qdispelform.cpp" line="591"/>
+        <location filename="../qdispelform.cpp" line="516"/>
+        <location filename="../qdispelform.cpp" line="562"/>
+        <location filename="../qdispelform.cpp" line="638"/>
+        <location filename="../qdispelform.cpp" line="681"/>
         <source>Heating...</source>
         <translation>正在加热。。。</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="421"/>
-        <location filename="../qdispelform.cpp" line="556"/>
+        <location filename="../qdispelform.cpp" line="524"/>
+        <location filename="../qdispelform.cpp" line="646"/>
         <source>Paused</source>
         <translation>暂停加热</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="491"/>
+        <location filename="../qdispelform.cpp" line="595"/>
         <source>Stoped</source>
         <translation>停止加热</translation>
     </message>
     <message>
-        <location filename="../qdispelform.cpp" line="613"/>
+        <location filename="../qdispelform.cpp" line="703"/>
         <source>Stoped...</source>
         <translation>停止加热</translation>
+    </message>
+    <message>
+        <location filename="../qdispelform.cpp" line="924"/>
+        <source>Controller reset. I will reboot.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Play</source>
@@ -818,24 +823,24 @@
         <translation type="unfinished">用户</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="395"/>
+        <location filename="../qeditform.ui" line="398"/>
         <source>Add</source>
         <translation>新增</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="376"/>
+        <location filename="../qeditform.ui" line="379"/>
         <source>Open</source>
         <translation>打开</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="408"/>
+        <location filename="../qeditform.ui" line="411"/>
         <source>Del</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="424"/>
+        <location filename="../qeditform.ui" line="427"/>
         <source>Save</source>
-        <translation>修改</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../qeditform.ui" line="116"/>
@@ -849,12 +854,12 @@
         <translation>方法</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="466"/>
+        <location filename="../qeditform.ui" line="469"/>
         <source>-</source>
         <translation>－</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="453"/>
+        <location filename="../qeditform.ui" line="456"/>
         <source>+</source>
         <translation>＋</translation>
     </message>
@@ -911,29 +916,59 @@
         <translation type="obsolete">阶段</translation>
     </message>
     <message>
-        <location filename="../qeditform.ui" line="473"/>
+        <location filename="../qeditform.ui" line="476"/>
         <source>Clear</source>
         <translation>清空</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="176"/>
-        <source>RAMP or HOLD couldnot be 00:00</source>
-        <translation type="unfinished"></translation>
+        <location filename="../qeditform.cpp" line="180"/>
+        <source>The field of stage is 1 - 42</source>
+        <translation>阶段区间 1-42</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="219"/>
+        <location filename="../qeditform.cpp" line="186"/>
+        <source>The field of ramp is 00:01 - 20:00</source>
+        <translation>加热区间 00:00-20:00</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="191"/>
+        <source>The field of press is 00:01 - 20:00</source>
+        <translation>功率区间 0-1800</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="196"/>
+        <source>The field of tempture is 00:01 - 20:00</source>
+        <translation>温度区间 0-300</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="202"/>
+        <source>The field of HOLD is 00:01 - 20:00</source>
+        <translation>保持时间 00:00-20:00</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="246"/>
         <source>Standard</source>
         <translation>标准控制</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="220"/>
+        <location filename="../qeditform.cpp" line="247"/>
         <source>Tempture</source>
-        <translation>温度爬坡</translation>
+        <translation>爬坡控制</translation>
     </message>
     <message>
-        <location filename="../qeditform.cpp" line="221"/>
+        <location filename="../qeditform.cpp" line="248"/>
         <source>Pressure</source>
         <translation>功率控制</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="362"/>
+        <source>gonglv</source>
+        <translation>功率</translation>
+    </message>
+    <message>
+        <location filename="../qeditform.cpp" line="366"/>
+        <source>press</source>
+        <translation>压力</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -1947,6 +1982,16 @@
         <source>Hold</source>
         <translation>保持时间</translation>
     </message>
+    <message>
+        <location filename="../qstagewidget.cpp" line="84"/>
+        <source>gonglv</source>
+        <translation>功率</translation>
+    </message>
+    <message>
+        <location filename="../qstagewidget.cpp" line="88"/>
+        <source>press</source>
+        <translation>压力</translation>
+    </message>
 </context>
 <context>
     <name>QSysEventView</name>
@@ -1998,27 +2043,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="32"/>
+        <location filename="../qtankexception.cpp" line="30"/>
         <source>Oven door open</source>
         <translation>炉门打开提示</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="38"/>
+        <location filename="../qtankexception.cpp" line="36"/>
         <source>COT Exception</source>
         <translation>COT异常提示</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="45"/>
+        <location filename="../qtankexception.cpp" line="43"/>
         <source>guangxianwenduchuanganqi error</source>
         <translation>光纤温度传感器故障</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="52"/>
+        <location filename="../qtankexception.cpp" line="50"/>
         <source>Optical fiber temperature sensor fault</source>
         <translation>红外温度传感器内圈故障</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="59"/>
+        <location filename="../qtankexception.cpp" line="58"/>
         <source>Optical fiber temperature sensor fault 2</source>
         <translation>红外温度传感器外圈故障</translation>
     </message>
@@ -2028,24 +2073,29 @@
         <translation>激光传感器内圈故障</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="73"/>
+        <location filename="../qtankexception.cpp" line="74"/>
         <source>The infrared failure outer ring</source>
         <translation>激光传感器外圈故障</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="80"/>
+        <location filename="../qtankexception.cpp" line="82"/>
         <source>Abnormal voltage</source>
         <translation>电压异常</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="87"/>
+        <location filename="../qtankexception.cpp" line="90"/>
         <source>Position sensor fault inner ring</source>
         <translation>位置传感器故障内圈</translation>
     </message>
     <message>
-        <location filename="../qtankexception.cpp" line="94"/>
+        <location filename="../qtankexception.cpp" line="98"/>
         <source>Main communication failures</source>
         <translation>主板通讯故障</translation>
+    </message>
+    <message>
+        <location filename="../qtankexception.cpp" line="106"/>
+        <source>Controler reset.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

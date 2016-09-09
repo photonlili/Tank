@@ -55,6 +55,11 @@ int QMethodForm::currentMethodType()
     return ui->tbv_method->currentMethodType();
 }
 
+int QMethodForm::currentMethodId()
+{
+    return ui->tbv_method->currentMethodId();
+}
+
 void QMethodForm::libChanged()
 {
     QString curDB = ui->tbv_lib->currentdb();
@@ -115,6 +120,7 @@ void QMethodForm::on_btn_sure_clicked()
     emit tellLibrary(curDB);
     emit tellLibraryDisplayed(curDBDisplayed);
     emit selMethod(curDB, mid, method, type);
+
     accept();
 }
 

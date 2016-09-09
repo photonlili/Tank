@@ -20,6 +20,7 @@ public:
     inline QString lastdb() { return m_lastDB; }
     inline void setMethodId(int methodid) { m_methodid = methodid; }
     inline int methodId() { return m_methodid; }
+    //ignore
     void refresh(QString filter = "");
     void refresh(int methodid, int type = Type_Temprature);
     void initdb(QString dbName = "", bool save = true);

@@ -74,6 +74,10 @@ QByteArray &operator>>(QByteArray &l, quint8& r);
 
 QByteArray &operator>>(QByteArray &l, quint16& r);
 
+QByteArray &operator>>(QByteArray &l, qint8& r);
+
+QByteArray &operator>>(QByteArray &l, qint16& r);
+
 QByteArray &operator>>(QByteArray &l, quint32& r);
 
 QByteArray &operator>>(QByteArray &l, QByteArray& r);

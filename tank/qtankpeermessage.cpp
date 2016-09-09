@@ -312,3 +312,15 @@ void QTankFactoryAck::parse(const QByteArray &l)
     QTankPeerMessage::parse(l);
     QByteArray d = data();
 }
+
+void QTankHeatHoldStruct::pack(QByteArray &l)
+{
+    //04	00	00	0000	0000	0000 XXXX
+    setCmd(_PEER_HEAT);
+    QByteArray d;
+    d << quint8(_HEAT_HOLD) << quint8(0x00) << quint8(0x00) <<
+         quint16(0x0000) << quint16(0x0000) << quint16(0x0000) << wHold;
+    setData(d);
+    translate();
+    QTankPeerMessage::pack(l);
+}

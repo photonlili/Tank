@@ -108,7 +108,7 @@ QSetForm::QSetForm(QWidget *parent) :
 
     m_facPass = new QFactorySetPassForm(this);
     ui->scb_bcklight->setRange(5, 255);
-    ui->scb_bcklight->setValue(255);
+    ui->scb_bcklight->setValue(240);
 
     ui->label_setlanguage->setFixedHeight(30);
     ui->label_userrights->setFixedHeight(30);
@@ -533,13 +533,31 @@ void QSetForm::on_chk_dhcp_stateChanged(int bChecked)
 void QSetForm::on_btnRestore_clicked()
 {
     //恢复出厂设置
+    QSettings set;
 
     //语言？
+    set.setValue("Language", 0);
     //开机是否允许登陆？
+    set.setValue("EnableDHCP", 0);
     //默认登陆用户
+    set.setValue("DefaultLogin", 0);
     //网络设置
+    set.setValue("DNS", "192.168.0.1");
+    set.setValue("Gateway", "192.168.0.1");
+    set.setValue("IP", "192.168.0.107");
+    set.setValue("Mask", "255.255.255.0");
     //主题
+    set.setValue(QString("%1/Theme").arg(gUserName), "blue");
+    set.setValue(QString("%1/lastDB").arg(gUserName), "Hanon");
+
     //头像
+    set.setValue(QString("%1/Pic").arg(gUserName), "user1");
+
+    set.sync();
+    HNMsgBox* box = new HNMsgBox(this);
+    box->warning(tr("Restarting..."));
+
+    system("reboot");
 }
 
 void QSetForm::on_btnCalibrate_clicked()

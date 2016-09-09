@@ -16,6 +16,8 @@ public:
     ~QHelpForm();
     void initLanguage();
 
+    void stop();
+
 private slots:
 private:
     Ui::QHelpForm *ui;
