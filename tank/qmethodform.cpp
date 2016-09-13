@@ -60,6 +60,11 @@ int QMethodForm::currentMethodId()
     return ui->tbv_method->currentMethodId();
 }
 
+QString QMethodForm::lastDBDisplayed()
+{
+    return ui->tbv_lib->lastDBDisplayed();
+}
+
 void QMethodForm::libChanged()
 {
     QString curDB = ui->tbv_lib->currentdb();

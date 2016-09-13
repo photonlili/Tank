@@ -77,6 +77,20 @@ QString QUserLibraryWidget::currentDBDisplayed()
     return txt;
 }
 
+QString QUserLibraryWidget::lastDBDisplayed()
+{
+    QSettings set;
+    QString text = set.value(QString("%1/lastDB").arg(gUserName)).toString();
+
+    QString txt = text;
+    if(text == DB_HANON)
+        txt = tr("System");
+    else if(text == DB_USER)
+        txt = tr("User");
+
+    return txt;
+}
+
 void QUserLibraryWidget::setdbname(QString newName, bool withMapper)
 {
     QModelIndex index = currentIndex();

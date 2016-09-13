@@ -60,12 +60,14 @@ mdev -s
 #/bin/mount -t vfat /dev/mtdblock5 /mnt/mtdblock5
 
 
-if ! [ -d /HNApp ]; then
-	mkdir /HNApp
+if ! [ -d /Application ]; then
+	mkdir /Application
 	mkfs.ext4 /dev/ndextern
 fi
-mount /dev/ndextern /HNApp
+mount /dev/ndextern /Application
 
-/HNApp/net.sh
-/HNApp/starttank.sh &
+source /etc/profile
+
+/Application/net.sh
+/Application/starttank.sh &
 

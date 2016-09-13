@@ -405,6 +405,13 @@ void QTankPeerPort::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
     QTankPeerMessage qMsg;
     qMsg.parse(blockOnNet);
+    bool checked = qMsg.checksum();
+    if(!checked)
+    {
+
+        pline() << "checksum fail package";
+        return;
+    }
     pline() << qMsg;
     emit sigRecvMsg(blockOnNet);
     switch(qMsg.cmd())

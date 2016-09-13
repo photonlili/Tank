@@ -122,12 +122,24 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
-    ui->widget_9->setFixedWidth(146);
-    ui->widget_10->setFixedWidth(146);
+    int wLeft = 167;
+    ui->widget_9->setFixedWidth(wLeft);
+    ui->widget_10->setFixedWidth(wLeft);
 
-    ui->widget_3->setFixedWidth(520);
-    ui->widget_4->setFixedWidth(434);
-    ui->widget_4->setFixedWidth(520);
+    int wRight = 515;
+    ui->widget_3->setFixedWidth(wRight);
+    ui->widget_4->setFixedWidth(wRight);
+
+    int wCur = 40;
+    ui->label_curtemp->setFixedWidth(wCur);
+    ui->label_stressure->setFixedWidth(wCur);
+    ui->label_curtemp_2->setFixedWidth(wCur);
+    ui->label_speed->setFixedWidth(wCur);
+
+    int wDanwei = 24;
+    ui->label_6->setFixedWidth(wDanwei);
+    ui->label_7->setFixedWidth(wDanwei);
+    ui->label_14->setFixedWidth(wDanwei);
 }
 
 QDispelForm::~QDispelForm()
@@ -144,9 +156,10 @@ void QDispelForm::initAll()
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
 
-    QString db, name; int mid, type;
+    QString db, dbd, name; int mid, type;
     QSettings set;
     db = set.value(QString("%1/lastDB").arg(gUserName)).toString();
+    dbd = set.value(QString("%1/lastDBDisplayed").arg(gUserName)).toString();
     name = set.value(QString("%1/lastMethod").arg(gUserName)).toString();
     mid = set.value(QString("%1/lastMethodId").arg(gUserName)).toInt();
     type = set.value(QString("%1/lastMethodType").arg(gUserName)).toInt();
@@ -161,7 +174,7 @@ void QDispelForm::initAll()
     }
     else
     {
-        ui->lb_libname->setText(db);
+        ui->lb_libname->setText(dbd);
         prepareRunning(db, mid, name, type);
     }
 
@@ -172,12 +185,9 @@ void QDispelForm::initAll()
     {
         name = methodForm2->currentMethodName();
         mid = methodForm2->currentMethodId();
-        prepareRunning(DB_EXTRACT, mid, name, 3);
     }
-    else
-    {
-        prepareRunning(DB_EXTRACT, mid, name, 3);
-    }
+    prepareRunning(DB_EXTRACT, mid, name, 3);
+
 }
 
 void QDispelForm::initLanguage()
@@ -197,7 +207,15 @@ void QDispelForm::prepareRunning(QString db, int mid, QString name, int type)
     ui->tbv_stage->refresh(mid, type);
     ui->lb_method->setText(name);
 
+    QString txt = db;
+    if(db == DB_HANON)
+        txt = tr("System");
+    else if(db == DB_USER)
+        txt = tr("User");
+
     QSettings set;
+    set.setValue(QString("%1/lastDB").arg(gUserName), db);
+    set.setValue(QString("%1/lastDBDisplayed").arg(gUserName), txt);
     set.setValue(QString("%1/lastMethod").arg(gUserName), name);
     set.setValue(QString("%1/lastMethodId").arg(gUserName), mid);
     set.setValue(QString("%1/lastMethodType").arg(gUserName), type);
@@ -206,7 +224,7 @@ void QDispelForm::prepareRunning(QString db, int mid, QString name, int type)
 
 void QDispelForm::prepareExtractRunning(QString db, int mid, QString name, int type)
 {
-    ui->tbv_stage_2->initdb(DB_EXTRACT);
+    ui->tbv_stage_2->initdb(DB_EXTRACT, false);
     ui->tbv_stage_2->refresh(mid, type);
     ui->lb_method_2->setText(name);
 
@@ -618,6 +636,7 @@ void QDispelForm::stopHeating()
     buffer.close();
     //m_dlg->endReport(serialNo, "None", "UserStop", ba);
     emit signalUpdateLabReport();
+    */
 
     /*
     m_text->append(tr("Plot:\n"));

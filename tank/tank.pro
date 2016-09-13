@@ -31,7 +31,7 @@ CONFIG(debug, debug|release) {
 
 INCLUDEPATH +=  .
 
-target.path += /HNApp
+target.path += /Application
 
 INSTALLS += target
 

@@ -73,8 +73,8 @@ void QEditForm::libGetted(QString name)
         ui->comboBox_method_type->setHidden(false);
     }
 
-    ui->tableView_method->initdb(name);
-    tbvStage->initdb(name);
+    ui->tableView_method->initdb(name, false);
+    tbvStage->initdb(name, false);
 
     ui->tableView_method->refresh();
     ui->tableView_method->selectMethod();

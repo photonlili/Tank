@@ -21,6 +21,7 @@ public:
     void selectdb(QString dbname);
     QString currentdb();
     QString currentDBDisplayed();
+    QString lastDBDisplayed();
     void setdbname(QString newName, bool withMapper = false);
     inline void addMap(QWidget* w, int section) { m_mapper->addMapping(w, section); }
 

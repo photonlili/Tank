@@ -59,6 +59,7 @@ public:
     static quint16 parseBlockSize(const QByteArray &netData);
     void parse(const QByteArray &netData);
     void translate();
+    bool checksum();
     void pack(QByteArray& netData);
 
 signals:

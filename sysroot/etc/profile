@@ -39,4 +39,4 @@ export SDL_MOUSEDRV=TSLIB
 #export ALSA_CONFIG_PATH=/usr/alsa/share/alsa.conf
 
 #tank settings
-export PATH=/HNApp:$PATH
+export PATH=/Application:$PATH

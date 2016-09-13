@@ -450,6 +450,7 @@ void QTankClient::readyReadData()
     //qint64 aaa = bytesAvailable();
     //pline() << aaa;
     //TODO:假设具备判断已经接受完全的装备
+    //TODO:假设具备校验序列的装备
     do{
         quint16 nBlockLen = QTankParser::parseBlockSize(m_blockOnNet);
 
@@ -479,6 +480,8 @@ void QTankClient::readyReadData()
 
 void QTankClient::dispatchRecvedMessage(QByteArray &blockOnNet)
 {
+    //假设存在CRC校验的设备
+    //校验通过，校验错误自纠正，CRC错误抛弃包。
     QTankMessage qMsg;
     QTankParser::parse(qMsg, blockOnNet);
     pline() << qMsg;

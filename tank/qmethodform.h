@@ -25,6 +25,7 @@ public:
     QString currentMethodName();
     int currentMethodType();
     int currentMethodId();
+    QString lastDBDisplayed();
 
 signals:
     void tellMethod(QString name);

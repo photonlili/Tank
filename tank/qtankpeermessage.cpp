@@ -19,9 +19,22 @@ void QTankPeerMessage::translate()
     m_Sum = 0;
     // 校验码等错误 会导致服务器不回复消息
     // 如果不添加quint8 0x0112+0x0088=0x009a 单字节到二字节进位的位置看不懂
+    // 带符号进位，需要调查，会引起移位上的某些问题。
     for(int i = 0; i < qbaVerify.length(); i++)
         m_Sum += quint8(qbaVerify.at(i));
 
+}
+
+bool QTankPeerMessage::checksum()
+{
+    QByteArray qbaVerify;
+    qbaVerify << m_Size << m_Cmd << m_Data;
+    quint16 sum = 0;
+    for(int i = 0; i < qbaVerify.length(); i++)
+        sum += quint8(qbaVerify.at(i));
+    if(sum == m_Sum)
+        return true;
+    return false;
 }
 
 QDebug operator<<(QDebug dbg, const QTankPeerMessage &c)

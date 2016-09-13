@@ -9,6 +9,7 @@
 #include "qtankdefine.h"
 #include "qhotplugwatcher.h"
 #include "hnmsgbox.h"
+#include "hanonkeyring.h"
 
 QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
 {
@@ -66,7 +67,10 @@ QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
     QHotplugWatcher* watcher = QHotplugWatcher::Instance();
     QObject::connect(watcher, SIGNAL(storageChanged(int)), this, SLOT(slotUPanAutoRun(int)));
 
+    HanonKeyRingInstance(this);
+
     qsrand(QTime(0, 0, 0).secsTo(QTime::currentTime()));
+
 }
 
 QTankApp::~QTankApp() {}
