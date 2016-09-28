@@ -10,6 +10,7 @@
 QSqlDatabase managerDB;
 QString gUserName;
 QString gPassword;
+int gAuthority;
 
 QSqlDatabase newDatabaseConn()
 {

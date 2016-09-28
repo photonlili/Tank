@@ -21,6 +21,7 @@ void QBackupLocalThread::run()
     QMetaObject::invokeMethod(parent(), "download");
 }
 
+
 void QUpgradeThread::run()
 {
     QMetaObject::invokeMethod(parent(), "setText", Q_ARG(QString, tr("Upgrading...")));

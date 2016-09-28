@@ -219,7 +219,7 @@ void QEditForm::saveM()
     ui->tableView_method->selectMethod(index.row());
     ui->spin_stage->setValue(stage);
 
-    emit signalSaved();
+    emit signalSaved(ui->tableView_method->currentMethodId(), ui->tableView_method->currentMethodType());
 
 }
 

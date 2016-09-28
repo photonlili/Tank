@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //ui->label_time->setFixedWidth(139);
     ui->label_user->setForegroundRole(QPalette::BrightText);
     ui->label->setForegroundRole(QPalette::BrightText);
-    connect(ui->tab_edit, SIGNAL(signalSaved()),
-            ui->tab_dispel, SLOT(refreshMethodForm()));
+    connect(ui->tab_edit, SIGNAL(signalSaved(int, int)),
+            ui->tab_dispel, SLOT(refreshMethodForm(int, int)));
     connect(ui->tab_set, SIGNAL(showDebugWindow(int)),
             ui->tab_dispel, SLOT(showDebugWindow(int)));
     connect(ui->tab_dispel, SIGNAL(signalUpdateLabReport()),

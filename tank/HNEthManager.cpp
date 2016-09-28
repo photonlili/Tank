@@ -35,6 +35,23 @@ bool HNEthManager::setCurrentWifi(QString bssid_mac, QString password)
     return true;
 }
 
+void HNEthManager::setDHCP(bool bUse)
+{
+    QSettings setting;
+    setting.setValue("/Network/EnableDHCP", bUse);
+    setting.sync();
+
+    m_bUseDHCP = bUse;
+}
+
+bool HNEthManager::dhcp()
+{
+    QSettings setting;
+    m_bUseDHCP = setting.value("/Network/EnableDHCP").toBool();
+
+    return m_bUseDHCP;
+}
+
 void HNEthManager::configIPAddress(QString ip, QString mask, QString gw, QString dns)
 {
     saveAddr(ip, mask, gw, dns);
@@ -265,7 +282,8 @@ void HNEthManager::checkNetworkClear()
 HNEthManager::HNEthManager(QObject *parent) :
     QObject(parent)
 {
-    m_bUseDHCP = false;
+    dhcp();
+
     m_clearThread = new HNNetworkClearThread(this);
     connect(m_clearThread, SIGNAL(cleared()), this, SIGNAL(sigNetworkClear()));
     connect(m_clearThread, SIGNAL(notcleared()), this, SIGNAL(sigNetworkNotClear()));

@@ -164,12 +164,15 @@ QSetForm::~QSetForm()
 
 void QSetForm::initAll()
 {
-    QString ip, mask, gw, dns;
-    HNEthManager::Instance()->getAddr(ip, mask, gw, dns);
-    ui->lineEdit_ip->setText(ip);
-    ui->lineEdit_mask->setText(mask);
-    ui->lineEdit_gateway->setText(gw);
-    ui->lineEdit_dns->setText(dns);
+    if(!HNEthManager::Instance()->dhcp())
+    {
+        QString ip, mask, gw, dns;
+        HNEthManager::Instance()->getAddr(ip, mask, gw, dns);
+        ui->lineEdit_ip->setText(ip);
+        ui->lineEdit_mask->setText(mask);
+        ui->lineEdit_gateway->setText(gw);
+        ui->lineEdit_dns->setText(dns);
+    }
 
     QDateTime dateTime = QDateTime::currentDateTime();
     ui->dateYear->setDate(dateTime.date());
@@ -180,7 +183,7 @@ void QSetForm::initAll()
     int bCheked = false;
     bCheked = setting.value("UserRights").toInt();
     ui->checkBox_userrights->setChecked(bCheked);
-    bCheked = setting.value("EnableDHCP").toInt();
+    bCheked = setting.value("/Network/EnableDHCP").toInt();
     ui->chk_dhcp->setChecked(bCheked);
 
     int eLanguage = Language_English;
@@ -278,6 +281,13 @@ void QSetForm::currentUserChanged()
 void QSetForm::newUser()
 {
     static QNewUser* newUserForm = new QNewUser(this);
+
+    if(gAuthority == 2)
+    {
+        HNMsgBox::warning(this, tr("You have no authority"));
+        return;
+    }
+
     newUserForm->initAll();
     int result = newUserForm->exec();
     if(QDialog::Rejected == result)
@@ -455,6 +465,13 @@ bool QSetForm::eventFilter(QObject * obj, QEvent * e)
                 ui->tabWidget_set->currentIndex() != FAC_PAGE_NUMBER &&
                 ui->tabWidget_set->tabBar()->tabRect(FAC_PAGE_NUMBER).contains(me->pos()))
         {
+            if(gAuthority == 2)
+            {
+                HNMsgBox::warning(this, tr("You have no authority"));
+                me->accept();
+                return true;
+            }
+
             m_facPass->initAll();
             moveCenter(m_facPass);
             m_facPass->exec();
@@ -517,17 +534,35 @@ void QSetForm::on_btn_saveip_clicked()
 void QSetForm::on_chk_dhcp_stateChanged(int bChecked)
 {
     QSettings setting;
-    setting.setValue("EnableDHCP", bChecked);
+    setting.setValue("/Network/EnableDHCP", bChecked);
     setting.sync();
 
     // 2 -3, 0 -1 这里存在浮点运算错误
     //pline() << bChecked << ~bChecked;
-    HNEthManager::Instance()->setDHCP(bChecked?true:false);
+    bool ret = bChecked?true:false;
+    HNEthManager::Instance()->setDHCP(ret);
 
     ui->lineEdit_ip->setDisabled(bChecked);
     ui->lineEdit_mask->setDisabled(bChecked);
     ui->lineEdit_gateway->setDisabled(bChecked);
     ui->lineEdit_dns->setDisabled(bChecked);
+
+    if(!ret)
+    {
+        QString ip,mask,gw,dns;
+        HNEthManager::Instance()->getAddr(ip, mask, gw, dns);
+        ui->lineEdit_ip->setText(ip);
+        ui->lineEdit_mask->setText(mask);
+        ui->lineEdit_gateway->setText(gw);
+        ui->lineEdit_dns->setText(dns);
+    }
+    else
+    {
+        ui->lineEdit_ip->clear();
+        ui->lineEdit_mask->clear();
+        ui->lineEdit_gateway->clear();
+        ui->lineEdit_dns->clear();
+    }
 }
 
 void QSetForm::on_btnRestore_clicked()
@@ -538,7 +573,7 @@ void QSetForm::on_btnRestore_clicked()
     //语言？
     set.setValue("Language", 0);
     //开机是否允许登陆？
-    set.setValue("EnableDHCP", 0);
+    set.setValue("/Network/EnableDHCP", 0);
     //默认登陆用户
     set.setValue("DefaultLogin", 0);
     //网络设置
@@ -599,4 +634,23 @@ void QSetForm::on_radioButton_turn1_toggled(bool checked)
     QSettings setting;
     setting.setValue("OneWayTurn", 0);
     setting.sync();
+}
+
+void QSetForm::on_btnRecovery_clicked()
+{
+    QDir d(QHotplugWatcher::Instance()->devMountPath());
+    if(!d.exists())
+    {
+        HNMsgBox::warning(this, tr("Please Check U Disk!"));
+        return;
+    }
+    QString file = d.absoluteFilePath("upgrate.tar.gz");
+    QFile f(file);
+    if(!f.exists())
+    {
+        HNMsgBox::warning(this, tr("Please Check Upgrade package!"));
+        return;
+    }
+
+    system("tar xzvf /mnt/usb_sda1/upgrade.tar.gz -C /");
 }

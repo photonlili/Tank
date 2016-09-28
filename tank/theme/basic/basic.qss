@@ -381,15 +381,3 @@ QSlider::sub-page:vertical {
  margin:0px 9px;
  border-radius:3px;
 }
-
-
-QScrollBar:vertical {
-background: url(images/scrollbar-vertical-bg.png);
-width: 20px;
-margin: 0px 0 0px 0;
-}
-QScrollBar:horizontal {
-background: url(images/scrollbar-vertical-bg.png);
-height: 20px;
-margin: 0px 0 0px 0;
-}

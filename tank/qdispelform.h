@@ -97,11 +97,9 @@ private slots:
 
     void on_btnStirD_clicked();
 
-    void refreshMethodForm();
+    void refreshMethodForm(int mid, int type);
 private:
     Ui::QDispelForm *ui;
-
-    qint8 m_currentStage;
 
     QTankException* excp;
 
@@ -147,6 +145,9 @@ private:
     QTankPeerPort* com0;
     QTankSerialPort* s2;
     QDebugWidget* m_debug;
+
+    int m_methodid;
+    int m_methodidextract;
 
     // QObject interface
 public:

@@ -108,7 +108,7 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_libbuddy->setFixedWidth(50);
     ui->lb_libname->setFixedWidth(100);
     ui->hs_0->setGeometry(QRect(150, 0, 40, 30));
-    ui->lb_mbuddy->setFixedWidth(55);
+    ui->lb_mbuddy->setFixedWidth(58);
     ui->lb_method->setFixedWidth(100);
     ui->hs_1->setGeometry(QRect(305, 0,  40, 30));
     ui->label_typebuddy->setFixedWidth(45);
@@ -118,7 +118,7 @@ QDispelForm::QDispelForm(QWidget *parent) :
     ui->lb_libbuddy_2->setFixedWidth(50);
     ui->lb_libname_2->setFixedWidth(100);
     ui->hs_2->setGeometry(QRect(150, 0, 40, 30));
-    ui->lb_mbuddy_2->setFixedWidth(55);
+    ui->lb_mbuddy_2->setFixedWidth(58);
     ui->lb_method_2->setFixedWidth(100);
     ui->hs_3->setGeometry(QRect(305, 0,  40, 30));
 
@@ -152,6 +152,7 @@ void QDispelForm::initAll()
     // 默认不运行
     bRunning = eStop;
     funcType = 0;
+    m_stageIndex = 0;
     //读取上一次的选中库和选中方法
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
@@ -205,7 +206,9 @@ void QDispelForm::prepareRunning(QString db, int mid, QString name, int type)
     pline() << db << name << mid << type;
     ui->tbv_stage->initdb(db);
     ui->tbv_stage->refresh(mid, type);
+    m_methodid = mid;
     ui->lb_method->setText(name);
+    ui->tbv_stage->selectStage(0);
 
     QString txt = db;
     if(db == DB_HANON)
@@ -227,6 +230,7 @@ void QDispelForm::prepareExtractRunning(QString db, int mid, QString name, int t
     ui->tbv_stage_2->initdb(DB_EXTRACT, false);
     ui->tbv_stage_2->refresh(mid, type);
     ui->lb_method_2->setText(name);
+    m_methodidextract = mid;
 
     QSettings set;
     set.setValue(QString("%1/lastExtractMethod").arg(gUserName), name);
@@ -305,7 +309,7 @@ void QDispelForm::slotStat(qint16 temp, qint16 press, qint8 stat)
  */
 void QDispelForm::timeNewData()
 {
-    static qint8 stage = 0;
+    //static qint8 stage = 0;
     qint8 vessel;
     static qint16 ramp = 0;
     static qint16 pressure = 0;
@@ -329,13 +333,15 @@ void QDispelForm::timeNewData()
     }
     preLastPointKey = m_lastPointKey;
 
-
+    //切换阶段，获取阶段数据
     if( m_testTime - 1 == 0)
     {
         //start
         ramp = 0;
         hold = 0;
-        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, m_curHold);
+        m_stageIndex = 0;
+        //内存中，不耗时
+        ui->tbv_stage->stageParam(m_stageIndex, vessel, m_curRamp, pressure, tempture, m_curHold);
         ramp = m_curRamp;
         hold = m_curHold;
         m_workstat = 0;
@@ -346,22 +352,38 @@ void QDispelForm::timeNewData()
         on_btn_stop_clicked();
         return;
     }
+    //+1代表显示00之后一秒
     else if(ramp + hold + 1 - m_testTime== 0)
     {
+        //reset
+        ui->tbv_stage->setStageRamp(m_stageIndex, m_curRamp);
+        ui->tbv_stage->setStageHold(m_stageIndex, m_curHold);
+
         //next
-        ui->tbv_stage->setRamp(m_curRamp);
-        ui->tbv_stage->setHold(m_curHold);
-        ui->tbv_stage->next();
-        ui->tbv_stage->currentStageParam(stage, vessel, m_curRamp, pressure, tempture, m_curHold);
+        m_stageIndex++;
+        //区别就在这里，为什么会闪烁呢？
+        ui->tbv_stage->stageParam(m_stageIndex, vessel, m_curRamp, pressure, tempture, m_curHold);
+
+        ui->tbv_stage->selectStage(m_stageIndex);
+        //ui->tbv_stage->setRamp(m_curRamp);
+        //ui->tbv_stage->setHold(m_curHold);
+
         ramp += m_curRamp;
         hold += m_curHold;
 
         m_workstat = 0;
 
+        //切换的时候耗费1s，不计算时间。
+        //通过暂停时间进行可控制
+        m_pauseTime++;;
+
         //pline()  << m_totalStageRamp << ramp << m_curRamp << 0 << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
         return;
     }
 
+#if 0
+    //根据方法类型，设置特殊加热和保温时间。
+    //ignore不应该出现这样的程序。数据库中的数据应该是正常的。
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
     {
@@ -375,11 +397,14 @@ void QDispelForm::timeNewData()
         tempture = 0;
         m_totalStageRamp = 0;
     }
+#endif
 
     //{ stageRamp stageHold, 0 }
     qint32 stageTime = hold + ramp - m_testTime;
 
+    //{m_curRamp,0}
     qint32 rampTime = -1;
+    //{m_curHold,0}
     qint32 holdTime = -1;
     //first
     if(stageTime - m_curHold >= 0)
@@ -388,13 +413,17 @@ void QDispelForm::timeNewData()
     else if(stageTime >= 0)
         holdTime = stageTime;
 
-    type = methodForm->currentMethodType();
+    int type = methodForm->currentMethodType();
+    pline() << type;
     switch(type)
     {
-    case Type_Standard:
     case Type_Stressure:
     {
-        if(m_curTemprature == tempture && m_workstat == 0)
+        break;
+    }
+    case Type_Standard:
+    {
+        if(m_curTemprature >= tempture && m_workstat == 0)
         {
             m_workstat = 1;
             com0->sendHeatHold(m_curHold);
@@ -403,13 +432,16 @@ void QDispelForm::timeNewData()
     }
     case Type_Temprature:
     {
-        if(stageTime == hold + ramp - m_testTime)
+        if(stageTime == m_curRamp + m_curHold)
         {
             //ramp start
-
         }
-        else if(stageTime == m_curHold)
+
+        else if(stageTime == m_curHold && m_workstat == 0)
         {
+            m_workstat = 1;
+            //delay 1s
+            m_pauseTime++;
             //hold start
             com0->sendHeatHold(m_curHold);
         }
@@ -423,21 +455,25 @@ void QDispelForm::timeNewData()
     //pline() << stageTime << rampTime << holdTime;
     //pline()  << m_totalStageRamp << ramp << m_curRamp << rampTime << pressure << tempture << m_lastPointKey-m_initPointKey << m_testTime << m_pauseTime ;
 
+    ui->tbv_stage->selectStage(m_stageIndex);
+    //以下函数存在一个问题，第一次选中行，第二次选中跳闪。
+    //设置数据后删除了ModelIndex。
     if(rampTime >= 0)
         ui->tbv_stage->setRamp(rampTime);
     if(holdTime >= 0)
         ui->tbv_stage->setHold(holdTime);
+    //弥补以上问题。
+    if(!ui->tbv_stage->currentIndex().isValid())
+        ui->tbv_stage->selectStage(m_stageIndex);
 
     pline() << "-----------------------------";
-    pline() << m_testTime;
-    pline() << stageTime;
-    pline() << m_curRamp << m_curHold;
-    pline() << ramp << hold;
-    pline() << m_totalStageRamp << m_totalStageHold;
-    pline() << rampTime << holdTime;
-    pline() << m_totalStageRamp + m_totalStageHold + 1 - m_testTime;
-    pline() << ramp + hold + 1 - m_testTime;
-
+    pline() << "stage: " << m_stageIndex;
+    pline() << "testT: " << m_testTime << ramp << hold << m_totalStageRamp << m_totalStageHold;
+    pline() << "stageRH" << rampTime << holdTime;
+    pline() << "stageT:" << stageTime << m_curRamp << m_curHold;
+    pline() << "testA: " << m_totalStageRamp + m_totalStageHold << m_totalStageRamp + m_totalStageHold + 1 - m_testTime;
+    //pline() << ramp + hold + 1 - m_testTime;
+    //pline() << ui->tbv_stage->currentIndex();
 }
 
 /**
@@ -446,7 +482,7 @@ void QDispelForm::timeNewData()
  */
 void QDispelForm::timeNewData2()
 {
-    qint8 stage;
+    //qint8 stage;
     qint8 vessel;
     qint16 ramp;
     static qint16 pressure = 0;
@@ -478,19 +514,19 @@ void QDispelForm::timeNewData2()
 
     if( m_testTime - 1 == 0)
     {
+
+        //start
+        ramp = 0;
+        hold = 0;
+        m_stageIndex = 0;
+        //内存中，不耗时
         m_curHold2 = 0;
-        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold2);
+        ui->tbv_stage_2->stageParam(m_stageIndex, vessel, ramp, pressure, tempture, m_curHold2);
         hold = m_curHold2;
+        m_workstat = 0;
+
     }
-
-    qint16 curHold = hold-m_testTime;
-    //65535 -1
-    //pline() << quint16(hold-m_testTime) << qint16(hold-m_testTime);
-    //pline()  << m_totalStageHold << hold << m_curHold << curHold << tempture << m_lastPointKey2-m_initPointKey2 << m_testTime << m_pauseTime2 ;
-    if(curHold >= 0)
-        ui->tbv_stage_2->setHold(curHold);
-
-    if(m_testTime - m_totalStageHold2 - 1 == 0)
+    else if(m_testTime - m_totalStageHold2 - 1 == 0)
     {
         // stop
         on_btn_stop_2_clicked();
@@ -498,14 +534,42 @@ void QDispelForm::timeNewData2()
     }
     else if( m_testTime - hold - 1 == 0)
     {
-        //允许这个阶段没做完直接跳到下各阶段。
-        ui->tbv_stage_2->setHold(m_curHold2);
-        ui->tbv_stage_2->next();
-        ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, pressure, tempture, m_curHold2);
+
+        //reset
+        ui->tbv_stage_2->setStageHold(m_stageIndex, m_curHold2);
+
+        //next
+        m_stageIndex++;
+        ui->tbv_stage_2->stageParam(m_stageIndex, vessel, ramp, pressure, tempture, m_curHold2);
+
+        ui->tbv_stage_2->selectStage(m_stageIndex);
+        //ui->tbv_stage->setRamp(m_curRamp);
+        //ui->tbv_stage->setHold(m_curHold);
+
         hold += m_curHold2;
+
+        m_workstat = 0;
+
+        //切换的时候耗费1s，不计算时间。
+        //通过暂停时间进行可控制
+        m_pauseTime2++;;
+
         //pline()  << m_totalStageHold << hold << m_curHold << 0 << tempture << m_lastPointKey2-m_initPointKey2 << m_testTime << m_pauseTime2 ;
         return;
     }
+
+    qint16 curHold = hold-m_testTime;
+    //65535 -1
+    //pline() << quint16(hold-m_testTime) << qint16(hold-m_testTime);
+    //pline()  << m_totalStageHold << hold << m_curHold << curHold << tempture << m_lastPointKey2-m_initPointKey2 << m_testTime << m_pauseTime2 ;
+    ui->tbv_stage_2->selectStage(m_stageIndex);
+
+    if(curHold >= 0)
+        ui->tbv_stage_2->setHold(curHold);
+
+    if(!ui->tbv_stage_2->currentIndex().isValid())
+        ui->tbv_stage_2->selectStage(m_stageIndex);
+
 }
 
 
@@ -516,19 +580,21 @@ void QDispelForm::startHeating()
     ui->sw_main->setCurrentIndex(0);
     ui->btn_open->setEnabled(false);
     m_workstat = 0;
-    qint8 stage;
     qint8 vessel;
     qint16 ramp;
     qint16 press;
     qint16 tempture;
     qint16 hold;
-    ui->tbv_stage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
+    ui->tbv_stage->stageParam(m_stageIndex, vessel, ramp, press, tempture, hold);
     m_totalStageRamp = ui->tbv_stage->totalStageTimeRamp();
     m_totalStageHold = ui->tbv_stage->totalStageHold();
-    m_currentStage = ui->tbv_stage->currentStage();
 
-    pline() << stage << vessel << ramp << press << tempture << hold;
-    pline() << m_currentStage << m_totalStageRamp << m_totalStageHold;
+    qint8 curStage;
+    curStage = ui->tbv_stage->currentStage();
+
+    pline() << curStage;
+    pline() << m_stageIndex << vessel << ramp << press << tempture << hold;
+    pline() << m_stageIndex << m_totalStageRamp << m_totalStageHold;
 
     ui->page_plot->clearData();
 
@@ -538,18 +604,18 @@ void QDispelForm::startHeating()
         ramp = 0;
         press = 0;
         m_totalStageRamp = 0;
-        com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
+        com0->sendMsgHeatStandard(m_stageIndex, vessel, tempture, hold);
     }
     else if(Type_Stressure == type)
     {
         ramp = 0;
         tempture = 0;
         m_totalStageRamp = 0;
-        com0->sendMsgHeatPress(stage, vessel, press);
+        com0->sendMsgHeatPress(m_stageIndex, vessel, press);
     }
     else if(Type_Temprature == type)
     {
-        com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
+        com0->sendMsgHeatRAMP(m_stageIndex, vessel, ramp, press, tempture, hold);
     }
     else if(Type_Extract == type)
     {
@@ -592,29 +658,26 @@ void QDispelForm::continueHeating()
     qint16 press;
     qint16 tempture;
     qint16 hold;
-    ui->tbv_stage->currentStageParam(stage, vessel, ramp, press, tempture, hold);
+    ui->tbv_stage->stageParam(m_stageIndex, vessel, ramp, press, tempture, hold);
 
 
     pline() << stage << vessel << ramp << press << tempture << hold;
-    pline() << m_currentStage << m_totalStageRamp;
+    pline() << stage << m_totalStageRamp;
 
     int type = methodForm->currentMethodType();
     if(Type_Standard == type)
     {
-        com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
+        com0->sendMsgHeatStandard(m_stageIndex, vessel, tempture, hold);
     }
     else if(Type_Stressure == type)
     {
-        com0->sendMsgHeatPress(stage, vessel, press);
+        com0->sendMsgHeatPress(m_stageIndex, vessel, press);
     }
     else if(Type_Temprature == type)
     {
-        com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
+        com0->sendMsgHeatRAMP(m_stageIndex, vessel, ramp, press, tempture, hold);
     }
-    else if(Type_Extract == type)
-    {
-        //com0->sendMsgHeatExtract(stage, tempture, hold);
-    }
+
     ui->label_status->setText(tr("Heating..."));
 
 }
@@ -661,6 +724,7 @@ void QDispelForm::startHeatingExtract()
     ui->sw_main_2->setCurrentIndex(0);
 
     ui->btn_open_2->setEnabled(false);
+    m_workstat = 0;
 
     qint8 stage;
     qint8 vessel;
@@ -668,7 +732,7 @@ void QDispelForm::startHeatingExtract()
     qint16 press;
     qint16 tempture;
     qint16 hold;
-    ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, press, tempture, hold);
+    ui->tbv_stage_2->stageParam(m_stageIndex, vessel, ramp, press, tempture, hold);
     m_totalStageHold2 = ui->tbv_stage_2->totalStageHold();
     int currentStage2 = ui->tbv_stage_2->currentStage();
 
@@ -676,7 +740,7 @@ void QDispelForm::startHeatingExtract()
 
     ui->page_plot_2->clearData();
 
-    com0->sendMsgHeatExtract(stage, tempture, hold);
+    com0->sendMsgHeatExtract(m_stageIndex, tempture, hold);
 
     /*
         m_text->clear();
@@ -715,26 +779,11 @@ void QDispelForm::continueHeatingExtract()
     qint16 press;
     qint16 tempture;
     qint16 hold;
-    ui->tbv_stage_2->currentStageParam(stage, vessel, ramp, press, tempture, hold);
 
+    ui->tbv_stage_2->stageParam(m_stageIndex, vessel, ramp, press, tempture, hold);
 
-    int type = methodForm->currentMethodType();
-    if(Type_Standard == type)
-    {
-        //com0->sendMsgHeatStandard(stage, vessel, tempture, hold);
-    }
-    else if(Type_Stressure == type)
-    {
-        //com0->sendMsgHeatPress(stage, vessel, press);
-    }
-    else if(Type_Temprature == type)
-    {
-        //com0->sendMsgHeatRAMP(stage, vessel, ramp, press, tempture, hold);
-    }
-    else if(Type_Extract == type)
-    {
-        com0->sendMsgHeatExtract(stage, tempture, hold);
-    }
+    com0->sendMsgHeatExtract(m_stageIndex, tempture, hold);
+
     ui->label_status_2->setText(tr("Heating..."));
 }
 
@@ -818,8 +867,11 @@ void QDispelForm::on_btn_stop_clicked()
     funcType = 0;
     if(timer->isActive())
     {
+        //reset
+        ui->tbv_stage->selectStage(m_stageIndex);
         ui->tbv_stage->setRamp(m_curRamp);
         ui->tbv_stage->setHold(m_curHold);
+        //return 0
         ui->tbv_stage->selectStage(0);
     }
     timer->stop();
@@ -893,7 +945,8 @@ void QDispelForm::on_btn_play_2_clicked()
         funcType = 2;
 
         timer2->start(1000);
-        ui->tbv_stage_2->selectStage(0);
+        m_stageIndex = 0;
+        ui->tbv_stage_2->selectStage(m_stageIndex);
 
         startHeatingExtract();
         //serialNo = m_dlg->newReport(methodForm->currentLibrary(),
@@ -907,7 +960,9 @@ void QDispelForm::on_btn_stop_2_clicked()
     funcType = 0;
     if(timer2->isActive())
     {
+        ui->tbv_stage_2->selectStage(m_stageIndex);
         ui->tbv_stage_2->setHold(m_curHold2);
+
         ui->tbv_stage_2->selectStage(0);
     }
     timer2->stop();
@@ -946,10 +1001,15 @@ void QDispelForm::on_btnStirD_clicked()
     com0->sendStirSet(speed);
 }
 
-void QDispelForm::refreshMethodForm()
+void QDispelForm::refreshMethodForm(int mid, int type)
 {
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
+
+    if(m_methodid == mid)
+        ui->tbv_stage->refresh(mid, type);
+    if(m_methodidextract == mid)
+        ui->tbv_stage_2->refresh(mid, type);
 }
 
 void QDispelForm::saveLabReport()
@@ -974,11 +1034,11 @@ void QDispelForm::slotException(quint16 e)
 
     pline() << e;
 
-    return;
+    //return;
 
     if(e == E_RESET)
     {
-        HNMsgBox::warning(this, tr("Controller reset. I will reboot."));
+        //HNMsgBox::warning(this, tr("Controller reset. I will reboot."));
         system("reboot");
         return;
     }

@@ -118,7 +118,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Library-0</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -178,7 +178,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Method-0</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -208,7 +208,7 @@
              <item>
               <widget class="QLabel" name="lb_type">
                <property name="text">
-                <string>pressing</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -617,7 +617,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Library-0</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -677,7 +677,7 @@
                 </size>
                </property>
                <property name="text">
-                <string>Method-0</string>
+                <string/>
                </property>
               </widget>
              </item>

@@ -30,7 +30,11 @@ public:
     int totalStageHold();
     void setRamp(qint16 ramp);
     void setHold(qint16 hold);
-    void stageParam(qint8& stage, qint8& vessel,
+    void setStageRamp(qint8 stage, qint16 ramp);
+    void setStageHold(qint8 stage, qint16 hold);
+    //void setRamp(qint8 row, qint16 ramp);
+    //void setHold(qint8 row, qint16 hold);
+    void stageParam(qint8 row, qint8& vessel,
                     qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold);
     void currentStageParam(qint8 &stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold);
     int countStage() { return m_model->rowCount(); }

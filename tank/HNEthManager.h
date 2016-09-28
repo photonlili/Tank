@@ -50,7 +50,8 @@ public:
     inline TWifi currentWifi(){ return m_curWifi; }
     bool setCurrentWifi(QString bssid_mac, QString password = "");
     void setRefresh(bool ref = true) { ref ? m_workTimer->start(5000) : m_workTimer->stop(); }
-    void setDHCP(bool bUse = false) { m_bUseDHCP = bUse; }
+    void setDHCP(bool bUse = false);
+    bool dhcp();
     void configIPAddress(QString ip, QString mask, QString gw, QString dns);
     QString currentNetName();
     QTimer* workTimer() { return m_workTimer; }

@@ -10,6 +10,7 @@ extern QSqlDatabase managerDB;
 
 extern QString gUserName;
 extern QString gPassword;
+extern int gAuthority;
 
 QSqlDatabase newDatabaseConn();
 

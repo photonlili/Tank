@@ -20,6 +20,6 @@ export QWS_MOUSE_PROTO=tslib:/dev/input/event0
 export QWS_DISPLAY=LinuxFb:/dev/fb0
 #export QWS_SIATH=$QTDIR/lib:$LD_LIBRARY_PATH
 
-cd /HNApp
-/HNApp/tank -qws &
+cd /Application
+/Application/tank -qws &
 

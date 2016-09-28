@@ -64,6 +64,8 @@ private slots:
 
     void on_radioButton_turn1_toggled(bool checked);
 
+    void on_btnRecovery_clicked();
+
 private:
     Ui::QSetForm *ui;
     QFactorySetPassForm* m_facPass;

@@ -41,7 +41,7 @@
       <enum>QTabWidget::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>6</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1204,7 +1204,7 @@
         <string>Backup</string>
        </property>
       </widget>
-      <widget class="QCPushButton" name="pushButton_3">
+      <widget class="QCPushButton" name="btnRecovery">
        <property name="geometry">
         <rect>
          <x>600</x>

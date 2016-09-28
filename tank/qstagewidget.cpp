@@ -108,7 +108,7 @@ void QStageWidget::initdb(QString dbName, bool save)
 void QStageWidget::selectStage(int row)
 {
     selectRow(row);
-    setFocus(Qt::MouseFocusReason);
+    setFocus(Qt::ActiveWindowFocusReason);
     //m_mapper->setCurrentIndex(row);
 }
 
@@ -142,14 +142,27 @@ void QStageWidget::setRamp(qint16 ramp)
 
 void QStageWidget::setHold(qint16 hold)
 {
+    pline() << currentIndex() << hold;
     int row = currentIndex().row();
     m_model->setData(m_model->index(row, Stage_Hold), hold);
 }
 
-void QStageWidget::stageParam(qint8 &stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold)
+void QStageWidget::setStageRamp(qint8 stage, qint16 ramp)
 {
-    int row = stage - 1;
-    stage = m_model->index(row, Stage_Index).data().toInt();
+    int row = stage;
+    m_model->setData(m_model->index(row, Stage_Timeramp), ramp);
+}
+
+void QStageWidget::setStageHold(qint8 stage, qint16 hold)
+{
+    int row = stage;
+    m_model->setData(m_model->index(row, Stage_Hold), hold);
+}
+
+void QStageWidget::stageParam(qint8 stage, qint8 &vessel, qint16 &ramp, qint16 &press, qint16 &tempture, qint16 &hold)
+{
+    int row = stage;
+    //stage = m_model->index(row, Stage_Index).data().toInt();
     vessel = m_model->index(row, Stage_Vessel).data().toInt();
     ramp = m_model->index(row, Stage_Timeramp).data().toInt();
     press = m_model->index(row, Stage_Presspsi).data().toInt();

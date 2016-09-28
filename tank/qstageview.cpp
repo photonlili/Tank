@@ -40,7 +40,7 @@ void QStageFormatTextDelegate::drawDisplay(QPainter *painter, const QStyleOption
     qint32 hour = time / 60;
     qint32 minute = time % 60;
     painter->save();
-    //pline() << quint32(option.state);
+    pline() << quint32(option.state);
     if( 106753 == option.state || 98305 == option.state || 98561 == option.state)
     {
         painter->setPen(option.palette.color(QPalette::BrightText));
