@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
     theWindow->showFullScreen();
 #else
     theWindow->showNormal();
-    moveRight(theWindow);
+    theWindow->move(0, 0);
 #endif
 
     //检查序列号

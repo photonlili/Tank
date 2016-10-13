@@ -462,7 +462,7 @@ bool QSetForm::eventFilter(QObject * obj, QEvent * e)
     {
         QMouseEvent* me = (QMouseEvent*)e;
         if(m_facPass->isHidden() &&
-                ui->tabWidget_set->currentIndex() != FAC_PAGE_NUMBER &&
+              ui->tabWidget_set->currentIndex() != FAC_PAGE_NUMBER &&
                 ui->tabWidget_set->tabBar()->tabRect(FAC_PAGE_NUMBER).contains(me->pos()))
         {
             if(gAuthority == 2)
@@ -481,13 +481,23 @@ bool QSetForm::eventFilter(QObject * obj, QEvent * e)
                 return true;
             }
         }
-        else if(ui->tabWidget_set->currentIndex() != CALI_PAGE_NUMBER &&
+        else if(m_facPass->isHidden() && ui->tabWidget_set->currentIndex() != CALI_PAGE_NUMBER &&
                 ui->tabWidget_set->tabBar()->tabRect(CALI_PAGE_NUMBER).contains(me->pos()))
         {
             //qieru calibrate
-            int r = HNMsgBox::question(this, tr("Start machine calibrate?"));
-            if(r == HNMsgBox::Rejected)
+            if(gAuthority == 2)
             {
+                HNMsgBox::warning(this, tr("You have no authority"));
+                me->accept();
+                return true;
+            }
+
+            m_facPass->initAll();
+            moveCenter(m_facPass);
+            m_facPass->exec();
+            if(m_facPass->result() == QFactorySetPassForm::Rejected)
+            {
+                me->accept();
                 return true;
             }
             timer->start(700);

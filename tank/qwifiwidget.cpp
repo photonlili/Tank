@@ -19,7 +19,7 @@ QWIFIWidget::QWIFIWidget(QWidget *parent) :
     setModel(m_model);
     for(int i = ESSID_TYPE; i < ESSID_MAX; i++)
         setColumnHidden(i, true);
-    setColumnWidth(ESSID_STATUS, 20);
+    setColumnWidth(ESSID_STATUS, 40);
 }
 
 QWIFIWidget::~QWIFIWidget()

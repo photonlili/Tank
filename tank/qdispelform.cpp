@@ -186,8 +186,9 @@ void QDispelForm::initAll()
     {
         name = methodForm2->currentMethodName();
         mid = methodForm2->currentMethodId();
+        pline();
     }
-    prepareRunning(DB_EXTRACT, mid, name, 3);
+    prepareExtractRunning(DB_EXTRACT, mid, name, 3);
 
 }
 
@@ -1001,15 +1002,25 @@ void QDispelForm::on_btnStirD_clicked()
     com0->sendStirSet(speed);
 }
 
-void QDispelForm::refreshMethodForm(int mid, int type)
+void QDispelForm::refreshMethodForm(int mid, int type, QString name)
 {
     methodForm->initAll("Library <> 'Extract'");
     methodForm2->initAll("Library = 'Extract'");
 
+    if(type != Type_Extract)
     if(m_methodid == mid)
+    {
+        ui->lb_method->setText(name);
         ui->tbv_stage->refresh(mid, type);
-    if(m_methodidextract == mid)
-        ui->tbv_stage_2->refresh(mid, type);
+    }
+
+    if(type == Type_Extract)
+        if(m_methodidextract == mid)
+        {
+            ui->lb_method_2->setText(name);
+
+            ui->tbv_stage_2->refresh(mid, type);
+        }
 }
 
 void QDispelForm::saveLabReport()
@@ -1034,7 +1045,7 @@ void QDispelForm::slotException(quint16 e)
 
     pline() << e;
 
-    //return;
+    return;
 
     if(e == E_RESET)
     {

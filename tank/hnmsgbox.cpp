@@ -1,5 +1,16 @@
 #include "hnmsgbox.h"
 #include "ui_hnmsgbox.h"
+#include "QElapsedTimer"
+
+void HNSleep(int millsecond)
+{
+    QElapsedTimer timer;
+    timer.start();
+    while(timer.elapsed() < millsecond)
+    {
+         QApplication::processEvents();
+    }
+}
 
 HNMsgBox::HNMsgBox(QWidget *parent) :
     QCDialog(parent),
@@ -56,8 +67,9 @@ void HNMsgBox::warning(QString content)
     ui->lb_content->setText(content);
     ui->stwBtn->setCurrentIndex(1);
     m_time = 0;
-    startTimer(1000);
+    //startTimer(1000);
     show();
+    HNSleep(100);
 }
 
 void HNMsgBox::question(QString content)
@@ -66,8 +78,20 @@ void HNMsgBox::question(QString content)
     ui->lb_content->setText(content);
     ui->stwBtn->setCurrentIndex(0);
     m_time = 0;
-    startTimer(1000);
+    //startTimer(1000);
     show();
+    HNSleep(100);
+}
+
+void HNMsgBox::information(QString content)
+{
+    setAttribute(Qt::WA_DeleteOnClose, false);
+    ui->lb_content->setText(content);
+    ui->stwBtn->setCurrentIndex(2);
+    m_time = 0;
+    //startTimer(1000);
+    show();
+    HNSleep(100);
 }
 
 void HNMsgBox::timerEvent(QTimerEvent *e)

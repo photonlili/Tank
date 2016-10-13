@@ -90,16 +90,44 @@ void QTankApp::slotUPanAutoRun(int status)
 {
     if(QHotplugWatcher::E_ADD == status)
     {
-        QString mP = QHotplugWatcher::Instance()->devMountPath();
-        QString auth = QString("chmod +x %1/autorun.sh").arg(mP);
-        QString app = QString("%1/autorun.sh").arg(mP);
+#if 0
+        /*作为保留意见，U盘调试能力，暂时还没遇到过，在出厂后如果也没遇到那么废弃*/
+        QString mP = QHotplugWatcher::Instance()->upanMountPath();
+        QString app = QString("%1/upgrade.sh").arg(mP);
+
         QFile file(app);
-        if(file.exists())
-            if(QDialog::Rejected == HNMsgBox::question(0, tr("Some app want to run in u disk!accepted?")))
-                return;
+        if(!file.exists())
+            return;
+
+        if(QDialog::Rejected == HNMsgBox::question(0, tr("发现升级程序,是否升级？")))
+            return;
+
+        QString auth = QString("chmod +x %1/upgrade.sh").arg(mP);
         system(auth.toAscii().constData());
-        QProcess* p = new QProcess(this);
-        p->setWorkingDirectory(mP);
-        p->start(app);
+
+        QString cmd = QString("bash -c %1/upgrade.sh").arg(mP);
+        system(cmd.toAscii().constData());
+#else
+        QString mP = QHotplugWatcher::Instance()->devMountPath();
+        QString app = QString("%1/upgrade.tar.gz").arg(mP);
+
+        QFile file(app);
+        if(!file.exists())
+            return;
+
+        if(QDialog::Rejected == HNMsgBox::question(0, tr("发现升级包,是否升级？")))
+            return;
+
+        HNMsgBox box;
+        box.information("正在升级...");
+
+        QString cmd = QString("/usr/bin/tar xzvf %1/upgrade.tar.gz -C /").arg(mP);
+        system(cmd.toAscii().constData());
+
+        box.information("正在重启...");
+
+        system("reboot");
+#endif
+
     }
 }

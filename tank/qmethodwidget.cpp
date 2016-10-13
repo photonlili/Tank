@@ -42,15 +42,18 @@ void QMethodWidget::refresh(QString filter)
 
 void QMethodWidget::initdb(QString dbName, bool save)
 {
+    setDatabaseName(m_db, QString("Method/%1").arg(dbName));
+    //pline() << "curdb" << gUserName << m_lastDB << "open" << m_db.isOpen();
+    m_model->setTable(TABLE_METHOD);
+
+    if(!save)
+        return;
+
     m_lastDB = setting->value(QString("%1/lastDB").arg(gUserName), gUserName).toString();
     //pline() << "predb" << gUserName << m_lastDB << "open" << m_db.isOpen();
     if(!dbName.isEmpty())
         m_lastDB = dbName;
-    setDatabaseName(m_db, QString("Method/%1").arg(m_lastDB));
-    //pline() << "curdb" << gUserName << m_lastDB << "open" << m_db.isOpen();
-    m_model->setTable(TABLE_METHOD);
-    if(!save)
-        return;
+
     setting->setValue(QString("%1/lastDB").arg(gUserName), m_lastDB);
     setting->sync();
 }

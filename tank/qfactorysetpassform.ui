@@ -66,7 +66,7 @@
    <item row="0" column="0" colspan="4">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Factory password:</string>
+      <string>password:</string>
      </property>
     </widget>
    </item>

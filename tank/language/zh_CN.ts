@@ -1192,7 +1192,7 @@
     <message>
         <location filename="../qmplayerui.ui" line="157"/>
         <source>v</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

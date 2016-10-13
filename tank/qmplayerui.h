@@ -34,6 +34,8 @@ private slots:
 
     void on_sliderVol_valueChanged(int value);
 
+    void on_btn_mute_toggled(bool checked);
+
 private:
     Ui::QMPlayerUI *ui;
     QMPlayerModel* app;

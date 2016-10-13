@@ -92,15 +92,19 @@ void QStageWidget::refresh(int methodid, int type)
 
 void QStageWidget::initdb(QString dbName, bool save)
 {
-    m_lastDB = setting->value(QString("%1/lastDB").arg(gUserName), gUserName).toString();
-    //pline() << "predb" << gUserName << m_lastDB << "opened" << m_db.isOpen();
-    if(!dbName.isEmpty())
-        m_lastDB = dbName;
-    setDatabaseName(m_db, QString("Method/%1").arg(m_lastDB));
+    setDatabaseName(m_db, QString("Method/%1").arg(dbName));
     m_model->setTable(TABLE_STAGE);
     //pline() << "curdb" << gUserName << m_lastDB << "opened" << m_db.isOpen();
+
     if(!save)
         return;
+
+    m_lastDB = setting->value(QString("%1/lastDB").arg(gUserName), gUserName).toString();
+    //pline() << "predb" << gUserName << m_lastDB << "opened" << m_db.isOpen();
+
+    if(!dbName.isEmpty())
+        m_lastDB = dbName;
+
     setting->setValue(QString("%1/lastDB").arg(gUserName), m_lastDB);
     setting->sync();
 }

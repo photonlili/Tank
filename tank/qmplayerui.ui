@@ -80,6 +80,19 @@
        <number>0</number>
       </property>
       <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QLabel" name="label_timepos">
         <property name="text">
          <string>00:00</string>
@@ -152,9 +165,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QToolButton" name="toolButton_mute">
+       <widget class="QCheckBox" name="btn_mute">
         <property name="text">
-         <string>v</string>
+         <string/>
         </property>
        </widget>
       </item>

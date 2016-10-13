@@ -50,6 +50,14 @@ QEditForm::~QEditForm()
 
 void QEditForm::initAll()
 {
+    QSettings set;
+    QString db = set.value(QString("%1/lastDBEdited").arg(gUserName)).toString();
+    int mid = set.value(QString("%1/lastMethodIdEdited").arg(gUserName)).toInt();
+    int stageid = set.value(QString("%1/lastStageEdited").arg(gUserName)).toInt();
+    if(db.isEmpty())
+        libGetted(DB_USER);
+    else
+        libGetted(db);
 }
 
 void QEditForm::libGetted(QString name)
@@ -78,6 +86,10 @@ void QEditForm::libGetted(QString name)
 
     ui->tableView_method->refresh();
     ui->tableView_method->selectMethod();
+
+    QSettings set;
+    set.setValue(QString("%1/lastDBEdited").arg(gUserName), name);
+    set.sync();
 }
 
 void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
@@ -156,6 +168,10 @@ void QEditForm::currentMethodChanged(QModelIndex, QModelIndex)
     ui->spin_stage->setRange(1, tbvStage->countStage());
     ui->spin_stage->setValue(1);
     ui->le_stagenum->setText(QString::number(tbvStage->countStage()));
+
+    QSettings set;
+    set.setValue(QString("%1/lastMethodIdEdited").arg(gUserName), ui->tableView_method->currentMethodId());
+    set.sync();
 }
 
 void QEditForm::saveM()
@@ -181,20 +197,54 @@ void QEditForm::saveM()
         return;
     }
 
-    if(ramp < 0 || ramp > 9999)
+    switch(ui->comboBox_method_type->currentIndex())
     {
-        HNMsgBox::warning(this, tr("The field of ramp is 00:01 - 20:00"));
-        return;
+    case Type_Temprature:
+        if(ramp < 0 || ramp > 9999)
+        {
+            HNMsgBox::warning(this, tr("The field of ramp is 00:01 - 20:00"));
+            return;
+        }
+        break;
+    case Type_Standard:
+    case Type_Stressure:
+    case Type_Extract:
+        ramp = 0;
+        break;
     }
-    if(press < 0 || press > 2800)
+
+    switch(ui->comboBox_method_type->currentIndex())
     {
-        HNMsgBox::warning(this, tr("The field of press is 00:01 - 20:00"));
-        return;
+    case Type_Temprature:
+    case Type_Stressure:
+        if(press < 0 || press > 2800)
+        {
+            HNMsgBox::warning(this, tr("The field of press is 00:01 - 20:00"));
+            return;
+        }
+        break;
+    case Type_Extract:
+    case Type_Standard:
+        press = 0;
+        break;
     }
-    if(tempture < 0 || tempture > 300)
+
+
+    switch(ui->comboBox_method_type->currentIndex())
     {
-        HNMsgBox::warning(this, tr("The field of tempture is 00:01 - 20:00"));
-        return;
+    case Type_Stressure:
+        tempture = 0;
+        break;
+    case Type_Temprature:
+    case Type_Standard:
+    case Type_Extract:
+        if(tempture < 0 || tempture > 300)
+        {
+            HNMsgBox::warning(this, tr("The field of tempture is 00:01 - 20:00"));
+            return;
+        }
+
+        break;
     }
 
     if(hold < 0 || hold > 9999)
@@ -219,16 +269,22 @@ void QEditForm::saveM()
     ui->tableView_method->selectMethod(index.row());
     ui->spin_stage->setValue(stage);
 
-    emit signalSaved(ui->tableView_method->currentMethodId(), ui->tableView_method->currentMethodType());
+    emit signalSaved(ui->tableView_method->currentMethodId(), ui->tableView_method->currentMethodType(), ui->tableView_method->currentMethodName());
 
 }
 
 void QEditForm::delM()
 {
+    int ret = HNMsgBox::question(this, tr("que ren shanchu method?"));
+    if(HNMsgBox::Rejected == ret)
+        return;
+
     int row = ui->tableView_method->currentIndex().row();
     tbvStage->delAllStage();
     ui->tableView_method->delMethod(row);
     ui->tableView_method->selectMethod(row>0?row-1:0);
+
+    HNMsgBox::warning(this, tr("del success!"));
 }
 
 void QEditForm::newM()
@@ -290,6 +346,10 @@ void QEditForm::on_spin_stage_valueChanged(int arg1)
             .arg(hour, 2, 10, QLatin1Char('0'))
             .arg(minute, 2, 10, QLatin1Char('0'));
     ui->le_hold->setText(tmStr);
+
+    QSettings set;
+    set.setValue(QString("%1/lastStageEdited").arg(gUserName), tbvStage->currentStage());
+    set.sync();
 
 }
 

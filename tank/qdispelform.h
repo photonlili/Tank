@@ -97,7 +97,7 @@ private slots:
 
     void on_btnStirD_clicked();
 
-    void refreshMethodForm(int mid, int type);
+    void refreshMethodForm(int mid, int type, QString);
 private:
     Ui::QDispelForm *ui;
 

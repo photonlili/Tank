@@ -27,7 +27,7 @@ public:
     void initAll();
 
 signals:
-    void signalSaved(int mid, int type);
+    void signalSaved(int mid, int type, QString name);
 
 public slots:
     void currentMethodChanged(QModelIndex, QModelIndex);
