@@ -67,7 +67,11 @@ int QPreviewUI::play()
     pre_buf.size = pre_size.w * pre_size.h * 3;
     pre_buf.common = &pre_memory;
     pre_buf.common->size = pre_buf.size * pre_buf.nr;
+#ifdef __MIPS_LINUX__
     pre_buf.common->data = memalign(4096, pre_buf.size * pre_buf.nr);
+#else
+    posix_memalign(&pre_buf.common->data, 4096, pre_buf.size * pre_buf.nr);
+#endif
     memset(pre_buf.common->data, 0xa5, (pre_buf.size * pre_buf.nr));
     if (pre_buf.common->data == NULL)
     {
@@ -95,8 +99,10 @@ int QPreviewUI::play()
         pre_buf.yuvMeta[i].count = pre_buf.nr;
 #ifdef __LINUX64__
         pre_buf.yuvMeta[i].yAddr = (int64_t)pre_buf.common->data + (pre_buf.size) * i;
-#else
+#elif defined (__MIPS_LINUX__)
         pre_buf.yuvMeta[i].yAddr = (int32_t)pre_buf.common->data + (pre_buf.size) * i;
+#else
+        pre_buf.yuvMeta[i].yAddr = (int64_t)pre_buf.common->data + (pre_buf.size) * i;
 #endif
         pre_buf.yuvMeta[i].yPhy = pre_buf.paddr + i * (pre_buf.size);
         if (pre_buf.yuvMeta[i].format == HAL_PIXEL_FORMAT_YCbCr_422_I) {	//yuv422 packed

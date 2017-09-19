@@ -127,7 +127,11 @@ int systemChild(const char *cmd)
 {
     if(!cmd)
         return -1;
+#ifdef __DARWIN__
+    pid_t pid = fork();
+#else
     __pid_t pid = fork();
+#endif
     if(pid > 0)
     {
         return 0;

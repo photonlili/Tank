@@ -101,8 +101,14 @@ QDispelForm::QDispelForm(QWidget *parent) :
     m_debug = new QDebugWidget(this);
     connect(com0, SIGNAL(sigDebug(QByteArray)), m_debug, SLOT(slotRecvMsg(QByteArray)));
     connect(com0, SIGNAL(sigStat(qint16,qint16,qint8)), this, SLOT(slotStat(qint16,qint16,qint8)));
+
     m_debug->setGeometry(9, 260, 700, 70);
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     m_debug->setShown(false);
+#else
+    m_debug->setHidden(true);
+#endif
+
     com0->sendMsgConnectToC51();
 
     ui->lb_libbuddy->setFixedWidth(50);
@@ -199,7 +205,11 @@ void QDispelForm::initLanguage()
 
 void QDispelForm::showDebugWindow(int show)
 {
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     m_debug->setShown(show);
+#else
+    m_debug->setHidden(show? false:true);
+#endif
 }
 
 void QDispelForm::prepareRunning(QString db, int mid, QString name, int type)

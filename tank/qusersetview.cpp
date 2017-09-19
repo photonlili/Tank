@@ -18,8 +18,11 @@ QUserSetView::QUserSetView(QWidget *parent) :
 #ifdef __MIPS_LINUX__
     setFocusPolicy(Qt::NoFocus);
 #endif
-
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+#else
+    horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+#endif
     setShowGrid(false);
 
     m_dg = new QUserSetViewTextDelegate(this);

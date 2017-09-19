@@ -44,7 +44,11 @@ HanonKeyRing::~HanonKeyRing()
 void HanonKeyRing::play(QString filename)
 {
     char buf[256]= {0};
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     sprintf(buf, "load %s\n", filename.toAscii().constData());
+#else
+    sprintf(buf, "load %s\n", filename.toLocal8Bit().constData());
+#endif
     app->write(buf);
 }
 

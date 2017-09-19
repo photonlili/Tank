@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT += core gui sql network
-
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport serialport
+greaterThan(QT_MAJOR_VERSION, 4): DEFINES += __QT5__
 CONFIG += serialport
 
 TARGET = tank
@@ -20,8 +21,12 @@ DEFINES += _TTY_POSIX_
 equals(QT_KIT, MIPS32) {
     QT += multimedia
     DEFINES += __MIPS_LINUX__
-} else {
+} else:equals(QT_KIT, LINUX64) {
     DEFINES += __LINUX64__
+} else:equals(QT_KIT, LINUX) {
+    DEFINES += __LINUX__
+} else:equals(QT_KIT, macOS) {
+    DEFINES += __DARWIN__
 }
 
 CONFIG(debug, debug|release) {
@@ -31,8 +36,13 @@ CONFIG(debug, debug|release) {
 
 INCLUDEPATH +=  .
 
-target.path += /Application
-
+unix {
+    equals(QT_KIT, MIPS32) {
+        target.path = /Application
+    }else:macx {
+        target.path = /Users/abel/Develop/b1-Product/a0-qqtbased/Application
+    }
+}
 INSTALLS += target
 
 TRANSLATIONS = language/zh_CN.ts \
@@ -323,3 +333,8 @@ FORMS    += mainwindow.ui \
 OTHER_FILES += \
     tank.pro.user \
     resource.rc
+
+equals (QT_KIT, macOS) {
+    SOURCES += qdevicewatcher_mac.cpp
+    LIBS += -framework IOKit -framework Cocoa -framework DiskArbitration
+}

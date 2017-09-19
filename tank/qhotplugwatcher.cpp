@@ -1,8 +1,9 @@
 
 #include "qhotplugwatcher.h"
+#ifdef __MIPS_LINUX__
 #include <QWSServer>
 #include <QMouseDriverFactory>
-
+#endif
 QHotplugWatcher* QHotplugWatcher::_instance = NULL;
 QHotplugWatcher::QHotplugWatcher(QObject *parent) :
     QThread(parent)

@@ -96,5 +96,9 @@ void QCPushButton::leaveEvent(QEvent *e)
 void QCPushButton::enabledChange(bool enabled)
 {
     state = isEnabled() ? BTN_NORMAL : BTN_DISABLE;
+#if QT_VERSION < QT_VERSION_CHECK(5,0,0)
     QPushButton::enabledChange(enabled);
+#else
+    QPushButton::setEnabled(enabled);
+#endif
 }

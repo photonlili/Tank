@@ -11,11 +11,13 @@
 int main(int argc, char *argv[])
 {
     //日志功能
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     qInstallMsgHandler(msgHandler);
     QDir dir("./log", "*.txt");
     if(dir.count() >= 30)
         dir.remove(dir[0]);
     dir.refresh();
+#endif
 
     //创建应用实例
     QTankApp* theApp = new QTankApp(argc, argv);
@@ -35,10 +37,13 @@ int main(int argc, char *argv[])
 
     //检查序列号
     QSettings set;
-    QString serial = set.value("/Device/DeviceNo").toString();
+    //QString serial = set.value("/Device/DeviceNo").toString();
+    QString serial = set.value("/Device/cc").toString();
     if(serial.isEmpty())
     {
         QSerialWarning war(theWindow);
+        pline() << serial;
+        pline() << set.fileName();
         theWindow->slotSerialLock();
         QTankSerialPort* s2 = HNSerialPort(theWindow);
         QObject::connect(s2, SIGNAL(sigSerialUnlock()), theWindow, SLOT(slotSerialUnLock()));

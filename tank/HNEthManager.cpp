@@ -12,6 +12,8 @@ HNEthManager *HNEthManager::Instance(QObject *parent)
     return _instance;
 }
 
+#define toAscii toLocal8Bit
+
 bool HNEthManager::setCurrentWifi(QString bssid_mac, QString password)
 {
     for(QList<TWifi>::Iterator it = m_wifiList.begin();
@@ -213,6 +215,7 @@ void HNEthManager::checkLanConnection()
 
 void HNEthManager::DhcpPassed(QString netname)
 {
+#ifdef __MIPS_LINUX__
     int sockfd;
     struct ifreq ifr;
     struct sockaddr_in sin;
@@ -271,6 +274,7 @@ void HNEthManager::DhcpPassed(QString netname)
 
     saveAddr(ip, mask, gw, dns);
     saveScript();
+#endif
 }
 
 void HNEthManager::checkNetworkClear()

@@ -13,15 +13,19 @@
 
 QTankApp::QTankApp(int &argc, char **argv) : QApplication(argc, argv)
 {
-    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QTextCodec::setCodecForCStrings(QTextCodec::codecForName("UTF-8"));
+    QTextCodec::setCodecForTr(QTextCodec::codecForName("UTF-8"));
+#endif
 
     QApplication::setOrganizationName("Hanon");
     QApplication::setOrganizationDomain("hanon.com");  // 专为Mac OS X 准备的
     QApplication::setApplicationName("Tank");
     QSettings::setPath(QSettings::NativeFormat, QSettings::UserScope, CONFIG_PATH);
     QSettings::setPath(QSettings::NativeFormat, QSettings::SystemScope, CONFIG_PATH);
+    QSettings::setUserIniPath(CONFIG_PATH);
+    QSettings::setSystemIniPath(CONFIG_PATH);
 
 #if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     QApplication::setGraphicsSystem("raster");
@@ -122,8 +126,13 @@ void QTankApp::slotUPanAutoRun(int status)
         box.information("正在升级...");
 
         QString cmd = QString("/usr/bin/tar xzvf %1/upgrade.tar.gz -C /").arg(mP);
-        system(cmd.toAscii().constData());
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
+
+        system(cmd.toAscii().constData());;
+#else
+        system(cmd.toLocal8Bit().constData());
+#endif
         box.information("正在重启...");
 
         system("reboot");

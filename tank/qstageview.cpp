@@ -17,7 +17,12 @@ QStageView::QStageView(QWidget *parent) :
     setFocusPolicy(Qt::NoFocus);
 #endif
     horizontalHeader()->setMinimumHeight(36);
+
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+#else
+    horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+#endif
     verticalHeader()->setHidden(true);
     resizeColumnsToContents();
     setShowGrid(false);

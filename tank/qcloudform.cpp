@@ -149,8 +149,11 @@ void QCloudForm::slotOpenDownOK()
 
     pline() << downedFile << localname;
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     system(QString("mv \"%1\" \"%2\"").arg(downedFile).arg(localname).toAscii().data());
-
+#else
+    system(QString("mv \"%1\" \"%2\"").arg(downedFile).arg(localname).toLocal8Bit().data());
+#endif
     if(QDialog::Accepted == m_progDown->result() )
         HNMsgBox::warning(this, "Download Success");
     else

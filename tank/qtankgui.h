@@ -38,7 +38,10 @@
 #include <QTimer>
 #include <QSettings>
 #include <QLayout>
+#if defined ( __MIPS_LINUX__ )
 #include <QWSServer>
+#include <QWSInputMethod>
+#endif
 #include <QQueue>
 #include <QMutex>
 #include <QList>
@@ -46,7 +49,6 @@
 #include <QItemSelectionModel>
 #include <QStylePainter>
 #include <QMouseEvent>
-#include <QWSInputMethod>
 #include <QItemDelegate>
 
 #endif // QHEADERS_H

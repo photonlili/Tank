@@ -3,8 +3,10 @@
 #include "qctabbar.h"
 #include <QDebug>
 #include <QListView>
+#ifdef __MIPS_LINUX__
 #include "QWSServer"
 #include "QMouseDriverFactory"
+#endif
 #include "QRegExp"
 #include "QRegExpValidator"
 #include "QDateTime"
@@ -252,7 +254,11 @@ void QSetForm::dateTimeChanged(QDateTime dt)
     date += " ";
     date += ui->dateTime->time().toString("hh:mm:ss");
     date += "\"";
+#if QT_VERSION < QT_VERSION_CHECK(5, 0, 0)
     system(date.toAscii());
+#else
+    system(date.toLocal8Bit());
+#endif
     //ignore
     //time_t tt = (time_t)dt.toTime_t();
     //只有超级权限的用户才可以使用成功

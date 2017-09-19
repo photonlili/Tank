@@ -84,6 +84,8 @@ void QTankParser::pack(QByteArray &netData, const QTankMessage &setter)
 #define _TCPCMD_DATADELETEFILE           "CODE=\"%1\"ID=\"%2\""
 #define _TCPCMD_DATASENDFILEINFO         "CODE=\"%1\"NAME=\"%2\"OVERWRITE=\"%3\"LENGTH=\"%4\""
 
+#define toAscii toLocal8Bit
+
 void QTankData::packLoginData(QByteArray &l, const QTCloudLogin &t)
 {
     l = QString(_TCPCMD_DATALOGIN).arg(t.m_name).arg(t.m_password).toAscii();
